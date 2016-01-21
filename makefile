@@ -3,11 +3,14 @@ CXXFLAGS=-Wall -Werror -Wpedantic
 
 all: intelevator
 
-intelevator: main.o event.o client.o elevator.o eventtype.o floor.o
+intelevator: main.o event.o client.o elevator.o eventtype.o floor.o config.o
 	$(CPP) $^ -o $@
 
 main.o: main.cpp
 	$(CPP) $(CXXFLAGS) -c main.cpp
+
+config.o: config.cpp config.h
+	$(CPP) $(CXXFLAGS) -c config.cpp
 
 client.o: client.cpp client.h
 	$(CPP) $(CXXFLAGS) -c client.cpp
