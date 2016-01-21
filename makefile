@@ -1,9 +1,9 @@
 CPP=clang++
-CXXFLAGS=-Wall -Werror -Wpedantic
+CXXFLAGS=-Wall -Werror -Wpedantic -std=c++11
 
 all: intelevator
 
-intelevator: main.o event.o client.o elevator.o eventtype.o floor.o config.o building.o
+intelevator: main.o event.o client.o elevator.o eventtype.o floor.o config.o building.o direction.o
 	$(CPP) $^ -o $@
 
 main.o: main.cpp
@@ -17,6 +17,9 @@ config.o: config.cpp config.h
 
 client.o: client.cpp client.h
 	$(CPP) $(CXXFLAGS) -c client.cpp
+
+direction.o: direction.cpp direction.h
+	$(CPP) $(CXXFLAGS) -c direction.cpp
 
 elevator.o: elevator.cpp elevator.h
 	$(CPP) $(CXXFLAGS) -c elevator.cpp
