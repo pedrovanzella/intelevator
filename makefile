@@ -3,7 +3,7 @@ CXXFLAGS=-Wall -Werror -Wpedantic -std=c++11
 
 all: intelevator
 
-intelevator: main.o event.o client.o elevator.o eventtype.o floor.o config.o building.o direction.o timer.o trip.o
+intelevator: main.o event.o client.o elevator.o eventtype.o floor.o config.o building.o direction.o timer.o trip.o statistics.o
 	$(CPP) $^ -o $@
 
 main.o: main.cpp
@@ -32,6 +32,9 @@ eventtype.o: eventtype.cpp eventtype.h
 
 floor.o: floor.cpp floor.h
 	$(CPP) $(CXXFLAGS) -c floor.cpp
+
+statistics.o: statistics.cpp statistics.h
+	$(CPP) $(CXXFLAGS) -c statistics.cpp
 
 timer.o: timer.cpp timer.h
 	$(CPP) $(CXXFLAGS) -c timer.cpp
