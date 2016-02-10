@@ -1,6 +1,6 @@
 #include "timer.h"
 
-void Timer::reset(Config config)
+void Timer::reset(std::shared_ptr<Config> config)
 {
   
 }

@@ -1,6 +1,6 @@
 #include "building.h"
 
-void Building::reset(Config config)
+void Building::reset(std::shared_ptr<Config> config)
 {
   
 }

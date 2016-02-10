@@ -10,9 +10,9 @@ class Event {
 public:
   EventType eventType;
   float eventTime;
-  Client client;
-  Elevator elevator;
-  Floor floor;
+  std::shared_ptr<Client> client;
+  std::shared_ptr<Elevator> elevator;
+  std::shared_ptr<Floor> floor;
 
   Event(EventType type, float time) : eventType(type), eventTime(time) {}
 };

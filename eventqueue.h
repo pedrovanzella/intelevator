@@ -6,12 +6,12 @@
 
 class EventQueue {
 private:
-  std::priority_queue<std::unique_ptr<Event>> eventQueue;
+  std::priority_queue<std::shared_ptr<Event>> eventQueue;
 
 public:
-  void push(std::unique_ptr<Event> event);
-  std::unique_ptr<Event> pop();
-  std::unique_ptr<Event> peek();
+  void push(std::shared_ptr<Event> event);
+  std::shared_ptr<Event> pop();
+  std::shared_ptr<Event> peek();
 };
 
 #endif /* _EVENTQUEUE_H_ */

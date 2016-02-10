@@ -11,8 +11,8 @@
 class Elevator {
 public:
   Floor currentFloor;
-  std::queue<Floor> destinations;
-  std::map<Floor, std::set<Client>> passengers;
+  std::queue<std::shared_ptr<Floor>> destinations;
+  std::map<std::shared_ptr<Floor>, std::set<std::shared_ptr<Client>>> passengers;
 
   Direction direction();
   int occupation();

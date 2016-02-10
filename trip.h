@@ -7,9 +7,9 @@
 
 class Trip {
 public:
-  Client client;
-  Floor origin;
-  Elevator elevator;
+  std::shared_ptr<Client> client;
+  std::shared_ptr<Floor> origin;
+  std::shared_ptr<Elevator> elevator;
   float waitingTime;
   float journeyTime;
   float arrivalTime;

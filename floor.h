@@ -7,8 +7,8 @@
 class Floor {
 public:
   int number;
-  std::queue<Client> upLine;
-  std::queue<Client> downLine;
+  std::queue<std::shared_ptr<Client>> upLine;
+  std::queue<std::shared_ptr<Client>> downLine;
 };
 
 #endif /* _FLOOR_H_ */

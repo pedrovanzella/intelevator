@@ -7,7 +7,7 @@
 
 class Statistics {
 public:
-  std::list<Trip> trips;
+  std::list<std::shared_ptr<Trip>> trips;
 
   void reset(Config config);
   bool keepRunning();

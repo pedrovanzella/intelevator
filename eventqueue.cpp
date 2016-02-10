@@ -1,15 +1,15 @@
 #include "eventqueue.h"
 
-void EventQueue::push(std::unique_ptr<Event> event)
+void EventQueue::push(std::shared_ptr<Event> event)
 {
 }
 
-std::unique_ptr<Event> EventQueue::pop()
+std::shared_ptr<Event> EventQueue::pop()
 {
   return nullptr;
 }
 
-std::unique_ptr<Event> EventQueue::peek()
+std::shared_ptr<Event> EventQueue::peek()
 {
   return nullptr;
 }

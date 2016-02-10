@@ -13,7 +13,7 @@ private:
   std::list<Floor> floors;
 
 public:
-  void reset(Config config);
+  void reset(std::shared_ptr<Config> config);
 };
 
 #endif /* _BUILDING_H_ */
