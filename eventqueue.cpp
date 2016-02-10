@@ -1,6 +1,6 @@
 #include "eventqueue.h"
 
-void EventQueue::push(Event event)
+void EventQueue::push(std::unique_ptr<Event> event)
 {
 }
 

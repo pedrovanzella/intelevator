@@ -6,10 +6,10 @@
 
 class EventQueue {
 private:
-  std::priority_queue<Event> eventQueue;
+  std::priority_queue<std::unique_ptr<Event>> eventQueue;
 
 public:
-  void push(Event event);
+  void push(std::unique_ptr<Event> event);
   std::unique_ptr<Event> pop();
   std::unique_ptr<Event> peek();
 };
