@@ -1,1 +1,4 @@
-#include "trip.h"
+#include "Trip.h"
+
+Trip::Trip()
+{}

@@ -1,15 +1,15 @@
-#include "eventqueue.h"
+#include "EventQueue.h"
 
-void EventQueue::push(std::shared_ptr<Event> event)
+void EventQueue::push(Event* event)
 {
 }
 
-std::shared_ptr<Event> EventQueue::pop()
+Event* EventQueue::pop()
 {
   return nullptr;
 }
 
-std::shared_ptr<Event> EventQueue::peek()
+Event* EventQueue::peek()
 {
   return nullptr;
 }

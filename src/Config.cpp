@@ -1,1 +1,3 @@
-#include "config.h"
+#include "Config.h"
+
+Config::Config() {}

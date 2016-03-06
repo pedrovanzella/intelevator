@@ -1,10 +1,10 @@
 #pragma once
 
-#include <set>
 #include <list>
-#include "elevator.h"
-#include "floor.h"
-#include "config.h"
+#include <set>
+#include "Config.h"
+#include "Elevator.h"
+#include "Floor.h"
 
 class Building {
 private:
@@ -12,5 +12,5 @@ private:
   std::list<Floor> floors;
 
 public:
-  void reset(std::shared_ptr<Config> config);
+  void reset(Config& config);
 };

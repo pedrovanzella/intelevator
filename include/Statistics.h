@@ -1,13 +1,14 @@
 #pragma once
 
 #include <list>
-#include "trip.h"
-#include "config.h"
+#include "Config.h"
+#include "Trip.h"
 
 class Statistics {
 public:
-  std::list<std::shared_ptr<Trip>> trips;
+  std::list<Trip*> trips;
 
+  Statistics();
   void reset(Config config);
   bool keepRunning();
 };

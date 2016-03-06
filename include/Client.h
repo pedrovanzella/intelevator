@@ -1,9 +1,12 @@
 #pragma once
-//#include "floor.h"
+
+class Floor; // forward declaration
 
 class Client {
 public:
   int partySize;
   double arrivalTime;
-  //  Floor destination; // Need to fix forward-decl
+  Floor* destination;
+
+  Client();
 };

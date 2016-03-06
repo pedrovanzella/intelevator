@@ -9,4 +9,6 @@ public:
   int maxLoad;
   float simulatorDuration;
   std::string title;
+
+  Config();
 };

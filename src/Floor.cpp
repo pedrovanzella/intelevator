@@ -1,1 +1,3 @@
-#include "floor.h"
+#include "Floor.h"
+
+Floor::Floor() {}

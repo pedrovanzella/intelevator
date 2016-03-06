@@ -1,6 +1,3 @@
-#include "building.h"
+#include "Building.h"
 
-void Building::reset(std::shared_ptr<Config> config)
-{
-  
-}
+void Building::reset(Config& config) {}

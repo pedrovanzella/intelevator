@@ -1,4 +1,6 @@
-#include "elevator.h"
+#include "Elevator.h"
+
+Elevator::Elevator() {}
 
 Direction Elevator::direction()
 {
