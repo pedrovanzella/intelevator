@@ -1,5 +1,5 @@
-CPP      := clang++
-CFLAGS   := -Wall -Werror -Wpedantic -std=c++11
+CXX      := clang++
+CXXFLAGS := -Wall -Werror -Wpedantic -std=c++11
 SRCDIR   := src
 BUILDDIR := build
 TARGET   := bin/intelevator
@@ -12,12 +12,12 @@ INC      := -I include
 
 $(TARGET) : $(OBJECTS)
 	@echo " Linking..."
-	@echo " $(CPP) $(CXXFLAGS) $^ -o $(TARGET) $(LIB)"; $(CPP) $(CXXFLAGS) $^ -o $(TARGET) $(LIB)
+	@echo " $(CXX) $(CXXFLAGS) $^ -o $(TARGET) $(LIB)"; $(CXX) $(CXXFLAGS) $^ -o $(TARGET) $(LIB)
 
 $(BUILDDIR)/%.o: $(SRCDIR)/%.$(SRCEXT)
 	@mkdir -p $(BUILDDIR)
-	@echo " $(CPP) $(CXXFLAGS) $(INC) -c -o $@ $<"; $(CPP) $(CXXFLAGS) $(INC) -c -o $@ $<
+	@echo " $(CXX) $(CXXFLAGS) $(INC) -c -o $@ $<"; $(CXX) $(CXXFLAGS) $(INC) -c -o $@ $<
 
 clean:
-	@echo " Cleaning..."; 
+	@echo " Cleaning...";
 	@echo " $(RM) -r $(BUILDDIR) $(TARGET)"; $(RM) -r $(BUILDDIR) $(TARGET)
