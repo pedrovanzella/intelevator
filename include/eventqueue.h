@@ -1,5 +1,4 @@
-#ifndef _EVENTQUEUE_H_
-#define _EVENTQUEUE_H_
+#pragma once
 
 #include <queue>
 #include "event.h"
@@ -13,5 +12,3 @@ public:
   std::shared_ptr<Event> pop();
   std::shared_ptr<Event> peek();
 };
-
-#endif /* _EVENTQUEUE_H_ */

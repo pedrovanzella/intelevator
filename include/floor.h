@@ -1,5 +1,4 @@
-#ifndef _FLOOR_H_
-#define _FLOOR_H_
+#pragma once
 
 #include <queue>
 #include "client.h"
@@ -10,5 +9,3 @@ public:
   std::queue<std::shared_ptr<Client>> upLine;
   std::queue<std::shared_ptr<Client>> downLine;
 };
-
-#endif /* _FLOOR_H_ */

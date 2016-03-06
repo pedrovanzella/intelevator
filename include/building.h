@@ -1,5 +1,4 @@
-#ifndef _BUILDING_H_
-#define _BUILDING_H_
+#pragma once
 
 #include <set>
 #include <list>
@@ -15,5 +14,3 @@ private:
 public:
   void reset(std::shared_ptr<Config> config);
 };
-
-#endif /* _BUILDING_H_ */

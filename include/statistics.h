@@ -1,5 +1,4 @@
-#ifndef _STATISTICS_H_
-#define _STATISTICS_H_
+#pragma once
 
 #include <list>
 #include "trip.h"
@@ -12,5 +11,3 @@ public:
   void reset(Config config);
   bool keepRunning();
 };
-
-#endif /* _STATISTICS_H_ */

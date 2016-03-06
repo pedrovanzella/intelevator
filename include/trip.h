@@ -1,5 +1,4 @@
-#ifndef _TRIP_H_
-#define _TRIP_H_
+#pragma once
 
 #include "client.h"
 #include "floor.h"
@@ -14,5 +13,3 @@ public:
   float journeyTime;
   float arrivalTime;
 };
-
-#endif /* _TRIP_H_ */

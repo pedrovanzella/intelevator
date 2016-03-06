@@ -1,5 +1,4 @@
-#ifndef _CONFIG_H_
-#define _CONFIG_H_
+#pragma once
 
 #include <string>
 
@@ -11,5 +10,3 @@ public:
   float simulatorDuration;
   std::string title;
 };
-
-#endif /* _CONFIG_H_ */

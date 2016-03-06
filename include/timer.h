@@ -1,5 +1,4 @@
-#ifndef _TIMER_H_
-#define _TIMER_H_
+#pragma once
 
 #include "config.h"
 
@@ -13,5 +12,3 @@ public:
   void advanceTo(float time);
   void advanceBy(float ammount);
 };
-
-#endif /* _TIMER_H_ */

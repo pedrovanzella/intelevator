@@ -1,5 +1,4 @@
-#ifndef _EVENT_H_
-#define _EVENT_H_
+#pragma once
 
 #include "eventtype.h"
 #include "client.h"
@@ -16,5 +15,3 @@ public:
 
   Event(EventType type, float time) : eventType(type), eventTime(time) {}
 };
-
-#endif /* _EVENT_H */

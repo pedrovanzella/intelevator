@@ -1,5 +1,4 @@
-#ifndef _ELEVATOR_H_
-#define _ELEVATOR_H_
+#pragma once
 
 #include <queue>
 #include <map>
@@ -17,5 +16,3 @@ public:
   Direction direction();
   int occupation();
 };
-
-#endif /* _ELEVATOR_H_ */

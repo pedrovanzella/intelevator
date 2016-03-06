@@ -1,8 +1,5 @@
-#ifndef _DIRECTION_H_
-#define _DIRECTION_H_
+#pragma once
 
 enum class Direction {
   ascending, descending, idle
 };
-
-#endif /* _DIRECTION_H_ */
