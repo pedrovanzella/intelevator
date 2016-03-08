@@ -10,14 +10,29 @@ OBJECTS  := $(patsubst $(SRCDIR)/%,$(BUILDDIR)/%,$(SOURCES:.$(SRCEXT)=.o))
 LIB      := ""
 INC      := -I include
 
-$(TARGET) : $(OBJECTS)
+TEST     := $(TARGET)-test
+TDIR     := test
+TSOURCES := $(wildcard $(TDIR)/*.$(SRCEXT))
+TOBJECTS := $(patsubst $(TDIR)/%,$(BUILDDIR)/%,$(TSOURCES:.$(SRCEXT)=.o))
+TLIB     := -lgtest -lgtest_main
+
+$(TARGET): $(OBJECTS)
 	@echo " Linking..."
-	@echo " $(CXX) $(CXXFLAGS) $^ -o $(TARGET) $(LIB)"; $(CXX) $(CXXFLAGS) $^ -o $(TARGET) $(LIB)
+	@echo " $(CXX) $(CXXFLAGS) $(LIB) $^ -o $(TARGET)"; $(CXX) $(CXXFLAGS) $(LIB) $^ -o $(TARGET)
 
 $(BUILDDIR)/%.o: $(SRCDIR)/%.$(SRCEXT)
 	@mkdir -p $(BUILDDIR)
 	@echo " $(CXX) $(CXXFLAGS) $(INC) -c -o $@ $<"; $(CXX) $(CXXFLAGS) $(INC) -c -o $@ $<
 
+$(TEST): $(filter-out $(BUILDDIR)/main.o, $(OBJECTS)) $(TOBJECTS)
+	@echo " Linking tests..."
+	@echo " $(CXX) $(CXXFLAGS) $(TLIB) $(INC) $^ -o $(TEST)"; $(CXX) $(CXXFLAGS) $(TLIB) $(INC) $^ -o $(TEST)
+
+test: $(TEST)
+	./$(TEST)
+
 clean:
 	@echo " Cleaning...";
-	@echo " $(RM) -r $(BUILDDIR) $(TARGET)"; $(RM) -r $(BUILDDIR) $(TARGET)
+	@echo " $(RM) -r $(BUILDDIR) $(TARGET) $(TEST)"; $(RM) -r $(BUILDDIR) $(TARGET) $(TEST)
+
+rebuild: clean $(TARGET) $(TEST)
