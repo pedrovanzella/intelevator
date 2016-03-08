@@ -12,6 +12,10 @@ public:
   Client* client;
   Elevator* elevator;
   Floor* floor;
+  unsigned long id;
 
   Event(EventType, float);
+
+private:
+  static unsigned long totalEvents;
 };
