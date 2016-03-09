@@ -24,6 +24,10 @@ $(BUILDDIR)/%.o: $(SRCDIR)/%.$(SRCEXT)
 	@mkdir -p $(BUILDDIR)
 	@echo " $(CXX) $(CXXFLAGS) $(INC) -c -o $@ $<"; $(CXX) $(CXXFLAGS) $(INC) -c -o $@ $<
 
+$(BUILDDIR)/%.o: $(TDIR)/%.$(SRCEXT)
+	@mkdir -p $(BUILDDIR)
+	@echo " $(CXX) $(CXXFLAGS) $(INC) -c -o $@ $<"; $(CXX) $(CXXFLAGS) $(INC) -c -o $@ $<
+
 $(TEST): $(filter-out $(BUILDDIR)/main.o, $(OBJECTS)) $(TOBJECTS)
 	@echo " Linking tests..."
 	@echo " $(CXX) $(CXXFLAGS) $(TLIB) $(INC) $^ -o $(TEST)"; $(CXX) $(CXXFLAGS) $(TLIB) $(INC) $^ -o $(TEST)
