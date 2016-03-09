@@ -16,7 +16,7 @@ EventQueue::~EventQueue()
 
 bool EventQueue::hasNextEvent()
 {
-  return this->eventQueue.empty();
+  return !this->eventQueue.empty();
 }
 
 void EventQueue::push(Event* event)
