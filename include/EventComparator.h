@@ -3,8 +3,8 @@
 #include "Event.h"
 
 struct EventComparator {
-  bool operator()(const Event* e1, const Event* e2)
+  bool operator()(Event* e1, Event* e2)
   {
-    return e1->eventTime > e2->eventTime;
+    return e1->getTime() > e2->getTime();
   }
 };

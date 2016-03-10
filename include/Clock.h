@@ -11,6 +11,7 @@ private:
 
 public:
   Clock(Config&);
+  virtual ~Clock();
 
   void reset(Config&);
   float currentTime();

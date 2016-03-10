@@ -2,9 +2,9 @@
 
 Clock::Clock(Config& config)
  : time(0.f)
- , config(config)
-{
-}
+ , config(config) {}
+
+Clock::~Clock() {}
 
 void Clock::reset(Config& config)
 {

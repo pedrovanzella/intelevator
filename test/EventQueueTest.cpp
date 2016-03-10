@@ -1,18 +1,25 @@
 #include <gtest/gtest.h>
 
+#include "ClientArrival.h"
 #include "EventQueue.h"
 
 struct EventQueueTest : testing::Test
 {
   EventQueue* eventQueue;
+  Floor* destination;
+  Client* client;
 
   EventQueueTest()
   {
     eventQueue = new EventQueue();
+    destination = new Floor();
+    client = new Client(1, 0.f, *destination);
   }
 
   virtual ~EventQueueTest()
   {
+    delete client;
+    delete destination;
     delete eventQueue;
   }
 };
@@ -24,15 +31,15 @@ TEST_F(EventQueueTest, HasNextEvent_BeforeInsertEvent_ReturnsFalse)
 
 TEST_F(EventQueueTest, HasNextEvent_AfterInsertEvent_ReturnsTrue)
 {
-  eventQueue->push(new Event(EventType::clientArrival, 0));
+  eventQueue->push(new ClientArrival(0.f, *client));
   EXPECT_TRUE(eventQueue->hasNextEvent());
 }
 
 TEST_F(EventQueueTest, Push_AddThreeEvents_ReturnsInPriorityOrder)
 {
-  Event* e1 = new Event(EventType::clientArrival, 100);
-  Event* e2 = new Event(EventType::clientArrival, 50);
-  Event* e3 = new Event(EventType::clientArrival, 75);
+  Event* e1 = new ClientArrival(10.f, *client);
+  Event* e2 = new ClientArrival(50.f, *client);
+  Event* e3 = new ClientArrival(75.f, *client);
 
   eventQueue->push(e1);
   eventQueue->push(e2);
