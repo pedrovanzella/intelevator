@@ -24,17 +24,17 @@ struct ClientTest : testing::Test
   }
 };
 
-TEST_F(ClientTest, CanGetPartySize)
+TEST_F(ClientTest, GetPartySize_ReturnsPartySize)
 {
   EXPECT_EQ(client->getPartySize(), partySize);
 }
 
-TEST_F(ClientTest, CanGetArrivalTime)
+TEST_F(ClientTest, GetArrivalTime_ReturnsArrivalTime)
 {
   EXPECT_EQ(client->getArrivalTime(), arrivalTime);
 }
 
-TEST_F(ClientTest, CanGetDestination)
+TEST_F(ClientTest, GetDestination_ReturnsDestination)
 {
   EXPECT_EQ(&client->getDestination(), &destination);
 }
