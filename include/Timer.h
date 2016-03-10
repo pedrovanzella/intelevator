@@ -5,11 +5,12 @@
 class Timer {
 private:
   float time;
+  Config& config;
 
 public:
-  Timer();
+  Timer(Config&);
   void reset(Config&);
   float currentTime();
-  void advanceTo(float);
-  void advanceBy(float);
+  void advanceTo(const float);
+  void advanceBy(const float);
 };

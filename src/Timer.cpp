@@ -1,14 +1,30 @@
 #include "Timer.h"
 
-Timer::Timer() {}
+Timer::Timer(Config& config)
+ : time(0.f)
+ , config(config)
+{
+}
 
-void Timer::reset(Config& config) {}
+void Timer::reset(Config& config)
+{
+  this->time = 0;
+  this->config = config;
+}
 
 float Timer::currentTime()
 {
-  return time;
+  return this->time;
 }
 
-void Timer::advanceTo(float time) {}
+void Timer::advanceTo(const float time)
+{
+  if (time <= this->time) return;
+  this->time = time;
+}
 
-void Timer::advanceBy(float ammount) {}
+void Timer::advanceBy(const float ammount)
+{
+  if (ammount <= 0) return;
+  this->time += ammount;
+}
