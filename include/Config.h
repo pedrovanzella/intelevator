@@ -7,8 +7,9 @@ public:
   int floors;
   int elevators;
   int maxLoad;
-  float simulatorDuration;
+  float duration;
   std::string title;
 
   Config();
+  virtual ~Config();
 };

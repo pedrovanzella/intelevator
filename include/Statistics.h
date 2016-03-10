@@ -12,11 +12,9 @@ public:
 
   void reset(Config& config);
   bool keepRunning();
-
   void notify(const Event&);
-
-  std::list<Trip*> trips;
 
 private:
   Config& config;
+  std::list<Trip*> trips;
 };
