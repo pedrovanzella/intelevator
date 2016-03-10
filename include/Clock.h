@@ -1,16 +1,21 @@
 #pragma once
 
 #include "Config.h"
+#include "EventObserver.h"
 
-class Timer {
+class Clock : public EventObserver
+{
 private:
   float time;
   Config& config;
 
 public:
-  Timer(Config&);
+  Clock(Config&);
+
   void reset(Config&);
   float currentTime();
   void advanceTo(const float);
   void advanceBy(const float);
+
+  void notify(const Event&);
 };

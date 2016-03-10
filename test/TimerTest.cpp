@@ -1,96 +1,96 @@
 #include <gtest/gtest.h>
 
-#include "Timer.h"
+#include "Clock.h"
 
-struct TimerTest : testing::Test
+struct ClockTest : testing::Test
 {
-  Timer* timer;
+  Clock* clock;
   Config config;
 
-  TimerTest()
+  ClockTest()
   {
-    timer = new Timer(config);
+    clock = new Clock(config);
   }
 
-  virtual ~TimerTest()
+  virtual ~ClockTest()
   {
-    delete timer;
+    delete clock;
   }
 };
 
-// Timer::advanceTo tests
+// Clock::advanceTo tests
 
-TEST_F(TimerTest, AdvanceTo_FutureTime_Updates)
+TEST_F(ClockTest, AdvanceTo_FutureTime_Updates)
 {
-  EXPECT_EQ(timer->currentTime(), 0.f);
-  timer->advanceTo(10.f);
-  EXPECT_EQ(timer->currentTime(), 10.f);
+  EXPECT_EQ(clock->currentTime(), 0.f);
+  clock->advanceTo(10.f);
+  EXPECT_EQ(clock->currentTime(), 10.f);
 }
 
-TEST_F(TimerTest, AdvanceTo_PastTime_DoesntUpdate)
+TEST_F(ClockTest, AdvanceTo_PastTime_DoesntUpdate)
 {
-  EXPECT_EQ(timer->currentTime(), 0.f);
-  timer->advanceTo(10.f);
-  EXPECT_EQ(timer->currentTime(), 10.f);
-  timer->advanceTo(5.f);
-  EXPECT_EQ(timer->currentTime(), 10.f);
+  EXPECT_EQ(clock->currentTime(), 0.f);
+  clock->advanceTo(10.f);
+  EXPECT_EQ(clock->currentTime(), 10.f);
+  clock->advanceTo(5.f);
+  EXPECT_EQ(clock->currentTime(), 10.f);
 }
 
-TEST_F(TimerTest, AdvanceTo_NegativeTime_DoesntUpdate)
+TEST_F(ClockTest, AdvanceTo_NegativeTime_DoesntUpdate)
 {
-  EXPECT_EQ(timer->currentTime(), 0.f);
-  timer->advanceTo(-10.f);
-  EXPECT_EQ(timer->currentTime(), 0.f);
+  EXPECT_EQ(clock->currentTime(), 0.f);
+  clock->advanceTo(-10.f);
+  EXPECT_EQ(clock->currentTime(), 0.f);
 }
 
-TEST_F(TimerTest, AdvanceTo_CallTwice_UpdatesTwice)
+TEST_F(ClockTest, AdvanceTo_CallTwice_UpdatesTwice)
 {
-  EXPECT_EQ(timer->currentTime(), 0.f);
-  timer->advanceTo(10.f);
-  EXPECT_EQ(timer->currentTime(), 10.f);
-  timer->advanceTo(20.f);
-  EXPECT_EQ(timer->currentTime(), 20.f);
+  EXPECT_EQ(clock->currentTime(), 0.f);
+  clock->advanceTo(10.f);
+  EXPECT_EQ(clock->currentTime(), 10.f);
+  clock->advanceTo(20.f);
+  EXPECT_EQ(clock->currentTime(), 20.f);
 }
 
-// Timer::advanceBy tests
+// Clock::advanceBy tests
 
-TEST_F(TimerTest, AdvanceBy_PositiveAmount_Advances)
+TEST_F(ClockTest, AdvanceBy_PositiveAmount_Advances)
 {
-  EXPECT_EQ(timer->currentTime(), 0.f);
-  timer->advanceBy(10.f);
-  EXPECT_EQ(timer->currentTime(), 10.f);
+  EXPECT_EQ(clock->currentTime(), 0.f);
+  clock->advanceBy(10.f);
+  EXPECT_EQ(clock->currentTime(), 10.f);
 }
 
-TEST_F(TimerTest, AdvanceBy_ZeroAmount_DoesntAdvance)
+TEST_F(ClockTest, AdvanceBy_ZeroAmount_DoesntAdvance)
 {
-  EXPECT_EQ(timer->currentTime(), 0.f);
-  timer->advanceBy(0.f);
-  EXPECT_EQ(timer->currentTime(), 0.f);
+  EXPECT_EQ(clock->currentTime(), 0.f);
+  clock->advanceBy(0.f);
+  EXPECT_EQ(clock->currentTime(), 0.f);
 }
 
-TEST_F(TimerTest, AdvanceBy_NegativeAmount_DoesntAdvance)
+TEST_F(ClockTest, AdvanceBy_NegativeAmount_DoesntAdvance)
 {
-  EXPECT_EQ(timer->currentTime(), 0.f);
-  timer->advanceBy(-10.f);
-  EXPECT_EQ(timer->currentTime(), 0.f);
+  EXPECT_EQ(clock->currentTime(), 0.f);
+  clock->advanceBy(-10.f);
+  EXPECT_EQ(clock->currentTime(), 0.f);
 }
 
-TEST_F(TimerTest, AdvanceBy_CallTwice_AdvancesTwice)
+TEST_F(ClockTest, AdvanceBy_CallTwice_AdvancesTwice)
 {
-  EXPECT_EQ(timer->currentTime(), 0.f);
-  timer->advanceBy(10.f);
-  EXPECT_EQ(timer->currentTime(), 10.f);
-  timer->advanceBy(20.f);
-  EXPECT_EQ(timer->currentTime(), 30.f);
+  EXPECT_EQ(clock->currentTime(), 0.f);
+  clock->advanceBy(10.f);
+  EXPECT_EQ(clock->currentTime(), 10.f);
+  clock->advanceBy(20.f);
+  EXPECT_EQ(clock->currentTime(), 30.f);
 }
 
-// Timer::reset tests
+// Clock::reset tests
 
-TEST_F(TimerTest, Reset_AdvancedTime_Resets)
+TEST_F(ClockTest, Reset_AdvancedTime_Resets)
 {
-  EXPECT_EQ(timer->currentTime(), 0.f);
-  timer->advanceBy(10.f);
-  EXPECT_EQ(timer->currentTime(), 10.f);
-  timer->reset(config);
-  EXPECT_EQ(timer->currentTime(), 0.f);
+  EXPECT_EQ(clock->currentTime(), 0.f);
+  clock->advanceBy(10.f);
+  EXPECT_EQ(clock->currentTime(), 10.f);
+  clock->reset(config);
+  EXPECT_EQ(clock->currentTime(), 0.f);
 }
