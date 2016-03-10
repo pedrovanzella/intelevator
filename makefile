@@ -35,6 +35,9 @@ $(TEST): $(filter-out $(BUILDDIR)/main.o, $(OBJECTS)) $(TOBJECTS)
 test: $(TEST)
 	./$(TEST)
 
+run: $(TARGET)
+	./$(TARGET)
+
 clean:
 	@echo " Cleaning...";
 	@echo " $(RM) -r $(BUILDDIR) $(TARGET) $(TEST)"; $(RM) -r $(BUILDDIR) $(TARGET) $(TEST)
