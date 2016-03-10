@@ -1,13 +1,27 @@
 #include "Elevator.h"
 
-Elevator::Elevator() {}
+Elevator::Elevator(const Building& building, Floor& location)
+ : building(building)
+ , location(location) {}
 
-Direction Elevator::direction()
+Elevator::~Elevator() {}
+
+const Building& Elevator::getBuilding()
+{
+  return this->building;
+}
+
+Floor& Elevator::getLocation()
+{
+  return this->location;
+}
+
+Direction Elevator::getDirection()
 {
   return Direction::idle;
 }
 
-int Elevator::occupation()
+int Elevator::getOccupation()
 {
   return 0;
 }

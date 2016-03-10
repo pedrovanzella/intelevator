@@ -1,7 +1,16 @@
 #include "Floor.h"
 
-Floor::Floor(int number)
- : number(number) {}
+Floor::Floor(const Building& building, int number)
+ : building(building)
+ , number(number) {}
+
+Floor::~Floor()
+{}
+
+const Building& Floor::getBuilding()
+{
+  return this->building;
+}
 
 int Floor::getNumber()
 {

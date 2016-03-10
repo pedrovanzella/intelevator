@@ -3,14 +3,21 @@
 #include <list>
 #include <set>
 #include "Config.h"
-#include "Elevator.h"
-#include "Floor.h"
+
+class Elevator; // forward declaration
+class Floor;    // forward declaration
 
 class Building {
 private:
-  std::set<Elevator> elevators;
-  std::list<Floor> floors;
+  Config& config;
+
+  std::list<Elevator*> elevators;
+  std::list<Floor*> floors;
 
 public:
-  void reset(Config& config);
+  Building(Config&);
+  virtual ~Building();
+
+  void reset(Config&);
+  const Config& getConfig();
 };
