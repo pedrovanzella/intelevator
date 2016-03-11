@@ -37,10 +37,13 @@ void Building::reset(Config& config)
     floors.push_back(f);
   }
 
+  Floor* lobby = floors.front();
+
   for (int i = 0; i < config.elevators; i++)
   {
     Elevator* e = new Elevator(this->config);
     elevators.push_back(e);
+    setLocation(e, lobby);
   }
 }
 
@@ -57,4 +60,9 @@ const std::list<Elevator*>& Building::getElevators()
 const std::list<Floor*>& Building::getFloors()
 {
   return this->floors;
+}
+
+void Building::setLocation(Elevator* elevator, Floor* location)
+{
+  locations[elevator] = location;
 }

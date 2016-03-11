@@ -1,6 +1,7 @@
 #pragma once
 
 #include <list>
+#include <map>
 #include <set>
 #include "Config.h"
 
@@ -13,6 +14,8 @@ private:
   std::list<Elevator*> elevators;
   std::list<Floor*> floors;
 
+  std::map<Elevator*, Floor*>locations;
+
 public:
   Building(Config&);
   virtual ~Building();
@@ -23,6 +26,5 @@ public:
   const std::list<Elevator*>& getElevators();
   const std::list<Floor*>& getFloors();
 
-  static Elevator* makeElevator();
-  static Floor* makeFloor(const int number);
+  void setLocation(Elevator* elevator, Floor* location);
 };
