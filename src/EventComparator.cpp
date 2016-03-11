@@ -1,6 +1,6 @@
 #include "EventComparator.h"
 
-bool EventComparator::operator()(Event* e1, Event* e2)
+bool EventComparator::operator()(const Event* e1, const Event* e2) const
 {
   return e1->getTime() > e2->getTime();
 }

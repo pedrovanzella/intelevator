@@ -5,5 +5,5 @@
 class EventObserver
 {
 public:
-  virtual void notify(const Event&) = 0;
+  virtual void notify(const Event&) const = 0;
 };

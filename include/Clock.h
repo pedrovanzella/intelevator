@@ -14,9 +14,9 @@ public:
   virtual ~Clock();
 
   void reset(Config&);
-  float currentTime();
+  float currentTime() const;
   void advanceTo(const float);
   void advanceBy(const float);
 
-  void notify(const Event&);
+  void notify(const Event&) const;
 };

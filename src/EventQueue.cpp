@@ -14,7 +14,7 @@ EventQueue::~EventQueue()
   }
 }
 
-bool EventQueue::hasNextEvent()
+bool EventQueue::hasNextEvent() const
 {
   return !this->eventQueue.empty();
 }
@@ -34,7 +34,7 @@ Event* EventQueue::pop()
   return event;
 }
 
-Event* EventQueue::top()
+Event* EventQueue::top() const
 {
   if (this->eventQueue.empty()) return nullptr;
 

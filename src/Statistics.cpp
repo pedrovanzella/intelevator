@@ -9,12 +9,12 @@ void Statistics::reset(Config& config)
   this->config = config;
 }
 
-bool Statistics::keepRunning()
+bool Statistics::keepRunning() const
 {
   return true;
 }
 
-void Statistics::notify(const Event& event)
+void Statistics::notify(const Event& event) const
 {
   // Handle events
 }

@@ -12,8 +12,8 @@ public:
   Elevator(const Config& config);
   virtual ~Elevator();
 
-  Direction getDirection();
-  int getOccupation();
+  Direction getDirection() const;
+  int getOccupation() const;
 
 private:
   std::queue<Floor*> destinations;

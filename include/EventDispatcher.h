@@ -13,7 +13,7 @@ public:
 
   void subscribe(EventObserver*);
   void unsubscribe(EventObserver*);
-  void notify(const Event&);
+  void notify(const Event&) const;
 
 private:
   std::list<EventObserver*> observers;

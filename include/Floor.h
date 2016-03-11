@@ -10,8 +10,8 @@ public:
   Floor(int number);
   virtual ~Floor();
 
-  int getNumber();
-  void notify(const Event&);
+  int getNumber() const;
+  void notify(const Event&) const;
 
 private:
   int number;

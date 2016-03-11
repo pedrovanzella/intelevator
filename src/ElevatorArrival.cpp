@@ -6,12 +6,12 @@ ElevatorArrival::ElevatorArrival(const float eventTime, const Elevator& elevator
  , elevator(elevator)
  , floor(floor) {}
 
-const Elevator& ElevatorArrival::getElevator()
+const Elevator& ElevatorArrival::getElevator() const
 {
   return this->elevator;
 }
 
-const Floor& ElevatorArrival::getFloor()
+const Floor& ElevatorArrival::getFloor() const
 {
   return this->floor;
 }

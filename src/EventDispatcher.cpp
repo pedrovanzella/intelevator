@@ -16,7 +16,7 @@ void EventDispatcher::unsubscribe(EventObserver* eventObserver)
   this->observers.remove(eventObserver);
 }
 
-void EventDispatcher::notify(const Event& event)
+void EventDispatcher::notify(const Event& event) const
 {
   for (auto &it : this->observers) {
     it->notify(event);

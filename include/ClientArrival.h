@@ -8,8 +8,8 @@ class ClientArrival : public Event
 {
 public:
   ClientArrival(const float, const Client&);
-  const Client& getClient();
-  const Floor& getDestination();
+  const Client& getClient() const;
+  const Floor& getDestination() const;
 
 private:
   const Client& client;

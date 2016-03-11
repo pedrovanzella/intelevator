@@ -47,17 +47,17 @@ void Building::reset(Config& config)
   }
 }
 
-const Config& Building::getConfig()
+const Config& Building::getConfig() const
 {
   return config;
 }
 
-const std::list<Elevator*>& Building::getElevators()
+const std::list<Elevator*>& Building::getElevators() const
 {
   return this->elevators;
 }
 
-const std::list<Floor*>& Building::getFloors()
+const std::list<Floor*>& Building::getFloors() const
 {
   return this->floors;
 }

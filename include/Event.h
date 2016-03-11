@@ -7,9 +7,9 @@ public:
   static unsigned long totalEvents;
 
   Event(float, EventType);
-  unsigned long getId();
-  float getTime();
-  EventType getType();
+  unsigned long getId() const;
+  float getTime() const;
+  EventType getType() const;
 
 protected:
   unsigned long id;

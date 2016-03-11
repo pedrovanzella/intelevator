@@ -5,12 +5,12 @@ Elevator::Elevator(const Config& config)
 
 Elevator::~Elevator() {}
 
-Direction Elevator::getDirection()
+Direction Elevator::getDirection() const
 {
   return Direction::idle;
 }
 
-int Elevator::getOccupation()
+int Elevator::getOccupation() const
 {
   return maxLoad; // TO-DO
 }

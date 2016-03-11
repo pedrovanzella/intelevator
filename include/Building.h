@@ -21,10 +21,10 @@ public:
   virtual ~Building();
 
   void reset(Config&);
-  const Config& getConfig();
+  const Config& getConfig() const;
 
-  const std::list<Elevator*>& getElevators();
-  const std::list<Floor*>& getFloors();
+  const std::list<Elevator*>& getElevators() const;
+  const std::list<Floor*>& getFloors() const;
 
   void setLocation(Elevator* elevator, Floor* location);
   Floor* getLocation(Elevator* elevator);

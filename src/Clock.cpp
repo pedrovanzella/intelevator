@@ -12,7 +12,7 @@ void Clock::reset(Config& config)
   this->config = config;
 }
 
-float Clock::currentTime()
+float Clock::currentTime() const
 {
   return this->time;
 }
@@ -29,7 +29,7 @@ void Clock::advanceBy(const float ammount)
   this->time += ammount;
 }
 
-void Clock::notify(const Event& /*event*/)
+void Clock::notify(const Event& /*event*/) const
 {
   // Handle events
 }

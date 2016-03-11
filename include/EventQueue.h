@@ -12,8 +12,8 @@ public:
   EventQueue();
   ~EventQueue();
 
-  bool hasNextEvent();
+  bool hasNextEvent() const;
   void push(Event*);
   Event* pop();
-  Event* top();
+  Event* top() const;
 };

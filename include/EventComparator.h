@@ -5,5 +5,5 @@
 class EventComparator
 {
 public:
-  bool operator()(Event* e1, Event* e2);
+  bool operator()(const Event* e1, const Event* e2) const;
 };

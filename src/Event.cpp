@@ -7,17 +7,17 @@ Event::Event(const float time, const EventType eventType)
   , eventTime(time)
   , eventType(eventType) {}
 
-unsigned long Event::getId()
+unsigned long Event::getId() const
 {
   return this->id;
 }
 
-float Event::getTime()
+float Event::getTime() const
 {
   return this->eventTime;
 }
 
-EventType Event::getType()
+EventType Event::getType() const
 {
   return this->eventType;
 }

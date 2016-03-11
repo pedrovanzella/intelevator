@@ -11,8 +11,8 @@ public:
   Statistics(Config&);
 
   void reset(Config& config);
-  bool keepRunning();
-  void notify(const Event&);
+  bool keepRunning() const;
+  void notify(const Event&) const;
 
 private:
   Config& config;

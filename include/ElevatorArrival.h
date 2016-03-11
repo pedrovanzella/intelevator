@@ -8,8 +8,8 @@ class ElevatorArrival : public Event
 {
 public:
   ElevatorArrival(const float, const Elevator&, const Floor&);
-  const Elevator& getElevator();
-  const Floor& getFloor();
+  const Elevator& getElevator() const;
+  const Floor& getFloor() const;
 
 private:
   const Elevator& elevator;

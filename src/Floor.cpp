@@ -6,12 +6,12 @@ Floor::Floor(int number)
 
 Floor::~Floor() {}
 
-int Floor::getNumber()
+int Floor::getNumber() const
 {
   return this->number;
 }
 
-void Floor::notify(const Event& event)
+void Floor::notify(const Event& event) const
 {
   // Handle events
 }
