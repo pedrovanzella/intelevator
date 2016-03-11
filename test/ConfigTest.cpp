@@ -22,11 +22,11 @@ struct ConfigTest : testing::Test
 TEST_F(ConfigTest, FromFile_Initializes)
 {
   std::string str =
-    "floors=4"
-    "elevators=2"
-    "maxLoad=150"
-    "duration=20.0"
-    "title=simple"
+    "floors=4\n"
+    "elevators=2\n"
+    "maxLoad=150\n"
+    "duration=20.0\n"
+    "title=simple\n"
     "seed=666";
 
   std::istringstream sstream(str);
