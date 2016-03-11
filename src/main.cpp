@@ -1,7 +1,8 @@
 #include <iostream>
 
-#include "Building.h"
 #include "Config.h"
+
+#include "Simulator.h"
 
 using namespace std;
 
@@ -16,7 +17,9 @@ int main(int argc, char* argv[])
   config.duration = 100;
   config.title = "Here we go!";
 
-  Building building(config);
+  Simulator simulator(config);
+
+  simulator.Run();
 
   return 0;
 }
