@@ -40,15 +40,15 @@ TEST_F(EventQueueTest, Push_AddThreeEvents_ReturnsInPriorityOrder)
 {
   Event* e1 = new ClientArrival(10.f, *client);
   Event* e2 = new ClientArrival(50.f, *client);
-  Event* e3 = new ClientArrival(75.f, *client);
+  Event* e3 = new ClientArrival(30.f, *client);
 
   eventQueue->push(e1);
   eventQueue->push(e2);
   eventQueue->push(e3);
 
-  EXPECT_EQ(eventQueue->pop(), e2);
-  EXPECT_EQ(eventQueue->pop(), e3);
   EXPECT_EQ(eventQueue->pop(), e1);
+  EXPECT_EQ(eventQueue->pop(), e3);
+  EXPECT_EQ(eventQueue->pop(), e2);
   EXPECT_FALSE(eventQueue->hasNextEvent());
 }
 
