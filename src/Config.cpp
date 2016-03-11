@@ -18,11 +18,11 @@ void Config::from_file(std::istringstream &is_file)
   while (std::getline(is_file, line)) {
     std::istringstream is_line(line);
     std::string key;
-    if(std::getline(is_line, key, '='))
-      {
+    if(std::getline(is_line, key, '=')) {
         std::string value;
-        if(std::getline(is_line, value)) 
+        if(std::getline(is_line, value)) {
           store_line(key, value);
+        }
       }
   }
 }
