@@ -1,20 +1,9 @@
 #include "Elevator.h"
 
-Elevator::Elevator(const Building& building, Floor& location)
- : building(building)
- , location(location) {}
+Elevator::Elevator(const Config& config)
+ : maxLoad(config.maxLoad) {}
 
 Elevator::~Elevator() {}
-
-const Building& Elevator::getBuilding()
-{
-  return this->building;
-}
-
-Floor& Elevator::getLocation()
-{
-  return this->location;
-}
 
 Direction Elevator::getDirection()
 {
@@ -23,5 +12,5 @@ Direction Elevator::getDirection()
 
 int Elevator::getOccupation()
 {
-  return 0;
+  return maxLoad; // TO-DO
 }

@@ -33,15 +33,13 @@ void Building::reset(Config& config)
 
   for (int i = 0; i < config.floors; i++)
   {
-    Floor* f = new Floor(*this, i);
+    Floor* f = new Floor(i);
     floors.push_back(f);
   }
 
-  Floor* lobby = floors.front();
-
   for (int i = 0; i < config.elevators; i++)
   {
-    Elevator* e = new Elevator(*this, *lobby);
+    Elevator* e = new Elevator(this->config);
     elevators.push_back(e);
   }
 }
@@ -49,4 +47,14 @@ void Building::reset(Config& config)
 const Config& Building::getConfig()
 {
   return config;
+}
+
+const std::list<Elevator*>& Building::getElevators()
+{
+  return this->elevators;
+}
+
+const std::list<Floor*>& Building::getFloors()
+{
+  return this->floors;
 }

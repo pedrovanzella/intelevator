@@ -10,7 +10,6 @@ class Floor;    // forward declaration
 class Building {
 private:
   Config& config;
-
   std::list<Elevator*> elevators;
   std::list<Floor*> floors;
 
@@ -20,4 +19,10 @@ public:
 
   void reset(Config&);
   const Config& getConfig();
+
+  const std::list<Elevator*>& getElevators();
+  const std::list<Floor*>& getFloors();
+
+  static Elevator* makeElevator();
+  static Floor* makeFloor(const int number);
 };
