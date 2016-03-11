@@ -1,6 +1,7 @@
 #pragma once
 
 #include <string>
+#include <sstream>
 
 class Config {
 public:
@@ -14,7 +15,7 @@ public:
   Config();
   virtual ~Config();
 
-  void from_file(std::string filename);
+  void from_file(std::istringstream &is_file);
 
 private:
   void store_line(std::string key, std::string value);

@@ -1,15 +1,14 @@
 #include "Config.h"
 #include <sstream>
 #include <stdexcept>
+#include <string>
 
 Config::Config() {}
 
 Config::~Config() {}
 
-void Config::from_file(std::string filename)
+void Config::from_file(std::istringstream &is_file)
 {
-  std::istringstream is_file(filename);
-
   if (is_file.bad()) {
     throw std::invalid_argument("Invalid File");
   }

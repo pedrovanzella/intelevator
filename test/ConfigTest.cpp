@@ -1,6 +1,7 @@
 #include <gtest/gtest.h>
 
 #include "Config.h"
+#include <sstream>
 
 struct ConfigTest : testing::Test
 {
@@ -20,7 +21,17 @@ struct ConfigTest : testing::Test
 // Config::from_file
 TEST_F(ConfigTest, FromFile_Initializes)
 {
-  config->from_file("test/mocks/config/simple.conf");
+  std::string str =
+    "floors=4"
+    "elevators=2"
+    "maxLoad=150"
+    "duration=20.0"
+    "title=simple"
+    "seed=666";
+
+  std::istringstream sstream(str);
+
+  config->from_file(sstream);
   EXPECT_EQ(config->floors, 4);
   EXPECT_EQ(config->elevators, 2);
   EXPECT_EQ(config->maxLoad, 150);
