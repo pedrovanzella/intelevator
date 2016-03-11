@@ -6,7 +6,7 @@
 struct ClientTest : testing::Test
 {
   Client* client;
-  Floor destination;
+  Floor* destination;
 
   int partySize;
   float arrivalTime;
@@ -15,12 +15,15 @@ struct ClientTest : testing::Test
   {
     partySize = 1;
     arrivalTime = 10.f;
-    client = new Client(partySize, arrivalTime, destination);
+
+    destination = new Floor(0);
+    client = new Client(partySize, arrivalTime, *destination);
   }
 
   virtual ~ClientTest()
   {
     delete client;
+    delete destination;
   }
 };
 
@@ -36,5 +39,5 @@ TEST_F(ClientTest, GetArrivalTime_ReturnsArrivalTime)
 
 TEST_F(ClientTest, GetDestination_ReturnsDestination)
 {
-  EXPECT_EQ(&client->destination, &destination);
+  EXPECT_EQ(&client->destination, destination);
 }

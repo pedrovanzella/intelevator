@@ -6,13 +6,14 @@
 struct EventQueueTest : testing::Test
 {
   EventQueue* eventQueue;
+
   Floor* destination;
   Client* client;
 
   EventQueueTest()
   {
     eventQueue = new EventQueue();
-    destination = new Floor();
+    destination = new Floor(0);
     client = new Client(1, 0.f, *destination);
   }
 
