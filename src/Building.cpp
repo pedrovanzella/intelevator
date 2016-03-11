@@ -66,3 +66,8 @@ void Building::setLocation(Elevator* elevator, Floor* location)
 {
   locations[elevator] = location;
 }
+
+Floor* Building::getLocation(Elevator* elevator)
+{
+  return locations[elevator];
+}

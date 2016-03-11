@@ -27,4 +27,5 @@ public:
   const std::list<Floor*>& getFloors();
 
   void setLocation(Elevator* elevator, Floor* location);
+  Floor* getLocation(Elevator* elevator);
 };

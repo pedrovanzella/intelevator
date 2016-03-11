@@ -1,7 +1,8 @@
 #include "Event.h"
 #include "Floor.h"
 
-Floor::Floor(int number) {}
+Floor::Floor(int number)
+  : number(number) {}
 
 Floor::~Floor() {}
 
