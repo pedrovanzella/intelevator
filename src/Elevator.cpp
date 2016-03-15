@@ -24,3 +24,8 @@ double Elevator::getOccupation() const
   }
   return total_passengers / _maxLoad;
 }
+
+void Elevator::addPassenger(Client* client)
+{
+
+}

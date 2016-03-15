@@ -20,6 +20,8 @@ struct ElevatorTest : testing::Test
   }
 };
 
+// Elevator::getOccupation() tests
+
 TEST_F(ElevatorTest, NullMaxLoad_ReturnsOccupation_Zero)
 {
   config._maxLoad = 0;

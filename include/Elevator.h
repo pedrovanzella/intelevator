@@ -16,6 +16,8 @@ public:
   Direction getDirection() const;
   double getOccupation() const;
 
+  void addPassenger(Client* client);
+
 private:
   std::queue<Floor*> _destinations;
   std::map<Floor*, std::set<Client*>> _passengers;
