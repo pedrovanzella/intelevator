@@ -5,18 +5,17 @@
 
 class Clock : public EventObserver
 {
-private:
-  float time;
-  Config& config;
-
 public:
   Clock(Config&);
   virtual ~Clock();
 
-  void reset(Config&);
   float currentTime() const;
-  void advanceTo(const float);
-  void advanceBy(const float);
+  void advanceTo(const float time);
+  void advanceBy(const float amount);
 
   void notify(const Event&) const;
+
+private:
+  float _time;
+  Config& _config;
 };

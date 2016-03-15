@@ -1,32 +1,26 @@
 #include "Clock.h"
 
 Clock::Clock(Config& config)
- : time(0.f)
- , config(config) {}
+ : _time(0.f)
+ , _config(config) {}
 
 Clock::~Clock() {}
 
-void Clock::reset(Config& config)
-{
-  this->time = 0;
-  this->config = config;
-}
-
 float Clock::currentTime() const
 {
-  return this->time;
+  return _time;
 }
 
 void Clock::advanceTo(const float time)
 {
-  if (time <= this->time) return;
-  this->time = time;
+  if (time <= _time) return;
+  _time = time;
 }
 
-void Clock::advanceBy(const float ammount)
+void Clock::advanceBy(const float amount)
 {
-  if (ammount <= 0) return;
-  this->time += ammount;
+  if (amount <= 0) return;
+  _time += amount;
 }
 
 void Clock::notify(const Event& /*event*/) const
