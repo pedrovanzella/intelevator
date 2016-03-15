@@ -31,7 +31,7 @@ TEST_F(ConfigTest, FromFile_Initializes)
 
   std::istringstream sstream(str);
 
-  config->from_file(sstream);
+  config->fromFile(sstream);
   EXPECT_EQ(config->floors, 4);
   EXPECT_EQ(config->elevators, 2);
   EXPECT_EQ(config->maxLoad, 150);

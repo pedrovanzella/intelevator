@@ -15,8 +15,8 @@ public:
   Config();
   virtual ~Config();
 
-  void from_file(std::istringstream &is_file);
+  void fromFile(std::istringstream& isFile);
 
 private:
-  void store_line(std::string key, std::string value);
+  void storeLine(std::string key, std::string value);
 };

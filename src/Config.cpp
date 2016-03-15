@@ -1,22 +1,20 @@
-#include "Config.h"
-#include <sstream>
 #include <stdexcept>
-#include <string>
 #include <iostream>
+#include "Config.h"
 
 Config::Config() {}
 
 Config::~Config() {}
 
-void Config::from_file(std::istringstream &is_file)
+void Config::fromFile(std::istringstream& isFile)
 {
-  if (is_file.bad()) {
+  if (isFile.bad()) {
     throw std::invalid_argument("Invalid File");
   }
 
   std::string line;
 
-  while (std::getline(is_file, line)) {
+  while (std::getline(isFile, line)) {
     std::istringstream is_line(line);
     std::string key;
 
@@ -24,13 +22,13 @@ void Config::from_file(std::istringstream &is_file)
       std::string value;
 
       if(std::getline(is_line, value)) {
-        store_line(key, value);
+        storeLine(key, value);
       }
     }
   }
 }
 
-void Config::store_line(std::string key, std::string value)
+void Config::storeLine(std::string key, std::string value)
 {
   // We can't use a switch with std::strings, apparently
   if (key == "floors") {
