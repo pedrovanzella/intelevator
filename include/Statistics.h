@@ -10,11 +10,10 @@ class Statistics : public EventObserver
 public:
   Statistics(Config&);
 
-  void reset(Config& config);
   bool keepRunning() const;
   void notify(const Event&) const;
 
 private:
-  Config& config;
-  std::list<Trip*> trips;
+  Config& _config;
+  std::list<Trip*> _trips;
 };

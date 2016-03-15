@@ -6,12 +6,12 @@
 
 class Trip {
 public:
-  Client* client;
-  Floor* origin;
-  Elevator* elevator;
-  float waitingTime;
-  float journeyTime;
-  float arrivalTime;
+  Client* _client;
+  Floor* _origin;
+  Elevator* _elevator;
+  float _waitingTime;
+  float _journeyTime;
+  float _arrivalTime;
 
   Trip();
 };

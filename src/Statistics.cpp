@@ -1,13 +1,8 @@
 #include "Statistics.h"
 
 Statistics::Statistics(Config& config)
- : config(config)
+ : _config(config)
 {}
-
-void Statistics::reset(Config& config)
-{
-  this->config = config;
-}
 
 bool Statistics::keepRunning() const
 {

@@ -3,14 +3,14 @@
 
 ClientArrival::ClientArrival(const float eventTime, const Client& client)
  : Event(eventTime, EventType::clientArrival)
- , client(client) {}
+ , _client(client) {}
 
 const Client& ClientArrival::getClient() const
 {
-  return this->client;
+  return _client;
 }
 
 const Floor& ClientArrival::getDestination() const
 {
-  return this->client.destination;
+  return _client._destination;
 }

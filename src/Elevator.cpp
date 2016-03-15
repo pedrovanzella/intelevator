@@ -1,7 +1,7 @@
 #include "Elevator.h"
 
 Elevator::Elevator(const Config& config)
- : maxLoad(config.maxLoad) {}
+ : _maxLoad(config.maxLoad) {}
 
 Elevator::~Elevator() {}
 
@@ -12,5 +12,5 @@ Direction Elevator::getDirection() const
 
 int Elevator::getOccupation() const
 {
-  return maxLoad; // TO-DO
+  return 0; // TO-DO
 }

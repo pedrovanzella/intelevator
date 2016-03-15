@@ -16,7 +16,7 @@ public:
   int getOccupation() const;
 
 private:
-  std::queue<Floor*> destinations;
-  std::map<Floor*, std::set<Client*>> passengers;
-  int maxLoad;
+  std::queue<Floor*> _destinations;
+  std::map<Floor*, std::set<Client*>> _passengers;
+  int _maxLoad;
 };

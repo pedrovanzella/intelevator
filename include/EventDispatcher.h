@@ -13,8 +13,8 @@ public:
 
   void subscribe(EventObserver*);
   void unsubscribe(EventObserver*);
-  void notify(const Event&) const;
+  void broadcast(const Event&) const;
 
 private:
-  std::list<EventObserver*> observers;
+  std::list<EventObserver*> _observers;
 };

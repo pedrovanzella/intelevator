@@ -6,9 +6,9 @@
 class Simulator
 {
 public:
-  Building* building;
-  Statistics* statistics;
-  Clock* clock;
+  Building* _building;
+  Statistics* _statistics;
+  Clock* _clock;
 
   Simulator(Config& config);
 

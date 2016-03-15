@@ -2,13 +2,13 @@
 #include "Floor.h"
 
 Floor::Floor(int number)
-  : number(number) {}
+  : _number(number) {}
 
 Floor::~Floor() {}
 
 int Floor::getNumber() const
 {
-  return this->number;
+  return _number;
 }
 
 void Floor::notify(const Event& event) const

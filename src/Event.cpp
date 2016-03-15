@@ -3,21 +3,21 @@
 unsigned long Event::totalEvents = 0;
 
 Event::Event(const float time, const EventType eventType)
-  : id(++Event::totalEvents)
-  , eventTime(time)
-  , eventType(eventType) {}
+  : _id(++Event::totalEvents)
+  , _eventTime(time)
+  , _eventType(eventType) {}
 
 unsigned long Event::getId() const
 {
-  return this->id;
+  return _id;
 }
 
 float Event::getTime() const
 {
-  return this->eventTime;
+  return _eventTime;
 }
 
 EventType Event::getType() const
 {
-  return this->eventType;
+  return _eventType;
 }

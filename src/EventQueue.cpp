@@ -6,7 +6,7 @@ EventQueue::EventQueue()
 
 EventQueue::~EventQueue()
 {
-  while (!this->eventQueue.empty())
+  while (!_eventQueue.empty())
   {
     Event* e = this->pop();
     if (e != nullptr)
@@ -16,27 +16,27 @@ EventQueue::~EventQueue()
 
 bool EventQueue::hasNextEvent() const
 {
-  return !this->eventQueue.empty();
+  return !_eventQueue.empty();
 }
 
 void EventQueue::push(Event* event)
 {
-  this->eventQueue.push(event);
+  _eventQueue.push(event);
 }
 
 Event* EventQueue::pop()
 {
-  if (this->eventQueue.empty()) return nullptr;
+  if (_eventQueue.empty()) return nullptr;
 
-  Event* event = this->eventQueue.top();
-  this->eventQueue.pop();
+  Event* event = _eventQueue.top();
+  _eventQueue.pop();
 
   return event;
 }
 
 Event* EventQueue::top() const
 {
-  if (this->eventQueue.empty()) return nullptr;
+  if (_eventQueue.empty()) return nullptr;
 
-  return this->eventQueue.top();
+  return _eventQueue.top();
 }

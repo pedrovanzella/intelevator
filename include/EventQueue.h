@@ -5,9 +5,6 @@
 #include "EventComparator.h"
 
 class EventQueue {
-private:
-  std::priority_queue<Event*, std::vector<Event*>, EventComparator> eventQueue;
-
 public:
   EventQueue();
   ~EventQueue();
@@ -16,4 +13,7 @@ public:
   void push(Event*);
   Event* pop();
   Event* top() const;
+
+private:
+  std::priority_queue<Event*, std::vector<Event*>, EventComparator> _eventQueue;
 };

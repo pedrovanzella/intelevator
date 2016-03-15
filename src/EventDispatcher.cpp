@@ -7,18 +7,18 @@ EventDispatcher::EventDispatcher()
 void EventDispatcher::subscribe(EventObserver* eventObserver)
 {
   if (eventObserver == nullptr) return;
-  this->observers.push_back(eventObserver);
+  _observers.push_back(eventObserver);
 }
 
 void EventDispatcher::unsubscribe(EventObserver* eventObserver)
 {
   if (eventObserver == nullptr) return;
-  this->observers.remove(eventObserver);
+  _observers.remove(eventObserver);
 }
 
-void EventDispatcher::notify(const Event& event) const
+void EventDispatcher::broadcast(const Event& event) const
 {
-  for (auto &it : this->observers) {
+  for (auto &it : _observers) {
     it->notify(event);
   }
 }

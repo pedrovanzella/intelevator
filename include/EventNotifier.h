@@ -8,5 +8,5 @@ class EventNotifier
 protected:
   virtual void subscribe(EventObserver*) = 0;
   virtual void unsubscribe(EventObserver*) = 0;
-  virtual void notify(const Event&) const = 0;
+  virtual void broadcast(const Event&) const = 0;
 };

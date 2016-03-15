@@ -12,6 +12,6 @@ public:
   const Floor& getFloor() const;
 
 private:
-  const Elevator& elevator;
-  const Floor& floor;
+  const Elevator& _elevator;
+  const Floor& _floor;
 };

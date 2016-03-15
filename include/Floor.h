@@ -14,7 +14,7 @@ public:
   void notify(const Event&) const;
 
 private:
-  int number;
-  std::queue<Client*> upLine;
-  std::queue<Client*> downLine;
+  int _number;
+  std::queue<Client*> _upLine;
+  std::queue<Client*> _downLine;
 };

@@ -3,15 +3,15 @@
 
 ElevatorArrival::ElevatorArrival(const float eventTime, const Elevator& elevator, const Floor& floor)
  : Event(eventTime, EventType::elevatorArrival)
- , elevator(elevator)
- , floor(floor) {}
+ , _elevator(elevator)
+ , _floor(floor) {}
 
 const Elevator& ElevatorArrival::getElevator() const
 {
-  return this->elevator;
+  return _elevator;
 }
 
 const Floor& ElevatorArrival::getFloor() const
 {
-  return this->floor;
+  return _floor;
 }
