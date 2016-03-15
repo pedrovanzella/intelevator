@@ -29,15 +29,15 @@ struct ClientTest : testing::Test
 
 TEST_F(ClientTest, GetPartySize_ReturnsPartySize)
 {
-  EXPECT_EQ(client->partySize, partySize);
+  EXPECT_EQ(client->_partySize, partySize);
 }
 
 TEST_F(ClientTest, GetArrivalTime_ReturnsArrivalTime)
 {
-  EXPECT_EQ(client->arrivalTime, arrivalTime);
+  EXPECT_EQ(client->_arrivalTime, arrivalTime);
 }
 
 TEST_F(ClientTest, GetDestination_ReturnsDestination)
 {
-  EXPECT_EQ(&client->destination, destination);
+  EXPECT_EQ(&client->_destination, destination);
 }

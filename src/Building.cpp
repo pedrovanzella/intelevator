@@ -17,7 +17,7 @@ Building::Building(Config& config)
   Elevator* e = nullptr;
   for (int i = 0; i < _config._elevators; i++)
   {
-    e = new Elevator(_config);
+    e = new Elevator(_config, this);
     _elevators.push_back(e);
     setLocation(e, lobby);
   }

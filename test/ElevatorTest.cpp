@@ -10,7 +10,8 @@ struct ElevatorTest : testing::Test
   ElevatorTest()
   {
     config._maxLoad = 10;
-    elevator = new Elevator(config);
+    config._elevators = 1;
+    elevator = new Elevator(config, nullptr);
   }
 
   virtual ~ElevatorTest()
@@ -19,7 +20,14 @@ struct ElevatorTest : testing::Test
   }
 };
 
+TEST_F(ElevatorTest, NullMaxLoad_ReturnsOccupation_Zero)
+{
+  config._maxLoad = 0;
+  elevator = new Elevator(config, nullptr);
+  EXPECT_EQ(elevator->getOccupation(), 0.f);
+}
+
 TEST_F(ElevatorTest, NoPassengers_ReturnsOccupation_Zero)
 {
-  EXPECT_EQ(elevator->getOccupation(), 0.0);
+  EXPECT_EQ(elevator->getOccupation(), 0.f);
 }
