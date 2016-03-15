@@ -4,14 +4,18 @@
 #include <map>
 #include <set>
 #include "Config.h"
+#include "EventObserver.h"
 
 class Elevator; // forward declaration
 class Floor;    // forward declaration
 
-class Building {
+class Building : public EventObserver
+{
 public:
   Building(Config& config);
   virtual ~Building();
+
+  void notify(const Event& event) const;
 
   const Config& getConfig() const;
 

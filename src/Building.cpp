@@ -6,7 +6,7 @@ Building::Building(Config& config)
  : _config(config)
 {
   Floor* f = nullptr;
-  for (int i = 0; i < _config.floors; i++)
+  for (int i = 0; i < _config._floors; i++)
   {
     f = new Floor(i);
     _floors.push_back(f);
@@ -15,7 +15,7 @@ Building::Building(Config& config)
   Floor* lobby = _floors.front();
 
   Elevator* e = nullptr;
-  for (int i = 0; i < _config.elevators; i++)
+  for (int i = 0; i < _config._elevators; i++)
   {
     e = new Elevator(_config);
     _elevators.push_back(e);
@@ -40,6 +40,11 @@ Building::~Building()
     _elevators.pop_back();
     delete e;
   }
+}
+
+void Building::notify(const Event&) const
+{
+  // TO-DO
 }
 
 const Config& Building::getConfig() const
