@@ -1,5 +1,5 @@
 CXX      := clang++
-CXXFLAGS := -Wall -Werror -Wpedantic -std=c++11
+CXXFLAGS := -Wall -Werror -Wpedantic -std=c++11 -Wno-unused-private-field
 SRCDIR   := src
 BUILDDIR := build
 TARGET   := bin/intelevator
