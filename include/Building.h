@@ -13,7 +13,6 @@ public:
   Building(Config& config);
   virtual ~Building();
 
-  void reset(const Config& config);
   const Config& getConfig() const;
 
   void setLocation(Elevator* elevator, Floor* location);
@@ -22,7 +21,7 @@ public:
   const std::list<Floor*>& getFloors() const;
 
 private:
-  Config& _config;
+  const Config& _config;
   std::list<Elevator*> _elevators;
   std::list<Floor*> _floors;
   std::map<Elevator*, Floor*> _locations;

@@ -5,7 +5,22 @@
 Building::Building(Config& config)
  : _config(config)
 {
-  reset(_config);
+  Floor* f = nullptr;
+  for (int i = 0; i < _config.floors; i++)
+  {
+    f = new Floor(i);
+    _floors.push_back(f);
+  }
+
+  Floor* lobby = _floors.front();
+
+  Elevator* e = nullptr;
+  for (int i = 0; i < _config.elevators; i++)
+  {
+    e = new Elevator(_config);
+    _elevators.push_back(e);
+    setLocation(e, lobby);
+  }
 }
 
 Building::~Building()
@@ -24,25 +39,6 @@ Building::~Building()
     e = _elevators.back();
     _elevators.pop_back();
     delete e;
-  }
-}
-
-void Building::reset(const Config& config)
-{
-  _config = config;
-
-  for (int i = 0; i < _config.floors; i++)
-  {
-    _floors.push_back(new Floor(i));
-  }
-
-  Floor* lobby = _floors.front();
-
-  for (int i = 0; i < config.elevators; i++)
-  {
-    Elevator* e = new Elevator(_config);
-    _elevators.push_back(e);
-    setLocation(e, lobby);
   }
 }
 
