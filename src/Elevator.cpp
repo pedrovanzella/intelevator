@@ -25,7 +25,7 @@ double Elevator::getOccupation() const
   return total_passengers / _maxLoad;
 }
 
-void Elevator::addPassenger(Client* client)
+void Elevator::addPassenger(Floor* floor, Client* client)
 {
-
+  _passengers[floor].insert(client);
 }
