@@ -1,7 +1,7 @@
 #include "Elevator.h"
 
 Elevator::Elevator(const Config& config)
- : _maxLoad(config.maxLoad) {}
+ : _maxLoad(config._maxLoad) {}
 
 Elevator::~Elevator() {}
 

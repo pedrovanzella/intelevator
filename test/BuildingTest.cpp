@@ -15,8 +15,8 @@ struct BuildingTest : testing::Test
   BuildingTest()
   {
     config = new Config();
-    config->floors = 3;
-    config->elevators = 5;
+    config->_floors = 3;
+    config->_elevators = 5;
 
     building = new Building(*config);
   }
@@ -35,12 +35,12 @@ TEST_F(BuildingTest, GetConfig_ReturnsConfig)
 
 TEST_F(BuildingTest, GetFloors_ReturnsRightSize)
 {
-  EXPECT_EQ(config->floors, building->getFloors().size());
+  EXPECT_EQ(config->_floors, building->getFloors().size());
 }
 
 TEST_F(BuildingTest, GetElevators_ReturnsRightSize)
 {
-  EXPECT_EQ(config->elevators, building->getElevators().size());
+  EXPECT_EQ(config->_elevators, building->getElevators().size());
 }
 
 TEST_F(BuildingTest, GetLocation_NewBuilding_ReturnsLobby)
