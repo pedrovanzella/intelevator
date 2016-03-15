@@ -5,12 +5,12 @@
 
 class Config {
 public:
-  int floors;
-  int elevators;
-  int maxLoad;
-  float duration;
-  std::string title;
-  int seed;
+  int _floors;
+  int _elevators;
+  int _maxLoad;
+  float _duration;
+  std::string _title;
+  int _seed;
 
   Config();
   virtual ~Config();

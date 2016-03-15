@@ -32,10 +32,10 @@ TEST_F(ConfigTest, FromFile_Initializes)
   std::istringstream sstream(str);
 
   config->fromFile(sstream);
-  EXPECT_EQ(config->floors, 4);
-  EXPECT_EQ(config->elevators, 2);
-  EXPECT_EQ(config->maxLoad, 150);
-  EXPECT_EQ(config->duration, 20.0);
-  EXPECT_EQ(config->title, "simple");
-  EXPECT_EQ(config->seed, 666);
+  EXPECT_EQ(config->_floors, 4);
+  EXPECT_EQ(config->_elevators, 2);
+  EXPECT_EQ(config->_maxLoad, 150);
+  EXPECT_EQ(config->_duration, 20.0);
+  EXPECT_EQ(config->_title, "simple");
+  EXPECT_EQ(config->_seed, 666);
 }

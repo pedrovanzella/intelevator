@@ -32,27 +32,27 @@ void Config::storeLine(std::string key, std::string value)
 {
   // We can't use a switch with std::strings, apparently
   if (key == "floors") {
-    floors = std::stoi(value);
+    _floors = std::stoi(value);
     return;
   }
   if (key == "elevators") {
-    elevators = std::stoi(value);
+    _elevators = std::stoi(value);
     return;
   }
   if (key == "maxLoad") {
-    maxLoad = std::stoi(value);
+    _maxLoad = std::stoi(value);
     return;
   }
   if (key == "duration") {
-    duration = std::stof(value);
+    _duration = std::stof(value);
     return;
   }
   if (key == "title") {
-    title = value;
+    _title = value;
     return;
   }
   if (key == "seed") {
-    seed = std::stoi(value);
+    _seed = std::stoi(value);
     return;
   }
   throw std::invalid_argument("Invalid key");
