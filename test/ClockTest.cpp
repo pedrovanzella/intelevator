@@ -83,14 +83,3 @@ TEST_F(ClockTest, AdvanceBy_CallTwice_AdvancesTwice)
   clock->advanceBy(20.f);
   EXPECT_EQ(clock->currentTime(), 30.f);
 }
-
-// Clock::reset tests
-
-TEST_F(ClockTest, Reset_AdvancedTime_Resets)
-{
-  EXPECT_EQ(clock->currentTime(), 0.f);
-  clock->advanceBy(10.f);
-  EXPECT_EQ(clock->currentTime(), 10.f);
-  clock->reset(config);
-  EXPECT_EQ(clock->currentTime(), 0.f);
-}
