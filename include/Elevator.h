@@ -16,10 +16,9 @@ public:
   Direction getDirection() const;
   double getOccupation() const;
 
-  void addPassenger(Client* client);
+  void addPassenger(Floor* floor, Client* client);
 
 private:
-  std::queue<Floor*> _destinations;
   std::map<Floor*, std::set<Client*>> _passengers;
   int _maxLoad;
   const Building* _building;
