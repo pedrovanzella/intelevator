@@ -13,7 +13,7 @@ public:
   virtual ~Elevator();
 
   Direction getDirection() const;
-  int getOccupation() const;
+  double getOccupation() const;
 
 private:
   std::queue<Floor*> _destinations;

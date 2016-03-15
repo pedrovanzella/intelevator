@@ -9,7 +9,7 @@ struct ElevatorTest : testing::Test
 
   ElevatorTest()
   {
-    config.maxLoad = 10;
+    config._maxLoad = 10;
     elevator = new Elevator(config);
   }
 
@@ -18,3 +18,8 @@ struct ElevatorTest : testing::Test
     delete elevator;
   }
 };
+
+TEST_F(ElevatorTest, NoPassengers_ReturnsOccupation_Zero)
+{
+  EXPECT_EQ(elevator->getOccupation(), 0.0);
+}
