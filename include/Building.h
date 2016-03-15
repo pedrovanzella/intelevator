@@ -9,23 +9,21 @@ class Elevator; // forward declaration
 class Floor;    // forward declaration
 
 class Building {
-private:
-  Config& config;
-  std::list<Elevator*> elevators;
-  std::list<Floor*> floors;
-
-  std::map<Elevator*, Floor*>locations;
-
 public:
-  Building(Config&);
+  Building(Config& config);
   virtual ~Building();
 
-  void reset(Config&);
+  void reset(const Config& config);
   const Config& getConfig() const;
-
-  const std::list<Elevator*>& getElevators() const;
-  const std::list<Floor*>& getFloors() const;
 
   void setLocation(Elevator* elevator, Floor* location);
   Floor* getLocation(Elevator* elevator);
+  const std::list<Elevator*>& getElevators() const;
+  const std::list<Floor*>& getFloors() const;
+
+private:
+  Config& _config;
+  std::list<Elevator*> _elevators;
+  std::list<Floor*> _floors;
+  std::map<Elevator*, Floor*> _locations;
 };

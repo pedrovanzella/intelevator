@@ -3,71 +3,70 @@
 #include "Floor.h"
 
 Building::Building(Config& config)
- : config(config)
+ : _config(config)
 {
-  this->reset(config);
+  reset(_config);
 }
 
 Building::~Building()
 {
   Floor* f = nullptr;
-  while(!floors.empty())
+  while(!_floors.empty())
   {
-    f = floors.back();
-    floors.pop_back();
+    f = _floors.back();
+    _floors.pop_back();
     delete f;
   }
 
   Elevator* e = nullptr;
-  while(!elevators.empty())
+  while(!_elevators.empty())
   {
-    e = elevators.back();
-    elevators.pop_back();
+    e = _elevators.back();
+    _elevators.pop_back();
     delete e;
   }
 }
 
-void Building::reset(Config& config)
+void Building::reset(const Config& config)
 {
-  this->config = config;
+  _config = config;
 
-  for (int i = 0; i < config.floors; i++)
+  for (int i = 0; i < _config.floors; i++)
   {
-    Floor* f = new Floor(i);
-    floors.push_back(f);
+    _floors.push_back(new Floor(i));
   }
 
-  Floor* lobby = floors.front();
+  Floor* lobby = _floors.front();
 
   for (int i = 0; i < config.elevators; i++)
   {
-    Elevator* e = new Elevator(this->config);
-    elevators.push_back(e);
+    Elevator* e = new Elevator(_config);
+    _elevators.push_back(e);
     setLocation(e, lobby);
   }
 }
 
 const Config& Building::getConfig() const
 {
-  return config;
-}
-
-const std::list<Elevator*>& Building::getElevators() const
-{
-  return this->elevators;
-}
-
-const std::list<Floor*>& Building::getFloors() const
-{
-  return this->floors;
+  return _config;
 }
 
 void Building::setLocation(Elevator* elevator, Floor* location)
 {
-  locations[elevator] = location;
+  _locations[elevator] = location;
 }
 
 Floor* Building::getLocation(Elevator* elevator)
 {
-  return locations[elevator];
+  return _locations[elevator];
+}
+
+const std::list<Elevator*>& Building::getElevators() const
+{
+  return _elevators;
+}
+
+const std::list<Floor*>& Building::getFloors() const
+{
+  return _floors;
 }
