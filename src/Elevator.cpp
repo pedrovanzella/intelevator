@@ -15,12 +15,9 @@ double Elevator::getOccupation() const
   if (_maxLoad == 0) return 0.0;
 
   int total_passengers = 0;
-  for (auto const& floors : _passengers)
+  for (auto const& client : _passengers)
   {
-    for (auto const& clients : floors.second)
-    {
-      total_passengers += clients->_partySize;
-    }
+    total_passengers += client->_partySize;
   }
   return total_passengers / _maxLoad;
 }
@@ -28,4 +25,19 @@ double Elevator::getOccupation() const
 void Elevator::addPassenger(Floor* floor, Client* client)
 {
   _passengers[floor].insert(client);
+}
+
+std::shared_ptr<std::set<Floor&>> Elevator::getDestinations() const
+{
+  std::shared_ptr<std::set<Floor&>> floors;
+
+  for (auto const& client : _passengers) {
+    floors->insert(client->_destination);
+  }
+
+  return floors;
+}
+
+std::shared_ptr<std::set<Client>> Elevator::getClients() const
+{
 }

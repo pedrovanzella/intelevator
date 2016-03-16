@@ -18,8 +18,11 @@ public:
 
   void addPassenger(Floor* floor, Client* client);
 
+  std::shared_ptr<std::set<Floor&>> getDestinations() const;
+  std::shared_ptr<std::set<Client&>> getClients() const;
+
 private:
-  std::map<Floor*, std::set<Client*>> _passengers;
+  std::set<Client&> _passengers;
   int _maxLoad;
   const Building* _building;
 };
