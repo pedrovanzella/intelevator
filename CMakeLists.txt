@@ -50,9 +50,18 @@ set(SOURCE_FILES
     src/Statistics.cpp
     src/Trip.cpp)
 
+set(TEST_FILES
+        test/BuildingTest.cpp
+        test/ClientTest.cpp
+        test/ClockTest.cpp
+        test/ElevatorTest.cpp
+        test/ConfigTest.cpp
+        test/EventQueueTest.cpp
+        test/FloorTest.cpp)
+
 include_directories(include)
 
 add_executable(intelevator ${SOURCE_FILES})
-add_executable(intelevatorTests ${SOURCE_FILES})
+add_executable(intelevatorTests ${SOURCE_FILES} ${TEST_FILES})
 
 target_link_libraries(intelevatorTests gtest gtest_main)
