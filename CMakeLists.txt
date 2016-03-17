@@ -50,6 +50,7 @@ set(SOURCE_FILES
     src/Statistics.cpp
     src/Trip.cpp)
 
+include_directories(include)
 
 add_executable(intelevator ${SOURCE_FILES})
 add_executable(intelevatorTests ${SOURCE_FILES})
