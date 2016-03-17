@@ -10,3 +10,8 @@ lib
 
 # python
 *.pyc
+
+.idea
+CMakeCache.txt
+CMakeFiles/
+cmake_install.cmake
