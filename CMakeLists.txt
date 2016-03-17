@@ -32,32 +32,11 @@ endif()
 
 set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++11")
 
-set(SOURCE_FILES
-    src/Building.cpp
-    src/Client.cpp
-    src/ClientArrival.cpp
-    src/Clock.cpp
-    src/Config.cpp
-    src/Elevator.cpp
-    src/ElevatorArrival.cpp
-    src/Event.cpp
-    src/EventComparator.cpp
-    src/EventDispatcher.cpp
-    src/EventQueue.cpp
-    src/Floor.cpp
-    src/main.cpp
-    src/Simulator.cpp
-    src/Statistics.cpp
-    src/Trip.cpp)
+file(GLOB SOURCE_FILES
+    "src/*.cpp")
 
-set(TEST_FILES
-        test/BuildingTest.cpp
-        test/ClientTest.cpp
-        test/ClockTest.cpp
-        test/ElevatorTest.cpp
-        test/ConfigTest.cpp
-        test/EventQueueTest.cpp
-        test/FloorTest.cpp)
+file(GLOB TEST_FILES
+        "test/*.cpp")
 
 include_directories(include)
 
