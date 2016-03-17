@@ -46,6 +46,9 @@ include_directories(include)
 add_executable(intelevator ${SOURCE_FILES})
 add_executable(intelevatorTests ${TEST_SOURCES})
 
+target_link_libraries(intelevatorTests gtest gtest_main)
+
 add_test(intelevatorTests intelevatorTests)
 
-target_link_libraries(intelevatorTests gtest gtest_main)
+install(TARGETS intelevator DESTINATION bin)
+install(TARGETS intelevatorTests DESTINATION bin)
