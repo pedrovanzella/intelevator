@@ -38,9 +38,14 @@ file(GLOB SOURCE_FILES
 file(GLOB TEST_FILES
         "test/*.cpp")
 
+set(TEST_SOURCES ${TEST_FILES} ${SOURCE_FILES})
+list(REMOVE_ITEM TEST_SOURCES main.cpp)
+
 include_directories(include)
 
 add_executable(intelevator ${SOURCE_FILES})
-add_executable(intelevatorTests ${SOURCE_FILES} ${TEST_FILES})
+add_executable(intelevatorTests ${TEST_SOURCES})
+
+add_test(intelevatorTests intelevatorTests)
 
 target_link_libraries(intelevatorTests gtest gtest_main)
