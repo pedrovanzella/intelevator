@@ -16,10 +16,9 @@ public:
   Direction getDirection() const;
   double getOccupation() const;
 
-  void addPassenger(Floor* floor, Client* client);
+  void addPassenger(Client& client);
 
-  std::shared_ptr<std::set<Floor&>> getDestinations() const;
-  std::shared_ptr<std::set<Client&>> getClients() const;
+  std::shared_ptr<std::set<Floor const&>> getDestinations() const;
 
 private:
   std::set<Client&> _passengers;
