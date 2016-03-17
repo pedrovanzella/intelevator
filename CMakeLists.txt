@@ -1,6 +1,8 @@
 cmake_minimum_required(VERSION 3.3)
 project(intelevator)
 
+include_directories(include ${gtest_SOURCE_DIR}/include $gtest_SOURCE_DIR})
+
 set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++11")
 
 set(SOURCE_FILES
@@ -21,6 +23,8 @@ set(SOURCE_FILES
     src/Statistics.cpp
     src/Trip.cpp)
 
-include_directories(include)
 
 add_executable(intelevator ${SOURCE_FILES})
+add_executable(intelevatorTests ${SOURCE_FILES})
+
+target_link_libraries(intelevatorTests gtest gtest_main)
