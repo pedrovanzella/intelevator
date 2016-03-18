@@ -1,7 +1,7 @@
 #include "Simulator.h"
 #include <iostream>
 
-Simulator::Simulator(Config& config)
+Simulator::Simulator(const std::shared_ptr<const Config> config)
   : _config()
   , _building(_config)
   , _statistics(_config)

@@ -1,6 +1,6 @@
 #include "Statistics.h"
 
-Statistics::Statistics(Config& config)
+Statistics::Statistics(const std::shared_ptr<const Config> config)
  : _config(config)
 {}
 

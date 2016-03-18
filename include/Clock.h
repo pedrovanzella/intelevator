@@ -7,7 +7,7 @@
 class Clock : public EventObserver
 {
 public:
-  Clock(Config&);
+  Clock(const std::shared_ptr<const Config> config);
   virtual ~Clock();
 
   float currentTime() const;
@@ -18,5 +18,5 @@ public:
 
 private:
   float _time;
-  Config& _config;
+  const std::shared_ptr<const Config> _config;
 };

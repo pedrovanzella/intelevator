@@ -2,43 +2,33 @@
 #include "Elevator.h"
 #include "Floor.h"
 
-Building::Building(Config& config)
+#include <iostream>
+using namespace std;
+
+Building::Building(const std::shared_ptr<const Config> config)
  : _config(config)
-{
-  Floor* f = nullptr;
-  for (int i = 0; i < _config._floors; i++)
-  {
-    f = new Floor(i);
-    _floors.push_back(f);
-  }
-
-  Floor* lobby = _floors.front();
-
-  Elevator* e = nullptr;
-  for (int i = 0; i < _config._elevators; i++)
-  {
-    e = new Elevator(_config, this);
-    _elevators.push_back(e);
-    setLocation(e, lobby);
-  }
-}
+{}
 
 Building::~Building()
 {
-  Floor* f = nullptr;
-  while(!_floors.empty())
+  _floors.clear();
+  _elevators.clear();
+}
+
+void Building::build()
+{
+  for (int i = 0; i < _config->getFloors(); i++)
   {
-    f = _floors.back();
-    _floors.pop_back();
-    delete f;
+    _floors.push_back(std::shared_ptr<Floor>(new Floor(i)));
   }
 
-  Elevator* e = nullptr;
-  while(!_elevators.empty())
+  auto lobby = _floors.front();
+  auto building = std::shared_ptr<const Building>(this);
+  for (int i = 0; i < _config->getElevators(); i++)
   {
-    e = _elevators.back();
-    _elevators.pop_back();
-    delete e;
+    std::shared_ptr<Elevator> e(new Elevator(building));
+    _elevators.push_back(e);
+    setLocation(e, lobby);
   }
 }
 
@@ -47,27 +37,27 @@ void Building::notify(const std::shared_ptr<const Event> event) const
   // TO-DO
 }
 
-const Config& Building::getConfig() const
+const std::shared_ptr<const Config> Building::getConfig() const
 {
   return _config;
 }
 
-void Building::setLocation(Elevator* elevator, Floor* location)
+void Building::setLocation(std::shared_ptr<const Elevator> elevator, std::shared_ptr<const Floor> location)
 {
   _locations[elevator] = location;
 }
 
-Floor* Building::getLocation(Elevator* elevator)
+const std::shared_ptr<const Floor> Building::getLocation(std::shared_ptr<const Elevator> elevator)
 {
   return _locations[elevator];
 }
 
-const std::list<Elevator*>& Building::getElevators() const
+const std::list<std::shared_ptr<const Elevator>>& Building::getElevators() const
 {
   return _elevators;
 }
 
-const std::list<Floor*>& Building::getFloors() const
+const std::list<std::shared_ptr<const Floor>>& Building::getFloors() const
 {
   return _floors;
 }

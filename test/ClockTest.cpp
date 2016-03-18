@@ -5,7 +5,7 @@
 struct ClockTest : testing::Test
 {
   Clock* clock;
-  Config config;
+  std::shared_ptr<Config> config;
 
   ClockTest()
   {

@@ -1,6 +1,6 @@
 #include "Clock.h"
 
-Clock::Clock(Config& config)
+Clock::Clock(const std::shared_ptr<const Config> config)
  : _time(0.f)
  , _config(config) {}
 

@@ -9,12 +9,12 @@
 class Statistics : public EventObserver
 {
 public:
-  Statistics(Config&);
+  Statistics(const std::shared_ptr<const Config> config);
 
   bool keepRunning() const;
   void notify(const std::shared_ptr<const Event> event) const;
 
 private:
-  Config& _config;
+  const std::shared_ptr<const Config> _config;
   std::list<Trip*> _trips;
 };

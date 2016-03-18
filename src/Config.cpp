@@ -28,32 +28,89 @@ void Config::fromFile(std::istringstream& isFile)
   }
 }
 
+void Config::setTitle(const std::string title)
+{
+  _title = title;
+}
+
+void Config::setSeed(const int seed)
+{
+  _seed = seed;
+}
+
+void Config::setFloors(const int floors)
+{
+  _floors = floors;
+}
+
+void Config::setElevators(const int elevators)
+{
+  _elevators = elevators;
+}
+
+void Config::setMaxLoad(const int maxLoad)
+{
+  _maxLoad = maxLoad;
+}
+
+void Config::setDuration(const int duration)
+{
+  _duration = duration;
+}
+
+std::string Config::getTitle() const
+{
+  return _title;
+}
+
+int Config::getSeed() const
+{
+  return _seed;
+}
+
+int Config::getFloors() const
+{
+  return _floors;
+}
+
+int Config::getElevators() const
+{
+  return _elevators;
+}
+
+int Config::getMaxLoad() const
+{
+  return _maxLoad;
+}
+
+float Config::getDuration() const
+{
+  return _duration;
+}
+
 void Config::storeLine(std::string key, std::string value)
 {
   // We can't use a switch with std::strings, apparently
-  if (key == "floors") {
-    _floors = std::stoi(value);
-    return;
-  }
-  if (key == "elevators") {
-    _elevators = std::stoi(value);
-    return;
-  }
-  if (key == "maxLoad") {
-    _maxLoad = std::stoi(value);
-    return;
-  }
-  if (key == "duration") {
-    _duration = std::stof(value);
-    return;
-  }
   if (key == "title") {
-    _title = value;
-    return;
+    setTitle(value);
   }
-  if (key == "seed") {
-    _seed = std::stoi(value);
-    return;
+  else if (key == "seed") {
+    setSeed(std::stoi(value));
   }
-  throw std::invalid_argument("Invalid key");
+  else if (key == "floors") {
+    setFloors(std::stoi(value));
+  }
+  else if (key == "elevators") {
+    setElevators(std::stoi(value));
+  }
+  else if (key == "maxLoad") {
+    setMaxLoad(std::stoi(value));
+  }
+  else if (key == "duration") {
+    setDuration(std::stof(value));
+  }
+  else
+  {
+    throw std::invalid_argument("Invalid key: " + key);
+  }
 }

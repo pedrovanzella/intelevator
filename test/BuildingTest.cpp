@@ -1,5 +1,6 @@
 #include <gtest/gtest.h>
 #include <iostream>
+#include <memory>
 
 #include "Building.h"
 #include "Elevator.h"
@@ -9,43 +10,42 @@ using namespace std;
 
 struct BuildingTest : testing::Test
 {
-  Config* config;
-  Building* building;
+  std::shared_ptr<Config> config;
+  Building* building; // como resolver isso?
 
   BuildingTest()
+  : config(new Config())
+  , building(new Building(config))
   {
-    config = new Config();
-    config->_floors = 3;
-    config->_elevators = 5;
+    config->setFloors(3);
+    config->setElevators(5);
 
-    building = new Building(*config);
+    building->build();
   }
 
   virtual ~BuildingTest()
   {
-    delete building;
-    delete config;
   }
 };
 
 TEST_F(BuildingTest, GetConfig_ReturnsConfig)
 {
-  EXPECT_EQ(config, &building->getConfig());
+  EXPECT_EQ(config, building->getConfig());
 }
 
 TEST_F(BuildingTest, GetFloors_ReturnsRightSize)
 {
-  EXPECT_EQ(config->_floors, building->getFloors().size());
+  EXPECT_EQ(config->getFloors(), building->getFloors().size());
 }
 
 TEST_F(BuildingTest, GetElevators_ReturnsRightSize)
 {
-  EXPECT_EQ(config->_elevators, building->getElevators().size());
+  EXPECT_EQ(config->getElevators(), building->getElevators().size());
 }
 
 TEST_F(BuildingTest, GetLocation_NewBuilding_ReturnsLobby)
 {
-  Floor* lobby = building->getFloors().front();
+  auto lobby = building->getFloors().front();
   for (auto e : building->getElevators())
   {
     EXPECT_EQ(lobby, building->getLocation(e));
@@ -54,9 +54,9 @@ TEST_F(BuildingTest, GetLocation_NewBuilding_ReturnsLobby)
 
 TEST_F(BuildingTest, SetLocation_ArbitraryElevator_UpdatesLocation)
 {
-  Floor* lobby = building->getFloors().front();
-  Floor* roof = building->getFloors().back();
-  Elevator* e = building->getElevators().front();
+  auto lobby = building->getFloors().front();
+  auto roof = building->getFloors().back();
+  auto e = building->getElevators().front();
   building->setLocation(e, roof);
   EXPECT_EQ(roof, building->getLocation(e));
   building->setLocation(e, lobby);

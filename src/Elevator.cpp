@@ -1,7 +1,8 @@
+#include <memory>
 #include "Elevator.h"
 
-Elevator::Elevator(const Config& config, const Building* building)
-  : _maxLoad(config._maxLoad), _building(building) {}
+Elevator::Elevator(const std::shared_ptr<const Building> building)
+  : _building(building) {}
 
 Elevator::~Elevator() {}
 
@@ -12,20 +13,28 @@ Direction Elevator::getDirection() const
 
 double Elevator::getOccupation() const
 {
-  if (_maxLoad == 0) return 0.0;
+  if (_building->getConfig()->getMaxLoad() == 0) return 0.0;
 
   int total_passengers = 0;
-  for (auto const& floors : _passengers)
+  for (auto const& client : _passengers)
   {
-    for (auto const& clients : floors.second)
-    {
-      total_passengers += clients->getPartySize();
-    }
+      total_passengers += client->getPartySize();
   }
-  return total_passengers / _maxLoad;
+  return total_passengers / _building->getConfig()->getMaxLoad();
 }
 
-void Elevator::addPassenger(Floor* floor, Client* client)
+void Elevator::addPassenger(std::shared_ptr<const Client> client)
 {
-  _passengers[floor].insert(client);
+  _passengers.insert(client);
+}
+
+std::shared_ptr<std::set<const Floor>> Elevator::getDestinations() const
+{
+  std::shared_ptr<std::set<const Floor>> floors;
+
+  // for (auto client : _passengers) {
+  //   floors->insert(client.getDestination());
+  // }
+
+  return floors;
 }

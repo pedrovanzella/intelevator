@@ -1,3 +1,4 @@
+#include <memory>
 #include "Building.h"
 #include "Clock.h"
 #include "Config.h"
@@ -8,10 +9,10 @@
 class Simulator
 {
 public:
-  Simulator(Config& config);
+  Simulator(const std::shared_ptr<const Config> config);
   virtual ~Simulator();
 
-  Config _config;
+  const std::shared_ptr<const Config> _config;
   Building _building;
   Statistics _statistics;
   Clock _clock;

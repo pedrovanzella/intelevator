@@ -4,19 +4,21 @@
 
 struct ElevatorTest : testing::Test
 {
-  Config config;
-  Elevator* elevator;
+  std::shared_ptr<Config> config;
+  std::shared_ptr<Building> building;
+  std::shared_ptr<Elevator> elevator;
 
   ElevatorTest()
+  : config(new Config())
+  , building(new Building(config))
+  , elevator(new Elevator(building))
   {
-    config._maxLoad = 10;
-    config._elevators = 1;
-    elevator = new Elevator(config, nullptr);
+    config->setMaxLoad(10);
+    config->setElevators(1);
   }
 
   virtual ~ElevatorTest()
   {
-    delete elevator;
   }
 };
 
@@ -24,8 +26,7 @@ struct ElevatorTest : testing::Test
 
 TEST_F(ElevatorTest, NullMaxLoad_ReturnsOccupation_Zero)
 {
-  config._maxLoad = 0;
-  elevator = new Elevator(config, nullptr);
+  config->setMaxLoad(0);
   EXPECT_EQ(elevator->getOccupation(), 0.f);
 }
 

@@ -6,17 +6,17 @@ Client::Client(int partySize, float arrivalTime, const std::shared_ptr<const Flo
   , _destination(destination)
 {}
 
-const int Client::getPartySize()
+int Client::getPartySize() const
 {
   return _partySize;
 }
 
-const float Client::getArrivalTime()
+float Client::getArrivalTime() const
 {
   return _arrivalTime;
 }
 
-const std::shared_ptr<const Floor> Client::getDestination()
+std::shared_ptr<const Floor> Client::getDestination() const
 {
   return _destination;
 }

@@ -1,7 +1,6 @@
 #include <iostream>
-
+#include <memory>
 #include "Config.h"
-
 #include "Simulator.h"
 
 using namespace std;
@@ -10,12 +9,12 @@ int main(int argc, char* argv[])
 {
   cout << "Welcome to Intelevator, the intelligent elevator" << endl;
 
-  Config config;
-  config._floors = 10;
-  config._elevators = 3;
-  config._maxLoad = 8;
-  config._duration = 100;
-  config._title = "Here we go!";
+  std::shared_ptr<Config> config;
+  config->setFloors(10);
+  config->setElevators(3);
+  config->setMaxLoad(8);
+  config->setDuration(100);
+  config->setTitle("Here we go!");
 
   Simulator simulator(config);
 

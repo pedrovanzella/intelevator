@@ -8,9 +8,9 @@ class Client {
 public:
   Client(const int partySize, const float arrivalTime, const std::shared_ptr<const Floor> destination);
 
-  const int getPartySize();
-  const float getArrivalTime();
-  const std::shared_ptr<const Floor> getDestination();
+int getPartySize() const;
+float getArrivalTime() const;
+std::shared_ptr<const Floor> getDestination() const;
 
 private:
   const int _partySize;
