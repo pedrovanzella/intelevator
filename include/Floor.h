@@ -16,6 +16,6 @@ public:
 
 private:
   int _number;
-  std::queue<Client*> _upLine;
-  std::queue<Client*> _downLine;
+  std::queue<std::shared_ptr<const Client>> _upLine;
+  std::queue<std::shared_ptr<const Client>> _downLine;
 };
