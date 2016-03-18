@@ -26,9 +26,8 @@ void Simulator::Run()
   std::cout << "Simulator is running" << std::endl;
   while (_statistics.keepRunning() && _eventQueue.hasNextEvent())
   {
-    Event* e = _eventQueue.pop();
-    _eventDispatcher.broadcast(std::shared_ptr<const Event>(e));
-    delete e;
+    auto e = _eventQueue.pop();
+    _eventDispatcher.broadcast(e);
   }
 }
 

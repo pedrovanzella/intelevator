@@ -6,11 +6,9 @@ EventQueue::EventQueue()
 
 EventQueue::~EventQueue()
 {
-  while (!_eventQueue.empty())
+  while(!_eventQueue.empty())
   {
-    Event* e = this->pop();
-    if (e != nullptr)
-      delete e;
+    _eventQueue.pop();
   }
 }
 
@@ -19,24 +17,24 @@ bool EventQueue::hasNextEvent() const
   return !_eventQueue.empty();
 }
 
-void EventQueue::push(Event* event)
+void EventQueue::push(std::shared_ptr<const Event> event)
 {
   _eventQueue.push(event);
 }
 
-Event* EventQueue::pop()
+std::shared_ptr<const Event> EventQueue::pop()
 {
-  if (_eventQueue.empty()) return nullptr;
+  if (_eventQueue.empty()) return std::shared_ptr<const Event>(nullptr);
 
-  Event* event = _eventQueue.top();
+  std::shared_ptr<const Event> event = _eventQueue.top();
   _eventQueue.pop();
 
   return event;
 }
 
-Event* EventQueue::top() const
+std::shared_ptr<const Event> EventQueue::top() const
 {
-  if (_eventQueue.empty()) return nullptr;
+  if (_eventQueue.empty()) return std::shared_ptr<const Event>(nullptr);
 
   return _eventQueue.top();
 }
