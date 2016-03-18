@@ -11,7 +11,7 @@ int Floor::getNumber() const
   return _number;
 }
 
-void Floor::notify(const Event& event) const
+void Floor::notify(const std::shared_ptr<const Event> event) const
 {
   // Handle events
 }

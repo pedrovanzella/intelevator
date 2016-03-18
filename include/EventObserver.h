@@ -1,9 +1,10 @@
 #pragma once
 
+#include <memory>
 #include "Event.h"
 
 class EventObserver
 {
 public:
-  virtual void notify(const Event&) const = 0;
+  virtual void notify(const std::shared_ptr<const Event> event) const = 0;
 };

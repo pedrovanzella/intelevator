@@ -1,5 +1,6 @@
 #pragma once
 
+#include <memory>
 #include "Config.h"
 #include "EventObserver.h"
 
@@ -13,7 +14,7 @@ public:
   void advanceTo(const float time);
   void advanceBy(const float amount);
 
-  void notify(const Event&) const;
+  void notify(const std::shared_ptr<const Event> event) const;
 
 private:
   float _time;

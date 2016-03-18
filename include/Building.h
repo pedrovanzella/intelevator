@@ -15,7 +15,7 @@ public:
   Building(Config& config);
   virtual ~Building();
 
-  void notify(const Event& event) const;
+  void notify(const std::shared_ptr<const Event> event) const;
 
   const Config& getConfig() const;
 

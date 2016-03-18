@@ -1,5 +1,6 @@
 #pragma once
 
+#include <memory>
 #include <queue>
 #include "Client.h"
 #include "EventObserver.h"
@@ -11,7 +12,7 @@ public:
   virtual ~Floor();
 
   int getNumber() const;
-  void notify(const Event&) const;
+  void notify(const std::shared_ptr<const Event> event) const;
 
 private:
   int _number;

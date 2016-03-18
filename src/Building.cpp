@@ -42,7 +42,7 @@ Building::~Building()
   }
 }
 
-void Building::notify(const Event&) const
+void Building::notify(const std::shared_ptr<const Event> event) const
 {
   // TO-DO
 }

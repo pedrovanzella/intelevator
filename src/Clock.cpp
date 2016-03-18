@@ -23,7 +23,7 @@ void Clock::advanceBy(const float amount)
   _time += amount;
 }
 
-void Clock::notify(const Event& /*event*/) const
+void Clock::notify(const std::shared_ptr<const Event> event) const
 {
   // Handle events
 }
