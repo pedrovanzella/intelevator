@@ -18,7 +18,7 @@ double Elevator::getOccupation() const
   int total_passengers = 0;
   for (auto const& client : _passengers)
   {
-      total_passengers += client->getPartySize();
+    total_passengers += client->getPartySize();
   }
   return total_passengers / _building->getConfig()->getMaxLoad();
 }
