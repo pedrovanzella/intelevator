@@ -9,8 +9,3 @@ const Client& ClientArrival::getClient() const
 {
   return _client;
 }
-
-const Floor& ClientArrival::getDestination() const
-{
-  return _client._destination;
-}

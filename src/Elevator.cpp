@@ -19,7 +19,7 @@ double Elevator::getOccupation() const
   {
     for (auto const& clients : floors.second)
     {
-      total_passengers += clients->_partySize;
+      total_passengers += clients->getPartySize();
     }
   }
   return total_passengers / _maxLoad;

@@ -7,20 +7,19 @@ struct EventQueueTest : testing::Test
 {
   EventQueue* eventQueue;
 
-  Floor* destination;
+  const std::shared_ptr<const Floor> destination;
   Client* client;
 
   EventQueueTest()
+  : destination(new Floor(0))
   {
     eventQueue = new EventQueue();
-    destination = new Floor(0);
-    client = new Client(1, 0.f, *destination);
+    client = new Client(1, 0.f, destination);
   }
 
   virtual ~EventQueueTest()
   {
     delete client;
-    delete destination;
     delete eventQueue;
   }
 };
