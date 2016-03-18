@@ -39,7 +39,8 @@ file(GLOB TEST_FILES
         "test/*.cpp")
 
 set(TEST_SOURCES ${TEST_FILES} ${SOURCE_FILES})
-list(REMOVE_ITEM TEST_SOURCES main.cpp)
+
+list(REMOVE_ITEM TEST_SOURCES ${CMAKE_CURRENT_SOURCE_DIR}/src/main.cpp)
 
 include_directories(include)
 
