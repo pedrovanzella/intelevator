@@ -1,29 +1,25 @@
 #include <gtest/gtest.h>
+#include <memory>
 
 #include "Client.h"
 #include "Floor.h"
 
 struct ClientTest : testing::Test
 {
-  Client* client;
-  const std::shared_ptr<const Floor> destination;
-
   int partySize;
   float arrivalTime;
+  const std::shared_ptr<const Floor> destination;
+  const std::shared_ptr<const Client> client;
 
   ClientTest()
-  : destination(new Floor(0))
-  {
-    partySize = 1;
-    arrivalTime = 10.f;
-
-    client = new Client(partySize, arrivalTime, destination);
-  }
+  : partySize(1)
+  , arrivalTime(10.f)
+  , destination(new Floor(0))
+  , client(new Client(partySize, arrivalTime, destination))
+  {}
 
   virtual ~ClientTest()
-  {
-    delete client;
-  }
+  {}
 };
 
 TEST_F(ClientTest, GetPartySize_ReturnsPartySize)
