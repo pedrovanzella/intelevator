@@ -10,7 +10,7 @@
 class Elevator; // forward declaration
 class Floor;    // forward declaration
 
-class Building : public EventObserver
+class Building : public EventObserver, public std::enable_shared_from_this<Building>
 {
 public:
   Building(const std::shared_ptr<const Config> config);

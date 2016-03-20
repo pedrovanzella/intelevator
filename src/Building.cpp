@@ -23,7 +23,7 @@ void Building::build()
   }
 
   auto lobby = _floors.front();
-  auto building = std::shared_ptr<const Building>(this);
+  std::shared_ptr<Building> building = static_pointer_cast<Building>(shared_from_this());
   for (int i = 0; i < _config->getElevators(); i++)
   {
     std::shared_ptr<Elevator> e(new Elevator(building));
