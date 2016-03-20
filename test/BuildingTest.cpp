@@ -24,8 +24,7 @@ struct BuildingTest : testing::Test
   }
 
   virtual ~BuildingTest()
-  {
-  }
+  {}
 };
 
 TEST_F(BuildingTest, GetConfig_ReturnsConfig)
@@ -52,13 +51,10 @@ TEST_F(BuildingTest, GetLocation_NewBuilding_ReturnsLobby)
   }
 }
 
-TEST_F(BuildingTest, SetLocation_ArbitraryElevator_UpdatesLocation)
+TEST_F(BuildingTest, SetLocation_UpdatesLocation)
 {
-  auto lobby = building->getFloors().front();
   auto roof = building->getFloors().back();
   auto e = building->getElevators().front();
   building->setLocation(e, roof);
   EXPECT_EQ(roof, building->getLocation(e));
-  building->setLocation(e, lobby);
-  EXPECT_EQ(lobby, building->getLocation(e));
 }
