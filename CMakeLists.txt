@@ -32,20 +32,57 @@ endif()
 
 set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++11")
 
-file(GLOB SOURCE_FILES
-    "src/*.cpp")
+set(SOURCE_FILES
+        "src/Building.cpp"
+        "src/Client.cpp"
+        "src/ClientArrival.cpp"
+        "src/Clock.cpp"
+        "src/Config.cpp"
+        "src/Dispatcher.cpp"
+        "src/DummyDispatcher.cpp"
+        "src/Elevator.cpp"
+        "src/ElevatorArrival.cpp"
+        "src/Event.cpp"
+        "src/EventComparator.cpp"
+        "src/EventDispatcher.cpp"
+        "src/EventQueue.cpp"
+        "src/Floor.cpp"
+        "src/main.cpp"
+        "src/Simulator.cpp"
+        "src/Statistics.cpp"
+        "src/Trip.cpp")
 
-file(GLOB TEST_FILES
-        "test/*.cpp")
+set(TEST_FILES
+        "src/Building.cpp"
+        "src/Client.cpp"
+        "src/ClientArrival.cpp"
+        "src/Clock.cpp"
+        "src/Config.cpp"
+        "src/Dispatcher.cpp"
+        "src/DummyDispatcher.cpp"
+        "src/Elevator.cpp"
+        "src/ElevatorArrival.cpp"
+        "src/Event.cpp"
+        "src/EventComparator.cpp"
+        "src/EventDispatcher.cpp"
+        "src/EventQueue.cpp"
+        "src/Floor.cpp"
+        "src/Simulator.cpp"
+        "src/Statistics.cpp"
+        "src/Trip.cpp"
+        "test/BuildingTest.cpp"
+        "test/ClientTest.cpp"
+        "test/ClockTest.cpp"
+        "test/ConfigTest.cpp"
+        "test/ElevatorTest.cpp"
+        "test/EventQueueTest.cpp"
+        "test/FloorTest.cpp")
 
-set(TEST_SOURCES ${TEST_FILES} ${SOURCE_FILES})
-
-list(REMOVE_ITEM TEST_SOURCES ${CMAKE_CURRENT_SOURCE_DIR}/src/main.cpp)
 
 include_directories(include)
 
 add_executable(intelevator ${SOURCE_FILES})
-add_executable(intelevatorTests ${TEST_SOURCES})
+add_executable(intelevatorTests ${TEST_FILES})
 
 target_link_libraries(intelevatorTests gtest gtest_main)
 
