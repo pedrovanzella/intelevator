@@ -6,9 +6,8 @@
 #include "Elevator.h"
 #include <memory>
 
-std::shared_ptr<Elevator> NearestNeighbourDispatcher::pick_next_elevator()
+std::shared_ptr<Elevator> NearestNeighbourDispatcher::pick_next_elevator(const std::shared_ptr<const ClientArrival> ca)
 {
     auto elevators = _building->getElevators();
     return nullptr;
 }
-

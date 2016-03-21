@@ -44,6 +44,10 @@ void Building::build()
 
 void Building::notify(const std::shared_ptr<const Event> event) const
 {
+    if (event->getType() == EventType::clientArrival) {
+        auto elevator = _dispatcher->pick_next_elevator(event);
+        // Do something with this elevator
+    }
   // TO-DO
 }
 

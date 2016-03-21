@@ -8,6 +8,7 @@
 
 class Building;
 class Elevator;
+#include "ClientArrival.h"
 
 /* This is an interface for all dispatchers */
 
@@ -17,7 +18,7 @@ public:
 
     virtual ~Dispatcher() {}
 
-    virtual std::shared_ptr<Elevator> pick_next_elevator() = 0;
+    virtual std::shared_ptr<Elevator> pick_next_elevator(const std::shared_ptr<const ClientArrival>) = 0;
 
 protected:
     std::shared_ptr<Building> _building;

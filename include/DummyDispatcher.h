@@ -9,11 +9,13 @@
 #include "Dispatcher.h"
 #include "Elevator.h"
 #include "Building.h"
+#include "ClientArrival.h"
 
 class DummyDispatcher : public Dispatcher {
 public:
     explicit DummyDispatcher(Building building): Dispatcher(building) {}
-    std::shared_ptr<Elevator> pick_next_elevator();
+
+    std::shared_ptr<Elevator> pick_next_elevator(const std::shared_ptr<const ClientArrival>);
 };
 
 
