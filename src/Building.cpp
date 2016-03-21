@@ -5,11 +5,18 @@
 
 #include <iostream>
 #include <memory>
+#include <NearestNeighbourDispatcher.h>
 
 Building::Building(const std::shared_ptr<const Config> config)
  : _config(config)
 {
-  _dispatcher = std::shared_ptr<DummyDispatcher>(new DummyDispatcher(*this));
+    auto dispatcher_name = config->getDispatcher();
+
+    if (dispatcher_name == "Dummy") {
+        _dispatcher = std::shared_ptr<DummyDispatcher>(new DummyDispatcher(*this));
+    } else if (dispatcher_name == "NearestNeighbour") {
+        _dispatcher = std::shared_ptr<NearestNeighbourDispatcher>(new NearestNeighbourDispatcher(*this));
+    }
 }
 
 Building::~Building()

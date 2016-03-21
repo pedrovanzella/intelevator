@@ -19,6 +19,6 @@ public:
 
     virtual std::shared_ptr<Elevator> pick_next_elevator() = 0;
 
-private:
+protected:
     std::shared_ptr<Building> _building;
 };
