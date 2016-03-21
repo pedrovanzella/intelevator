@@ -1,13 +1,16 @@
 #include "Building.h"
 #include "Elevator.h"
 #include "Floor.h"
+#include "DummyDispatcher.h"
 
 #include <iostream>
-using namespace std;
+#include <memory>
 
 Building::Building(const std::shared_ptr<const Config> config)
  : _config(config)
-{}
+{
+  _dispatcher = std::unique_ptr<DummyDispatcher>(new DummyDispatcher(this));
+}
 
 Building::~Building()
 {
@@ -23,7 +26,7 @@ void Building::build()
   }
 
   auto lobby = _floors.front();
-  std::shared_ptr<Building> building = static_pointer_cast<Building>(shared_from_this());
+  std::shared_ptr<Building> building = std::static_pointer_cast<Building>(shared_from_this());
   for (int i = 0; i < _config->getElevators(); i++)
   {
     std::shared_ptr<Elevator> e(new Elevator(building));
