@@ -32,5 +32,5 @@ private:
   std::map<std::shared_ptr<const Elevator>, std::shared_ptr<const Floor>> _locations;
   std::list<std::shared_ptr<const Elevator>> _elevators;
   std::list<std::shared_ptr<const Floor>> _floors;
-    std::unique_ptr<Dispatcher> _dispatcher;
+    std::shared_ptr<Dispatcher> _dispatcher;
 };

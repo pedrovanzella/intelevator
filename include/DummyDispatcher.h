@@ -12,14 +12,8 @@
 
 class DummyDispatcher : public Dispatcher {
 public:
-    DummyDispatcher() = default;
-
-    DummyDispatcher(Building* building);
-
+    explicit DummyDispatcher(Building building): Dispatcher(building) {}
     std::shared_ptr<Elevator> pick_next_elevator();
-
-private:
-    std::shared_ptr<Building> _building;
 };
 
 

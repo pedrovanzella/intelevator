@@ -9,7 +9,7 @@
 Building::Building(const std::shared_ptr<const Config> config)
  : _config(config)
 {
-  _dispatcher = std::unique_ptr<DummyDispatcher>(new DummyDispatcher(this));
+  _dispatcher = std::shared_ptr<DummyDispatcher>(new DummyDispatcher(*this));
 }
 
 Building::~Building()

@@ -4,14 +4,21 @@
 
 #pragma once
 
-class Elevator;
 #include <memory>
+
+class Building;
+class Elevator;
 
 /* This is an interface for all dispatchers */
 
-class Dispatcher {
+class Dispatcher : public std::enable_shared_from_this<Dispatcher> {
 public:
-    Dispatcher();
+    Dispatcher(Building building);
+
+    virtual ~Dispatcher() {}
 
     virtual std::shared_ptr<Elevator> pick_next_elevator() = 0;
+
+private:
+    std::shared_ptr<Building> _building;
 };
