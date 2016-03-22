@@ -20,6 +20,8 @@ public:
 
   std::shared_ptr<std::set<const Floor>> getDestinations() const;
 
+    constexpr static float seconds_per_floor = 10.f;
+
 private:
   std::set<std::shared_ptr<const Client>> _passengers;
   const std::shared_ptr<const Building> _building;
