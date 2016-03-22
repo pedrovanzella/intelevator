@@ -62,3 +62,8 @@ TEST_F(BuildingTest, SetLocation_ArbitraryElevator_UpdatesLocation)
   building->setLocation(e, lobby);
   EXPECT_EQ(lobby, building->getLocation(e));
 }
+
+
+TEST_F(BuildingTest, GetLobby_ReturnsLobby) {
+  EXPECT_EQ(building->getLobby()->getNumber(), 1);
+}
