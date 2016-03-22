@@ -2,7 +2,10 @@
 #include "Elevator.h"
 
 Elevator::Elevator(const std::shared_ptr<const Building> building)
-  : _building(building) {}
+  : _building(building)
+{
+    _current_floor = _building->getLobby();
+}
 
 Elevator::~Elevator() {}
 
@@ -37,4 +40,9 @@ std::shared_ptr<std::set<const Floor>> Elevator::getDestinations() const
   // }
 
   return floors;
+}
+
+std::shared_ptr<const Floor> Elevator::getCurrentFloor() const
+{
+    return _current_floor;
 }
