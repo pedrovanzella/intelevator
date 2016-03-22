@@ -78,17 +78,9 @@ const std::list<std::shared_ptr<const Floor>>& Building::getFloors() const
 
 std::shared_ptr<const Floor> Building::getLobby() const
 {
-    auto lobby = _floors.front();
-
-    // Floors might not be in order, for some freak reason
-    if (lobby->getNumber() != 1) {
-        for (auto floor : _floors) {
-            if (floor->getNumber() == 1) {
-                lobby = floor;
-                break;
-            }
-        }
-    }
-
-    return lobby;
+    auto first = std::find_if(_floors.begin(), _floors.end(),
+                              [](std::shared_ptr<const Floor> floor){
+                                    return floor->getNumber() == 1;
+                              });
+    return *first;
 }
