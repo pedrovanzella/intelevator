@@ -15,7 +15,7 @@ class DummyDispatcher : public Dispatcher {
 public:
     explicit DummyDispatcher(Building building): Dispatcher(building) {}
 
-    std::shared_ptr<Elevator> pick_next_elevator(const std::shared_ptr<const ClientArrival>);
+    std::shared_ptr<const Elevator> pick_next_elevator(const std::shared_ptr<const ClientArrival>) const;
 };
 
 

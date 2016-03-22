@@ -15,7 +15,7 @@ class NearestNeighbourDispatcher : public Dispatcher {
 public:
     explicit NearestNeighbourDispatcher(Building building): Dispatcher(building) {}
 
-    std::shared_ptr<Elevator> pick_next_elevator(const std::shared_ptr<const ClientArrival>);
+    std::shared_ptr<const Elevator> pick_next_elevator(const std::shared_ptr<const ClientArrival>) const;
 };
 
 #endif //INTELEVATOR_NEARESTNEIGHBOURDISPATCHER_H

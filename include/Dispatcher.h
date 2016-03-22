@@ -18,7 +18,7 @@ public:
 
     virtual ~Dispatcher() {}
 
-    virtual std::shared_ptr<Elevator> pick_next_elevator(const std::shared_ptr<const ClientArrival>) = 0;
+    virtual std::shared_ptr<const Elevator> pick_next_elevator(const std::shared_ptr<const ClientArrival>) const = 0;
 
 protected:
     std::shared_ptr<Building> _building;
