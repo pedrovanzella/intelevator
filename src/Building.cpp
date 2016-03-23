@@ -1,13 +1,23 @@
 #include "Building.h"
 #include "Elevator.h"
 #include "Floor.h"
+#include "DummyDispatcher.h"
 
 #include <iostream>
-using namespace std;
+#include <memory>
+#include <NearestNeighbourDispatcher.h>
 
 Building::Building(const std::shared_ptr<const Config> config)
  : _config(config)
-{}
+{
+    auto dispatcher_name = config->getDispatcher();
+
+    if (dispatcher_name == "Dummy") {
+        _dispatcher = std::shared_ptr<DummyDispatcher>(new DummyDispatcher(*this));
+    } else if (dispatcher_name == "NearestNeighbour") {
+        _dispatcher = std::shared_ptr<NearestNeighbourDispatcher>(new NearestNeighbourDispatcher(*this));
+    }
+}
 
 Building::~Building()
 {
@@ -23,7 +33,7 @@ void Building::build()
   }
 
   auto lobby = _floors.front();
-  std::shared_ptr<Building> building = static_pointer_cast<Building>(shared_from_this());
+  std::shared_ptr<Building> building = std::static_pointer_cast<Building>(shared_from_this());
   for (int i = 0; i < _config->getElevators(); i++)
   {
     std::shared_ptr<Elevator> e(new Elevator(building));
@@ -34,6 +44,10 @@ void Building::build()
 
 void Building::notify(const std::shared_ptr<const Event> event) const
 {
+    if (event->getType() == EventType::clientArrival) {
+        auto elevator = _dispatcher->pick_next_elevator(std::static_pointer_cast<const ClientArrival>(event));
+        // Do something with this elevator
+    }
   // TO-DO
 }
 
@@ -60,4 +74,13 @@ const std::list<std::shared_ptr<const Elevator>>& Building::getElevators() const
 const std::list<std::shared_ptr<const Floor>>& Building::getFloors() const
 {
   return _floors;
+}
+
+std::shared_ptr<const Floor> Building::getLobby() const
+{
+    auto first = std::find_if(_floors.begin(), _floors.end(),
+                              [](std::shared_ptr<const Floor> floor){
+                                    return floor->getNumber() == 1;
+                              });
+    return *first;
 }

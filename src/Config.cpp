@@ -58,6 +58,10 @@ void Config::setDuration(const int duration)
   _duration = duration;
 }
 
+void Config::setDispatcher(const std::string dispatcher) {
+  _dispatcher = dispatcher;
+}
+
 std::string Config::getTitle() const
 {
   return _title;
@@ -88,6 +92,10 @@ float Config::getDuration() const
   return _duration;
 }
 
+std::string Config::getDispatcher() const {
+  return _dispatcher;
+}
+
 void Config::storeLine(std::string key, std::string value)
 {
   // We can't use a switch with std::strings, apparently
@@ -114,3 +122,5 @@ void Config::storeLine(std::string key, std::string value)
     throw std::invalid_argument("Invalid key: " + key);
   }
 }
+
+

@@ -16,6 +16,7 @@ public:
   void setElevators(const int elevators);
   void setMaxLoad(const int maxLoad);
   void setDuration(const int duration);
+    void setDispatcher(const std::string dispatcher);
 
   std::string getTitle() const;
   int getSeed() const;
@@ -23,6 +24,7 @@ public:
   int getElevators() const;
   int getMaxLoad() const;
   float getDuration() const;
+    std::string getDispatcher() const;
 
 private:
   int _floors;
@@ -31,6 +33,7 @@ private:
   float _duration;
   std::string _title;
   int _seed;
+    std::string _dispatcher;
 
   void storeLine(std::string key, std::string value);
 };
