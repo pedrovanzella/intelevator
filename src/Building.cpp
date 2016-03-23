@@ -7,6 +7,7 @@
 #include <iostream>
 #include <memory>
 #include <NearestNeighbourDispatcher.h>
+#include "BetterNearestNeighbourDispatcher.h"
 
 Building::Building(const std::shared_ptr<const Config> config)
  : _config(config)
@@ -17,6 +18,8 @@ Building::Building(const std::shared_ptr<const Config> config)
         _dispatcher = std::shared_ptr<DummyDispatcher>(new DummyDispatcher(*this));
     } else if (dispatcher_name == "NearestNeighbour") {
         _dispatcher = std::shared_ptr<NearestNeighbourDispatcher>(new NearestNeighbourDispatcher(*this));
+    } else if (dispatcher_name == "BetterNearestNeighbour") {
+        _dispatcher = std::shared_ptr<BetterNearestNeighbourDispatcher>(new BetterNearestNeighbourDispatcher(*this));
     }
 }
 

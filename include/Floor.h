@@ -15,7 +15,7 @@ public:
   int getNumber() const;
   void notify(const std::shared_ptr<const Event> event) const;
 
-    Direction compareTo(Floor& other);
+    Direction compareTo(const Floor& other) const;
 
 private:
   int _number;

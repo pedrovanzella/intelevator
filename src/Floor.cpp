@@ -16,7 +16,7 @@ void Floor::notify(const std::shared_ptr<const Event> event) const
   // Handle events
 }
 
-Direction Floor::compareTo(Floor &other)
+Direction Floor::compareTo(const Floor &other) const
 {
     if (other.getNumber() < _number)
         return Direction::descending;
