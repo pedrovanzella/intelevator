@@ -4,6 +4,7 @@
 #include <queue>
 #include "Client.h"
 #include "EventObserver.h"
+#include "Direction.h"
 
 class Floor : public EventObserver
 {
@@ -13,6 +14,8 @@ public:
 
   int getNumber() const;
   void notify(const std::shared_ptr<const Event> event) const;
+
+    Direction compareTo(Floor& other);
 
 private:
   int _number;
