@@ -3,6 +3,7 @@
 #include "Floor.h"
 #include "DummyDispatcher.h"
 
+#include <algorithm>
 #include <iostream>
 #include <memory>
 #include <NearestNeighbourDispatcher.h>
