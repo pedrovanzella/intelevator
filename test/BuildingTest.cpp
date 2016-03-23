@@ -11,7 +11,7 @@ using namespace std;
 struct BuildingTest : testing::Test
 {
   std::shared_ptr<Config> config;
-  std::shared_ptr<Building> building; // como resolver isso?
+  std::shared_ptr<Building> building;
 
   BuildingTest()
   : config(new Config())
