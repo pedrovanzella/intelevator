@@ -13,7 +13,7 @@
 
 class NearestNeighbourDispatcher : public Dispatcher {
 public:
-    explicit NearestNeighbourDispatcher(Building building): Dispatcher(building) {}
+    explicit NearestNeighbourDispatcher(std::shared_ptr<Building> building): Dispatcher(building) {}
 
     std::shared_ptr<const Elevator> pick_next_elevator(const std::shared_ptr<const ClientArrival>) const;
 };

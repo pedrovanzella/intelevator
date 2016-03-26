@@ -14,7 +14,7 @@ class Elevator;
 
 class Dispatcher : public std::enable_shared_from_this<Dispatcher> {
 public:
-    Dispatcher(Building building);
+    Dispatcher(std::shared_ptr<Building> building);
 
     virtual ~Dispatcher() {}
 

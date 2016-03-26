@@ -3,8 +3,9 @@
 //
 #include "Dispatcher.h"
 #include "Building.h"
+#include <memory>
 
-Dispatcher::Dispatcher(Building building)
+Dispatcher::Dispatcher(std::shared_ptr<Building> building)
 {
-    _building = std::make_shared<Building>(building);
+    _building = building;
 }

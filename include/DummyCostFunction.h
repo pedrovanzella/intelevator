@@ -9,7 +9,8 @@
 
 class DummyCostFunction : public CostFunction
 {
-    explicit DummyCostFunction(Building b) : CostFunction(b) {}
+public:
+    explicit DummyCostFunction(std::shared_ptr<Building> b) : CostFunction(b) {}
 
     float calculate() const;
 };

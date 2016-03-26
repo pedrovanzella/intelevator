@@ -15,11 +15,11 @@ Building::Building(const std::shared_ptr<const Config> config)
     auto dispatcher_name = config->getDispatcher();
 
     if (dispatcher_name == "Dummy") {
-        _dispatcher = std::shared_ptr<DummyDispatcher>(new DummyDispatcher(*this));
+        _dispatcher = std::shared_ptr<DummyDispatcher>(new DummyDispatcher(std::make_shared<Building>(*this)));
     } else if (dispatcher_name == "NearestNeighbour") {
-        _dispatcher = std::shared_ptr<NearestNeighbourDispatcher>(new NearestNeighbourDispatcher(*this));
+        _dispatcher = std::shared_ptr<NearestNeighbourDispatcher>(new NearestNeighbourDispatcher(std::make_shared<Building>(*this)));
     } else if (dispatcher_name == "BetterNearestNeighbour") {
-        _dispatcher = std::shared_ptr<BetterNearestNeighbourDispatcher>(new BetterNearestNeighbourDispatcher(*this));
+        _dispatcher = std::shared_ptr<BetterNearestNeighbourDispatcher>(new BetterNearestNeighbourDispatcher(std::make_shared<Building>(*this)));
     }
 }
 

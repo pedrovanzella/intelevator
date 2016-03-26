@@ -62,6 +62,11 @@ void Config::setDispatcher(const std::string dispatcher) {
   _dispatcher = dispatcher;
 }
 
+void Config::setCostFunction(const std::string costFunction)
+{
+  _costFunction = costFunction;
+}
+
 std::string Config::getTitle() const
 {
   return _title;
@@ -94,6 +99,11 @@ float Config::getDuration() const
 
 std::string Config::getDispatcher() const {
   return _dispatcher;
+}
+
+std::string Config::getCostFunction() const
+{
+  return _costFunction;
 }
 
 void Config::storeLine(std::string key, std::string value)

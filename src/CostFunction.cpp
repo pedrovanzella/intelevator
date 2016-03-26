@@ -4,7 +4,7 @@
 #include "CostFunction.h"
 #include "Building.h"
 
-CostFunction::CostFunction(Building b)
+CostFunction::CostFunction(std::shared_ptr<Building> b)
 {
-    _building = std::make_shared<Building>(b);
+    _building = b;
 }

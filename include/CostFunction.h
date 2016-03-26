@@ -11,7 +11,7 @@ class Building;
 class CostFunction
 {
 public:
-    CostFunction(Building b);
+    CostFunction(std::shared_ptr<Building> b);
 
     virtual ~CostFunction() {}
 

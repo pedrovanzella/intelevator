@@ -27,7 +27,7 @@ std::shared_ptr<const Elevator> BetterNearestNeighbourDispatcher::pick_next_elev
 
     // if no elevators are idle or going that way, then look through all elevators
     if (sd_elevators.size() == 0) {
-        NearestNeighbourDispatcher disp(*_building);
+        NearestNeighbourDispatcher disp(_building);
 
         return disp.pick_next_elevator(ca);
     }

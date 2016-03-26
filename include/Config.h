@@ -17,6 +17,7 @@ public:
   void setMaxLoad(const int maxLoad);
   void setDuration(const int duration);
     void setDispatcher(const std::string dispatcher);
+    void setCostFunction(const std::string costFunction);
 
   std::string getTitle() const;
   int getSeed() const;
@@ -25,6 +26,7 @@ public:
   int getMaxLoad() const;
   float getDuration() const;
     std::string getDispatcher() const;
+    std::string getCostFunction() const;
 
 private:
   int _floors;
@@ -34,6 +36,7 @@ private:
   std::string _title;
   int _seed;
     std::string _dispatcher;
+    std::string _costFunction;
 
   void storeLine(std::string key, std::string value);
 };
