@@ -6,13 +6,14 @@
 #define INTELEVATOR_DUMMYCOSTFUNCTION_H
 #include "CostFunction.h"
 #include "Building.h"
+#include "Elevator.h"
 
 class DummyCostFunction : public CostFunction
 {
 public:
     explicit DummyCostFunction(std::shared_ptr<Building> b) : CostFunction(b) {}
 
-    float calculate() const;
+    float calculate(std::shared_ptr<const Elevator> e, const std::shared_ptr<const ClientArrival> ca) const;
 };
 
 #endif //INTELEVATOR_DUMMYCOSTFUNCTION_H
