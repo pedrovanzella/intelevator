@@ -2,9 +2,11 @@
 // Created by Pedro Vanzella on 3/26/16.
 //
 
+#include <NearestNeighbourCostFunction.h>
 #include "CostFunctionDispatcher.h"
 #include "Building.h"
 #include "DummyCostFunction.h"
+#include "NearestNeighbourCostFunction.h"
 
 CostFunctionDispatcher::CostFunctionDispatcher(std::shared_ptr<Building> b) : Dispatcher(b)
 {
@@ -14,6 +16,8 @@ CostFunctionDispatcher::CostFunctionDispatcher(std::shared_ptr<Building> b) : Di
 
     if (cf == "Dummy") {
         _costFunction = std::shared_ptr<DummyCostFunction>(new DummyCostFunction(b));
+    } else if (cf == "NearestNeighbour") {
+        _costFunction = std::shared_ptr<NearestNeighbourCostFunction>(new NearestNeighbourCostFunction(b));
     }
 }
 
