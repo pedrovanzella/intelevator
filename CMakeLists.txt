@@ -50,7 +50,7 @@ set(SOURCE_FILES
         "src/main.cpp"
         "src/Simulator.cpp"
         "src/Statistics.cpp"
-        "src/Trip.cpp" src/NearestNeighbourDispatcher.cpp src/BetterNearestNeighbourDispatcher.cpp)
+        "src/Trip.cpp" src/NearestNeighbourDispatcher.cpp src/BetterNearestNeighbourDispatcher.cpp src/CostFunction.cpp src/DummyCostFunction.cpp)
 
 set(TEST_FILES
         "src/Building.cpp"
@@ -76,7 +76,7 @@ set(TEST_FILES
         "test/ConfigTest.cpp"
         "test/ElevatorTest.cpp"
         "test/EventQueueTest.cpp"
-        "test/FloorTest.cpp" src/NearestNeighbourDispatcher.cpp src/BetterNearestNeighbourDispatcher.cpp)
+        "test/FloorTest.cpp" src/NearestNeighbourDispatcher.cpp src/BetterNearestNeighbourDispatcher.cpp src/CostFunction.cpp src/DummyCostFunction.cpp)
 
 
 include_directories(include)
