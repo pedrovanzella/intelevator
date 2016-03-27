@@ -5,8 +5,6 @@
 #include "Event.h"
 #include "Floor.h"
 
-
-
 class ElevatorArrival : public Event
 {
 public:

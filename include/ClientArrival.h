@@ -14,5 +14,5 @@ public:
 
 private:
   const std::shared_ptr<const Client> _client;
-    const std::shared_ptr<const Floor> _floor;
+  const std::shared_ptr<const Floor> _floor;
 };

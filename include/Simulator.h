@@ -1,3 +1,5 @@
+#pragma once
+
 #include <memory>
 #include "Building.h"
 #include "Clock.h"

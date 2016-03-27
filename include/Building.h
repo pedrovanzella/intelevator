@@ -5,8 +5,8 @@
 #include <memory>
 #include <set>
 #include "Config.h"
-#include "EventObserver.h"
 #include "Dispatcher.h"
+#include "EventObserver.h"
 
 class Elevator; // forward declaration
 class Floor;    // forward declaration
