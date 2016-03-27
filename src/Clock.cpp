@@ -1,10 +1,17 @@
 #include "Clock.h"
+#include "easylogging++.h"
 
 Clock::Clock(const std::shared_ptr<const Config> config)
  : _time(0.f)
- , _config(config) {}
+ , _config(config)
+{
+  LOG(TRACE) << "Clock created.";
+}
 
-Clock::~Clock() {}
+Clock::~Clock()
+{
+  LOG(TRACE) << "Clock created.";
+}
 
 float Clock::currentTime() const
 {

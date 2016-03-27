@@ -1,6 +1,7 @@
-# Ignore bin, build and lib dirs
+# Ignore bin, build, lib and log dirs
 bin
 build
+logs
 
 # Emacs crap
 \#*#

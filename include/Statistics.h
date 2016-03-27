@@ -10,6 +10,7 @@ class Statistics : public EventObserver
 {
 public:
   Statistics(const std::shared_ptr<const Config> config);
+  virtual ~Statistics();
 
   bool keepRunning() const;
   void notify(const std::shared_ptr<const Event> event) const;

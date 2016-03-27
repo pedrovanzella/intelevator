@@ -1,37 +1,44 @@
 #include "Simulator.h"
-#include <iostream>
 
-Simulator::Simulator(const std::shared_ptr<const Config> config)
-  : _config()
-  , _building(_config)
-  , _statistics(_config)
-  , _clock(_config)
-  , _eventQueue()
-  , _eventDispatcher()
+#include <memory>
+#include "easylogging++.h"
+
+Simulator::Simulator(const std::shared_ptr<const Config> config,
+                     const std::shared_ptr<Building> building,
+                     const std::shared_ptr<Statistics> statistics,
+                     const std::shared_ptr<Clock> clock,
+                     const std::shared_ptr<EventQueue> eventQueue,
+                     const std::shared_ptr<EventDispatcher> EventDispatcher)
+  : _config(config)
+  , _building(building)
+  , _statistics(statistics)
+  , _clock(clock)
+  , _eventQueue(eventQueue)
+  , _eventDispatcher(EventDispatcher)
 {
-  _eventDispatcher.subscribe(std::shared_ptr<const EventObserver>(static_cast<EventObserver*>(&_building)));
-  _eventDispatcher.subscribe(std::shared_ptr<const EventObserver>(static_cast<EventObserver*>(&_statistics)));
-  _eventDispatcher.subscribe(std::shared_ptr<const EventObserver>(static_cast<EventObserver*>(&_clock)));
+  _eventDispatcher->subscribe(std::static_pointer_cast<EventObserver>(_building));
+  _eventDispatcher->subscribe(std::static_pointer_cast<EventObserver>(_statistics));
+  _eventDispatcher->subscribe(std::static_pointer_cast<EventObserver>(_clock));
 }
 
 Simulator::~Simulator()
 {
-  _eventDispatcher.unsubscribe(std::shared_ptr<const EventObserver>(static_cast<EventObserver*>(&_building)));
-  _eventDispatcher.unsubscribe(std::shared_ptr<const EventObserver>(static_cast<EventObserver*>(&_statistics)));
-  _eventDispatcher.unsubscribe(std::shared_ptr<const EventObserver>(static_cast<EventObserver*>(&_clock)));
+  _eventDispatcher->unsubscribe(std::static_pointer_cast<EventObserver>(_building));
+  _eventDispatcher->unsubscribe(std::static_pointer_cast<EventObserver>(_statistics));
+  _eventDispatcher->unsubscribe(std::static_pointer_cast<EventObserver>(_clock));
 }
 
-void Simulator::Run()
+void Simulator::run()
 {
-  std::cout << "Simulator is running" << std::endl;
-  while (_statistics.keepRunning() && _eventQueue.hasNextEvent())
+  LOG(INFO) << "Simulator is running.";
+  while (_statistics->keepRunning() && _eventQueue->hasNextEvent())
   {
-    auto e = _eventQueue.pop();
-    _eventDispatcher.broadcast(e);
+    auto e = _eventQueue->pop();
+    _eventDispatcher->broadcast(e);
   }
 }
 
-bool Simulator::NextStep()
+bool Simulator::nextStep()
 {
   return true;
 }

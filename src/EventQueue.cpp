@@ -1,7 +1,9 @@
+#include "easylogging++.h"
 #include "EventQueue.h"
 
 EventQueue::EventQueue()
 {
+  LOG(TRACE) << "EventQueue created.";
 }
 
 EventQueue::~EventQueue()
@@ -10,6 +12,7 @@ EventQueue::~EventQueue()
   {
     _eventQueue.pop();
   }
+  LOG(TRACE) << "EventQueue destroyed.";
 }
 
 bool EventQueue::hasNextEvent() const

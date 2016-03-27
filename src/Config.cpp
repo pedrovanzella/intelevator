@@ -1,10 +1,17 @@
 #include <stdexcept>
 #include <iostream>
 #include "Config.h"
+#include "easylogging++.h"
 
-Config::Config() {}
+Config::Config()
+{
+  LOG(TRACE) << "Config created.";
+}
 
-Config::~Config() {}
+Config::~Config()
+{
+  LOG(TRACE) << "Config destroyed.";
+}
 
 void Config::fromFile(std::istringstream& isFile)
 {

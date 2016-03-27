@@ -9,18 +9,22 @@
 class Simulator
 {
 public:
-  Simulator(const std::shared_ptr<const Config> config);
+  Simulator(const std::shared_ptr<const Config> config,
+            const std::shared_ptr<Building> building,
+            const std::shared_ptr<Statistics> statistics,
+            const std::shared_ptr<Clock> clock,
+            const std::shared_ptr<EventQueue> eventQueue,
+            const std::shared_ptr<EventDispatcher> EventDispatcher);
   virtual ~Simulator();
-
-  const std::shared_ptr<const Config> _config;
-  Building _building;
-  Statistics _statistics;
-  Clock _clock;
-  EventQueue _eventQueue;
-  EventDispatcher _eventDispatcher;
-
-  void Run();
+  void run();
 
 private:
-  bool NextStep();
+  bool nextStep();
+
+  const std::shared_ptr<const Config> _config;
+  const std::shared_ptr<Building> _building;
+  const std::shared_ptr<Statistics> _statistics;
+  const std::shared_ptr<Clock> _clock;
+  const std::shared_ptr<EventQueue> _eventQueue;
+  const std::shared_ptr<EventDispatcher> _eventDispatcher;
 };

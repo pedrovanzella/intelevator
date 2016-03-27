@@ -1,16 +1,23 @@
+#include "easylogging++.h"
 #include "EventDispatcher.h"
 
 EventDispatcher::EventDispatcher()
 {
+  LOG(TRACE) << "EventDispatcher created.";
 }
 
-void EventDispatcher::subscribe(std::shared_ptr<const EventObserver> eventObserver)
+EventDispatcher::~EventDispatcher()
+{
+  LOG(TRACE) << "EventDispatcher destroyed.";
+}
+
+void EventDispatcher::subscribe(std::shared_ptr<EventObserver> eventObserver)
 {
   if (eventObserver == nullptr) return;
   _observers.push_back(eventObserver);
 }
 
-void EventDispatcher::unsubscribe(std::shared_ptr<const EventObserver> eventObserver)
+void EventDispatcher::unsubscribe(std::shared_ptr<EventObserver> eventObserver)
 {
   if (eventObserver == nullptr) return;
   _observers.remove(eventObserver);

@@ -27,12 +27,12 @@ public:
   const std::list<std::shared_ptr<const Elevator>>& getElevators() const;
   const std::list<std::shared_ptr<const Floor>>& getFloors() const;
 
-    std::shared_ptr<const Floor> getLobby() const;
+  std::shared_ptr<const Floor> getLobby() const;
 
 private:
   const std::shared_ptr<const Config> _config;
   std::map<std::shared_ptr<const Elevator>, std::shared_ptr<const Floor>> _locations;
   std::list<std::shared_ptr<const Elevator>> _elevators;
   std::list<std::shared_ptr<const Floor>> _floors;
-    std::shared_ptr<Dispatcher> _dispatcher;
+  std::shared_ptr<Dispatcher> _dispatcher;
 };
