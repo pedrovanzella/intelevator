@@ -16,14 +16,14 @@ Direction Elevator::getDirection() const
 
 double Elevator::getOccupation() const
 {
-  if (_building->getConfig()->getMaxLoad() == 0) return 0.0;
+  if (_building->getConfig()->getInt(Property::MaxLoad) == 0) return 0.0;
 
   int total_passengers = 0;
   for (auto const& client : _passengers)
   {
     total_passengers += client->getPartySize();
   }
-  return total_passengers / _building->getConfig()->getMaxLoad();
+  return total_passengers / _building->getConfig()->getInt(Property::MaxLoad);
 }
 
 void Elevator::addPassenger(std::shared_ptr<const Client> client)

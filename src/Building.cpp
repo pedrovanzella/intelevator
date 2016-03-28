@@ -13,16 +13,6 @@
 Building::Building(const std::shared_ptr<const Config> config)
  : _config(config)
 {
-  auto dispatcher_name = config->getDispatcher();
-
-  if (dispatcher_name == "Dummy") {
-    _dispatcher = std::shared_ptr<DummyDispatcher>(new DummyDispatcher(std::make_shared<Building>(*this)));
-  } else if (dispatcher_name == "NearestNeighbour") {
-    _dispatcher = std::shared_ptr<NearestNeighbourDispatcher>(new NearestNeighbourDispatcher(std::make_shared<Building>(*this)));
-  } else if (dispatcher_name == "BetterNearestNeighbour") {
-    _dispatcher = std::shared_ptr<BetterNearestNeighbourDispatcher>(new BetterNearestNeighbourDispatcher(std::make_shared<Building>(*this)));
-  }
-
   LOG(TRACE) << "Building created.";
 }
 
@@ -34,23 +24,35 @@ Building::~Building()
   LOG(TRACE) << "Building destroyed.";
 }
 
-void Building::build()
+void Building::initialize()
 {
-  for (int i = 0; i < _config->getFloors(); i++)
+  // Create building floors
+  for (int i = 0; i < _config->getInt(Property::Floors); i++)
   {
     _floors.push_back(std::shared_ptr<Floor>(new Floor(i)));
   }
 
+  // Create building elevators and assign them to the lobby
   auto lobby = _floors.front();
   std::shared_ptr<Building> building = std::static_pointer_cast<Building>(shared_from_this());
-  for (int i = 0; i < _config->getElevators(); i++)
+  for (int i = 0; i < _config->getInt(Property::Elevators); i++)
   {
     std::shared_ptr<Elevator> e(new Elevator(building));
     _elevators.push_back(e);
     setLocation(e, lobby);
   }
 
-    LOG(TRACE) << "Building build with " << _floors.size() << " floors and " << _elevators.size() << " elevators.";
+  // Set up the building AI dispatcher
+  auto dispatcher_name = _config->getString(Property::Dispatcher);
+  if (dispatcher_name == "Dummy") {
+    _dispatcher = std::shared_ptr<DummyDispatcher>(new DummyDispatcher(std::make_shared<Building>(*this)));
+  } else if (dispatcher_name == "NearestNeighbour") {
+    _dispatcher = std::shared_ptr<NearestNeighbourDispatcher>(new NearestNeighbourDispatcher(std::make_shared<Building>(*this)));
+  } else if (dispatcher_name == "BetterNearestNeighbour") {
+    _dispatcher = std::shared_ptr<BetterNearestNeighbourDispatcher>(new BetterNearestNeighbourDispatcher(std::make_shared<Building>(*this)));
+  }
+
+  LOG(INFO) << "Building initialized with " << _floors.size() << " floors, " << _elevators.size() << " elevators and " << _config->getString(Property::Dispatcher) << " dispatcher.";
 }
 
 void Building::notify(const std::shared_ptr<const Event> event) const

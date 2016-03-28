@@ -13,8 +13,8 @@ struct ElevatorTest : testing::Test
   , building(new Building(config))
   , elevator(new Elevator(building))
   {
-    config->setMaxLoad(10);
-    config->setElevators(1);
+    config->setInt(Property::MaxLoad, 10);
+    config->setInt(Property::Elevators, 1);
   }
 
   virtual ~ElevatorTest()
@@ -26,7 +26,7 @@ struct ElevatorTest : testing::Test
 
 TEST_F(ElevatorTest, NullMaxLoad_ReturnsOccupation_Zero)
 {
-  config->setMaxLoad(0);
+  config->setInt(Property::MaxLoad, 0);
   EXPECT_EQ(elevator->getOccupation(), 0.f);
 }
 

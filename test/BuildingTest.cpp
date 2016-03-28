@@ -17,13 +17,14 @@ struct BuildingTest : testing::Test
   std::shared_ptr<Building> building;
 
   BuildingTest()
-  : config(new Config())
-  , building(new Building(config))
+    : config(new Config())
+    , building(new Building(config))
   {
-    config->setFloors(3);
-    config->setElevators(5);
+    config->setString(Property::Dispatcher, "Dummy");
+    config->setInt(Property::Floors, 3);
+    config->setInt(Property::Elevators, 5);
 
-    building->build();
+    building->initialize();
   }
 
   virtual ~BuildingTest()
@@ -37,12 +38,12 @@ TEST_F(BuildingTest, GetConfig_ReturnsConfig)
 
 TEST_F(BuildingTest, GetFloors_ReturnsRightSize)
 {
-  EXPECT_EQ(config->getFloors(), building->getFloors().size());
+  EXPECT_EQ(config->getInt(Property::Floors), building->getFloors().size());
 }
 
 TEST_F(BuildingTest, GetElevators_ReturnsRightSize)
 {
-  EXPECT_EQ(config->getElevators(), building->getElevators().size());
+  EXPECT_EQ(config->getInt(Property::Elevators), building->getElevators().size());
 }
 
 TEST_F(BuildingTest, GetLocation_NewBuilding_ReturnsLobby)

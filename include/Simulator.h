@@ -5,6 +5,7 @@
 #include "Clock.h"
 #include "Config.h"
 #include "EventDispatcher.h"
+#include "EventFactory.h"
 #include "EventQueue.h"
 #include "Statistics.h"
 
@@ -16,7 +17,8 @@ public:
             const std::shared_ptr<Statistics> statistics,
             const std::shared_ptr<Clock> clock,
             const std::shared_ptr<EventQueue> eventQueue,
-            const std::shared_ptr<EventDispatcher> EventDispatcher);
+            const std::shared_ptr<EventDispatcher> eventDispatcher,
+            const std::shared_ptr<EventFactory> eventFactory);
   virtual ~Simulator();
   void run();
 
@@ -29,4 +31,5 @@ private:
   const std::shared_ptr<Clock> _clock;
   const std::shared_ptr<EventQueue> _eventQueue;
   const std::shared_ptr<EventDispatcher> _eventDispatcher;
+  const std::shared_ptr<EventFactory> _eventFactory;
 };

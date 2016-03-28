@@ -10,7 +10,7 @@
 
 CostFunctionDispatcher::CostFunctionDispatcher(std::shared_ptr<Building> b) : Dispatcher(b)
 {
-    auto cf = b->getConfig()->getCostFunction();
+    auto cf = b->getConfig()->getString(Property::CostFunction);
 
     _costFunction = nullptr;
 

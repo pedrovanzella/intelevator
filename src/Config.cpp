@@ -13,6 +13,26 @@ Config::~Config()
   LOG(TRACE) << "Config destroyed.";
 }
 
+std::string Config::getPropName (Property p)
+{
+  const std::map<Property, const std::string> PropertyStrings
+  {
+    { Property::Title, "Property::Title" },
+    { Property::Floors, "Property::Floors" },
+    { Property::Elevators, "Property::Elevators" },
+    { Property::MaxLoad, "Property::MaxLoad" },
+    { Property::Duration, "Property::Duration" },
+    { Property::Dispatcher, "Property::Dispatcher" },
+    { Property::CostFunction, "Property::CostFunction" },
+    { Property::Seed, "Property::Seed" },
+    { Property::Mean, "Property::Mean" },
+    { Property::Deviation, "Property::Deviation" }
+  };
+
+  auto it = PropertyStrings.find(p);
+  return it == PropertyStrings.end() ? "Out of range" : it->second;
+}
+
 void Config::fromFile(std::istringstream& isFile)
 {
   if (isFile.bad()) {
@@ -35,109 +55,85 @@ void Config::fromFile(std::istringstream& isFile)
   }
 }
 
-void Config::setTitle(const std::string title)
+int Config::getInt(Property property) const
 {
-  _title = title;
+  auto it = intProps.find(property);
+  if (it == intProps.end())
+    throw std::invalid_argument("Can't find " + getPropName(property) + ".");
+
+  return it->second;
 }
 
-void Config::setSeed(const int seed)
+float Config::getFloat(Property property) const
 {
-  _seed = seed;
+  auto it = floatProps.find(property);
+  if (it == floatProps.end())
+    throw std::invalid_argument("Can't find " + getPropName(property) + ".");
+
+  return it->second;
 }
 
-void Config::setFloors(const int floors)
+std::string Config::getString(Property property) const
 {
-  _floors = floors;
+  auto it = stringProps.find(property);
+  if (it == stringProps.end())
+    throw std::invalid_argument("Can't find " + getPropName(property) + ".");
+
+  return it->second;
 }
 
-void Config::setElevators(const int elevators)
+void Config::setInt(Property property, int value)
 {
-  _elevators = elevators;
+  intProps[property] = value;
 }
 
-void Config::setMaxLoad(const int maxLoad)
+void Config::setFloat(Property property, float value)
 {
-  _maxLoad = maxLoad;
+  floatProps[property] = value;
 }
 
-void Config::setDuration(const int duration)
+void Config::setString(Property property, std::string value)
 {
-  _duration = duration;
-}
-
-void Config::setDispatcher(const std::string dispatcher) {
-  _dispatcher = dispatcher;
-}
-
-void Config::setCostFunction(const std::string costFunction)
-{
-  _costFunction = costFunction;
-}
-
-std::string Config::getTitle() const
-{
-  return _title;
-}
-
-int Config::getSeed() const
-{
-  return _seed;
-}
-
-int Config::getFloors() const
-{
-  return _floors;
-}
-
-int Config::getElevators() const
-{
-  return _elevators;
-}
-
-int Config::getMaxLoad() const
-{
-  return _maxLoad;
-}
-
-float Config::getDuration() const
-{
-  return _duration;
-}
-
-std::string Config::getDispatcher() const {
-  return _dispatcher;
-}
-
-std::string Config::getCostFunction() const
-{
-  return _costFunction;
+  stringProps[property] = value;
 }
 
 void Config::storeLine(std::string key, std::string value)
 {
-  // We can't use a switch with std::strings, apparently
   if (key == "title") {
-    setTitle(value);
-  }
-  else if (key == "seed") {
-    setSeed(std::stoi(value));
+    setString(Property::Title, value);
   }
   else if (key == "floors") {
-    setFloors(std::stoi(value));
+    setInt(Property::Floors, std::stoi(value));
   }
   else if (key == "elevators") {
-    setElevators(std::stoi(value));
+    setInt(Property::Elevators, std::stoi(value));
   }
   else if (key == "maxLoad") {
-    setMaxLoad(std::stoi(value));
+    setInt(Property::MaxLoad, std::stoi(value));
   }
   else if (key == "duration") {
-    setDuration(std::stof(value));
+    setFloat(Property::Duration, std::stoi(value));
+  }
+  else if (key == "dispatcher") {
+    setString(Property::Dispatcher, value);
+  }
+  else if (key == "costFunction") {
+    setString(Property::CostFunction, value);
+  }
+  else if (key == "seed")
+  {
+    setInt(Property::Seed, std::stoi(value));
+  }
+  else if (key == "mean")
+  {
+    setFloat(Property::Mean, std::stof(value));
+  }
+  else if (key == "deviation")
+  {
+    setFloat(Property::Deviation, std::stof(value));
   }
   else
   {
     throw std::invalid_argument("Invalid key: " + key);
   }
 }
-
-

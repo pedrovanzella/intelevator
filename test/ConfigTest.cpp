@@ -19,6 +19,28 @@ struct ConfigTest : testing::Test
   }
 };
 
+TEST_F(ConfigTest, SetInt_GetInt)
+{
+  config->setInt(Property::Elevators, 10);
+  config->setInt(Property::Floors, 3);
+  EXPECT_EQ(config->getInt(Property::Elevators), 10);
+  EXPECT_EQ(config->getInt(Property::Floors), 3);
+}
+
+TEST_F(ConfigTest, SetFloat_GetFloat)
+{
+  config->setFloat(Property::Duration, 10.f);
+  EXPECT_EQ(config->getFloat(Property::Duration),10.f);
+}
+
+TEST_F(ConfigTest, SetString_GetString)
+{
+  config->setString(Property::Title, "teste");
+  config->setString(Property::Dispatcher, "dispatcher");
+  EXPECT_EQ(config->getString(Property::Title), "teste");
+  EXPECT_EQ(config->getString(Property::Dispatcher), "dispatcher");
+}
+
 // Config::from_file
 TEST_F(ConfigTest, FromFile_Initializes)
 {
@@ -33,10 +55,10 @@ TEST_F(ConfigTest, FromFile_Initializes)
   std::istringstream sstream(str);
 
   config->fromFile(sstream);
-  EXPECT_EQ(config->getFloors(), 4);
-  EXPECT_EQ(config->getElevators(), 2);
-  EXPECT_EQ(config->getMaxLoad(), 150);
-  EXPECT_EQ(config->getDuration(), 20.0);
-  EXPECT_EQ(config->getTitle(), "simple");
-  EXPECT_EQ(config->getSeed(), 666);
+  EXPECT_EQ(config->getInt(Property::Floors), 4);
+  EXPECT_EQ(config->getInt(Property::Elevators), 2);
+  EXPECT_EQ(config->getInt(Property::MaxLoad), 150);
+  EXPECT_EQ(config->getInt(Property::Seed), 666);
+  EXPECT_EQ(config->getFloat(Property::Duration), 20.0);
+  EXPECT_EQ(config->getString(Property::Title), "simple");
 }

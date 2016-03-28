@@ -1,6 +1,4 @@
 #include "Simulator.h"
-
-#include <memory>
 #include "easylogging++.h"
 
 Simulator::Simulator(const std::shared_ptr<const Config> config,
@@ -8,13 +6,15 @@ Simulator::Simulator(const std::shared_ptr<const Config> config,
                      const std::shared_ptr<Statistics> statistics,
                      const std::shared_ptr<Clock> clock,
                      const std::shared_ptr<EventQueue> eventQueue,
-                     const std::shared_ptr<EventDispatcher> EventDispatcher)
+                     const std::shared_ptr<EventDispatcher> eventDispatcher,
+                     const std::shared_ptr<EventFactory> eventFactory)
   : _config(config)
   , _building(building)
   , _statistics(statistics)
   , _clock(clock)
   , _eventQueue(eventQueue)
-  , _eventDispatcher(EventDispatcher)
+  , _eventDispatcher(eventDispatcher)
+  , _eventFactory(eventFactory)
 {
   _eventDispatcher->subscribe(std::static_pointer_cast<EventObserver>(_building));
   _eventDispatcher->subscribe(std::static_pointer_cast<EventObserver>(_statistics));
@@ -30,12 +30,13 @@ Simulator::~Simulator()
 
 void Simulator::run()
 {
-  LOG(INFO) << "Simulator is running.";
+  LOG(INFO) << "Simulation started.";
   while (_statistics->keepRunning() && _eventQueue->hasNextEvent())
   {
     auto e = _eventQueue->pop();
     _eventDispatcher->broadcast(e);
   }
+  LOG(INFO) << "Simulation completed.";
 }
 
 bool Simulator::nextStep()

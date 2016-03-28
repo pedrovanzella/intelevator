@@ -1,7 +1,10 @@
 #pragma once
 
+#include <map>
 #include <sstream>
 #include <string>
+
+#include "Property.h"
 
 class Config
 {
@@ -9,34 +12,21 @@ public:
   Config();
   virtual ~Config();
 
+  static std::string getPropName (Property p);
   void fromFile(std::istringstream& isFile);
-  void setTitle(const std::string title);
-  void setSeed(const int seed);
-  void setFloors(const int floors);
-  void setElevators(const int elevators);
-  void setMaxLoad(const int maxLoad);
-  void setDuration(const int duration);
-  void setDispatcher(const std::string dispatcher);
-  void setCostFunction(const std::string costFunction);
 
-  std::string getTitle() const;
-  int getSeed() const;
-  int getFloors() const;
-  int getElevators() const;
-  int getMaxLoad() const;
-  float getDuration() const;
-  std::string getDispatcher() const;
-  std::string getCostFunction() const;
+  int getInt(Property property) const;
+  float getFloat(Property property) const;
+  std::string getString(Property property) const;
+
+  void setInt(Property property, int value);
+  void setFloat(Property property, float value);
+  void setString(Property property, std::string value);
 
 private:
-  int _floors;
-  int _elevators;
-  int _maxLoad;
-  float _duration;
-  std::string _title;
-  int _seed;
-  std::string _dispatcher;
-  std::string _costFunction;
-
   void storeLine(std::string key, std::string value);
+
+  std::map<Property, int> intProps;
+  std::map<Property, float> floatProps;
+  std::map<Property, std::string> stringProps;
 };
