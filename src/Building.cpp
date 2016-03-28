@@ -9,6 +9,7 @@
 #include "Elevator.h"
 #include "Floor.h"
 #include "NearestNeighbourDispatcher.h"
+#include "MissingDispatcherError.h"
 
 Building::Building(const std::shared_ptr<const Config> config)
  : _config(config)
@@ -50,6 +51,8 @@ void Building::initialize()
     _dispatcher = std::shared_ptr<NearestNeighbourDispatcher>(new NearestNeighbourDispatcher(std::make_shared<Building>(*this)));
   } else if (dispatcher_name == "BetterNearestNeighbour") {
     _dispatcher = std::shared_ptr<BetterNearestNeighbourDispatcher>(new BetterNearestNeighbourDispatcher(std::make_shared<Building>(*this)));
+  } else {
+    throw MissingDispatcherError(dispatcher_name);
   }
 
   LOG(INFO) << "Building initialized with " << _floors.size() << " floors, " << _elevators.size() << " elevators and " << _config->getString(Property::Dispatcher) << " dispatcher.";
