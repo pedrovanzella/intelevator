@@ -1,21 +1,14 @@
-//
-// Created by Pedro Vanzella on 3/23/16.
-//
-
-#ifndef INTELEVATOR_BETTERNEARESTNEIGHBOURDISPATCHER_H
-#define INTELEVATOR_BETTERNEARESTNEIGHBOURDISPATCHER_H
+#pragma once
 
 #include <memory>
-#include "Dispatcher.h"
-#include "Elevator.h"
 #include "Building.h"
 #include "ClientArrival.h"
+#include "Dispatcher.h"
+#include "Elevator.h"
 
-class BetterNearestNeighbourDispatcher : public Dispatcher {
+class BetterNearestNeighbourDispatcher : public Dispatcher
+{
 public:
-    explicit BetterNearestNeighbourDispatcher(std::shared_ptr<Building> building): Dispatcher(building) {}
-
-    std::shared_ptr<const Elevator> pick_next_elevator(const std::shared_ptr<const ClientArrival>) const;
+  explicit BetterNearestNeighbourDispatcher(std::shared_ptr<Building> building): Dispatcher(building) {}
+  std::shared_ptr<const Elevator> pick_next_elevator(const std::shared_ptr<const ClientArrival>) const;
 };
-
-#endif //INTELEVATOR_BETTERNEARESTNEIGHBOURDISPATCHER_H
