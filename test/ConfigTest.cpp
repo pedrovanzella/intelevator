@@ -1,6 +1,7 @@
 #include <gtest/gtest.h>
 
 #include "Config.h"
+#include "easylogging++.h"
 #include <sstream>
 
 struct ConfigTest : testing::Test

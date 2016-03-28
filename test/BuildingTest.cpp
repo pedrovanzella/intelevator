@@ -3,8 +3,11 @@
 #include <memory>
 
 #include "Building.h"
+#include "easylogging++.h"
 #include "Elevator.h"
 #include "Floor.h"
+
+INITIALIZE_EASYLOGGINGPP
 
 using namespace std;
 

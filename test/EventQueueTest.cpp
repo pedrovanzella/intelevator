@@ -1,6 +1,7 @@
 #include <gtest/gtest.h>
 
 #include "ClientArrival.h"
+#include "easylogging++.h"
 #include "EventQueue.h"
 
 struct EventQueueTest : testing::Test

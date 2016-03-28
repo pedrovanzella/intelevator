@@ -1,6 +1,7 @@
 #include <gtest/gtest.h>
 
 #include "Clock.h"
+#include "easylogging++.h"
 
 struct ClockTest : testing::Test
 {
