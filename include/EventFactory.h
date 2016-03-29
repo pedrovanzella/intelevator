@@ -12,12 +12,15 @@
 class EventFactory
 {
 public:
-  EventFactory(const std::shared_ptr<Building> building, const std::shared_ptr<Clock> clock);
+  EventFactory(const std::shared_ptr<const Config> config,
+               const std::shared_ptr<Building> building,
+               const std::shared_ptr<Clock> clock);
   virtual ~EventFactory();
 
   const std::shared_ptr<const Event> createEvent(EventType eventType) const;
 
 private:
-  std::shared_ptr<Building> _building;
-  std::shared_ptr<Clock> _clock;
+  const std::shared_ptr<const Config> _config;
+  const std::shared_ptr<Building> _building;
+  const std::shared_ptr<Clock> _clock;
 };
