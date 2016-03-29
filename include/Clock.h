@@ -10,13 +10,13 @@ public:
   Clock(const std::shared_ptr<const Config> config);
   virtual ~Clock();
 
-  float currentTime() const;
-  void advanceTo(const float time);
-  void advanceBy(const float amount);
+  unsigned long currentTime() const;
+  void advanceTo(const unsigned long time);
+  void advanceBy(const unsigned long amount);
 
   void notify(const std::shared_ptr<const Event> event) const;
 
 private:
-  float _time;
+  unsigned long _time;
   const std::shared_ptr<const Config> _config;
 };

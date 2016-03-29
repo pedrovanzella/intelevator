@@ -23,64 +23,50 @@ struct ClockTest : testing::Test
 
 TEST_F(ClockTest, AdvanceTo_FutureTime_Updates)
 {
-  EXPECT_EQ(clock->currentTime(), 0.f);
-  clock->advanceTo(10.f);
-  EXPECT_EQ(clock->currentTime(), 10.f);
+  EXPECT_EQ(clock->currentTime(), 0ul);
+  clock->advanceTo(10ul);
+  EXPECT_EQ(clock->currentTime(), 10ul);
 }
 
 TEST_F(ClockTest, AdvanceTo_PastTime_DoesntUpdate)
 {
-  EXPECT_EQ(clock->currentTime(), 0.f);
-  clock->advanceTo(10.f);
-  EXPECT_EQ(clock->currentTime(), 10.f);
-  clock->advanceTo(5.f);
-  EXPECT_EQ(clock->currentTime(), 10.f);
-}
-
-TEST_F(ClockTest, AdvanceTo_NegativeTime_DoesntUpdate)
-{
-  EXPECT_EQ(clock->currentTime(), 0.f);
-  clock->advanceTo(-10.f);
-  EXPECT_EQ(clock->currentTime(), 0.f);
+  EXPECT_EQ(clock->currentTime(), 0ul);
+  clock->advanceTo(10ul);
+  EXPECT_EQ(clock->currentTime(), 10ul);
+  clock->advanceTo(5ul);
+  EXPECT_EQ(clock->currentTime(), 10ul);
 }
 
 TEST_F(ClockTest, AdvanceTo_CallTwice_UpdatesTwice)
 {
-  EXPECT_EQ(clock->currentTime(), 0.f);
-  clock->advanceTo(10.f);
-  EXPECT_EQ(clock->currentTime(), 10.f);
-  clock->advanceTo(20.f);
-  EXPECT_EQ(clock->currentTime(), 20.f);
+  EXPECT_EQ(clock->currentTime(), 0ul);
+  clock->advanceTo(10ul);
+  EXPECT_EQ(clock->currentTime(), 10ul);
+  clock->advanceTo(20ul);
+  EXPECT_EQ(clock->currentTime(), 20ul);
 }
 
 // Clock::advanceBy tests
 
 TEST_F(ClockTest, AdvanceBy_PositiveAmount_Advances)
 {
-  EXPECT_EQ(clock->currentTime(), 0.f);
-  clock->advanceBy(10.f);
-  EXPECT_EQ(clock->currentTime(), 10.f);
+  EXPECT_EQ(clock->currentTime(), 0ul);
+  clock->advanceBy(10ul);
+  EXPECT_EQ(clock->currentTime(), 10ul);
 }
 
 TEST_F(ClockTest, AdvanceBy_ZeroAmount_DoesntAdvance)
 {
-  EXPECT_EQ(clock->currentTime(), 0.f);
-  clock->advanceBy(0.f);
-  EXPECT_EQ(clock->currentTime(), 0.f);
-}
-
-TEST_F(ClockTest, AdvanceBy_NegativeAmount_DoesntAdvance)
-{
-  EXPECT_EQ(clock->currentTime(), 0.f);
-  clock->advanceBy(-10.f);
-  EXPECT_EQ(clock->currentTime(), 0.f);
+  EXPECT_EQ(clock->currentTime(), 0ul);
+  clock->advanceBy(0ul);
+  EXPECT_EQ(clock->currentTime(), 0ul);
 }
 
 TEST_F(ClockTest, AdvanceBy_CallTwice_AdvancesTwice)
 {
-  EXPECT_EQ(clock->currentTime(), 0.f);
-  clock->advanceBy(10.f);
-  EXPECT_EQ(clock->currentTime(), 10.f);
-  clock->advanceBy(20.f);
-  EXPECT_EQ(clock->currentTime(), 30.f);
+  EXPECT_EQ(clock->currentTime(), 0ul);
+  clock->advanceBy(10ul);
+  EXPECT_EQ(clock->currentTime(), 10ul);
+  clock->advanceBy(20ul);
+  EXPECT_EQ(clock->currentTime(), 30ul);
 }
