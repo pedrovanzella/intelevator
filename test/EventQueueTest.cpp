@@ -31,15 +31,15 @@ TEST_F(EventQueueTest, HasNextEvent_BeforeInsertEvent_ReturnsFalse)
 
 TEST_F(EventQueueTest, HasNextEvent_AfterInsertEvent_ReturnsTrue)
 {
-  eventQueue->push(std::shared_ptr<const Event>(new ClientArrival(0.f, client, nullptr)));
+  eventQueue->push(std::shared_ptr<const Event>(new ClientArrival(0, client, nullptr)));
   EXPECT_TRUE(eventQueue->hasNextEvent());
 }
 
 TEST_F(EventQueueTest, Push_AddThreeEvents_ReturnsInPriorityOrder)
 {
-  auto e1 = std::shared_ptr<const Event>(new ClientArrival(10.f, client, nullptr));
-  auto e2 = std::shared_ptr<const Event>(new ClientArrival(50.f, client, nullptr));
-  auto e3 = std::shared_ptr<const Event>(new ClientArrival(30.f, client, nullptr));
+  auto e1 = std::shared_ptr<const Event>(new ClientArrival(10, client, nullptr));
+  auto e2 = std::shared_ptr<const Event>(new ClientArrival(50, client, nullptr));
+  auto e3 = std::shared_ptr<const Event>(new ClientArrival(30, client, nullptr));
 
   eventQueue->push(e1);
   eventQueue->push(e2);
