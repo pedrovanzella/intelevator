@@ -8,7 +8,7 @@
 class ElevatorArrival : public Event
 {
 public:
-  ElevatorArrival(const float, const std::shared_ptr<const Elevator> elevator, const std::shared_ptr<const Floor> floor);
+  ElevatorArrival(const unsigned long eventTime, const std::shared_ptr<const Elevator> elevator, const std::shared_ptr<const Floor> floor);
   const std::shared_ptr<const Elevator> getElevator() const;
   const std::shared_ptr<const Floor> getFloor() const;
 

@@ -2,7 +2,7 @@
 
 unsigned long Event::totalEvents = 0;
 
-Event::Event(const float time, const EventType eventType)
+Event::Event(const unsigned long time, const EventType eventType)
   : _id(++Event::totalEvents)
   , _eventTime(time)
   , _eventType(eventType) {}
@@ -12,7 +12,7 @@ unsigned long Event::getId() const
   return _id;
 }
 
-float Event::getTime() const
+unsigned long Event::getTime() const
 {
   return _eventTime;
 }

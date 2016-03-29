@@ -1,7 +1,7 @@
 #include "ClientArrival.h"
 #include "EventType.h"
 
-ClientArrival::ClientArrival(const float eventTime,
+ClientArrival::ClientArrival(const unsigned long eventTime,
                              const std::shared_ptr<const Client> client,
                              const std::shared_ptr<const Floor> floor)
     : Event(eventTime, EventType::clientArrival)

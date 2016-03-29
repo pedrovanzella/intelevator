@@ -8,7 +8,7 @@
 class ClientArrival : public Event
 {
 public:
-  ClientArrival(const float eventTime, const std::shared_ptr<const Client> client, const std::shared_ptr<const Floor> floor);
+  ClientArrival(const unsigned long eventTime, const std::shared_ptr<const Client> client, const std::shared_ptr<const Floor> floor);
   const std::shared_ptr<const Client> getClient() const;
   const std::shared_ptr<const Floor> getFloor() const;
 
