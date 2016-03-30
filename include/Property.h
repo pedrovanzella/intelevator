@@ -4,14 +4,22 @@
 
 enum class Property
 {
+  // Simulation properties
   Title,
+  Duration,
+
+  // Building properties
   Floors,
   Elevators,
   MaxLoad,
-  Duration,
+
+  // Dispatcher properties
   Dispatcher,
   CostFunction,
-  Seed,
-  Mean,
-  Deviation,
+
+  // Poisson process properties
+  PoissonSeed,
+  Population,
+  EventInterval,
+  Experiments,
 };
