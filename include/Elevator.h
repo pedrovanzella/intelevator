@@ -10,11 +10,12 @@
 
 class Elevator {
 public:
-  Elevator(const std::shared_ptr<const Building> building);
+  Elevator(const std::shared_ptr<const Building> building, int number);
   virtual ~Elevator();
 
   Direction getDirection() const;
   double getOccupation() const;
+  int getNumber() const;
 
   void addPassenger(std::shared_ptr<const Client> client);
 
@@ -25,7 +26,8 @@ public:
   constexpr static float seconds_per_floor = 10.f;
 
 private:
-  std::set<std::shared_ptr<const Client>> _passengers;
   const std::shared_ptr<const Building> _building;
+  int _number;
+  std::set<std::shared_ptr<const Client>> _passengers;
   std::shared_ptr<const Floor> _current_floor;
 };

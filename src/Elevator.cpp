@@ -1,8 +1,9 @@
 #include <memory>
 #include "Elevator.h"
 
-Elevator::Elevator(const std::shared_ptr<const Building> building)
+Elevator::Elevator(const std::shared_ptr<const Building> building, int number)
   : _building(building)
+  , _number(number)
 {
     _current_floor = _building->getLobby();
 }
@@ -24,6 +25,11 @@ double Elevator::getOccupation() const
     total_passengers += client->getPartySize();
   }
   return total_passengers / _building->getConfig()->getInt(Property::MaxLoad);
+}
+
+int Elevator::getNumber() const
+{
+  return _number;
 }
 
 void Elevator::addPassenger(std::shared_ptr<const Client> client)

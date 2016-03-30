@@ -11,7 +11,7 @@ struct ElevatorTest : testing::Test
   ElevatorTest()
   : config(new Config("test_config.yaml"))
   , building(new Building(config))
-  , elevator(new Elevator(building))
+  , elevator(new Elevator(building, 0))
   {}
 
   virtual ~ElevatorTest()
