@@ -9,17 +9,13 @@ struct ElevatorTest : testing::Test
   std::shared_ptr<Elevator> elevator;
 
   ElevatorTest()
-  : config(new Config())
+  : config(new Config("test_config.yaml"))
   , building(new Building(config))
   , elevator(new Elevator(building))
-  {
-    config->setInt(Property::MaxLoad, 10);
-    config->setInt(Property::Elevators, 1);
-  }
+  {}
 
   virtual ~ElevatorTest()
-  {
-  }
+  {}
 };
 
 // Elevator::getOccupation() tests

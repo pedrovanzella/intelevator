@@ -17,13 +17,9 @@ struct BuildingTest : testing::Test
   std::shared_ptr<Building> building;
 
   BuildingTest()
-    : config(new Config())
+    : config(new Config("test_config.yaml"))
     , building(new Building(config))
   {
-    config->setString(Property::Dispatcher, "Dummy");
-    config->setInt(Property::Floors, 3);
-    config->setInt(Property::Elevators, 5);
-
     building->initialize();
   }
 
