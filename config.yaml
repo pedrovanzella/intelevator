@@ -1,0 +1,18 @@
+simulation:
+  title: "Simulation #0"
+  duration: 1000
+
+building:
+  floors: 10
+  elevators: 3
+  max_load: 8
+
+dispatcher:
+  name: Dummy
+  cost_function: Dummy
+
+poisson:
+  seed: Semente sementosa sementuda!
+  population: 150
+  event_interval: 100
+  experiments: 1000

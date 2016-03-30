@@ -1,0 +1,18 @@
+simulation:
+  title: "Unit Test Simulation"
+  duration: 10
+
+building:
+  floors: 3
+  elevators: 10
+  max_load: 4
+
+dispatcher:
+  name: Dummy
+  cost_function: Dummy
+
+poisson:
+  seed: unit test simulation
+  population: 10
+  event_interval: 1
+  experiments: 100

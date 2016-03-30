@@ -1,5 +1,5 @@
 CXX      := clang++
-CXXFLAGS := -Wall -Werror -Wpedantic -std=c++11 -Wno-unused-private-field
+CXXFLAGS := -Wall -Werror -Wpedantic -std=c++11
 SRCDIR   := src
 BUILDDIR := build
 TARGET   := bin/intelevator
@@ -7,14 +7,14 @@ TARGET   := bin/intelevator
 SRCEXT   := cpp
 SOURCES  := $(wildcard $(SRCDIR)/*.$(SRCEXT))
 OBJECTS  := $(patsubst $(SRCDIR)/%,$(BUILDDIR)/%,$(SOURCES:.$(SRCEXT)=.o))
-LIB      := ""
+LIB      := -L/usr/local/lib/ -lyaml-cpp
 INC      := -I include
 
 TEST     := $(TARGET)-test
 TDIR     := test
 TSOURCES := $(wildcard $(TDIR)/*.$(SRCEXT))
 TOBJECTS := $(patsubst $(TDIR)/%,$(BUILDDIR)/%,$(TSOURCES:.$(SRCEXT)=.o))
-TLIB     := -lgtest -lgtest_main
+TLIB     := -L/usr/local/lib/ -lgtest -lgtest_main -lyaml-cpp
 
 $(TARGET): $(OBJECTS)
 	@echo " Linking..."
