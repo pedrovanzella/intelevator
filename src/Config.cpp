@@ -3,56 +3,51 @@
 #include "Config.h"
 #include "easylogging++.h"
 
-Config::Config()
+Config::Config(const std::string file)
 {
-  LOG(TRACE) << "Config created.";
+  YAML::Node config = YAML::LoadFile(file);
+
+  setString(Property::Title, config["simulation"]["title"].as<std::string>());
+  setInt(Property::Duration, config["simulation"]["duration"].as<int>());
+
+  setInt(Property::Floors, config["building"]["floors"].as<int>());
+  setInt(Property::Elevators, config["building"]["elevators"].as<int>());
+  setInt(Property::MaxLoad, config["building"]["max_load"].as<int>());
+
+  setString(Property::Dispatcher, config["dispatcher"]["name"].as<std::string>());
+  setString(Property::CostFunction, config["dispatcher"]["cost_function"].as<std::string>());
+
+  setString(Property::PoissonSeed, config["poisson"]["seed"].as<std::string>());
+  setInt(Property::Population, config["poisson"]["population"].as<int>());
+  setInt(Property::EventInterval, config["poisson"]["event_interval"].as<int>());
+  setInt(Property::Experiments, config["poisson"]["experiments"].as<int>());
+
+  LOG(INFO) << "Configuration loaded from '" << file << "'.";
 }
 
 Config::~Config()
-{
-  LOG(TRACE) << "Config destroyed.";
-}
+{}
 
 std::string Config::getPropName (Property p)
 {
   const std::map<Property, const std::string> PropertyStrings
   {
     { Property::Title, "Property::Title" },
+    { Property::Duration, "Property::Duration" },
     { Property::Floors, "Property::Floors" },
     { Property::Elevators, "Property::Elevators" },
     { Property::MaxLoad, "Property::MaxLoad" },
     { Property::Duration, "Property::Duration" },
     { Property::Dispatcher, "Property::Dispatcher" },
     { Property::CostFunction, "Property::CostFunction" },
-    { Property::Seed, "Property::Seed" },
-    { Property::Mean, "Property::Mean" },
-    { Property::Deviation, "Property::Deviation" }
+    { Property::PoissonSeed, "Property::PoissonSeed" },
+    { Property::Population, "Property::Population" },
+    { Property::EventInterval, "Property::EventInterval" },
+    { Property::Experiments, "Property::Experiments" }
   };
 
   auto it = PropertyStrings.find(p);
   return it == PropertyStrings.end() ? "Out of range" : it->second;
-}
-
-void Config::fromFile(std::istringstream& isFile)
-{
-  if (isFile.bad()) {
-    throw std::invalid_argument("Invalid File");
-  }
-
-  std::string line;
-
-  while (std::getline(isFile, line)) {
-    std::istringstream is_line(line);
-    std::string key;
-
-    if(std::getline(is_line, key, '=')) {
-      std::string value;
-
-      if(std::getline(is_line, value)) {
-        storeLine(key, value);
-      }
-    }
-  }
 }
 
 int Config::getInt(Property property) const
@@ -95,45 +90,4 @@ void Config::setFloat(Property property, float value)
 void Config::setString(Property property, std::string value)
 {
   stringProps[property] = value;
-}
-
-void Config::storeLine(std::string key, std::string value)
-{
-  if (key == "title") {
-    setString(Property::Title, value);
-  }
-  else if (key == "floors") {
-    setInt(Property::Floors, std::stoi(value));
-  }
-  else if (key == "elevators") {
-    setInt(Property::Elevators, std::stoi(value));
-  }
-  else if (key == "maxLoad") {
-    setInt(Property::MaxLoad, std::stoi(value));
-  }
-  else if (key == "duration") {
-    setFloat(Property::Duration, std::stoi(value));
-  }
-  else if (key == "dispatcher") {
-    setString(Property::Dispatcher, value);
-  }
-  else if (key == "costFunction") {
-    setString(Property::CostFunction, value);
-  }
-  else if (key == "seed")
-  {
-    setInt(Property::Seed, std::stoi(value));
-  }
-  else if (key == "mean")
-  {
-    setFloat(Property::Mean, std::stof(value));
-  }
-  else if (key == "deviation")
-  {
-    setFloat(Property::Deviation, std::stof(value));
-  }
-  else
-  {
-    throw std::invalid_argument("Invalid key: " + key);
-  }
 }

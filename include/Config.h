@@ -3,17 +3,17 @@
 #include <map>
 #include <sstream>
 #include <string>
+#include <yaml-cpp/yaml.h>
 
 #include "Property.h"
 
 class Config
 {
 public:
-  Config();
+  Config(const std::string file);
   virtual ~Config();
 
   static std::string getPropName (Property p);
-  void fromFile(std::istringstream& isFile);
 
   int getInt(Property property) const;
   float getFloat(Property property) const;
@@ -24,8 +24,6 @@ public:
   void setString(Property property, std::string value);
 
 private:
-  void storeLine(std::string key, std::string value);
-
   std::map<Property, int> intProps;
   std::map<Property, float> floatProps;
   std::map<Property, std::string> stringProps;
