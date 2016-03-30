@@ -1,5 +1,6 @@
 #include "Simulator.h"
 #include "easylogging++.h"
+#include <random>
 
 Simulator::Simulator(const std::shared_ptr<const Config> config,
                      const std::shared_ptr<Building> building,
