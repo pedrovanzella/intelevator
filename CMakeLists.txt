@@ -85,6 +85,8 @@ add_executable(intelevator ${SOURCE_FILES})
 add_executable(intelevatorTests ${TEST_FILES})
 
 target_link_libraries(intelevatorTests gtest gtest_main)
+target_link_libraries(intelevatorTests yaml-cpp)
+target_link_libraries(intelevator yaml-cpp)
 
 add_test(intelevatorTests intelevatorTests)
 
