@@ -59,7 +59,6 @@ TEST_F(BuildingTest, SetLocation_UpdatesLocation)
   EXPECT_EQ(roof, building->getLocation(e));
 }
 
-
 TEST_F(BuildingTest, GetLobby_ReturnsLobby) {
-  EXPECT_EQ(building->getLobby()->getNumber(), 1);
+  EXPECT_EQ(building->getLobby()->getNumber(), 0);
 }

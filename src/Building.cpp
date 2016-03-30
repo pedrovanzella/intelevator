@@ -38,7 +38,7 @@ void Building::initialize()
   std::shared_ptr<Building> building = std::static_pointer_cast<Building>(shared_from_this());
   for (int i = 0; i < _config->getInt(Property::Elevators); i++)
   {
-    std::shared_ptr<Elevator> e(new Elevator(building));
+    std::shared_ptr<Elevator> e(new Elevator(building, i));
     _elevators.push_back(e);
     setLocation(e, lobby);
   }
@@ -94,9 +94,23 @@ const std::list<std::shared_ptr<const Floor>>& Building::getFloors() const
 
 std::shared_ptr<const Floor> Building::getLobby() const
 {
-  auto first = std::find_if(_floors.begin(), _floors.end(),
-                            [](std::shared_ptr<const Floor> floor) {
-                              return floor->getNumber() == 1;
+  return getFloor(0);
+}
+
+const std::shared_ptr<const Floor> Building::getFloor(int number) const
+{
+  auto it = std::find_if(_floors.begin(), _floors.end(),
+                            [number](std::shared_ptr<const Floor> floor) {
+                              return floor->getNumber() == number;
                             });
-  return *first;
+  return *it;
+}
+
+const std::shared_ptr<const Elevator> Building::getElevator(int number) const
+{
+  auto it = std::find_if(_elevators.begin(), _elevators.end(),
+                            [number](std::shared_ptr<const Elevator> elevator) {
+                              return elevator->getNumber() == number;
+                            });
+  return *it;
 }

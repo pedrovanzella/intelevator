@@ -27,6 +27,9 @@ public:
   const std::list<std::shared_ptr<const Elevator>>& getElevators() const;
   const std::list<std::shared_ptr<const Floor>>& getFloors() const;
 
+  const std::shared_ptr<const Floor> getFloor(int number) const;
+  const std::shared_ptr<const Elevator> getElevator(int number) const;
+
   std::shared_ptr<const Floor> getLobby() const;
 
 private:
