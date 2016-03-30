@@ -2,6 +2,7 @@
 
 #include <memory>
 #include "Client.h"
+#include "easylogging++.h"
 #include "Event.h"
 #include "Floor.h"
 
