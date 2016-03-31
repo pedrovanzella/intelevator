@@ -42,6 +42,24 @@ TEST_F(BuildingTest, GetElevators_ReturnsRightSize)
   EXPECT_EQ(config->getInt(Property::Elevators), building->getElevators().size());
 }
 
+TEST_F(BuildingTest, VerifyFloors)
+{
+  int i = 0;
+  for (auto f : building->getFloors())
+  {
+    EXPECT_EQ(f->getNumber(), i++);
+  }
+}
+
+TEST_F(BuildingTest, VerifyElevators)
+{
+  int i = 0;
+  for (auto e : building->getElevators())
+  {
+    EXPECT_EQ(e->getNumber(), i++);
+  }
+}
+
 TEST_F(BuildingTest, GetLocation_NewBuilding_ReturnsLobby)
 {
   auto lobby = building->getFloors().front();

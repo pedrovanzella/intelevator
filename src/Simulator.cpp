@@ -80,7 +80,7 @@ void Simulator::initializeEventQueue()
 
     _eventQueue->push(std::static_pointer_cast<Event>(ca));
 
-    LOG(DEBUG) << "Event " << it.first << " will have " << clientsInThisEvent << " clients arriving.";
+    VLOG(5) << "Event " << it.first << " will have " << clientsInThisEvent << " clients arriving.";
 
     totalClients += clientsInThisEvent;
   }

@@ -30,15 +30,16 @@ void Building::initialize()
   // Create building floors
   for (int i = 0; i < _config->getInt(Property::Floors); i++)
   {
-    _floors.push_back(std::shared_ptr<Floor>(new Floor(i)));
+    auto f = std::shared_ptr<Floor>(new Floor(i));
+    _floors.push_back(f);
   }
 
   // Create building elevators and assign them to the lobby
-  auto lobby = _floors.front();
+  auto lobby = getLobby();
   std::shared_ptr<Building> building = std::static_pointer_cast<Building>(shared_from_this());
   for (int i = 0; i < _config->getInt(Property::Elevators); i++)
   {
-    std::shared_ptr<Elevator> e(new Elevator(building, i));
+    auto e = std::shared_ptr<Elevator>(new Elevator(building, i));
     _elevators.push_back(e);
     setLocation(e, lobby);
   }
@@ -82,12 +83,12 @@ const std::shared_ptr<const Floor> Building::getLocation(std::shared_ptr<const E
   return _locations[elevator];
 }
 
-const std::list<std::shared_ptr<const Elevator>>& Building::getElevators() const
+const std::vector<std::shared_ptr<const Elevator>>& Building::getElevators() const
 {
   return _elevators;
 }
 
-const std::list<std::shared_ptr<const Floor>>& Building::getFloors() const
+const std::vector<std::shared_ptr<const Floor>>& Building::getFloors() const
 {
   return _floors;
 }
@@ -99,18 +100,12 @@ std::shared_ptr<const Floor> Building::getLobby() const
 
 const std::shared_ptr<const Floor> Building::getFloor(int number) const
 {
-  auto it = std::find_if(_floors.begin(), _floors.end(),
-                            [number](std::shared_ptr<const Floor> floor) {
-                              return floor->getNumber() == number;
-                            });
-  return *it;
+  if (number >= _floors.size()) throw std::out_of_range ("Floor number out of range: " + std::to_string(number));
+  return _floors[number];
 }
 
 const std::shared_ptr<const Elevator> Building::getElevator(int number) const
 {
-  auto it = std::find_if(_elevators.begin(), _elevators.end(),
-                            [number](std::shared_ptr<const Elevator> elevator) {
-                              return elevator->getNumber() == number;
-                            });
-  return *it;
+  if (number >= _elevators.size()) throw std::out_of_range ("Elevator number our of range: " + std::to_string(number));
+  return _elevators[number];
 }

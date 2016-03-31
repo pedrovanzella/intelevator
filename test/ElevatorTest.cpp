@@ -6,20 +6,21 @@ struct ElevatorTest : testing::Test
 {
   std::shared_ptr<Config> config;
   std::shared_ptr<Building> building;
-  std::shared_ptr<Elevator> elevator;
+  std::shared_ptr<const Elevator> elevator;
 
   ElevatorTest()
   : config(new Config("test_config.yaml"))
   , building(new Building(config))
-  , elevator(new Elevator(building, 0))
-  {}
+  {
+    building->initialize();
+    elevator = building->getElevator(0);
+  }
 
   virtual ~ElevatorTest()
   {}
 };
 
 // Elevator::getOccupation() tests
-
 TEST_F(ElevatorTest, NullMaxLoad_ReturnsOccupation_Zero)
 {
   config->setInt(Property::MaxLoad, 0);

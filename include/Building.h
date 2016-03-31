@@ -1,6 +1,6 @@
 #pragma once
 
-#include <list>
+#include <vector>
 #include <map>
 #include <memory>
 #include <set>
@@ -24,8 +24,8 @@ public:
 
   void setLocation(std::shared_ptr<const Elevator> elevator, std::shared_ptr<const Floor> location);
   const std::shared_ptr<const Floor> getLocation(std::shared_ptr<const Elevator> elevator);
-  const std::list<std::shared_ptr<const Elevator>>& getElevators() const;
-  const std::list<std::shared_ptr<const Floor>>& getFloors() const;
+  const std::vector<std::shared_ptr<const Elevator>>& getElevators() const;
+  const std::vector<std::shared_ptr<const Floor>>& getFloors() const;
 
   const std::shared_ptr<const Floor> getFloor(int number) const;
   const std::shared_ptr<const Elevator> getElevator(int number) const;
@@ -35,7 +35,7 @@ public:
 private:
   const std::shared_ptr<const Config> _config;
   std::map<std::shared_ptr<const Elevator>, std::shared_ptr<const Floor>> _locations;
-  std::list<std::shared_ptr<const Elevator>> _elevators;
-  std::list<std::shared_ptr<const Floor>> _floors;
+  std::vector<std::shared_ptr<const Elevator>> _elevators;
+  std::vector<std::shared_ptr<const Floor>> _floors;
   std::shared_ptr<Dispatcher> _dispatcher;
 };
