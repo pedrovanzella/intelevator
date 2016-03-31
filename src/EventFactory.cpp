@@ -2,6 +2,7 @@
 
 #include "ClientArrival.h"
 #include "ElevatorArrival.h"
+#include <random>
 
 EventFactory::EventFactory(const std::shared_ptr<const Config> config,
                            const std::shared_ptr<Building> building,
