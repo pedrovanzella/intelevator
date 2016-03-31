@@ -23,7 +23,6 @@ public:
   void run();
 
 private:
-  void initializeEventQueue();
   bool nextStep();
 
   const std::shared_ptr<const Config> _config;

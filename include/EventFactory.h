@@ -4,9 +4,9 @@
 #include <string>
 
 #include "Building.h"
-#include "Clock.h"
 #include "easylogging++.h"
 #include "Event.h"
+#include "EventQueue.h"
 #include "EventType.h"
 
 class EventFactory
@@ -14,13 +14,16 @@ class EventFactory
 public:
   EventFactory(const std::shared_ptr<const Config> config,
                const std::shared_ptr<Building> building,
-               const std::shared_ptr<Clock> clock);
+               const std::shared_ptr<EventQueue> eventQueue);
   virtual ~EventFactory();
 
-  const std::shared_ptr<const Event> createEvent(EventType eventType) const;
+  void initialize() const;
 
 private:
   const std::shared_ptr<const Config> _config;
   const std::shared_ptr<Building> _building;
-  const std::shared_ptr<Clock> _clock;
+  const std::shared_ptr<EventQueue> _eventQueue;
+
+  std::map<unsigned long, double> generateEventRatios() const;
+  std::map<unsigned long, unsigned long> generateClientsPerEvent(std::map<unsigned long, double> events) const;
 };

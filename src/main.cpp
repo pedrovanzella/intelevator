@@ -22,7 +22,7 @@ int main(int argc, char* argv[])
   shared_ptr<Clock> clock(new Clock(config));
   shared_ptr<EventQueue> eventQueue(new EventQueue());
   shared_ptr<EventDispatcher> eventDispatcher(new EventDispatcher());
-  shared_ptr<EventFactory> eventFactory(new EventFactory(config, building, clock));
+  shared_ptr<EventFactory> eventFactory(new EventFactory(config, building, eventQueue));
 
   Simulator simulator(config, building, statistics, clock, eventQueue, eventDispatcher, eventFactory);
   simulator.run();
