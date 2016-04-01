@@ -24,6 +24,15 @@ private:
   const std::shared_ptr<Building> _building;
   const std::shared_ptr<EventQueue> _eventQueue;
 
-  std::map<unsigned long, double> generateEventRatios() const;
-  std::map<unsigned long, unsigned long> generateClientsPerEvent(std::map<unsigned long, double> events) const;
+  std::map<unsigned long, double> getProbabilities(const std::string seed,
+                                                   const unsigned long experiments,
+                                                   const double lambda) const;
+
+  std::map<unsigned long, double> getDestProbabilities(const std::string seed,
+                                                       const unsigned long experiments,
+                                                       const int floors,
+                                                       const int floor_number) const;
+
+  std::map<unsigned long, unsigned long> getClients(std::map<unsigned long, double> probabilities,
+                                                    const unsigned long population) const;
 };
