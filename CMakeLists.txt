@@ -50,6 +50,7 @@ set(SOURCE_FILES
         "src/main.cpp"
         "src/Simulator.cpp"
         "src/Statistics.cpp"
+        "src/EventFactory.cpp"
         "src/Trip.cpp" src/NearestNeighbourDispatcher.cpp src/BetterNearestNeighbourDispatcher.cpp src/CostFunction.cpp src/DummyCostFunction.cpp src/CostFunctionDispatcher.cpp src/NearestNeighbourCostFunction.cpp)
 
 set(TEST_FILES
@@ -70,6 +71,7 @@ set(TEST_FILES
         "src/Simulator.cpp"
         "src/Statistics.cpp"
         "src/Trip.cpp"
+        "src/EventFactory.cpp"
         "test/BuildingTest.cpp"
         "test/ClientTest.cpp"
         "test/ClockTest.cpp"
