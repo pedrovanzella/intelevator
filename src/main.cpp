@@ -1,5 +1,7 @@
 #include <memory>
+#include <vector>
 #include "easylogging++.h"
+#include "Scenario.h"
 #include "Simulator.h"
 
 INITIALIZE_EASYLOGGINGPP
@@ -15,17 +17,12 @@ int main(int argc, char* argv[])
 
   LOG(INFO) << "Welcome to Intelevator, the intelligent elevator.";
 
-  shared_ptr<Config> config(new Config("config.yaml"));
-  shared_ptr<Building> building(new Building(config));
-  building->initialize();
-  shared_ptr<Statistics> statistics(new Statistics(config));
-  shared_ptr<Clock> clock(new Clock(config));
-  shared_ptr<EventQueue> eventQueue(new EventQueue());
-  shared_ptr<EventDispatcher> eventDispatcher(new EventDispatcher());
-  shared_ptr<EventFactory> eventFactory(new EventFactory(config, building, eventQueue));
-
-  Simulator simulator(config, building, statistics, clock, eventQueue, eventDispatcher, eventFactory);
-  simulator.run();
+  auto scenarios = Scenario::Load("config.yaml");
+  for (auto scenario : *scenarios)
+  {
+    Simulator sim(scenario);
+    sim.run();
+  }
 
   return 0;
 }

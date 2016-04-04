@@ -1,11 +1,13 @@
 #include <gtest/gtest.h>
 #include <iostream>
 #include <memory>
+#include <vector>
 
 #include "Building.h"
 #include "easylogging++.h"
 #include "Elevator.h"
 #include "Floor.h"
+#include "Scenario.h"
 
 INITIALIZE_EASYLOGGINGPP
 
@@ -13,39 +15,35 @@ using namespace std;
 
 struct BuildingTest : testing::Test
 {
-  std::shared_ptr<Config> config;
+  YAML::Node config;
+  std::shared_ptr<Scenario> scenario;
   std::shared_ptr<Building> building;
 
   BuildingTest()
-    : config(new Config("test_config.yaml"))
-    , building(new Building(config))
   {
-    building->initialize();
+    config = YAML::LoadFile("test_config.yaml")["scenarios"][0];
+    scenario = std::shared_ptr<Scenario>(new Scenario(config));
+    building = scenario->createBuilding();
   }
 
   virtual ~BuildingTest()
   {}
 };
 
-TEST_F(BuildingTest, GetConfig_ReturnsConfig)
-{
-  EXPECT_EQ(config, building->getConfig());
-}
-
 TEST_F(BuildingTest, GetFloors_ReturnsRightSize)
 {
-  EXPECT_EQ(config->getInt(Property::Floors), building->getFloors().size());
+  EXPECT_EQ(config["population"].size(), building->getFloors()->size());
 }
 
 TEST_F(BuildingTest, GetElevators_ReturnsRightSize)
 {
-  EXPECT_EQ(config->getInt(Property::Elevators), building->getElevators().size());
+  EXPECT_EQ(config["elevators"].as<int>(), building->getElevators()->size());
 }
 
 TEST_F(BuildingTest, VerifyFloors)
 {
   int i = 0;
-  for (auto f : building->getFloors())
+  for (auto f : *building->getFloors())
   {
     EXPECT_EQ(f->getNumber(), i++);
   }
@@ -54,7 +52,7 @@ TEST_F(BuildingTest, VerifyFloors)
 TEST_F(BuildingTest, VerifyElevators)
 {
   int i = 0;
-  for (auto e : building->getElevators())
+  for (auto e : *building->getElevators())
   {
     EXPECT_EQ(e->getNumber(), i++);
   }
@@ -62,21 +60,17 @@ TEST_F(BuildingTest, VerifyElevators)
 
 TEST_F(BuildingTest, GetLocation_NewBuilding_ReturnsLobby)
 {
-  auto lobby = building->getFloors().front();
-  for (auto e : building->getElevators())
+  auto lobby = building->getFloor(0);
+  for (auto e : *building->getElevators())
   {
-    EXPECT_EQ(lobby, building->getLocation(e));
+    EXPECT_EQ(lobby->getNumber(), building->getLocation(e)->getNumber());
   }
 }
 
 TEST_F(BuildingTest, SetLocation_UpdatesLocation)
 {
-  auto roof = building->getFloors().back();
-  auto e = building->getElevators().front();
+  auto roof = building->getFloors()->back();
+  auto e = building->getElevators()->front();
   building->setLocation(e, roof);
   EXPECT_EQ(roof, building->getLocation(e));
-}
-
-TEST_F(BuildingTest, GetLobby_ReturnsLobby) {
-  EXPECT_EQ(building->getLobby()->getNumber(), 0);
 }

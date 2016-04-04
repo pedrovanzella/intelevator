@@ -1,30 +1,41 @@
 #include <gtest/gtest.h>
+#include <memory>
 
 #include "Floor.h"
 #include "Direction.h"
 
 struct FloorTest : testing::Test
 {
-  Floor* floor;
   int number = 1;
+  int population = 10;
+  std::shared_ptr<Floor> floor;
 
   FloorTest()
-  {
-    floor = new Floor(number);
-  }
+   : number(1)
+   , population(10)
+   , floor(new Floor(number, population))
+   {}
 
   virtual ~FloorTest()
-  {
-    delete floor;
-  }
+  {}
 };
 
-TEST_F(FloorTest, FloorTest_CompareTo_Test)
+TEST_F(FloorTest, GetNumber)
 {
-  Floor down(0);
+  EXPECT_EQ(floor->getNumber(), number);
+}
+
+TEST_F(FloorTest, GetPopulation)
+{
+  EXPECT_EQ(floor->getPopulation(), population);
+}
+
+TEST_F(FloorTest, CompareTo)
+{
+  Floor down(0, 10);
   EXPECT_EQ(floor->compareTo(down), Direction::descending);
 
-  Floor up(2);
+  Floor up(2, 10);
   EXPECT_EQ(floor->compareTo(up), Direction::ascending);
 
   EXPECT_EQ(floor->compareTo(*floor), Direction::idle);

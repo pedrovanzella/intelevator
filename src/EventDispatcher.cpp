@@ -2,14 +2,10 @@
 #include "EventDispatcher.h"
 
 EventDispatcher::EventDispatcher()
-{
-  LOG(TRACE) << "EventDispatcher created.";
-}
+{}
 
 EventDispatcher::~EventDispatcher()
-{
-  LOG(TRACE) << "EventDispatcher destroyed.";
-}
+{}
 
 void EventDispatcher::subscribe(std::shared_ptr<EventObserver> eventObserver)
 {

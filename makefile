@@ -14,7 +14,7 @@ TEST     := $(TARGET)-test
 TDIR     := test
 TSOURCES := $(wildcard $(TDIR)/*.$(SRCEXT))
 TOBJECTS := $(patsubst $(TDIR)/%,$(BUILDDIR)/%,$(TSOURCES:.$(SRCEXT)=.o))
-TLIB     := -L/usr/local/lib/ -lgtest -lgtest_main -lyaml-cpp
+TLIB     := $(LIB) -lgtest -lgtest_main
 
 $(TARGET): $(OBJECTS)
 	@echo " Linking..."

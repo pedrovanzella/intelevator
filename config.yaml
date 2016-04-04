@@ -14,5 +14,36 @@ dispatcher:
 poisson:
   seed: Semente sementosa sementuda!
   population: 150
-  event_interval: 100
-  experiments: 1000
+  event_interval: 50
+  experiments: 10000
+
+elevator_config:
+  small: &small
+    capacity: 5
+  medium: &medium
+    capacity: 8
+  large: &large
+    capacity: 10
+
+scenarios:
+  - name: Scenario 01
+    elevators: 2
+    elevator_config: *small
+    population: [ 30, 10, 10, 10, 10 ]
+    dispatcher: dummy
+    cost_function: dummy
+
+  - name: Scenario 02
+    elevators: 3
+    capacity: 8
+    elevator_config: *medium
+    population: [ 50, 30, 30, 30, 30, 30, 30, 30 , 30, 30]
+    dispatcher: nearest_neighbour
+    cost_function: dummy
+
+  - name: Scenario 03
+    elevators: 8
+    elevator_config: *large
+    population: [ 160, 80, 80, 80, 80, 80, 80, 80, 80, 80, 80, 80, 80, 80, 80, 80, 80, 80, 80, 80 ]
+    dispatcher: nearest_neighbour
+    cost_function: dummy

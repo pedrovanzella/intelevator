@@ -1,22 +1,17 @@
-#include "Simulator.h"
-#include "easylogging++.h"
 #include <random>
+#include "easylogging++.h"
+#include "Scenario.h"
+#include "Simulator.h"
 
-Simulator::Simulator(const std::shared_ptr<const Config> config,
-                     const std::shared_ptr<Building> building,
-                     const std::shared_ptr<Statistics> statistics,
-                     const std::shared_ptr<Clock> clock,
-                     const std::shared_ptr<EventQueue> eventQueue,
-                     const std::shared_ptr<EventDispatcher> eventDispatcher,
-                     const std::shared_ptr<EventFactory> eventFactory)
-  : _config(config)
-  , _building(building)
-  , _statistics(statistics)
-  , _clock(clock)
-  , _eventQueue(eventQueue)
-  , _eventDispatcher(eventDispatcher)
-  , _eventFactory(eventFactory)
+Simulator::Simulator(const std::shared_ptr<const Scenario> scenario)
+  : _scenario(scenario)
+  , _statistics(std::shared_ptr<Statistics>(new Statistics()))
+  , _clock(std::shared_ptr<Clock>(new Clock()))
+  , _eventQueue(std::shared_ptr<EventQueue>(new EventQueue()))
+  , _eventDispatcher(std::shared_ptr<EventDispatcher>(new EventDispatcher()))
 {
+  _building = _scenario->createBuilding();
+
   _eventDispatcher->subscribe(std::static_pointer_cast<EventObserver>(_building));
   _eventDispatcher->subscribe(std::static_pointer_cast<EventObserver>(_statistics));
   _eventDispatcher->subscribe(std::static_pointer_cast<EventObserver>(_clock));
@@ -31,14 +26,13 @@ Simulator::~Simulator()
 
 void Simulator::run()
 {
-  _eventFactory->initialize();
-  LOG(INFO) << "Simulation started.";
+  LOG(INFO) << "Running scenario '" << _scenario->getName() << "'.";
   while (_statistics->keepRunning() && _eventQueue->hasNextEvent())
   {
     auto e = _eventQueue->pop();
     _eventDispatcher->broadcast(e);
   }
-  LOG(INFO) << "Simulation completed.";
+  LOG(INFO) << "Finished scenario '" << _scenario->getName() << "'.";
 }
 
 bool Simulator::nextStep()

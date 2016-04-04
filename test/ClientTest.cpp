@@ -14,7 +14,7 @@ struct ClientTest : testing::Test
   ClientTest()
   : partySize(1)
   , arrivalTime(10.f)
-  , destination(new Floor(0))
+  , destination(new Floor(0, 10))
   , client(new Client(partySize, arrivalTime, destination))
   {}
 

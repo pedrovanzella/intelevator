@@ -1,10 +1,10 @@
 #pragma once
 
-#include <vector>
 #include <map>
 #include <memory>
 #include <set>
-#include "Config.h"
+#include <vector>
+#include "CostFunction.h"
 #include "Dispatcher.h"
 #include "EventObserver.h"
 
@@ -14,28 +14,28 @@ class Floor;    // forward declaration
 class Building : public EventObserver, public std::enable_shared_from_this<Building>
 {
 public:
-  Building(const std::shared_ptr<const Config> config);
+  Building(std::shared_ptr<std::vector<std::shared_ptr<const Floor>>> floors,
+           std::shared_ptr<std::vector<std::shared_ptr<const Elevator>>> elevators,
+           std::shared_ptr<const Dispatcher> dispatcher,
+           std::shared_ptr<const CostFunction> costFunction);
+
   virtual ~Building();
-
-  void initialize();
-  void notify(const std::shared_ptr<const Event> event) const;
-
-  const std::shared_ptr<const Config> getConfig() const;
 
   void setLocation(std::shared_ptr<const Elevator> elevator, std::shared_ptr<const Floor> location);
   const std::shared_ptr<const Floor> getLocation(std::shared_ptr<const Elevator> elevator);
-  const std::vector<std::shared_ptr<const Elevator>>& getElevators() const;
-  const std::vector<std::shared_ptr<const Floor>>& getFloors() const;
+  const std::shared_ptr<std::vector<std::shared_ptr<const Elevator>>> getElevators() const;
+  const std::shared_ptr<std::vector<std::shared_ptr<const Floor>>> getFloors() const;
 
   const std::shared_ptr<const Floor> getFloor(int number) const;
   const std::shared_ptr<const Elevator> getElevator(int number) const;
 
-  std::shared_ptr<const Floor> getLobby() const;
+  void notify(const std::shared_ptr<const Event> event) const;
 
 private:
-  const std::shared_ptr<const Config> _config;
+  std::shared_ptr<std::vector<std::shared_ptr<const Floor>>> _floors;
+  std::shared_ptr<std::vector<std::shared_ptr<const Elevator>>> _elevators;
+  const std::shared_ptr<const Dispatcher> _dispatcher;
+  const std::shared_ptr<const CostFunction> _costFunction;
+
   std::map<std::shared_ptr<const Elevator>, std::shared_ptr<const Floor>> _locations;
-  std::vector<std::shared_ptr<const Elevator>> _elevators;
-  std::vector<std::shared_ptr<const Floor>> _floors;
-  std::shared_ptr<Dispatcher> _dispatcher;
 };

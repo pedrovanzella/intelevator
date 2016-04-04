@@ -1,14 +1,20 @@
 #include "Event.h"
 #include "Floor.h"
 
-Floor::Floor(int number)
-  : _number(number) {}
+Floor::Floor(int number, int population)
+  : _number(number)
+  , _population(population) {}
 
 Floor::~Floor() {}
 
 int Floor::getNumber() const
 {
   return _number;
+}
+
+int Floor::getPopulation() const
+{
+  return _population;
 }
 
 void Floor::notify(const std::shared_ptr<const Event> event) const

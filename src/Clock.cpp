@@ -1,17 +1,12 @@
 #include "Clock.h"
 #include "easylogging++.h"
 
-Clock::Clock(const std::shared_ptr<const Config> config)
+Clock::Clock()
  : _time(0)
- , _config(config)
-{
-  LOG(TRACE) << "Clock created.";
-}
+{}
 
 Clock::~Clock()
-{
-  LOG(TRACE) << "Clock created.";
-}
+{}
 
 unsigned long Clock::currentTime() const
 {

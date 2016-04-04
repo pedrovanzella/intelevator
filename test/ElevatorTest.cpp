@@ -1,33 +1,42 @@
 #include <gtest/gtest.h>
 
 #include "Elevator.h"
+#include "Floor.h"
 
 struct ElevatorTest : testing::Test
 {
-  std::shared_ptr<Config> config;
-  std::shared_ptr<Building> building;
+  int number;
+  int capacity;
+  std::shared_ptr<const Floor> floor;
   std::shared_ptr<const Elevator> elevator;
 
   ElevatorTest()
-  : config(new Config("test_config.yaml"))
-  , building(new Building(config))
-  {
-    building->initialize();
-    elevator = building->getElevator(0);
-  }
+  : number(0)
+  , capacity(8)
+  , floor(new Floor(0, 10))
+  , elevator(new Elevator(number, capacity, floor))
+  {}
 
   virtual ~ElevatorTest()
   {}
 };
 
-// Elevator::getOccupation() tests
-TEST_F(ElevatorTest, NullMaxLoad_ReturnsOccupation_Zero)
-{
-  config->setInt(Property::MaxLoad, 0);
-  EXPECT_EQ(elevator->getOccupation(), 0.f);
-}
-
 TEST_F(ElevatorTest, NoPassengers_ReturnsOccupation_Zero)
 {
   EXPECT_EQ(elevator->getOccupation(), 0.f);
+}
+
+TEST_F(ElevatorTest, GetNumber)
+{
+  EXPECT_EQ(elevator->getNumber(), number);
+}
+
+TEST_F(ElevatorTest, GetCapacity)
+{
+  EXPECT_EQ(elevator->getCapacity(), capacity);
+}
+
+TEST_F(ElevatorTest, GetCurrentFloor)
+{
+  EXPECT_EQ(elevator->getCurrentFloor(), floor);
 }

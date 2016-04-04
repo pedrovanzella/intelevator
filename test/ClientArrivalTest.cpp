@@ -14,9 +14,9 @@ struct ClientArrivalTest : testing::Test
   ClientArrivalTest()
   : partySize(1)
   , arrivalTime(10)
-  , destination(new Floor(0))
+  , destination(new Floor(0, 10))
   , client(new Client(partySize, arrivalTime, destination))
-  , floor(new Floor(1))
+  , floor(new Floor(1, 10))
   , clientArrival(new ClientArrival(arrivalTime, client, floor))
   {}
 

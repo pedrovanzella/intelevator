@@ -6,7 +6,8 @@
 #include "Dispatcher.h"
 #include "Elevator.h"
 
-class DummyDispatcher : public Dispatcher
+// BetterNearestNeighbourDispatcher
+class BNNDispatcher : public Dispatcher
 {
 public:
   std::shared_ptr<const Elevator> pick_next_elevator(const std::shared_ptr<const CostFunction> costFunction,

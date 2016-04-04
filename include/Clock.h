@@ -1,13 +1,12 @@
 #pragma once
 
 #include <memory>
-#include "Config.h"
 #include "EventObserver.h"
 
 class Clock : public EventObserver
 {
 public:
-  Clock(const std::shared_ptr<const Config> config);
+  Clock();
   virtual ~Clock();
 
   unsigned long currentTime() const;
@@ -18,5 +17,4 @@ public:
 
 private:
   unsigned long _time;
-  const std::shared_ptr<const Config> _config;
 };

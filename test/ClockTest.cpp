@@ -1,22 +1,19 @@
 #include <gtest/gtest.h>
+#include <memory>
 
 #include "Clock.h"
 #include "easylogging++.h"
 
 struct ClockTest : testing::Test
 {
-  Clock* clock;
-  std::shared_ptr<Config> config;
+  std::shared_ptr<Clock> clock;
 
   ClockTest()
-  {
-    clock = new Clock(config);
-  }
+  : clock(new Clock())
+  {}
 
   virtual ~ClockTest()
-  {
-    delete clock;
-  }
+  {}
 };
 
 // Clock::advanceTo tests

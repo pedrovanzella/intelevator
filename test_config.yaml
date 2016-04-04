@@ -1,18 +1,19 @@
 simulation:
-  title: "Unit Test Simulation"
-  duration: 10
+  title: Test Simulation
+  duration: 100
 
-building:
-  floors: 3
-  elevators: 10
-  max_load: 4
+elevator_config:
+  small: &small
+    capacity: 5
+  medium: &medium
+    capacity: 8
+  large: &large
+    capacity: 10
 
-dispatcher:
-  name: Dummy
-  cost_function: Dummy
-
-poisson:
-  seed: unit test simulation
-  population: 10
-  event_interval: 1
-  experiments: 100
+scenarios:
+  - name: Test Scenario
+    elevators: 2
+    elevator_config: *small
+    population: [ 10, 10, 10, 10, 10 ]
+    dispatcher: dummy
+    cost_function: dummy

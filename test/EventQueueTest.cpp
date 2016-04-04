@@ -1,4 +1,5 @@
 #include <gtest/gtest.h>
+#include <memory>
 
 #include "ClientArrival.h"
 #include "easylogging++.h"
@@ -6,22 +7,18 @@
 
 struct EventQueueTest : testing::Test
 {
-  EventQueue* eventQueue;
-
   const std::shared_ptr<const Floor> destination;
   const std::shared_ptr<const Client> client;
+  const std::shared_ptr<EventQueue> eventQueue;
 
   EventQueueTest()
-  : destination(new Floor(0))
+  : destination(new Floor(0, 10))
   , client(new Client(1, 0.f, destination))
-  {
-    eventQueue = new EventQueue();
-  }
+  , eventQueue(new EventQueue())
+  {}
 
   virtual ~EventQueueTest()
-  {
-    delete eventQueue;
-  }
+  {}
 };
 
 TEST_F(EventQueueTest, HasNextEvent_BeforeInsertEvent_ReturnsFalse)
