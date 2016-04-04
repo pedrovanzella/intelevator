@@ -33,7 +33,7 @@ endif()
 set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++11")
 
 set(SOURCE_FILES
-        src/BNNDispatcher.cpp
+        src/BetterNearestNeighbourDispatcher.cpp
         src/ClientArrival.cpp
         src/DummyDispatcher.cpp
         src/Event.cpp
@@ -46,7 +46,7 @@ set(SOURCE_FILES
         src/Elevator.cpp
         src/EventComparator.cpp
         src/EventQueue.cpp
-        src/NNDispatcher.cpp
+        src/NearestNeighbourDispatcher.cpp
         src/Statistics.cpp
         src/Client.cpp
         src/DummyCostFunction.cpp
@@ -57,7 +57,7 @@ set(SOURCE_FILES
         src/Trip.cpp)
 
 set(TEST_FILES
-        src/BNNDispatcher.cpp
+        src/BetterNearestNeighbourDispatcher.cpp
         src/ClientArrival.cpp
         src/DummyDispatcher.cpp
         src/Event.cpp
@@ -69,7 +69,7 @@ set(TEST_FILES
         src/Elevator.cpp
         src/EventComparator.cpp
         src/EventQueue.cpp
-        src/NNDispatcher.cpp
+        src/NearestNeighbourDispatcher.cpp
         src/Statistics.cpp
         src/Client.cpp
         src/DummyCostFunction.cpp

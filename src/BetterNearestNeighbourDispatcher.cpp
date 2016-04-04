@@ -1,10 +1,10 @@
 #include <memory>
-#include "BNNDispatcher.h"
+#include "BetterNearestNeighbourDispatcher.h"
 #include "Direction.h"
 #include "Elevator.h"
-#include "NNDispatcher.h"
+#include "NearestNeighbourDispatcher.h"
 
-std::shared_ptr<const Elevator> BNNDispatcher::pick_next_elevator(const std::shared_ptr<const CostFunction> costFunction,
+std::shared_ptr<const Elevator> BetterNearestNeighbourDispatcher::pick_next_elevator(const std::shared_ptr<const CostFunction> costFunction,
                                                                   const std::shared_ptr<const Building> building,
                                                                   const std::shared_ptr<const ClientArrival> ca) const
 {
@@ -23,7 +23,7 @@ std::shared_ptr<const Elevator> BNNDispatcher::pick_next_elevator(const std::sha
 
   // if no elevators are idle or going that way, then look through all elevators
   if (sd_elevators.size() == 0) {
-    NNDispatcher disp;
+    NearestNeighbourDispatcher disp;
 
       return disp.pick_next_elevator(costFunction, building, ca);
   }

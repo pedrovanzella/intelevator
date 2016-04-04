@@ -1,9 +1,9 @@
 #pragma once
 
-#include "BNNDispatcher.h"
+#include "BetterNearestNeighbourDispatcher.h"
 #include "Dispatcher.h"
 #include "DummyDispatcher.h"
-#include "NNDispatcher.h"
+#include "NearestNeighbourDispatcher.h"
 
 class DispatcherCreator
 {

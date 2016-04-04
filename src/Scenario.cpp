@@ -54,10 +54,10 @@ std::shared_ptr<Building> Scenario::createBuilding() const
       dispatcher = DispatcherCreator::create<DummyDispatcher>();
       break;
     case DispatcherType::NearestNeighbour:
-      dispatcher = DispatcherCreator::create<NNDispatcher>();
+      dispatcher = DispatcherCreator::create<NearestNeighbourDispatcher>();
       break;
     case DispatcherType::BetterNearestNeighbour:
-      dispatcher = DispatcherCreator::create<BNNDispatcher>();
+      dispatcher = DispatcherCreator::create<BetterNearestNeighbourDispatcher>();
       break;
     default:
       throw MissingDispatcherError(std::to_string((int)_dispatcherType));
