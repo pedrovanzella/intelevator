@@ -8,7 +8,6 @@ std::shared_ptr<const Elevator> BNNDispatcher::pick_next_elevator(const std::sha
                                                                   const std::shared_ptr<const Building> building,
                                                                   const std::shared_ptr<const ClientArrival> ca) const
 {
-  throw "aff";
   auto elevators = *(building->getElevators());
   auto request_floor = ca->getFloor();
   auto closest = elevators.front();

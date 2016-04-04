@@ -4,6 +4,8 @@
 #include <yaml-cpp/yaml.h>
 
 #include "Building.h"
+#include "CostFunctionType.h"
+#include "DispatcherType.h"
 
 class Scenario
 {
@@ -21,4 +23,6 @@ private:
   int _elevators;
   int _capacity;
   std::vector<int> _population;
+  DispatcherType _dispatcherType;
+  CostFunctionType _costFunctionType;
 };

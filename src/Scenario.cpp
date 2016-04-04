@@ -1,8 +1,12 @@
+#include <string>
+
 #include "CostFunctionCreator.h"
 #include "DispatcherCreator.h"
 #include "easylogging++.h"
 #include "Elevator.h"
 #include "Floor.h"
+#include "MissingCostFunctionError.h"
+#include "MissingDispatcherError.h"
 #include "Scenario.h"
 
 Scenario::Scenario(YAML::Node scenario)
@@ -10,6 +14,8 @@ Scenario::Scenario(YAML::Node scenario)
   _name = scenario["name"].as<std::string>();
   _elevators = scenario["elevators"].as<int>();
   _capacity = scenario["elevator_config"]["capacity"].as<int>();
+  _dispatcherType = static_cast<DispatcherType>(scenario["dispatcher"].as<int>());
+  _costFunctionType = static_cast<CostFunctionType>(scenario["cost_function"].as<int>());
 
   for (auto it : scenario["population"])
   {
@@ -37,12 +43,38 @@ std::shared_ptr<Building> Scenario::createBuilding() const
   std::shared_ptr<std::vector<std::shared_ptr<const Elevator>>> elevators(new std::vector<std::shared_ptr<const Elevator>>);
   for (int i = 0; i < _elevators; i++)
   {
-    auto e = std::shared_ptr<const Elevator>(new Elevator(i, _capacity, floors->at(0)));
+    auto e = std::shared_ptr<const Elevator>(new Elevator(i, _capacity, floors->front()));
     elevators->push_back(e);
   }
 
-  std::shared_ptr<const Dispatcher> dispatcher(DispatcherCreator::create<DummyDispatcher>());
-  std::shared_ptr<const CostFunction> costFunction(CostFunctionCreator::create<DummyCostFunction>());
+  std::shared_ptr<const Dispatcher> dispatcher;
+  switch(_dispatcherType)
+  {
+    case DispatcherType::Dummy:
+      dispatcher = DispatcherCreator::create<DummyDispatcher>();
+      break;
+    case DispatcherType::NearestNeighbour:
+      dispatcher = DispatcherCreator::create<NNDispatcher>();
+      break;
+    case DispatcherType::BetterNearestNeighbour:
+      dispatcher = DispatcherCreator::create<BNNDispatcher>();
+      break;
+    default:
+      throw MissingDispatcherError(std::to_string((int)_dispatcherType));
+  }
+
+  std::shared_ptr<const CostFunction> costFunction;
+  switch(_costFunctionType)
+  {
+    case CostFunctionType::Dummy:
+      costFunction = CostFunctionCreator::create<DummyCostFunction>();
+      break;
+    case CostFunctionType::NearestNeighbour:
+      costFunction = CostFunctionCreator::create<NNCostFunction>();
+      break;
+    default:
+      throw MissingCostFunctionError(std::to_string((int)_costFunctionType));
+  }
 
   std::shared_ptr<Building> b(new Building(floors, elevators, dispatcher, costFunction));
   return b;
