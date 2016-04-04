@@ -15,8 +15,6 @@ int main(int argc, char* argv[])
   el::Loggers::reconfigureAllLoggers(conf);
   START_EASYLOGGINGPP(argc, argv);
 
-  LOG(INFO) << "Welcome to Intelevator, the intelligent elevator.";
-
   auto scenarios = Scenario::Load("config.yaml");
   for (auto scenario : *scenarios)
   {
