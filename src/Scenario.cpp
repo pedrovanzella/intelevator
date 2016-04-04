@@ -70,7 +70,7 @@ std::shared_ptr<Building> Scenario::createBuilding() const
       costFunction = CostFunctionCreator::create<DummyCostFunction>();
       break;
     case CostFunctionType::NearestNeighbour:
-      costFunction = CostFunctionCreator::create<NNCostFunction>();
+      costFunction = CostFunctionCreator::create<NearestNeighbourCostFunction>();
       break;
     default:
       throw MissingCostFunctionError(std::to_string((int)_costFunctionType));

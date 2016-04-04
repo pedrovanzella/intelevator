@@ -1,6 +1,6 @@
-#include "NNCostFunction.h"
+#include "NearestNeighbourCostFunction.h"
 
-  float NNCostFunction::calculate(const std::shared_ptr<const Building> building,
+  float NearestNeighbourCostFunction::calculate(const std::shared_ptr<const Building> building,
                                   const std::shared_ptr<const Elevator> elevator,
                                   const std::shared_ptr<const ClientArrival> ca) const
 {

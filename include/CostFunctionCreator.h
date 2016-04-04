@@ -2,7 +2,7 @@
 
 #include "CostFunction.h"
 #include "DummyCostFunction.h"
-#include "NNCostFunction.h"
+#include "NearestNeighbourCostFunction.h"
 
 class CostFunctionCreator
 {

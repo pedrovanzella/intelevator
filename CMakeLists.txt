@@ -38,7 +38,7 @@ set(SOURCE_FILES
         src/DummyDispatcher.cpp
         src/Event.cpp
         src/EventFactory.cpp
-        src/NNCostFunction.cpp
+        src/NearestNeighbourCostFunction.cpp
         src/Simulator.cpp
         src/main.cpp
         src/Building.cpp
@@ -62,7 +62,7 @@ set(TEST_FILES
         src/DummyDispatcher.cpp
         src/Event.cpp
         src/EventFactory.cpp
-        src/NNCostFunction.cpp
+        src/NearestNeighbourCostFunction.cpp
         src/Simulator.cpp
         src/Building.cpp
         src/Clock.cpp

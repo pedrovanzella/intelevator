@@ -4,7 +4,7 @@
 #include "CostFunction.h"
 #include "Elevator.h"
 
-class NNCostFunction : public CostFunction
+class NearestNeighbourCostFunction : public CostFunction
 {
 public:
   float calculate(const std::shared_ptr<const Building> building,
