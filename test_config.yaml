@@ -1,7 +1,3 @@
-simulation:
-  title: Test Simulation
-  duration: 100
-
 elevator_config:
   small: &small
     capacity: 5
@@ -15,5 +11,5 @@ scenarios:
     elevators: 2
     elevator_config: *small
     population: [ 10, 10, 10, 10, 10 ]
-    dispatcher: dummy
-    cost_function: dummy
+    dispatcher: 0
+    cost_function: 0
