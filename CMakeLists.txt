@@ -33,52 +33,58 @@ endif()
 set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++11")
 
 set(SOURCE_FILES
-        "src/Building.cpp"
-        "src/Client.cpp"
-        "src/ClientArrival.cpp"
-        "src/Clock.cpp"
-        "src/Config.cpp"
-        "src/Dispatcher.cpp"
-        "src/DummyDispatcher.cpp"
-        "src/Elevator.cpp"
-        "src/ElevatorArrival.cpp"
-        "src/Event.cpp"
-        "src/EventComparator.cpp"
-        "src/EventDispatcher.cpp"
-        "src/EventQueue.cpp"
-        "src/Floor.cpp"
-        "src/main.cpp"
-        "src/Simulator.cpp"
-        "src/Statistics.cpp"
-        "src/EventFactory.cpp"
-        "src/Trip.cpp" src/NearestNeighbourDispatcher.cpp src/BetterNearestNeighbourDispatcher.cpp src/CostFunction.cpp src/DummyCostFunction.cpp src/CostFunctionDispatcher.cpp src/NearestNeighbourCostFunction.cpp)
+        src/BNNDispatcher.cpp
+        src/ClientArrival.cpp
+        src/DummyDispatcher.cpp
+        src/Event.cpp
+        src/EventFactory.cpp
+        src/NNCostFunction.cpp
+        src/Simulator.cpp
+        src/main.cpp
+        src/Building.cpp
+        src/Clock.cpp
+        src/Elevator.cpp
+        src/EventComparator.cpp
+        src/EventQueue.cpp
+        src/NNDispatcher.cpp
+        src/Statistics.cpp
+        src/Client.cpp
+        src/DummyCostFunction.cpp
+        src/ElevatorArrival.cpp
+        src/EventDispatcher.cpp
+        src/Floor.cpp
+        src/Scenario.cpp
+        src/Trip.cpp)
 
 set(TEST_FILES
-        "src/Building.cpp"
-        "src/Client.cpp"
-        "src/ClientArrival.cpp"
-        "src/Clock.cpp"
-        "src/Config.cpp"
-        "src/Dispatcher.cpp"
-        "src/DummyDispatcher.cpp"
-        "src/Elevator.cpp"
-        "src/ElevatorArrival.cpp"
-        "src/Event.cpp"
-        "src/EventComparator.cpp"
-        "src/EventDispatcher.cpp"
-        "src/EventQueue.cpp"
-        "src/Floor.cpp"
-        "src/Simulator.cpp"
-        "src/Statistics.cpp"
-        "src/Trip.cpp"
-        "src/EventFactory.cpp"
-        "test/BuildingTest.cpp"
-        "test/ClientTest.cpp"
-        "test/ClockTest.cpp"
-        "test/ConfigTest.cpp"
-        "test/ElevatorTest.cpp"
-        "test/EventQueueTest.cpp"
-        "test/FloorTest.cpp" src/NearestNeighbourDispatcher.cpp src/BetterNearestNeighbourDispatcher.cpp src/CostFunction.cpp src/DummyCostFunction.cpp src/CostFunctionDispatcher.cpp src/NearestNeighbourCostFunction.cpp)
+        src/BNNDispatcher.cpp
+        src/ClientArrival.cpp
+        src/DummyDispatcher.cpp
+        src/Event.cpp
+        src/EventFactory.cpp
+        src/NNCostFunction.cpp
+        src/Simulator.cpp
+        src/Building.cpp
+        src/Clock.cpp
+        src/Elevator.cpp
+        src/EventComparator.cpp
+        src/EventQueue.cpp
+        src/NNDispatcher.cpp
+        src/Statistics.cpp
+        src/Client.cpp
+        src/DummyCostFunction.cpp
+        src/ElevatorArrival.cpp
+        src/EventDispatcher.cpp
+        src/Floor.cpp
+        src/Scenario.cpp
+        src/Trip.cpp
+        test/BuildingTest.cpp
+        test/ClientArrivalTest.cpp
+        test/ClientTest.cpp
+        test/ClockTest.cpp
+        test/ElevatorTest.cpp
+        test/EventQueueTest.cpp
+        test/FloorTest.cpp)
 
 
 include_directories(include)
