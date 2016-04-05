@@ -24,4 +24,5 @@ void EventDispatcher::broadcast(const std::shared_ptr<const Event> event) const
   for (auto &it : _observers) {
     it->notify(event);
   }
+  LOG(INFO) << "Broadcasting event " << event->getId() << " (" << Helpers::eventTypeName(event->getType()) << ").";
 }

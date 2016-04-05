@@ -20,6 +20,8 @@ bool EventQueue::hasNextEvent() const
 void EventQueue::push(std::shared_ptr<const Event> event)
 {
   _eventQueue.push(event);
+
+  LOG(INFO) << "Scheduled event " << event->getId() << " (" << Helpers::eventTypeName(event->getType()) << ").";
 }
 
 std::shared_ptr<const Event> EventQueue::pop()
