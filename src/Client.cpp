@@ -5,9 +5,7 @@ Client::Client(int partySize, float arrivalTime, const std::shared_ptr<const Flo
   : _partySize(partySize)
   , _arrivalTime(arrivalTime)
   , _destination(destination)
-{
-  LOG(DEBUG) << "Created client with partySize=" << _partySize << ", arrivalTime=" << _arrivalTime << " and destination=" << destination->getNumber();
-}
+{}
 
 int Client::getPartySize() const
 {

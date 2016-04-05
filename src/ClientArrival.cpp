@@ -7,9 +7,7 @@ ClientArrival::ClientArrival(const unsigned long eventTime,
   : Event(eventTime, EventType::clientArrival)
   , _client(client)
   , _floor(floor)
-{
-  LOG(DEBUG) << "Created ClientArrival event with eventTime=" << _eventTime << " at floor " << floor->getNumber() << ".";
-}
+{}
 
 const std::shared_ptr<const Client> ClientArrival::getClient() const
 {
