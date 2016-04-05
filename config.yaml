@@ -13,24 +13,31 @@ elevator_config:
     capacity: 10
 
 scenarios:
-  - name: Scenario 01
-    elevators: 2
+  - name: Simple
+    elevators: 1
     elevator_config: *small
-    population: [ 30, 10, 10, 10, 10 ]
+    population: [ 5, 5, 5, 5 ]
     dispatcher: 0
     cost_function: 0
 
-  - name: Scenario 02
-    elevators: 3
-    capacity: 8
-    elevator_config: *medium
-    population: [ 50, 30, 30, 30, 30, 30, 30, 30 , 30, 30]
-    dispatcher: 1
-    cost_function: 1
+  # - name: Scenario 01
+  #   elevators: 2
+  #   elevator_config: *small
+  #   population: [ 30, 10, 10, 10, 10 ]
+  #   dispatcher: 0
+  #   cost_function: 0
 
-  - name: Scenario 03
-    elevators: 8
-    elevator_config: *large
-    population: [ 160, 80, 80, 80, 80, 80, 80, 80, 80, 80, 80, 80, 80, 80, 80, 80, 80, 80, 80, 80 ]
-    dispatcher: 2
-    cost_function: 1
+  # - name: Scenario 02
+  #   elevators: 3
+  #   capacity: 8
+  #   elevator_config: *medium
+  #   population: [ 50, 30, 30, 30, 30, 30, 30, 30 , 30, 30]
+  #   dispatcher: 1
+  #   cost_function: 1
+
+  # - name: Scenario 03
+  #   elevators: 8
+  #   elevator_config: *large
+  #   population: [ 160, 80, 80, 80, 80, 80, 80, 80, 80, 80, 80, 80, 80, 80, 80, 80, 80, 80, 80, 80 ]
+  #   dispatcher: 2
+  #   cost_function: 1
