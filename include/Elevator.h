@@ -6,8 +6,10 @@
 #include <set>
 #include "Client.h"
 #include "Direction.h"
+#include "Event.h"
+#include "EventObserver.h"
 
-class Elevator {
+class Elevator : public EventObserver {
 public:
   Elevator(int number, int capacity, std::shared_ptr<const Floor> floor);
   virtual ~Elevator();
@@ -24,6 +26,8 @@ public:
   std::shared_ptr<const Floor> getCurrentFloor() const;
 
   constexpr static float seconds_per_floor = 10.f;
+
+  void notify(const std::shared_ptr<const Event> event) const;
 
 private:
   const int _number;

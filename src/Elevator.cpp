@@ -55,3 +55,11 @@ std::shared_ptr<const Floor> Elevator::getCurrentFloor() const
 {
   return _current_floor;
 }
+
+void Elevator::notify(const std::shared_ptr<const Event> event) const
+{
+  if (event->getType() == EventType::cycleElevators)
+  {
+    LOG(INFO) << "Elevator(" << getNumber() << ") :: " << Helpers::eventTypeName(event->getType());
+  }
+}

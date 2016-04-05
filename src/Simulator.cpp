@@ -3,6 +3,9 @@
 #include "Scenario.h"
 #include "Simulator.h"
 
+#include "ClientArrival.h"
+#include "CycleElevators.h"
+
 Simulator::Simulator(const std::shared_ptr<const Scenario> scenario)
   : _scenario(scenario)
   , _statistics(std::shared_ptr<Statistics>(new Statistics()))
@@ -15,14 +18,26 @@ Simulator::Simulator(const std::shared_ptr<const Scenario> scenario)
   _eventDispatcher->subscribe(std::static_pointer_cast<EventObserver>(_building));
   _eventDispatcher->subscribe(std::static_pointer_cast<EventObserver>(_statistics));
   _eventDispatcher->subscribe(std::static_pointer_cast<EventObserver>(_clock));
+
+  for (auto elevator : *(_building->getElevators()))
+  {
+    _eventDispatcher->subscribe(std::static_pointer_cast<EventObserver>(std::const_pointer_cast<Elevator>(elevator)));
+  }
+
+  auto destination = _building->getFloors()->back();
+  const auto client = std::shared_ptr<const Client>(new Client(1, 10, destination));
+
+  auto location = _building->getFloors()->front();
+  auto ca = std::shared_ptr<ClientArrival>(new ClientArrival(10, client, location));
+
+  auto ce = std::shared_ptr<CycleElevators>(new CycleElevators(0));
+
+  _eventQueue->push(std::static_pointer_cast<Event>(ca));
+  _eventQueue->push(std::static_pointer_cast<Event>(ce));
 }
 
 Simulator::~Simulator()
-{
-  _eventDispatcher->unsubscribe(std::static_pointer_cast<EventObserver>(_building));
-  _eventDispatcher->unsubscribe(std::static_pointer_cast<EventObserver>(_statistics));
-  _eventDispatcher->unsubscribe(std::static_pointer_cast<EventObserver>(_clock));
-}
+{}
 
 void Simulator::run()
 {
@@ -30,7 +45,8 @@ void Simulator::run()
   while (_statistics->keepRunning() && _eventQueue->hasNextEvent())
   {
     auto e = _eventQueue->pop();
-    _eventDispatcher->broadcast(e);
+    if (e)
+      _eventDispatcher->broadcast(e);
   }
   LOG(INFO) << "Finished scenario '" << _scenario->getName() << "'.";
 }
