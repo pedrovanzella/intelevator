@@ -18,14 +18,12 @@ public:
   int getCapacity() const;
   int getLocation() const;
   int getDestination() const;
-  void setDestination(int destination);
-
   Direction getDirection() const;
   int getAvailableCapacity() const;
 
-  void addPassenger(std::shared_ptr<const Client> client);
 
-  constexpr static float seconds_per_floor = 10.f;
+  void setDestination(int destination);
+  void addPassenger(std::shared_ptr<const Client> client);
 
   void notify(const std::shared_ptr<const Event> event) const;
 
