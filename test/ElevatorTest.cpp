@@ -7,13 +7,13 @@ struct ElevatorTest : testing::Test
 {
   int number;
   int capacity;
-  std::shared_ptr<const Floor> floor;
+  int floor;
   std::shared_ptr<const Elevator> elevator;
 
   ElevatorTest()
   : number(0)
   , capacity(8)
-  , floor(new Floor(0, 10))
+  , floor(0)
   , elevator(new Elevator(number, capacity, floor))
   {}
 

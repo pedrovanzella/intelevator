@@ -1,7 +1,7 @@
 #include <memory>
 #include "Elevator.h"
 
-Elevator::Elevator(int number, int capacity, std::shared_ptr<const Floor> floor)
+Elevator::Elevator(int number, int capacity, int floor)
   : _number(number)
   , _capacity(capacity)
   , _current_floor(floor) {}
@@ -51,7 +51,7 @@ std::shared_ptr<std::set<const Floor>> Elevator::getDestinations() const
   return floors;
 }
 
-std::shared_ptr<const Floor> Elevator::getCurrentFloor() const
+int Elevator::getCurrentFloor() const
 {
   return _current_floor;
 }

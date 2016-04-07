@@ -11,7 +11,7 @@
 
 class Elevator : public EventObserver {
 public:
-  Elevator(int number, int capacity, std::shared_ptr<const Floor> floor);
+  Elevator(int number, int capacity, int floor);
   virtual ~Elevator();
 
   Direction getDirection() const;
@@ -23,7 +23,7 @@ public:
 
   std::shared_ptr<std::set<const Floor>> getDestinations() const;
 
-  std::shared_ptr<const Floor> getCurrentFloor() const;
+  int getCurrentFloor() const;
 
   constexpr static float seconds_per_floor = 10.f;
 
@@ -32,7 +32,7 @@ public:
 private:
   const int _number;
   const int _capacity;
-  std::shared_ptr<const Floor> _current_floor;
+  int _current_floor;
 
   std::set<std::shared_ptr<const Client>> _passengers;
 };

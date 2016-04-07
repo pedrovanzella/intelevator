@@ -43,7 +43,7 @@ std::shared_ptr<Building> Scenario::createBuilding() const
   std::shared_ptr<std::vector<std::shared_ptr<const Elevator>>> elevators(new std::vector<std::shared_ptr<const Elevator>>);
   for (int i = 0; i < _elevators; i++)
   {
-    auto e = std::shared_ptr<const Elevator>(new Elevator(i, _capacity, floors->front()));
+    auto e = std::shared_ptr<const Elevator>(new Elevator(i, _capacity, floors->front()->getNumber()));
     elevators->push_back(e);
   }
 
