@@ -12,6 +12,7 @@ Simulator::Simulator(const std::shared_ptr<const Scenario> scenario)
   , _clock(std::shared_ptr<Clock>(new Clock()))
   , _eventQueue(std::shared_ptr<EventQueue>(new EventQueue()))
   , _eventDispatcher(std::shared_ptr<EventDispatcher>(new EventDispatcher()))
+  , _eventFactory(std::shared_ptr<EventFactory>(new EventFactory(_scenario, _clock, _eventQueue)))
 {
   _building = _scenario->createBuilding();
 

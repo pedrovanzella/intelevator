@@ -23,6 +23,7 @@ private:
   const std::shared_ptr<Clock> _clock;
   const std::shared_ptr<EventQueue> _eventQueue;
   const std::shared_ptr<EventDispatcher> _eventDispatcher;
+  const std::shared_ptr<EventFactory> _eventFactory;
 
   std::shared_ptr<Building> _building;
 };

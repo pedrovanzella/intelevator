@@ -1,34 +1,22 @@
-// #pragma once
+#pragma once
 
-// #include <memory>
-// #include <string>
+#include <memory>
+#include "easylogging++.h"
+#include "Clock.h"
+#include "EventQueue.h"
+#include "Scenario.h"
 
-// #include "Building.h"
-// #include "easylogging++.h"
-// #include "Event.h"
-// #include "EventQueue.h"
-// #include "EventType.h"
+class EventFactory
+{
+public:
+  EventFactory(const std::shared_ptr<const Scenario> scenario,
+               const std::shared_ptr<Clock> clock,
+               const std::shared_ptr<EventQueue> queue);
+  virtual ~EventFactory();
 
-// class EventFactory
-// {
-// public:
-//   EventFactory(const std::shared_ptr<const Scenario> scenario);
-//   virtual ~EventFactory();
+private:
+  const std::shared_ptr<const Scenario> _scenario;
+  const std::shared_ptr<Clock> _clock;
+  const std::shared_ptr<EventQueue> _queue;
 
-//   void initialize() const;
-
-// private:
-//   const std::shared_ptr<const Scenario> _scenario;
-
-//   std::map<unsigned long, double> getProbabilities(const std::string seed,
-//                                                    const unsigned long experiments,
-//                                                    const double lambda) const;
-
-//   std::map<unsigned long, double> getDestProbabilities(const std::string seed,
-//                                                        const unsigned long experiments,
-//                                                        const int floors,
-//                                                        const int floor_number) const;
-
-//   std::map<unsigned long, unsigned long> getClients(std::map<unsigned long, double> probabilities,
-//                                                     const unsigned long population) const;
-// };
+};
