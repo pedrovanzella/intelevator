@@ -2,9 +2,9 @@
 #include "Elevator.h"
 #include "NearestNeighbourDispatcher.h"
 
-std::shared_ptr<const Elevator> NearestNeighbourDispatcher::pick_next_elevator(const std::shared_ptr<const CostFunction> costFunction,
-                                                                 const std::shared_ptr<const Building> building,
-                                                                 const std::shared_ptr<const ClientArrival> ca) const
+int NearestNeighbourDispatcher::pick_next_elevator(const std::shared_ptr<const CostFunction> costFunction,
+                                                   const std::shared_ptr<const Building> building,
+                                                   const std::shared_ptr<const ClientArrival> ca) const
 {
   auto elevators = building->getElevators();
   auto request_floor = ca->getFloor();
@@ -25,5 +25,5 @@ std::shared_ptr<const Elevator> NearestNeighbourDispatcher::pick_next_elevator(c
     }
   }
 
-  return closest;
+  return closest->getNumber();
 }

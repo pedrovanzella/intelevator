@@ -31,7 +31,10 @@ void Building::notify(const std::shared_ptr<const Event> event)
 
   if (event->getType() == EventType::clientArrival)
   {
-    auto elevator = _dispatcher->pick_next_elevator(_costFunction, shared_from_this(), std::static_pointer_cast<const ClientArrival>(event));
+    auto ce = std::static_pointer_cast<ClientArrival>(event);
+    auto elevator = _dispatcher->pick_next_elevator(_costFunction, shared_from_this(), ce);
+    LOG(INFO) << "Dispatcher has chosen elevator #" << elevator << ".";
+
     // Do something with this elevator
   }
   // TO-DO

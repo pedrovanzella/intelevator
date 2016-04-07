@@ -10,7 +10,7 @@
 class NearestNeighbourDispatcher : public Dispatcher
 {
 public:
-  std::shared_ptr<const Elevator> pick_next_elevator(const std::shared_ptr<const CostFunction> costFunction,
-                                                     const std::shared_ptr<const Building> building,
-                                                     const std::shared_ptr<const ClientArrival>) const;
+  int pick_next_elevator(const std::shared_ptr<const CostFunction> costFunction,
+                         const std::shared_ptr<const Building> building,
+                         const std::shared_ptr<const ClientArrival>) const;
 };
