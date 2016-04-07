@@ -1,17 +1,17 @@
 #include "ElevatorArrival.h"
 #include "EventType.h"
 
-ElevatorArrival::ElevatorArrival(const unsigned long eventTime, const std::shared_ptr<const Elevator> elevator, const std::shared_ptr<const Floor> floor)
+ElevatorArrival::ElevatorArrival(const unsigned long eventTime, int elevator, int location)
  : Event(eventTime, EventType::elevatorArrival)
  , _elevator(elevator)
- , _floor(floor) {}
+ , _location(location) {}
 
-const std::shared_ptr<const Elevator> ElevatorArrival::getElevator() const
+int ElevatorArrival::getElevator() const
 {
   return _elevator;
 }
 
-const std::shared_ptr<const Floor> ElevatorArrival::getFloor() const
+int ElevatorArrival::getLocation() const
 {
-  return _floor;
+  return _location;
 }
