@@ -75,6 +75,7 @@ void Elevator::notify(const std::shared_ptr<const Event> event)
 {
   if (event->getType() == EventType::cycleElevators)
   {
+    LOG(INFO) << "Elevator " << _number << " reacting to event " << event->getId() << " (" << Helpers::eventTypeName(event->getType()) << ").";
     move();
   }
 }
@@ -84,9 +85,19 @@ void Elevator::move()
   if (_location > _destination)
   {
     _location -= 1;
+
+    if (_location == _destination)
+    {
+      // deve criar um evento de elevator arrival e enfileirar
+    }
   }
   else if (_location < _destination)
   {
     _location += 1;
+
+    if (_location == _destination)
+    {
+      // deve criar um evento de elevator arrival e enfileirar
+    }
   }
 }
