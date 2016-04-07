@@ -21,7 +21,7 @@ void EventQueue::push(std::shared_ptr<const Event> event)
 {
   _eventQueue.push(event);
 
-  LOG(INFO) << "Scheduled event " << event->getId() << " (" << Helpers::eventTypeName(event->getType()) << ").";
+  LOG(INFO) << "Scheduled event " << event->str() << ".";
 }
 
 std::shared_ptr<const Event> EventQueue::pop()

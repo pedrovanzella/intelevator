@@ -21,8 +21,8 @@ void EventDispatcher::unsubscribe(std::shared_ptr<EventObserver> eventObserver)
 
 void EventDispatcher::broadcast(const std::shared_ptr<const Event> event) const
 {
+  LOG(INFO) << "Broadcasting event " << event->str() << ".";
   for (auto &it : _observers) {
     it->notify(event);
   }
-  LOG(INFO) << "Broadcasting event " << event->getId() << " (" << Helpers::eventTypeName(event->getType()) << ").";
 }

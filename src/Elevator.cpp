@@ -75,7 +75,7 @@ void Elevator::notify(const std::shared_ptr<const Event> event)
 {
   if (event->getType() == EventType::cycleElevators)
   {
-    LOG(INFO) << "Elevator " << _number << " reacting to event " << event->getId() << " (" << Helpers::eventTypeName(event->getType()) << ").";
+    LOG(INFO) << "Elevator " << _number << " reacting to event " << event->str() << ".";
     move();
   }
 }

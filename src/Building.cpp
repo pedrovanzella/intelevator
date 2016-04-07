@@ -27,6 +27,8 @@ Building::~Building() {}
 
 void Building::notify(const std::shared_ptr<const Event> event)
 {
+  LOG(INFO) << "Building reacting to event " << event->str() << ".";
+
   if (event->getType() == EventType::clientArrival)
   {
     auto elevator = _dispatcher->pick_next_elevator(_costFunction, shared_from_this(), std::static_pointer_cast<const ClientArrival>(event));
