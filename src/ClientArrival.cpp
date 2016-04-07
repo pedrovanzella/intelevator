@@ -3,10 +3,10 @@
 
 ClientArrival::ClientArrival(const unsigned long eventTime,
                              const std::shared_ptr<const Client> client,
-                             const std::shared_ptr<const Floor> floor)
+                             int location)
   : Event(eventTime, EventType::clientArrival)
   , _client(client)
-  , _floor(floor)
+  , _location(location)
 {}
 
 const std::shared_ptr<const Client> ClientArrival::getClient() const
@@ -14,7 +14,7 @@ const std::shared_ptr<const Client> ClientArrival::getClient() const
   return _client;
 }
 
-const std::shared_ptr<const Floor> ClientArrival::getFloor() const
+int ClientArrival::getLocation() const
 {
-    return _floor;
+    return _location;
 }

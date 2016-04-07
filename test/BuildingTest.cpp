@@ -63,14 +63,6 @@ TEST_F(BuildingTest, GetLocation_NewBuilding_ReturnsLobby)
   auto lobby = building->getFloor(0);
   for (auto e : *building->getElevators())
   {
-    EXPECT_EQ(lobby->getNumber(), building->getLocation(e)->getNumber());
+    EXPECT_EQ(lobby->getNumber(), e->getLocation());
   }
-}
-
-TEST_F(BuildingTest, SetLocation_UpdatesLocation)
-{
-  auto roof = building->getFloors()->back();
-  auto e = building->getElevators()->front();
-  building->setLocation(e, roof);
-  EXPECT_EQ(roof, building->getLocation(e));
 }

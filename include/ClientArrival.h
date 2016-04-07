@@ -9,11 +9,11 @@
 class ClientArrival : public Event
 {
 public:
-  ClientArrival(const unsigned long eventTime, const std::shared_ptr<const Client> client, const std::shared_ptr<const Floor> floor);
+  ClientArrival(const unsigned long eventTime, const std::shared_ptr<const Client> client, int location);
   const std::shared_ptr<const Client> getClient() const;
-  const std::shared_ptr<const Floor> getFloor() const;
+  int getLocation() const;
 
 private:
   const std::shared_ptr<const Client> _client;
-  const std::shared_ptr<const Floor> _floor;
+  int _location;
 };

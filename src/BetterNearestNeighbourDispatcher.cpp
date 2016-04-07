@@ -9,7 +9,8 @@ int BetterNearestNeighbourDispatcher::pick_next_elevator(const std::shared_ptr<c
                                                          const std::shared_ptr<const ClientArrival> ca) const
 {
   auto elevators = *(building->getElevators());
-  auto request_floor = ca->getFloor();
+  auto floors = building->getFloors();
+  auto request_floor = floors->at(ca->getLocation());
   auto closest = elevators.front();
 
   decltype(elevators) sd_elevators;

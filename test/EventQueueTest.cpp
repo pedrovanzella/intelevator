@@ -8,13 +8,13 @@
 struct EventQueueTest : testing::Test
 {
   int destination;
-  const std::shared_ptr<const Floor> location;
+  int location;
   const std::shared_ptr<const Client> client;
   const std::shared_ptr<EventQueue> eventQueue;
 
   EventQueueTest()
   : destination(0)
-  , location(new Floor(0, 10))
+  , location(0)
   , client(new Client(1, 0.f, destination))
   , eventQueue(new EventQueue())
   {}
