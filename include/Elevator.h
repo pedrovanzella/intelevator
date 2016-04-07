@@ -23,16 +23,17 @@ public:
   Direction getDirection() const;
   int getAvailableCapacity() const;
 
+  void setLocation(int location);
   void setDestination(int destination);
   void addPassenger(std::shared_ptr<const Client> client);
   void notify(const std::shared_ptr<const Event> event);
 
+  void move();
 private:
   const int _number;
   const int _capacity;
   int _location;
   int _destination;
-  ElevatorStatus _elevatorStatus;
 
   std::set<std::shared_ptr<const Client>> _passengers;
 };

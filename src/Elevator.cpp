@@ -6,7 +6,6 @@ Elevator::Elevator(int number, int capacity, int floor)
   , _capacity(capacity)
   , _location(floor)
   , _destination(floor)
-  , _elevatorStatus(ElevatorStatus::Stopped)
   {}
 
 Elevator::~Elevator() {}
@@ -33,7 +32,10 @@ int Elevator::getDestination() const
 
 ElevatorStatus Elevator::getStatus() const
 {
-  return _elevatorStatus;
+  if (_location != _destination)
+    return ElevatorStatus::Moving;
+
+  return ElevatorStatus::Stopped;
 }
 
 Direction Elevator::getDirection() const
@@ -53,6 +55,12 @@ int Elevator::getAvailableCapacity() const
   return _capacity - total_passengers;
 }
 
+void Elevator::setLocation(int location)
+{
+  _location = location;
+}
+
+
 void Elevator::setDestination(int destination)
 {
   _destination = destination;
@@ -67,6 +75,18 @@ void Elevator::notify(const std::shared_ptr<const Event> event)
 {
   if (event->getType() == EventType::cycleElevators)
   {
-    LOG(INFO) << "Elevator(" << getNumber() << ") :: " << Helpers::eventTypeName(event->getType());
+    move();
+  }
+}
+
+void Elevator::move()
+{
+  if (_location > _destination)
+  {
+    _location -= 1;
+  }
+  else if (_location < _destination)
+  {
+    _location += 1;
   }
 }
