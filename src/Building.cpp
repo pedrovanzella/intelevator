@@ -8,7 +8,7 @@
 #include "Floor.h"
 
 Building::Building(std::shared_ptr<std::vector<std::shared_ptr<const Floor>>> floors,
-                   std::shared_ptr<std::vector<std::shared_ptr<const Elevator>>> elevators,
+                   std::shared_ptr<std::vector<std::shared_ptr<Elevator>>> elevators,
                    std::shared_ptr<const Dispatcher> dispatcher,
                    std::shared_ptr<const CostFunction> costFunction)
   : _floors(floors)
@@ -31,11 +31,14 @@ void Building::notify(const std::shared_ptr<const Event> event)
 
   if (event->getType() == EventType::clientArrival)
   {
-    auto ce = std::static_pointer_cast<ClientArrival>(event);
-    auto elevator = _dispatcher->pick_next_elevator(_costFunction, shared_from_this(), ce);
-    LOG(INFO) << "Dispatcher has chosen elevator #" << elevator << ".";
+    auto ce = std::static_pointer_cast<const ClientArrival>(event);
+    int elevatorNum = _dispatcher->pick_next_elevator(_costFunction, shared_from_this(), ce);
+    LOG(INFO) << "Dispatcher has chosen elevator #" << elevatorNum << ".";
 
-    // Do something with this elevator
+    auto e = _elevators->at(elevatorNum);
+    LOG(INFO) << "Currently, elevator " << e->getNumber() << " is " << Helpers::elevatorStatusName(e->getStatus()) << ".";
+
+    e->setDestination(ce->getClient()->getDestination());
   }
   // TO-DO
 }
@@ -50,7 +53,7 @@ const std::shared_ptr<const Floor> Building::getLocation(std::shared_ptr<const E
   return _locations[elevator];
 }
 
-const std::shared_ptr<std::vector<std::shared_ptr<const Elevator>>> Building::getElevators() const
+const std::shared_ptr<std::vector<std::shared_ptr<Elevator>>> Building::getElevators() const
 {
   return _elevators;
 }
