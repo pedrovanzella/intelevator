@@ -1,4 +1,6 @@
 #include "Event.h"
+#include <string>
+#include <sstream>
 
 unsigned long Event::totalEvents = 0;
 
@@ -20,4 +22,11 @@ unsigned long Event::getTime() const
 EventType Event::getType() const
 {
   return _eventType;
+}
+
+std::string Event::str() const
+{
+  std::ostringstream stream;
+  stream << "#" << getId() << " (" << Helpers::eventTypeName(getType()) << ")";
+  return stream.str();
 }

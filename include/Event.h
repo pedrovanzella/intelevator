@@ -11,6 +11,8 @@ public:
   unsigned long getTime() const;
   EventType getType() const;
 
+  std::string str() const;
+
 protected:
   unsigned long _id;
   unsigned long _eventTime;
