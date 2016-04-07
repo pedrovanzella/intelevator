@@ -31,3 +31,15 @@ Direction Floor::compareTo(const Floor &other) const
 
     return Direction::idle;
 }
+
+void Floor::addClient(const std::shared_ptr<const Client> client)
+{
+  int destination = client->getDestination();
+
+  if (destination > _number)
+    _upLine.push(client);
+  else if (destination < _number)
+    _downLine.push(client);
+  else
+    throw("This should never happen. Call Batman!");
+}

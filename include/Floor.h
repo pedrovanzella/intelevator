@@ -16,6 +16,8 @@ public:
   int getPopulation() const;
   void notify(const std::shared_ptr<const Event> event);
 
+  void addClient(const std::shared_ptr<const Client> client);
+
   Direction compareTo(const Floor& other) const;
 
 private:
