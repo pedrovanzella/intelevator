@@ -23,7 +23,7 @@ public:
 
   std::shared_ptr<std::set<const Floor>> getDestinations() const;
 
-  int getCurrentFloor() const;
+  int getLocation() const;
 
   constexpr static float seconds_per_floor = 10.f;
 
@@ -32,7 +32,7 @@ public:
 private:
   const int _number;
   const int _capacity;
-  int _current_floor;
+  int _location;
 
   std::set<std::shared_ptr<const Client>> _passengers;
 };

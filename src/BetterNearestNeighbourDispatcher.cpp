@@ -17,7 +17,7 @@ std::shared_ptr<const Elevator> BetterNearestNeighbourDispatcher::pick_next_elev
   // Find all elevators that are going that way, or are idle
   std::copy_if(elevators.begin(), elevators.end(), std::back_inserter(sd_elevators),
   [&](std::shared_ptr<const Elevator> el) {
-    auto current_floor = building->getFloor(el->getCurrentFloor());
+    auto current_floor = building->getFloor(el->getLocation());
     return (el->getDirection() == current_floor->compareTo(*request_floor)) ||
            (el->getDirection() == Direction::idle);
   });
@@ -30,9 +30,9 @@ std::shared_ptr<const Elevator> BetterNearestNeighbourDispatcher::pick_next_elev
   }
 
   for (auto elevator : sd_elevators) {
-    auto where_it_is = elevator->getCurrentFloor();
+    auto where_it_is = elevator->getLocation();
     auto where_to = request_floor->getNumber();
-    auto where_the_closest_is = closest->getCurrentFloor();
+    auto where_the_closest_is = closest->getLocation();
 
     auto distance = where_it_is - where_to;
     auto closest_distance = where_the_closest_is - where_to;

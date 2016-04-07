@@ -4,7 +4,7 @@
 Elevator::Elevator(int number, int capacity, int floor)
   : _number(number)
   , _capacity(capacity)
-  , _current_floor(floor) {}
+  , _location(floor) {}
 
 Elevator::~Elevator() {}
 
@@ -51,9 +51,9 @@ std::shared_ptr<std::set<const Floor>> Elevator::getDestinations() const
   return floors;
 }
 
-int Elevator::getCurrentFloor() const
+int Elevator::getLocation() const
 {
-  return _current_floor;
+  return _location;
 }
 
 void Elevator::notify(const std::shared_ptr<const Event> event) const

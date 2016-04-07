@@ -13,9 +13,9 @@ std::shared_ptr<const Elevator> NearestNeighbourDispatcher::pick_next_elevator(c
 
   for (auto elevator : *elevators)
   {
-    auto where_it_is = elevator->getCurrentFloor();
+    auto where_it_is = elevator->getLocation();
     auto where_to = request_floor->getNumber();
-    auto where_the_closest_is = closest->getCurrentFloor();
+    auto where_the_closest_is = closest->getLocation();
 
     auto distance = where_it_is - where_to;
     auto closest_distance = where_the_closest_is - where_to;

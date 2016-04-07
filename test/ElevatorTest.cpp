@@ -36,7 +36,7 @@ TEST_F(ElevatorTest, GetCapacity)
   EXPECT_EQ(elevator->getCapacity(), capacity);
 }
 
-TEST_F(ElevatorTest, GetCurrentFloor)
+TEST_F(ElevatorTest, GetLocation)
 {
-  EXPECT_EQ(elevator->getCurrentFloor(), floor);
+  EXPECT_EQ(elevator->getLocation(), floor);
 }
