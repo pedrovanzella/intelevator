@@ -6,6 +6,7 @@ Elevator::Elevator(int number, int capacity, int floor)
   , _capacity(capacity)
   , _location(floor)
   , _destination(floor)
+  , _elevatorStatus(ElevatorStatus::Stopped)
   {}
 
 Elevator::~Elevator() {}
@@ -30,9 +31,9 @@ int Elevator::getDestination() const
   return _destination;
 }
 
-void Elevator::setDestination(int destination)
+ElevatorStatus Elevator::getStatus() const
 {
-  _destination = destination;
+  return _elevatorStatus;
 }
 
 Direction Elevator::getDirection() const
@@ -50,6 +51,11 @@ int Elevator::getAvailableCapacity() const
     total_passengers += client->getPartySize();
   }
   return _capacity - total_passengers;
+}
+
+void Elevator::setDestination(int destination)
+{
+  _destination = destination;
 }
 
 void Elevator::addPassenger(std::shared_ptr<const Client> client)
