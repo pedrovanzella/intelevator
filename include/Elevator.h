@@ -14,16 +14,18 @@ public:
   Elevator(int number, int capacity, int floor);
   virtual ~Elevator();
 
-  Direction getDirection() const;
-  double getOccupation() const;
   int getNumber() const;
   int getCapacity() const;
+  int getLocation() const;
+  int getDestination() const;
+  void setDestination(int destination);
+
+  Direction getDirection() const;
+  double getOccupation() const;
 
   void addPassenger(std::shared_ptr<const Client> client);
 
   std::shared_ptr<std::set<const Floor>> getDestinations() const;
-
-  int getLocation() const;
 
   constexpr static float seconds_per_floor = 10.f;
 
@@ -33,6 +35,7 @@ private:
   const int _number;
   const int _capacity;
   int _location;
+  int _destination;
 
   std::set<std::shared_ptr<const Client>> _passengers;
 };

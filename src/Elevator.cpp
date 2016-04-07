@@ -4,9 +4,36 @@
 Elevator::Elevator(int number, int capacity, int floor)
   : _number(number)
   , _capacity(capacity)
-  , _location(floor) {}
+  , _location(floor)
+  , _destination(floor)
+  {}
 
 Elevator::~Elevator() {}
+
+int Elevator::getNumber() const
+{
+  return _number;
+}
+
+int Elevator::getCapacity() const
+{
+  return _capacity;
+}
+
+int Elevator::getLocation() const
+{
+  return _location;
+}
+
+int Elevator::getDestination() const
+{
+  return _destination;
+}
+
+void Elevator::setDestination(int destination)
+{
+  _destination = destination;
+}
 
 Direction Elevator::getDirection() const
 {
@@ -25,16 +52,6 @@ double Elevator::getOccupation() const
   return total_passengers / _capacity;
 }
 
-int Elevator::getNumber() const
-{
-  return _number;
-}
-
-int Elevator::getCapacity() const
-{
-  return _capacity;
-}
-
 void Elevator::addPassenger(std::shared_ptr<const Client> client)
 {
   _passengers.insert(client);
@@ -49,11 +66,6 @@ std::shared_ptr<std::set<const Floor>> Elevator::getDestinations() const
   // }
 
   return floors;
-}
-
-int Elevator::getLocation() const
-{
-  return _location;
 }
 
 void Elevator::notify(const std::shared_ptr<const Event> event) const
