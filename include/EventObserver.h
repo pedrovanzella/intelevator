@@ -6,5 +6,5 @@
 class EventObserver
 {
 public:
-  virtual void notify(const std::shared_ptr<const Event> event) const = 0;
+  virtual void notify(const std::shared_ptr<const Event> event) = 0;
 };

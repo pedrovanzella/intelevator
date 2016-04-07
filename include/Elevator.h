@@ -25,7 +25,7 @@ public:
   void setDestination(int destination);
   void addPassenger(std::shared_ptr<const Client> client);
 
-  void notify(const std::shared_ptr<const Event> event) const;
+  void notify(const std::shared_ptr<const Event> event);
 
 private:
   const int _number;

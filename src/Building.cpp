@@ -25,7 +25,7 @@ Building::Building(std::shared_ptr<std::vector<std::shared_ptr<const Floor>>> fl
 
 Building::~Building() {}
 
-void Building::notify(const std::shared_ptr<const Event> event) const
+void Building::notify(const std::shared_ptr<const Event> event)
 {
   if (event->getType() == EventType::clientArrival)
   {

@@ -29,7 +29,7 @@ public:
   const std::shared_ptr<const Floor> getFloor(int number) const;
   const std::shared_ptr<const Elevator> getElevator(int number) const;
 
-  void notify(const std::shared_ptr<const Event> event) const;
+  void notify(const std::shared_ptr<const Event> event);
 
 private:
   std::shared_ptr<std::vector<std::shared_ptr<const Floor>>> _floors;

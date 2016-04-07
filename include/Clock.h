@@ -13,7 +13,7 @@ public:
   void advanceTo(const unsigned long time);
   void advanceBy(const unsigned long amount);
 
-  void notify(const std::shared_ptr<const Event> event) const;
+  void notify(const std::shared_ptr<const Event> event);
 
 private:
   unsigned long _time;

@@ -14,7 +14,7 @@ public:
 
   int getNumber() const;
   int getPopulation() const;
-  void notify(const std::shared_ptr<const Event> event) const;
+  void notify(const std::shared_ptr<const Event> event);
 
   Direction compareTo(const Floor& other) const;
 

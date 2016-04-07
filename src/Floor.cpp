@@ -17,7 +17,7 @@ int Floor::getPopulation() const
   return _population;
 }
 
-void Floor::notify(const std::shared_ptr<const Event> event) const
+void Floor::notify(const std::shared_ptr<const Event> event)
 {
   // Handle events
 }

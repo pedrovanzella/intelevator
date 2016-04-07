@@ -57,7 +57,7 @@ void Elevator::addPassenger(std::shared_ptr<const Client> client)
   _passengers.insert(client);
 }
 
-void Elevator::notify(const std::shared_ptr<const Event> event) const
+void Elevator::notify(const std::shared_ptr<const Event> event)
 {
   if (event->getType() == EventType::cycleElevators)
   {

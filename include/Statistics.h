@@ -12,7 +12,7 @@ public:
   virtual ~Statistics();
 
   bool keepRunning() const;
-  void notify(const std::shared_ptr<const Event> event) const;
+  void notify(const std::shared_ptr<const Event> event);
 
 private:
   std::list<Trip*> _trips;
