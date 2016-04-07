@@ -21,11 +21,9 @@ public:
   void setDestination(int destination);
 
   Direction getDirection() const;
-  double getOccupation() const;
+  int getAvailableCapacity() const;
 
   void addPassenger(std::shared_ptr<const Client> client);
-
-  std::shared_ptr<std::set<const Floor>> getDestinations() const;
 
   constexpr static float seconds_per_floor = 10.f;
 

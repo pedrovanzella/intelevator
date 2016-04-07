@@ -23,7 +23,7 @@ struct ElevatorTest : testing::Test
 
 TEST_F(ElevatorTest, NoPassengers_ReturnsOccupation_Zero)
 {
-  EXPECT_EQ(elevator->getOccupation(), 0.f);
+  EXPECT_EQ(elevator->getAvailableCapacity(), capacity);
 }
 
 TEST_F(ElevatorTest, GetNumber)

@@ -40,7 +40,7 @@ Direction Elevator::getDirection() const
   return Direction::idle;
 }
 
-double Elevator::getOccupation() const
+int Elevator::getAvailableCapacity() const
 {
   if (_capacity == 0) return 0.0;
 
@@ -49,23 +49,12 @@ double Elevator::getOccupation() const
   {
     total_passengers += client->getPartySize();
   }
-  return total_passengers / _capacity;
+  return _capacity - total_passengers;
 }
 
 void Elevator::addPassenger(std::shared_ptr<const Client> client)
 {
   _passengers.insert(client);
-}
-
-std::shared_ptr<std::set<const Floor>> Elevator::getDestinations() const
-{
-  std::shared_ptr<std::set<const Floor>> floors;
-
-  // for (auto client : _passengers) {
-  //   floors->insert(client.getDestination());
-  // }
-
-  return floors;
 }
 
 void Elevator::notify(const std::shared_ptr<const Event> event) const
