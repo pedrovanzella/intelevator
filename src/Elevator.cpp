@@ -85,6 +85,7 @@ void Elevator::move()
   if (_location > _destination)
   {
     _location -= 1;
+    LOG(INFO) << "Elevator went down.";
 
     if (_location == _destination)
     {
@@ -94,6 +95,7 @@ void Elevator::move()
   else if (_location < _destination)
   {
     _location += 1;
+    LOG(INFO) << "Elevator went up.";
 
     if (_location == _destination)
     {

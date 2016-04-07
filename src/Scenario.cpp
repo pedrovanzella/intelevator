@@ -33,10 +33,10 @@ const std::string Scenario::getName() const
 
 std::shared_ptr<Building> Scenario::createBuilding() const
 {
-  std::shared_ptr<std::vector<std::shared_ptr<const Floor>>> floors(new std::vector<std::shared_ptr<const Floor>>);
+  std::shared_ptr<std::vector<std::shared_ptr<Floor>>> floors(new std::vector<std::shared_ptr<Floor>>);
   for (int i = 0; i < _population.size(); i++)
   {
-    auto f = std::shared_ptr<const Floor>(new Floor(i, _population[i]));
+    auto f = std::shared_ptr<Floor>(new Floor(i, _population[i]));
     floors->push_back(f);
   }
 
