@@ -7,12 +7,14 @@
 
 struct EventQueueTest : testing::Test
 {
-  const std::shared_ptr<const Floor> destination;
+  int destination;
+  const std::shared_ptr<const Floor> location;
   const std::shared_ptr<const Client> client;
   const std::shared_ptr<EventQueue> eventQueue;
 
   EventQueueTest()
-  : destination(new Floor(0, 10))
+  : destination(0)
+  , location(new Floor(0, 10))
   , client(new Client(1, 0.f, destination))
   , eventQueue(new EventQueue())
   {}
@@ -28,15 +30,15 @@ TEST_F(EventQueueTest, HasNextEvent_BeforeInsertEvent_ReturnsFalse)
 
 TEST_F(EventQueueTest, HasNextEvent_AfterInsertEvent_ReturnsTrue)
 {
-  eventQueue->push(std::shared_ptr<const Event>(new ClientArrival(0, client, destination)));
+  eventQueue->push(std::shared_ptr<const Event>(new ClientArrival(0, client, location)));
   EXPECT_TRUE(eventQueue->hasNextEvent());
 }
 
 TEST_F(EventQueueTest, Push_AddThreeEvents_ReturnsInPriorityOrder)
 {
-  auto e1 = std::shared_ptr<const Event>(new ClientArrival(10, client, destination));
-  auto e2 = std::shared_ptr<const Event>(new ClientArrival(50, client, destination));
-  auto e3 = std::shared_ptr<const Event>(new ClientArrival(30, client, destination));
+  auto e1 = std::shared_ptr<const Event>(new ClientArrival(10, client, location));
+  auto e2 = std::shared_ptr<const Event>(new ClientArrival(50, client, location));
+  auto e3 = std::shared_ptr<const Event>(new ClientArrival(30, client, location));
 
   eventQueue->push(e1);
   eventQueue->push(e2);

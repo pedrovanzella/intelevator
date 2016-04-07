@@ -6,7 +6,7 @@ struct ClientArrivalTest : testing::Test
 {
   int partySize;
   float arrivalTime;
-  const std::shared_ptr<const Floor> destination;
+  int destination;
   const std::shared_ptr<const Client> client;
   const std::shared_ptr<const Floor> floor;
   const std::shared_ptr<const ClientArrival> clientArrival;
@@ -14,7 +14,7 @@ struct ClientArrivalTest : testing::Test
   ClientArrivalTest()
   : partySize(1)
   , arrivalTime(10)
-  , destination(new Floor(0, 10))
+  , destination(0)
   , client(new Client(partySize, arrivalTime, destination))
   , floor(new Floor(1, 10))
   , clientArrival(new ClientArrival(arrivalTime, client, floor))
