@@ -53,7 +53,7 @@ TEST_F(ElevatorTest, GetDestination)
 TEST_F(ElevatorTest, MoveUp)
 {
   EXPECT_EQ(elevator->getLocation(), location);
-  EXPECT_EQ(elevator->getStatus(), ElevatorStatus::Stopped);
+  EXPECT_EQ(elevator->getStatus(), Status::Stopped);
 
   elevator->setDestination(destination);
   EXPECT_EQ(elevator->getDestination(), destination);
@@ -66,14 +66,14 @@ TEST_F(ElevatorTest, MoveUp)
   {
     elevator->move();
     EXPECT_EQ(elevator->getLocation(), i + 1);
-    EXPECT_EQ(elevator->getStatus(), ElevatorStatus::Moving);
+    EXPECT_EQ(elevator->getStatus(), Status::Moving);
   }
 
   elevator->move();
   EXPECT_EQ(elevator->getLocation(), location + destination);
 
   elevator->stop();
-  EXPECT_EQ(elevator->getStatus(), ElevatorStatus::Stopped);
+  EXPECT_EQ(elevator->getStatus(), Status::Stopped);
 }
 
 TEST_F(ElevatorTest, MoveDown)
@@ -90,18 +90,18 @@ TEST_F(ElevatorTest, MoveDown)
   elevator->start();
 
   EXPECT_EQ(elevator->getDirection(), Direction::Down);
-  EXPECT_EQ(elevator->getStatus(), ElevatorStatus::Moving);
+  EXPECT_EQ(elevator->getStatus(), Status::Moving);
 
   for (int i = location; i > destination + 1; i--)
   {
     elevator->move();
     EXPECT_EQ(elevator->getLocation(), i - 1);
-    EXPECT_EQ(elevator->getStatus(), ElevatorStatus::Moving);
+    EXPECT_EQ(elevator->getStatus(), Status::Moving);
   }
 
   elevator->move();
   EXPECT_EQ(elevator->getLocation(), destination);
 
   elevator->stop();
-  EXPECT_EQ(elevator->getStatus(), ElevatorStatus::Stopped);
+  EXPECT_EQ(elevator->getStatus(), Status::Stopped);
 }

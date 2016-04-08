@@ -6,7 +6,7 @@
 #include <set>
 #include "Client.h"
 #include "Direction.h"
-#include "ElevatorStatus.h"
+#include "Status.h"
 #include "Event.h"
 #include "EventObserver.h"
 
@@ -19,7 +19,7 @@ public:
   int getCapacity() const;
   int getLocation() const;
   int getDestination() const;
-  ElevatorStatus getStatus() const;
+  Status getStatus() const;
   Direction getDirection() const;
   int getAvailableCapacity() const;
 
@@ -39,7 +39,7 @@ private:
   int _location;
   int _destination;
 
-  ElevatorStatus _status;
+  Status _status;
   Direction _direction;
 
   std::set<std::shared_ptr<const Client>> _passengers;

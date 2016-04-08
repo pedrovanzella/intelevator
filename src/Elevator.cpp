@@ -6,7 +6,7 @@ Elevator::Elevator(int number, int capacity, int floor)
   , _capacity(capacity)
   , _location(floor)
   , _destination(floor)
-  , _status(ElevatorStatus::Stopped)
+  , _status(Status::Stopped)
   , _direction(Direction::Up)
   {}
 
@@ -32,7 +32,7 @@ int Elevator::getDestination() const
   return _destination;
 }
 
-ElevatorStatus Elevator::getStatus() const
+Status Elevator::getStatus() const
 {
   return _status;
 }
@@ -80,12 +80,12 @@ void Elevator::notify(const std::shared_ptr<const Event> event)
 
 void Elevator::start()
 {
-  _status = ElevatorStatus::Moving;
+  _status = Status::Moving;
 }
 
 void Elevator::stop()
 {
-  _status = ElevatorStatus::Stopped;
+  _status = Status::Stopped;
 }
 
 void Elevator::turn()

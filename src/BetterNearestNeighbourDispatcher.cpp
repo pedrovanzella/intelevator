@@ -20,7 +20,7 @@ int BetterNearestNeighbourDispatcher::pick_next_elevator(const std::shared_ptr<c
   [&](std::shared_ptr<const Elevator> el) {
     auto current_floor = building->getFloor(el->getLocation());
     return (el->getDirection() == current_floor->compareTo(*request_floor)) ||
-           (el->getStatus() == ElevatorStatus::Stopped);
+           (el->getStatus() == Status::Stopped);
   });
 
   // if no elevators are idle or going that way, then look through all elevators
