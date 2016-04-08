@@ -1,5 +1,8 @@
+#include "ClientArrival.h"
 #include "Event.h"
 #include "Floor.h"
+#include <sstream>
+#include <string>
 
 Floor::Floor(int number, int population)
   : _number(number)
@@ -17,17 +20,12 @@ int Floor::getPopulation() const
   return _population;
 }
 
-void Floor::notify(const std::shared_ptr<const Event> event)
-{
-  // Handle events
-}
-
 Direction Floor::compareTo(const Floor &other) const
 {
     if (other.getNumber() < _number)
-        return Direction::descending;
+      return Direction::descending;
     if (other.getNumber() > _number)
-        return Direction::ascending;
+      return Direction::ascending;
 
     return Direction::idle;
 }
@@ -41,5 +39,9 @@ void Floor::addClient(const std::shared_ptr<const Client> client)
   else if (destination < _number)
     _downLine.push(client);
   else
-    throw("This should never happen. Call Batman!");
+  {
+    std::ostringstream stream;
+    stream << "Floor " << _number << " received a Client which destination is this own floor! This should never happen!";
+    throw(stream.str());
+  }
 }

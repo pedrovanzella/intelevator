@@ -6,7 +6,7 @@
 #include "EventObserver.h"
 #include "Direction.h"
 
-class Floor : public EventObserver
+class Floor
 {
 public:
   Floor(int number, int population);
@@ -14,11 +14,9 @@ public:
 
   int getNumber() const;
   int getPopulation() const;
-  void notify(const std::shared_ptr<const Event> event);
+  Direction compareTo(const Floor& other) const;
 
   void addClient(const std::shared_ptr<const Client> client);
-
-  Direction compareTo(const Floor& other) const;
 
 private:
   int _number;
