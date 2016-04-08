@@ -22,9 +22,14 @@ public:
   Status getStatus() const;
   Direction getDirection() const;
   int getAvailableCapacity() const;
+  int getNextLocation() const;
 
   void setLocation(int location);
   void setDestination(int destination);
+  void setDirection(Direction direction);
+  void setStatus(Status status);
+
+  void stopAtNextLocation();
   void addPassenger(std::shared_ptr<const Client> client);
   void notify(const std::shared_ptr<const Event> event);
 
@@ -41,6 +46,8 @@ private:
 
   Status _status;
   Direction _direction;
+
+  bool _stopAtNextLocation;
 
   std::set<std::shared_ptr<const Client>> _passengers;
 };

@@ -2,5 +2,6 @@
 
 enum class Direction {
   Up,
-  Down
+  Down,
+  None
 };

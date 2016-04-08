@@ -8,6 +8,7 @@ Elevator::Elevator(int number, int capacity, int floor)
   , _destination(floor)
   , _status(Status::Stopped)
   , _direction(Direction::Up)
+  , _stopAtNextLocation(false)
   {}
 
 Elevator::~Elevator() {}
@@ -54,6 +55,21 @@ int Elevator::getAvailableCapacity() const
   return _capacity - total_passengers;
 }
 
+int Elevator::getNextLocation() const
+{
+  if (_status == Status::Moving) {
+    if (_direction == Direction::Up) {
+      return _location + 1;
+    } else if (_direction == Direction::Down) {
+      return _location - 1;
+    } else {
+      return _location;
+    }
+  } else {
+    return _location;
+  }
+}
+
 void Elevator::setLocation(int location)
 {
   _location = location;
@@ -62,6 +78,20 @@ void Elevator::setLocation(int location)
 void Elevator::setDestination(int destination)
 {
   _destination = destination;
+}
+
+void Elevator::setDirection(Direction direction)
+{
+  _direction = direction;
+}
+void Elevator::setStatus(Status status)
+{
+  _status = status;
+}
+
+void Elevator::stopAtNextLocation()
+{
+  _stopAtNextLocation = true;
 }
 
 void Elevator::addPassenger(std::shared_ptr<const Client> client)
@@ -98,22 +128,45 @@ void Elevator::turn()
 
 void Elevator::move()
 {
-  if (_direction == Direction::Up)
+  switch (_status)
   {
-    _location += 1;
-
-    if (_location == _destination)
+    case Status::Moving:
     {
-      // deve criar um evento de elevator arrival e enfileirar
+      if (_direction == Direction::Up)
+      {
+        _location++;
+      } else if (_direction == Direction::Down)
+      {
+        _location--;
+      }
+
+      if (_stopAtNextLocation)
+      {
+        stop();
+        _stopAtNextLocation = false;
+      }
+
+      // if (algum passageiro quer descer em _location) {
+      //   stop();
+      //   return;
+      // }
+
+      if (_location == _destination)
+      {
+        stop();
+        setDirection(Direction::None);
+      }
+    }
+    break;
+    case Status::Stopped:
+    {
+      // Passos:
+      //  1 - se houver alguém que queira descer aqui, desembarcá-los;
+      //  2 - se não tem mais nenhum passageiro e não tem mais pra onde ir, o elevador não tem mais nada pra fazer e deve ficar em IDLE
+      //  3 - se tem pra onde ir, o elevador deve se mover pra lá
+    }
+    break;
+    default:
+      break;
     }
   }
-  else
-  {
-    _location -= 1;
-
-    if (_location == _destination)
-    {
-      // deve criar um evento de elevator arrival e enfileirar
-    }
-  }
-}
