@@ -33,10 +33,8 @@ TEST_F(FloorTest, GetPopulation)
 TEST_F(FloorTest, CompareTo)
 {
   Floor down(0, 10);
-  EXPECT_EQ(floor->compareTo(down), Direction::descending);
+  EXPECT_EQ(floor->compareTo(down), Direction::Down);
 
   Floor up(2, 10);
-  EXPECT_EQ(floor->compareTo(up), Direction::ascending);
-
-  EXPECT_EQ(floor->compareTo(*floor), Direction::idle);
+  EXPECT_EQ(floor->compareTo(up), Direction::Up);
 }

@@ -34,11 +34,9 @@ bool Floor::hasDownCall() const
 Direction Floor::compareTo(const Floor &other) const
 {
     if (other.getNumber() < _number)
-      return Direction::descending;
-    if (other.getNumber() > _number)
-      return Direction::ascending;
+      return Direction::Down;
 
-    return Direction::idle;
+    return Direction::Up;
 }
 
 void Floor::addClient(const std::shared_ptr<const Client> client)
