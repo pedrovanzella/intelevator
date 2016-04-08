@@ -15,6 +15,8 @@ public:
   int getNumber() const;
   int getPopulation() const;
   Direction compareTo(const Floor& other) const;
+  bool hasUpCall() const;
+  bool hasDownCall() const;
 
   void addClient(const std::shared_ptr<const Client> client);
 

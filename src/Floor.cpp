@@ -20,6 +20,17 @@ int Floor::getPopulation() const
   return _population;
 }
 
+bool Floor::hasUpCall() const
+{
+  return _upLine.size() > 0;
+}
+
+bool Floor::hasDownCall() const
+{
+  return _downLine.size() > 0;
+}
+
+
 Direction Floor::compareTo(const Floor &other) const
 {
     if (other.getNumber() < _number)
