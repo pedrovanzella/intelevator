@@ -26,21 +26,24 @@ void Building::notify(const std::shared_ptr<const Event> event)
   if (event->getType() == EventType::clientArrival)
   {
     /*
-      Quando ocorre um clientArrival, ele ocorre em um andar específico.
-      O Building deve decidir se esse clientArrival é pra subir ou é pra descer e colocar na fila correta do andar específico.
-      Além disso, deve saber se já tem chamada para subir ou para descer neste andar.
+      Um evento ClientArrival ocorre em um andar específico.  O Building deve
+      localizar o Floor correspondente e notificá-lo da chegada deste novo
+      cliente.
     */
     auto ce = std::static_pointer_cast<const ClientArrival>(event);
+    auto location = _floors->at(ce->getLocation());
+    location->addClient(ce->getClient());
 
-    int elevatorNum = _dispatcher->pick_next_elevator(_costFunction, shared_from_this(), ce);
-    LOG(INFO) << "Dispatcher has chosen elevator #" << elevatorNum << ".";
+    /*
+      A partir deste ponto, o cliente (carregando suas informações) está em uma
+      das filas daquele andar. No mundo real, se o cliente chega em uma das
+      filas (de subida ou de descida) e não houver ninguém na fila, ele apertará
+      o botão do sentido que deseja ir.
 
-    auto e = _elevators->at(elevatorNum);
-    LOG(INFO) << "Currently, elevator " << e->getNumber() << " is " << Helpers::elevatorStatusName(e->getStatus()) << ".";
-
-    e->setDestination(ce->getClient()->getDestination());
+      O sistema, ao perceber que um novo botão foi pressionado, deve designar
+      um elevator para atender aquele request.
+    */
   }
-  // TO-DO
 }
 
 const std::shared_ptr<std::vector<std::shared_ptr<Elevator>>> Building::getElevators() const
