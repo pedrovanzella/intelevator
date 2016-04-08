@@ -6,6 +6,8 @@ Elevator::Elevator(int number, int capacity, int floor)
   , _capacity(capacity)
   , _location(floor)
   , _destination(floor)
+  , _status(ElevatorStatus::Stopped)
+  , _direction(Direction::Up)
   {}
 
 Elevator::~Elevator() {}
@@ -32,15 +34,12 @@ int Elevator::getDestination() const
 
 ElevatorStatus Elevator::getStatus() const
 {
-  if (_location != _destination)
-    return ElevatorStatus::Moving;
-
-  return ElevatorStatus::Stopped;
+  return _status;
 }
 
 Direction Elevator::getDirection() const
 {
-  return Direction::idle;
+  return _direction;
 }
 
 int Elevator::getAvailableCapacity() const
@@ -59,7 +58,6 @@ void Elevator::setLocation(int location)
 {
   _location = location;
 }
-
 
 void Elevator::setDestination(int destination)
 {
@@ -80,22 +78,38 @@ void Elevator::notify(const std::shared_ptr<const Event> event)
   }
 }
 
+void Elevator::start()
+{
+  _status = ElevatorStatus::Moving;
+}
+
+void Elevator::stop()
+{
+  _status = ElevatorStatus::Stopped;
+}
+
+void Elevator::turn()
+{
+  if (_direction == Direction::Up)
+    _direction = Direction::Down;
+  else
+    _direction = Direction::Up;
+}
+
 void Elevator::move()
 {
-  if (_location > _destination)
+  if (_direction == Direction::Up)
   {
-    _location -= 1;
-    LOG(INFO) << "Elevator went down.";
+    _location += 1;
 
     if (_location == _destination)
     {
       // deve criar um evento de elevator arrival e enfileirar
     }
   }
-  else if (_location < _destination)
+  else
   {
-    _location += 1;
-    LOG(INFO) << "Elevator went up.";
+    _location -= 1;
 
     if (_location == _destination)
     {

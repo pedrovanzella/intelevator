@@ -28,12 +28,19 @@ public:
   void addPassenger(std::shared_ptr<const Client> client);
   void notify(const std::shared_ptr<const Event> event);
 
+  void start();
+  void stop();
+  void turn();
+
   void move();
 private:
   const int _number;
   const int _capacity;
   int _location;
   int _destination;
+
+  ElevatorStatus _status;
+  Direction _direction;
 
   std::set<std::shared_ptr<const Client>> _passengers;
 };
