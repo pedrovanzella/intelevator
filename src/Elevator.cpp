@@ -1,63 +1,43 @@
-#include <memory>
 #include "Elevator.h"
+#include <memory>
 
 Elevator::Elevator(int number, int capacity, int floor)
-  : _number(number)
-  , _capacity(capacity)
-  , _location(floor)
-  , _destination(floor)
-  , _status(Status::Stopped)
-  , _direction(Direction::Up)
-  , _stopAtNextLocation(false)
-  , _passengers(new std::vector<std::shared_ptr<const Client>>)
-  {}
+  : _number(number),
+    _capacity(capacity),
+    _location(floor),
+    _destination(floor),
+    _status(Status::Stopped),
+    _direction(Direction::Up),
+    _stopAtNextLocation(false),
+    _passengers(new std::vector<std::shared_ptr<const Client>>) {}
 
 Elevator::~Elevator() {}
 
-int Elevator::getNumber() const
-{
-  return _number;
+int Elevator::getNumber() const { return _number; }
+
+int Elevator::getCapacity() const { return _capacity; }
+
+int Elevator::getLocation() const { return _location; }
+
+int Elevator::getDestination() const { return _destination; }
+
+Status Elevator::getStatus() const { return _status; }
+
+Direction Elevator::getDirection() const { return _direction; }
+
+const std::shared_ptr<const std::vector<std::shared_ptr<const Client>>> Elevator::getPassengers() const {
+  return _passengers;
 }
 
-int Elevator::getCapacity() const
-{
-  return _capacity;
-}
-
-int Elevator::getLocation() const
-{
-  return _location;
-}
-
-int Elevator::getDestination() const
-{
-  return _destination;
-}
-
-Status Elevator::getStatus() const
-{
-  return _status;
-}
-
-Direction Elevator::getDirection() const
-{
-  return _direction;
-}
-
-int Elevator::getAvailableCapacity() const
-{
+int Elevator::getAvailableCapacity() const {
   if (_capacity == 0) return 0.0;
 
   int total_passengers = 0;
-  for (auto client : *_passengers)
-  {
-    total_passengers += client->getPartySize() * 1;
-  }
+  for (auto client : *_passengers) total_passengers += client->getPartySize();
   return _capacity - total_passengers;
 }
 
-int Elevator::getNextLocation() const
-{
+int Elevator::getNextLocation() const {
   if (_status == Status::Moving) {
     if (_direction == Direction::Up) {
       return _location + 1;
@@ -71,110 +51,74 @@ int Elevator::getNextLocation() const
   }
 }
 
-const std::shared_ptr<const std::vector<std::shared_ptr<const Client>>> Elevator::getPassengers() const
-{
-  return _passengers;
-}
+void Elevator::setLocation(int location) { _location = location; }
 
-std::shared_ptr<std::vector<std::shared_ptr<const Client>>> Elevator::dropPassengersToCurrentLocation()
-{
+void Elevator::setDestination(int destination) { _destination = destination; }
+
+void Elevator::setDirection(Direction direction) { _direction = direction; }
+
+void Elevator::setStatus(Status status) { _status = status; }
+
+std::shared_ptr<std::vector<std::shared_ptr<const Client>>> Elevator::dropPassengersToCurrentLocation() {
   /* Copy every client bound to current _location into passengersToDrop container. */
   decltype(_passengers) passengersToDrop(new std::vector<std::shared_ptr<const Client>>);
-  std::copy_if(_passengers->begin(), _passengers->end(), std::back_inserter(*passengersToDrop),
-  [&](std::shared_ptr<const Client> c) {
-    return (c->getDestination() == _location);
-  });
+  std::copy_if(_passengers->begin(),
+               _passengers->end(),
+               std::back_inserter(*passengersToDrop),
+               [&](std::shared_ptr<const Client> c) {
+                 return (c->getDestination() == _location);
+               });
 
-  /* Creates a new container with the difference between all the clients inside the elevador
-    and the passengers about to drop off the elevator. */
-  decltype(_passengers) passengersRemaining(new std::vector<std::shared_ptr<const Client>>);
-  std::set_difference(
-    _passengers->begin(),
-    _passengers->end(),
-    passengersToDrop->begin(),
-    passengersToDrop->end(),
-    std::inserter(*passengersRemaining, passengersRemaining->begin())
-  );
+  /* Creates a new container with the difference between all the clients inside
+    the elevator and the passengers about to drop off the elevator. */
+  decltype(_passengers) remainingPassengers(new std::vector<std::shared_ptr<const Client>>);
+  std::set_difference(_passengers->begin(),
+                      _passengers->end(),
+                      passengersToDrop->begin(),
+                      passengersToDrop->end(),
+                      std::inserter(*remainingPassengers, remainingPassengers->begin()));
 
   /* Swaps the Clients container with the Difference container. */
-  _passengers.swap(passengersRemaining);
+  _passengers.swap(remainingPassengers);
 
   /* Returns the passengers about to drop off the elevador. */
   return passengersToDrop;
 }
 
-void Elevator::setLocation(int location)
-{
-  _location = location;
-}
+void Elevator::stopAtNextLocation() { _stopAtNextLocation = true; }
 
-void Elevator::setDestination(int destination)
-{
-  _destination = destination;
-}
-
-void Elevator::setDirection(Direction direction)
-{
-  _direction = direction;
-}
-void Elevator::setStatus(Status status)
-{
-  _status = status;
-}
-
-void Elevator::stopAtNextLocation()
-{
-  _stopAtNextLocation = true;
-}
-
-void Elevator::addPassenger(std::shared_ptr<const Client> client)
-{
+void Elevator::addPassenger(std::shared_ptr<const Client> client) {
   _passengers->push_back(client);
 }
 
-void Elevator::notify(const std::shared_ptr<const Event> event)
-{
-  if (event->getType() == EventType::cycleElevators)
-  {
+void Elevator::notify(const std::shared_ptr<const Event> event) {
+  if (event->getType() == EventType::cycleElevators) {
     LOG(INFO) << "Elevator " << _number << " reacting to event " << event->str() << ".";
     move();
   }
 }
 
-void Elevator::start()
-{
-  _status = Status::Moving;
-}
+void Elevator::start() { _status = Status::Moving; }
 
-void Elevator::stop()
-{
-  _status = Status::Stopped;
-}
+void Elevator::stop() { _status = Status::Stopped; }
 
-void Elevator::turn()
-{
+void Elevator::turn() {
   if (_direction == Direction::Up)
     _direction = Direction::Down;
   else
     _direction = Direction::Up;
 }
 
-void Elevator::move()
-{
-  switch (_status)
-  {
-    case Status::Moving:
-    {
-      if (_direction == Direction::Up)
-      {
+void Elevator::move() {
+  switch (_status) {
+    case Status::Moving: {
+      if (_direction == Direction::Up) {
         _location++;
-      } else if (_direction == Direction::Down)
-      {
+      } else if (_direction == Direction::Down) {
         _location--;
       }
 
-      if (_stopAtNextLocation)
-      {
+      if (_stopAtNextLocation) {
         stop();
         _stopAtNextLocation = false;
       }
@@ -184,22 +128,19 @@ void Elevator::move()
       //   return;
       // }
 
-      if (_location == _destination)
-      {
+      if (_location == _destination) {
         stop();
         setDirection(Direction::None);
       }
-    }
-    break;
-    case Status::Stopped:
-    {
+    } break;
+    case Status::Stopped: {
       // Passos:
       //  1 - se houver alguém que queira descer aqui, desembarcá-los;
-      //  2 - se não tem mais nenhum passageiro e não tem mais pra onde ir, o elevador não tem mais nada pra fazer e deve ficar em IDLE
+      //  2 - se não tem mais nenhum passageiro e não tem mais pra onde ir, o
+      //  elevador não tem mais nada pra fazer e deve ficar em IDLE
       //  3 - se tem pra onde ir, o elevador deve se mover pra lá
-    }
-    break;
+    } break;
     default:
       break;
-    }
   }
+}
