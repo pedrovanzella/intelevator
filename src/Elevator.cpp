@@ -39,17 +39,19 @@ int Elevator::getAvailableCapacity() const {
 }
 
 int Elevator::getNextLocation() const {
-  if (_status == Status::Moving) {
-    if (_direction == Direction::Up) {
-      return _location + 1;
-    } else if (_direction == Direction::Down) {
-      return _location - 1;
-    } else {
-      return _location;
-    }
-  } else {
+  if (_status == Status::Stopped)
     return _location;
+
+  if (_status == Status::Moving)
+  {
+    if (_direction == Direction::Up)
+      return _location + 1;
+
+    if (_direction == Direction::Down)
+      return _location - 1;
   }
+
+  return _location;
 }
 
 void Elevator::setLocation(int location) { _location = location; }
@@ -103,7 +105,7 @@ void Elevator::turn() {
     _direction = Direction::Up;
 }
 
-void Elevator::move() {
+void Elevator::update() {
   switch (_status) {
     case Status::Moving: {
       if (_direction == Direction::Up) {
@@ -116,11 +118,6 @@ void Elevator::move() {
         stop();
         _stopAtNextLocation = false;
       }
-
-      // if (algum passageiro quer descer em _location) {
-      //   stop();
-      //   return;
-      // }
 
       if (_location == _destination) {
         stop();

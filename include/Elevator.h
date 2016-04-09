@@ -37,7 +37,7 @@ public:
   void start();
   void stop();
   void turn();
-  void move();
+  void update();
 
 private:
   const int _number;
