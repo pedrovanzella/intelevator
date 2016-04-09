@@ -1,18 +1,18 @@
 #pragma once
 
+#include "CostFunction.h"
+#include "Dispatcher.h"
+#include "EventObserver.h"
 #include <map>
 #include <memory>
 #include <set>
 #include <vector>
-#include "CostFunction.h"
-#include "Dispatcher.h"
-#include "EventObserver.h"
 
 class Elevator; // forward declaration
 class Floor;    // forward declaration
 
-class Building : public EventObserver, public std::enable_shared_from_this<Building>
-{
+class Building : public EventObserver,
+                 public std::enable_shared_from_this<Building> {
 public:
   Building(std::shared_ptr<std::vector<std::shared_ptr<Floor>>> floors,
            std::shared_ptr<std::vector<std::shared_ptr<Elevator>>> elevators,

@@ -3,28 +3,24 @@
 #include <memory>
 
 #include "Building.h"
-#include <glog/logging.h>
 #include "Elevator.h"
 #include "Floor.h"
+#include <glog/logging.h>
 
-Building::Building(std::shared_ptr<std::vector<std::shared_ptr<Floor>>> floors,
-                   std::shared_ptr<std::vector<std::shared_ptr<Elevator>>> elevators,
-                   std::shared_ptr<const Dispatcher> dispatcher,
-                   std::shared_ptr<const CostFunction> costFunction)
-  : _floors(floors)
-  , _elevators(elevators)
-  , _dispatcher(dispatcher)
-  , _costFunction(costFunction)
-{}
+Building::Building(
+    std::shared_ptr<std::vector<std::shared_ptr<Floor>>> floors,
+    std::shared_ptr<std::vector<std::shared_ptr<Elevator>>> elevators,
+    std::shared_ptr<const Dispatcher> dispatcher,
+    std::shared_ptr<const CostFunction> costFunction)
+    : _floors(floors), _elevators(elevators), _dispatcher(dispatcher),
+      _costFunction(costFunction) {}
 
 Building::~Building() {}
 
-void Building::notify(const std::shared_ptr<const Event> event)
-{
+void Building::notify(const std::shared_ptr<const Event> event) {
   LOG(INFO) << "Building reacting to event " << event->str() << ".";
 
-  if (event->getType() == EventType::clientArrival)
-  {
+  if (event->getType() == EventType::clientArrival) {
     auto ce = std::static_pointer_cast<const ClientArrival>(event);
 
     /*
@@ -53,8 +49,7 @@ void Building::notify(const std::shared_ptr<const Event> event)
     bool hasUpCallAfter = location->hasUpCall();
     bool hasDownCallAfter = location->hasDownCall();
 
-    if (!hasUpCall && hasUpCallAfter)
-    {
+    if (!hasUpCall && hasUpCallAfter) {
       /*
         Antes não tinha ninguém pra subir; agora, tem.
         O dispatcher recebe esta informação e devolve o número do elevator
@@ -85,8 +80,7 @@ void Building::notify(const std::shared_ptr<const Event> event)
       */
     }
 
-    if (!hasDownCall && hasDownCallAfter)
-    {
+    if (!hasDownCall && hasDownCallAfter) {
       /*
         Antes não tinha ninguém pra descer; agora, tem.
         O dispatcher recebe esta informação e devolve o número do elevator
@@ -103,24 +97,22 @@ void Building::notify(const std::shared_ptr<const Event> event)
   }
 }
 
-const std::shared_ptr<std::vector<std::shared_ptr<Elevator>>> Building::getElevators() const
-{
+const std::shared_ptr<std::vector<std::shared_ptr<Elevator>>> Building::getElevators() const {
   return _elevators;
 }
 
-const std::shared_ptr<std::vector<std::shared_ptr<Floor>>> Building::getFloors() const
-{
+const std::shared_ptr<std::vector<std::shared_ptr<Floor>>> Building::getFloors() const {
   return _floors;
 }
 
-const std::shared_ptr<Floor> Building::getFloor(int number) const
-{
-  if (number >= _floors->size()) throw std::out_of_range ("Floor number out of range: " + std::to_string(number));
+const std::shared_ptr<Floor> Building::getFloor(int number) const {
+  if (number >= _floors->size())
+    throw std::out_of_range("Floor number out of range: " + std::to_string(number));
   return _floors->at(number);
 }
 
-const std::shared_ptr<Elevator> Building::getElevator(int number) const
-{
-  if (number >= _elevators->size()) throw std::out_of_range ("Elevator number our of range: " + std::to_string(number));
+const std::shared_ptr<Elevator> Building::getElevator(int number) const {
+  if (number >= _elevators->size())
+    throw std::out_of_range("Elevator number our of range: " + std::to_string(number));
   return _elevators->at(number);
 }
