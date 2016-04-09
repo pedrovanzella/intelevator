@@ -92,13 +92,6 @@ void Elevator::addPassenger(std::shared_ptr<const Client> client) {
   _passengers->push_back(client);
 }
 
-void Elevator::notify(const std::shared_ptr<const Event> event) {
-  if (event->getType() == EventType::cycleElevators) {
-    LOG(INFO) << "Elevator " << _number << " reacting to event " << event->str() << ".";
-    move();
-  }
-}
-
 void Elevator::start() { _status = Status::Moving; }
 
 void Elevator::stop() { _status = Status::Stopped; }

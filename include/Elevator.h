@@ -3,14 +3,13 @@
 #include "Client.h"
 #include "Direction.h"
 #include "Event.h"
-#include "EventObserver.h"
 #include "Status.h"
 #include <map>
 #include <memory>
 #include <queue>
 #include <vector>
 
-class Elevator : public EventObserver {
+class Elevator {
 public:
   Elevator(int number, int capacity, int floor);
   virtual ~Elevator();
@@ -34,7 +33,6 @@ public:
   std::shared_ptr<std::vector<std::shared_ptr<const Client>>> dropPassengersToCurrentLocation();
   void stopAtNextLocation();
   void addPassenger(std::shared_ptr<const Client> client);
-  void notify(const std::shared_ptr<const Event> event);
 
   void start();
   void stop();
