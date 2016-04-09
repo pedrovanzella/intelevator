@@ -20,21 +20,13 @@ Simulator::Simulator(const std::shared_ptr<const Scenario> scenario)
   _eventDispatcher->subscribe(std::static_pointer_cast<EventObserver>(_statistics));
   _eventDispatcher->subscribe(std::static_pointer_cast<EventObserver>(_clock));
 
-  for (auto elevator : *(_building->getElevators()))
-  {
-    _eventDispatcher->subscribe(std::static_pointer_cast<EventObserver>(std::const_pointer_cast<Elevator>(elevator)));
-  }
-
   auto destination = _building->getFloors()->back()->getNumber();
   const auto client = std::shared_ptr<const Client>(new Client(1, 10, destination));
 
   auto location = _building->getFloors()->front()->getNumber();
-  auto ca = std::shared_ptr<ClientArrival>(new ClientArrival(0, client, location));
+  auto ca = std::shared_ptr<ClientArrival>(new ClientArrival(10, client, location));
 
   _eventQueue->push(std::static_pointer_cast<Event>(ca));
-
-  auto ce = std::shared_ptr<CycleElevators>(new CycleElevators(10));
-  _eventQueue->push(std::static_pointer_cast<Event>(ce));
 }
 
 Simulator::~Simulator()
