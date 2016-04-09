@@ -64,12 +64,12 @@ TEST_F(ElevatorTest, MoveUp)
 
   for (int i = location; i < destination - 1; i++)
   {
-    elevator->move();
+    elevator->update();
     EXPECT_EQ(elevator->getLocation(), i + 1);
     EXPECT_EQ(elevator->getStatus(), Status::Moving);
   }
 
-  elevator->move();
+  elevator->update();
   EXPECT_EQ(elevator->getLocation(), location + destination);
 
   elevator->stop();
@@ -94,12 +94,12 @@ TEST_F(ElevatorTest, MoveDown)
 
   for (int i = location; i > destination + 1; i--)
   {
-    elevator->move();
+    elevator->update();
     EXPECT_EQ(elevator->getLocation(), i - 1);
     EXPECT_EQ(elevator->getStatus(), Status::Moving);
   }
 
-  elevator->move();
+  elevator->update();
   EXPECT_EQ(elevator->getLocation(), destination);
 
   elevator->stop();
