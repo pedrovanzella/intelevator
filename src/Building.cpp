@@ -3,6 +3,7 @@
 #include "Floor.h"
 #include <algorithm>
 #include <glog/logging.h>
+#include <sstream>
 
 Building::Building(
   std::shared_ptr<std::vector<std::shared_ptr<Floor>>> floors,
@@ -10,7 +11,17 @@ Building::Building(
   std::shared_ptr<const Dispatcher> dispatcher,
   std::shared_ptr<const CostFunction> costFunction)
   : _floors(floors), _elevators(elevators), _dispatcher(dispatcher),
-    _costFunction(costFunction) {}
+    _costFunction(costFunction), _stops() {
+
+  for (auto e : *_elevators) {
+    std::vector<bool> stops(floors->size());
+
+    for (auto f : *_floors)
+      stops[f->getNumber()] = false;
+
+    _stops[e->getNumber()] = stops;
+  }
+}
 
 Building::~Building() {}
 
@@ -112,4 +123,21 @@ const std::shared_ptr<Elevator> Building::getElevator(int number) const {
   if (number >= _elevators->size())
     throw std::out_of_range("Elevator number our of range: " + std::to_string(number));
   return _elevators->at(number);
+}
+
+std::string Building::stopsToString() const
+{
+  std::ostringstream stream;
+  stream << "\n";
+
+  for (auto el : _stops)
+  {
+    stream << "Elevator #" << el.first << " stops: [ ";
+
+    for (auto b : el.second)
+      stream << b << " ";
+
+    stream << "]\n";
+  }
+  return stream.str();
 }

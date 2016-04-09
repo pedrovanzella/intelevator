@@ -14,9 +14,9 @@ elevator_config:
 
 scenarios:
   - name: Simple
-    elevators: 1
+    elevators: 2
     elevator_config: *small
-    population: [ 5, 5, 5, 5 ]
+    population: [ 5, 5, 5, 5, 5, 5 ]
     dispatcher: 0
     cost_function: 0
 

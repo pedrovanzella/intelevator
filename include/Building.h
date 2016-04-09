@@ -3,7 +3,9 @@
 #include "CostFunction.h"
 #include "Dispatcher.h"
 #include "EventObserver.h"
+#include <map>
 #include <memory>
+#include <string>
 #include <vector>
 
 class Elevator; // forward declaration
@@ -27,9 +29,13 @@ public:
 
   void notify(const std::shared_ptr<const Event> event);
 
+  std::string stopsToString() const;
+
 private:
   std::shared_ptr<std::vector<std::shared_ptr<Floor>>> _floors;
   std::shared_ptr<std::vector<std::shared_ptr<Elevator>>> _elevators;
   const std::shared_ptr<const Dispatcher> _dispatcher;
   const std::shared_ptr<const CostFunction> _costFunction;
+
+  std::map<int, std::vector<bool>> _stops;
 };
