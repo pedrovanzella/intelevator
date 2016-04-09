@@ -11,98 +11,20 @@ Building::Building(
   std::shared_ptr<const Dispatcher> dispatcher,
   std::shared_ptr<const CostFunction> costFunction)
   : _floors(floors), _elevators(elevators), _dispatcher(dispatcher),
-    _costFunction(costFunction), _stops() {
     _costFunction(costFunction), _stops(), _lastEventTime(0) {
 
-  for (auto e : *_elevators) {
-    std::vector<bool> stops(floors->size());
-
-    for (auto f : *_floors)
-      stops[f->getNumber()] = false;
-
-    _stops[e->getNumber()] = stops;
-  }
+  initializeStops();
 }
 
 Building::~Building() {}
 
 void Building::notify(const std::shared_ptr<const Event> event) {
-  LOG(INFO) << "Building reacting to event " << event->str() << ".";
+  for (int time = _lastEventTime; time < event->getTime(); ++time) {
+    updateElevators();
+  }
 
   if (event->getType() == EventType::clientArrival) {
-    auto ce = std::static_pointer_cast<const ClientArrival>(event);
-
-    /*
-      Um evento ClientArrival ocorre em um andar específico. O Building deve
-      localizar o Floor correspondente e notificá-lo da chegada deste novo
-      cliente.
-    */
-
-    auto location = _floors->at(ce->getLocation());
-
-    /*
-      O cliente (carregando suas informações) entrará em uma das filas daquele
-      andar. No mundo real, se o cliente chega em uma das filas (de subida ou de
-      descida) e não há ninguém na fila, ele aperta o botão do sentido que
-      deseja ir.
-
-      O sistema, ao perceber que um novo botão foi pressionado, designa um
-      elevador para atender aquela nova requisição.
-    */
-
-    bool hasUpCall = location->hasUpCall();
-    bool hasDownCall = location->hasDownCall();
-
-    location->addClient(ce->getClient());
-
-    bool hasUpCallAfter = location->hasUpCall();
-    bool hasDownCallAfter = location->hasDownCall();
-
-    if (!hasUpCall && hasUpCallAfter) {
-      /*
-        Antes não tinha ninguém pra subir; agora, tem.
-        O dispatcher recebe esta informação e devolve o número do elevator
-        que deverá atender esta solicitação.
-      */
-
-      int elevatorNum = _dispatcher->pick_next_elevator(_costFunction, shared_from_this(), ce);
-      auto elevator = _elevators->at(elevatorNum);
-
-      /*
-        Agora, existem algus casos que podem ocorrer:
-
-          1) Este elevador está parado (ou seja, não tem nada pra atender);
-          2) Este elevador está em movimento, atendendo um chamado, mas não tem mais parada pra fazer depois;
-          3) Este elevador está em movimento, atendendo um chamado, e tem mais paradas pra fazer depois.
-
-          Como tratar?
-
-            Possibilidade 1: para cada elevador, guardar dentro do Building uma lista (ou outra estrutura mais
-                             apropriada) que irá armazenar as paradas que o elevador deverá realizar, na ordem
-                             em que elas devem ocorrer. Quando o elevador chega em um destino, o Building irá
-                             retirar o próximo destino da lista armazenada e irá entregar para o elevador, que
-                             continuará sua viagem através do prédio. Quando o elevador não possui mais paradas
-                             para realizar, ele fica parado (futuramente podemos adicionar heurísticas neste
-                             caso).
-
-            Possibilidade 2: sei lá.
-      */
-    }
-
-    if (!hasDownCall && hasDownCallAfter) {
-      /*
-        Antes não tinha ninguém pra descer; agora, tem.
-        O dispatcher recebe esta informação e devolve o número do elevator
-        que deverá atender esta solicitação.
-      */
-
-      int elevatorNum = _dispatcher->pick_next_elevator(_costFunction, shared_from_this(), ce);
-      auto elevator = _elevators->at(elevatorNum);
-
-      /*
-        ... (mesmo caso que o acima)
-      */
-    }
+    doClientArrival(std::static_pointer_cast<const ClientArrival>(event));
   }
 }
 
@@ -131,8 +53,6 @@ std::string Building::stopsToString() const
   std::ostringstream stream;
   stream << "\n";
 
-  for (auto el : _stops)
-  {
   for (auto el : _stops) {
     stream << "Elevator #" << el.first << " stops: [ ";
 
@@ -141,5 +61,81 @@ std::string Building::stopsToString() const
 
     stream << "]\n";
   }
+
   return stream.str();
+}
+
+void Building::initializeStops() {
+  for (auto e : *_elevators) {
+    std::vector<bool> stops(_floors->size());
+
+    for (auto f : *_floors)
+      stops[f->getNumber()] = false;
+
+    _stops[e->getNumber()] = stops;
+  }
+}
+
+void Building::doClientArrival(std::shared_ptr<const ClientArrival> event) {
+  /*
+    Um evento ClientArrival ocorre em um andar específico. O Building deve
+    localizar o Floor correspondente e notificá-lo da chegada deste novo
+    cliente.
+
+    O cliente (carregando suas informações) entrará em uma das filas daquele
+    andar. No mundo real, se o cliente chega em uma das filas (de subida ou de
+    descida) e não há ninguém na fila, ele aperta o botão do sentido que
+    deseja ir.
+  */
+
+  auto location = _floors->at(event->getLocation());
+  location->addClient(event->getClient());
+
+  /*
+    O sistema, ao perceber que um novo botão foi pressionado, designa um
+    elevador para atender aquela nova requisição.
+  */
+
+  int elevatorNum = _dispatcher->pick_next_elevator(_costFunction, shared_from_this(), event);
+
+  /* Agora, esse elevador deve parar no andar em que ocorreu o evento para buscar a pessoa. */
+  if (!_stops[elevatorNum][event->getLocation()]) {
+    _stops[elevatorNum][event->getLocation()] = true;
+    LOG(INFO) << "Elevator #" << elevatorNum << " will stop on floor " << event->getLocation() << " to pick up some clients.";
+  }
+}
+
+void Building::updateElevators() {
+  for (auto e : *_elevators) {
+
+    // Checks if elevator must stop at next floor.
+    auto nextLocation = e->getNextLocation();
+    bool shouldStop = _stops[e->getNumber()][nextLocation];
+
+    if (shouldStop) e->stopAtNextLocation();
+
+    e->update();
+
+    if (shouldStop) _stops[e->getNumber()][nextLocation] = false;
+
+    /* Neste ponto, se o elevador estiver parado, é por que ele deveria estar. :P
+       Assim, as pessoas que querem descer neste andar devem sair e as pessoas que
+       irão embarcar no elevador devem entrar. */
+
+    if (e->getStatus() == Status::Stopped) {
+      auto dropped = e->dropPassengersToCurrentLocation();
+
+      LOG_IF(INFO, !dropped->empty())
+        << "Elevator #" << e->getNumber()
+        << " dropped " << dropped->size()
+        << " clients at floor #" << e->getLocation() << ".";
+
+      if (e->getDirection() == Direction::Up) {
+        /* Embarcar as pessoas que irão subir com o elevador. */
+      }
+      else if (e->getDirection() == Direction::Down) {
+        /* Embarcar as pessoas que irão descer com o elevador. */
+      }
+    }
+  }
 }

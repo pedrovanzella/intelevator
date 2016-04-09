@@ -38,4 +38,8 @@ private:
   const std::shared_ptr<const CostFunction> _costFunction;
   std::map<int, std::vector<bool>> _stops;
   int _lastEventTime;
+
+  void doClientArrival(std::shared_ptr<const ClientArrival> event);
+  void initializeStops();
+  void updateElevators();
 };
