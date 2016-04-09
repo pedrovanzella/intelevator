@@ -3,9 +3,7 @@
 #include "CostFunction.h"
 #include "Dispatcher.h"
 #include "EventObserver.h"
-#include <map>
 #include <memory>
-#include <set>
 #include <vector>
 
 class Elevator; // forward declaration
