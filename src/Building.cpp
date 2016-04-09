@@ -1,11 +1,10 @@
-#include <algorithm>
-#include <iostream>
-#include <memory>
-
 #include "Building.h"
 #include "Elevator.h"
 #include "Floor.h"
+#include <algorithm>
 #include <glog/logging.h>
+#include <iostream>
+#include <memory>
 
 Building::Building(
   std::shared_ptr<std::vector<std::shared_ptr<Floor>>> floors,
