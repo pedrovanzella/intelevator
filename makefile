@@ -33,10 +33,10 @@ $(TEST): $(filter-out $(BUILDDIR)/main.o, $(OBJECTS)) $(TOBJECTS)
 	@echo " $(CXX) $(CXXFLAGS) $(TLIB) $(INC) $^ -o $(TEST)"; $(CXX) $(CXXFLAGS) $(TLIB) $(INC) $^ -o $(TEST)
 
 test: $(TEST)
-	./$(TEST)
+	GLOG_minloglevel=100 ./$(TEST)
 
 run: $(TARGET)
-	./$(TARGET)
+	GLOG_logtostderr=1 ./$(TARGET)
 
 clean:
 	@echo " Cleaning...";
