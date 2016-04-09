@@ -9,6 +9,7 @@ Elevator::Elevator(int number, int capacity, int floor)
   , _status(Status::Stopped)
   , _direction(Direction::Up)
   , _stopAtNextLocation(false)
+  , _passengers(new std::vector<std::shared_ptr<const Client>>)
   {}
 
 Elevator::~Elevator() {}
@@ -48,9 +49,9 @@ int Elevator::getAvailableCapacity() const
   if (_capacity == 0) return 0.0;
 
   int total_passengers = 0;
-  for (auto const& client : _passengers)
+  for (auto client : *_passengers)
   {
-    total_passengers += client->getPartySize();
+    total_passengers += client->getPartySize() * 1;
   }
   return _capacity - total_passengers;
 }
@@ -68,6 +69,33 @@ int Elevator::getNextLocation() const
   } else {
     return _location;
   }
+}
+
+const std::shared_ptr<const std::vector<std::shared_ptr<const Client>>> Elevator::getPassengers() const
+{
+  return _passengers;
+}
+
+std::shared_ptr<std::vector<std::shared_ptr<const Client>>> Elevator::dropPassengersToCurrentLocation()
+{
+  decltype(_passengers) passengersToDrop(new std::vector<std::shared_ptr<const Client>>);
+  std::copy_if(_passengers->begin(), _passengers->end(), std::back_inserter(*passengersToDrop),
+  [&](std::shared_ptr<const Client> c) {
+    return (c->getDestination() == _location);
+  });
+
+  decltype(_passengers) passengersRemaining(new std::vector<std::shared_ptr<const Client>>);
+  std::set_difference(
+    _passengers->begin(),
+    _passengers->end(),
+    passengersToDrop->begin(),
+    passengersToDrop->end(),
+    std::inserter(*passengersRemaining, passengersRemaining->begin())
+  );
+
+  _passengers.swap(passengersRemaining);
+
+  return passengersToDrop;
 }
 
 void Elevator::setLocation(int location)
@@ -96,7 +124,7 @@ void Elevator::stopAtNextLocation()
 
 void Elevator::addPassenger(std::shared_ptr<const Client> client)
 {
-  _passengers.insert(client);
+  _passengers->push_back(client);
 }
 
 void Elevator::notify(const std::shared_ptr<const Event> event)

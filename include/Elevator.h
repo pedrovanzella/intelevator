@@ -3,7 +3,7 @@
 #include <map>
 #include <memory>
 #include <queue>
-#include <set>
+#include <vector>
 #include "Client.h"
 #include "Direction.h"
 #include "Status.h"
@@ -23,6 +23,9 @@ public:
   Direction getDirection() const;
   int getAvailableCapacity() const;
   int getNextLocation() const;
+  const std::shared_ptr<const std::vector<std::shared_ptr<const Client>>> getPassengers() const;
+
+  std::shared_ptr<std::vector<std::shared_ptr<const Client>>> dropPassengersToCurrentLocation();
 
   void setLocation(int location);
   void setDestination(int destination);
@@ -49,5 +52,5 @@ private:
 
   bool _stopAtNextLocation;
 
-  std::set<std::shared_ptr<const Client>> _passengers;
+  std::shared_ptr<std::vector<std::shared_ptr<const Client>>> _passengers;
 };

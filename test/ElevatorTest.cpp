@@ -105,3 +105,26 @@ TEST_F(ElevatorTest, MoveDown)
   elevator->stop();
   EXPECT_EQ(elevator->getStatus(), Status::Stopped);
 }
+
+TEST_F(ElevatorTest, DropPassengersToCurrentLocation)
+{
+  for (int destination = 0; destination < 10; destination++)
+  {
+    for (int i = 0; i < 3; i++)
+    {
+      int passengersBefore = elevator->getPassengers()->size();
+      std::shared_ptr<const Client> c(new Client(1, 1, destination));
+      elevator->addPassenger(c);
+      EXPECT_EQ(passengersBefore + 1, elevator->getPassengers()->size());
+    }
+  }
+
+  for (int destination = 0; destination < 10; destination++)
+  {
+    int passengersBefore = elevator->getPassengers()->size();
+    elevator->setLocation(destination);
+    auto ps = elevator->dropPassengersToCurrentLocation();
+    EXPECT_EQ(3, ps->size());
+    EXPECT_EQ(passengersBefore - 3, elevator->getPassengers()->size());
+  }
+}
