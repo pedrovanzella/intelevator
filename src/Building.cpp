@@ -12,6 +12,7 @@ Building::Building(
   std::shared_ptr<const CostFunction> costFunction)
   : _floors(floors), _elevators(elevators), _dispatcher(dispatcher),
     _costFunction(costFunction), _stops() {
+    _costFunction(costFunction), _stops(), _lastEventTime(0) {
 
   for (auto e : *_elevators) {
     std::vector<bool> stops(floors->size());
@@ -132,6 +133,7 @@ std::string Building::stopsToString() const
 
   for (auto el : _stops)
   {
+  for (auto el : _stops) {
     stream << "Elevator #" << el.first << " stops: [ ";
 
     for (auto b : el.second)

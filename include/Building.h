@@ -36,6 +36,6 @@ private:
   std::shared_ptr<std::vector<std::shared_ptr<Elevator>>> _elevators;
   const std::shared_ptr<const Dispatcher> _dispatcher;
   const std::shared_ptr<const CostFunction> _costFunction;
-
   std::map<int, std::vector<bool>> _stops;
+  int _lastEventTime;
 };
