@@ -30,7 +30,6 @@ bool Floor::hasDownCall() const
   return _downLine.size() > 0;
 }
 
-
 Direction Floor::compareTo(const Floor &other) const
 {
     if (other.getNumber() < _number)
@@ -43,10 +42,14 @@ void Floor::addClient(const std::shared_ptr<const Client> client)
 {
   int destination = client->getDestination();
 
-  if (destination > _number)
+  if (destination > _number) {
     _upLine.push(client);
-  else if (destination < _number)
+    LOG(INFO) << "Floor #" << _number << " received a client to go UP to floor #" << client->getDestination() << ".";
+  }
+  else if (destination < _number) {
     _downLine.push(client);
+   LOG(INFO) << "Floor #" << _number << " received a client to go DOWN to floor #" << client->getDestination() << ".";
+  }
   else
   {
     std::ostringstream stream;
