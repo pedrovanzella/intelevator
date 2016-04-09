@@ -78,12 +78,15 @@ const std::shared_ptr<const std::vector<std::shared_ptr<const Client>>> Elevator
 
 std::shared_ptr<std::vector<std::shared_ptr<const Client>>> Elevator::dropPassengersToCurrentLocation()
 {
+  /* Copy every client bound to current _location into passengersToDrop container. */
   decltype(_passengers) passengersToDrop(new std::vector<std::shared_ptr<const Client>>);
   std::copy_if(_passengers->begin(), _passengers->end(), std::back_inserter(*passengersToDrop),
   [&](std::shared_ptr<const Client> c) {
     return (c->getDestination() == _location);
   });
 
+  /* Creates a new container with the difference between all the clients inside the elevador
+    and the passengers about to drop off the elevator. */
   decltype(_passengers) passengersRemaining(new std::vector<std::shared_ptr<const Client>>);
   std::set_difference(
     _passengers->begin(),
@@ -93,8 +96,10 @@ std::shared_ptr<std::vector<std::shared_ptr<const Client>>> Elevator::dropPassen
     std::inserter(*passengersRemaining, passengersRemaining->begin())
   );
 
+  /* Swaps the Clients container with the Difference container. */
   _passengers.swap(passengersRemaining);
 
+  /* Returns the passengers about to drop off the elevador. */
   return passengersToDrop;
 }
 
