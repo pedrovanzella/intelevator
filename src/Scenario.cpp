@@ -2,7 +2,7 @@
 
 #include "CostFunctionCreator.h"
 #include "DispatcherCreator.h"
-#include "easylogging++.h"
+#include <glog/logging.h>
 #include "Elevator.h"
 #include "Floor.h"
 #include "MissingCostFunctionError.h"

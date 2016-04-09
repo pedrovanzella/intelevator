@@ -1,4 +1,4 @@
-#include "easylogging++.h"
+#include <glog/logging.h>
 #include "Statistics.h"
 
 Statistics::Statistics()

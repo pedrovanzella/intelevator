@@ -7,7 +7,7 @@ TARGET   := bin/intelevator
 SRCEXT   := cpp
 SOURCES  := $(wildcard $(SRCDIR)/*.$(SRCEXT))
 OBJECTS  := $(patsubst $(SRCDIR)/%,$(BUILDDIR)/%,$(SOURCES:.$(SRCEXT)=.o))
-LIB      := -L/usr/local/lib/ -lyaml-cpp
+LIB      := -L/usr/local/lib/ -lyaml-cpp -lglog
 INC      := -I include
 
 TEST     := $(TARGET)-test

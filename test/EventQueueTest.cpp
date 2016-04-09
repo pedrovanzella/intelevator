@@ -2,7 +2,7 @@
 #include <memory>
 
 #include "ClientArrival.h"
-#include "easylogging++.h"
+#include <glog/logging.h>
 #include "EventQueue.h"
 
 struct EventQueueTest : testing::Test

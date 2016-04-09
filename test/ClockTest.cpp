@@ -2,7 +2,7 @@
 #include <memory>
 
 #include "Clock.h"
-#include "easylogging++.h"
+#include <glog/logging.h>
 
 struct ClockTest : testing::Test
 {

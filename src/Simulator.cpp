@@ -1,5 +1,5 @@
 #include <random>
-#include "easylogging++.h"
+#include <glog/logging.h>
 #include "Scenario.h"
 #include "Simulator.h"
 

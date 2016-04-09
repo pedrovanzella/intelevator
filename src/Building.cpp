@@ -3,7 +3,7 @@
 #include <memory>
 
 #include "Building.h"
-#include "easylogging++.h"
+#include <glog/logging.h>
 #include "Elevator.h"
 #include "Floor.h"
 

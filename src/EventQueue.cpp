@@ -1,4 +1,4 @@
-#include "easylogging++.h"
+#include <glog/logging.h>
 #include "EventQueue.h"
 
 EventQueue::EventQueue()

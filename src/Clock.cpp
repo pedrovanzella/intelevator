@@ -1,5 +1,5 @@
 #include "Clock.h"
-#include "easylogging++.h"
+#include <glog/logging.h>
 
 Clock::Clock()
  : _time(0)

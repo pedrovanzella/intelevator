@@ -1,3 +1,4 @@
+#include <algorithm>
 #include <memory>
 #include "BetterNearestNeighbourDispatcher.h"
 #include "Direction.h"

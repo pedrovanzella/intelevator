@@ -1,4 +1,5 @@
 #include "Elevator.h"
+#include <algorithm>
 #include <memory>
 
 Elevator::Elevator(int number, int capacity, int floor)

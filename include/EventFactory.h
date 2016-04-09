@@ -1,7 +1,7 @@
 #pragma once
 
 #include <memory>
-#include "easylogging++.h"
+#include <glog/logging.h>
 #include "Clock.h"
 #include "EventQueue.h"
 #include "Scenario.h"

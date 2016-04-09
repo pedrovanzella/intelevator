@@ -1,15 +1,15 @@
+#include <glog/logging.h>
 #include <gtest/gtest.h>
 #include <iostream>
 #include <memory>
 #include <vector>
 
 #include "Building.h"
-#include "easylogging++.h"
 #include "Elevator.h"
 #include "Floor.h"
 #include "Scenario.h"
 
-INITIALIZE_EASYLOGGINGPP
+#define MAX_LOG_LEVEL -100
 
 using namespace std;
 
