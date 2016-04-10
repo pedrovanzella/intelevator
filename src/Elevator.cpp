@@ -135,6 +135,9 @@ void Elevator::update() {
       });
       //  2 - se não tem mais nenhum passageiro e não tem mais pra onde ir, o
       //  elevador não tem mais nada pra fazer e deve ficar em IDLE
+      if (_passengers->size() == 0) {
+        _status = Status::Idle;
+      }
       //  3 - se tem pra onde ir, o elevador deve se mover pra lá
     } break;
     default:
