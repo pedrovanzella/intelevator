@@ -1,6 +1,7 @@
 #include "Elevator.h"
 #include <algorithm>
 #include <memory>
+#include <glog/logging.h>
 
 Elevator::Elevator(int number, int capacity, int floor)
   : _number(number),
@@ -125,16 +126,21 @@ void Elevator::update() {
       }
     } break;
     case Status::Stopped: {
-      // Passos:
-      //  1 - se houver alguém que queira descer aqui, desembarcá-los;
-      dropPassengersToCurrentLocation();
-      //  2 - se não tem mais nenhum passageiro e não tem mais pra onde ir, o
-      //  elevador não tem mais nada pra fazer e deve ficar em IDLE
+      //  if there's someone to be dropped
+      auto passengersToDrop = dropPassengersToCurrentLocation();
+      // log their arrival
+      for (auto passenger : *passengersToDrop) {
+        LOG(INFO) << "dropPassengersToCurrentLocation(): Dropping Client with party size: "
+            << passenger->getPartySize() << std::endl;
+      }
+
+      //  if there's no one left in the elevator, set it to idle
       if (_passengers->size() == 0) {
         _status = Status::Idle;
+      } else {
+        //  otherwise, move to next location
+        stopAtNextLocation();
       }
-      //  3 - se tem pra onde ir, o elevador deve se mover pra lá
-      stopAtNextLocation();
     } break;
     default:
       break;
