@@ -2,6 +2,7 @@
 #include <algorithm>
 #include <memory>
 #include <glog/logging.h>
+#include "Trip.h"
 
 Elevator::Elevator(int number, int capacity, int floor)
   : _number(number),
@@ -132,6 +133,8 @@ void Elevator::update() {
       for (auto passenger : *passengersToDrop) {
         LOG(INFO) << "dropPassengersToCurrentLocation(): Dropping Client with party size: "
             << passenger->getPartySize() << std::endl;
+
+        auto t = std::make_shared<Trip>();
       }
 
       //  if there's no one left in the elevator, set it to idle

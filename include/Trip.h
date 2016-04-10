@@ -3,12 +3,13 @@
 #include "Client.h"
 #include "Elevator.h"
 #include "Floor.h"
+#include <memory>
 
 class Trip {
 public:
-  Client* _client;
-  Floor* _origin;
-  Elevator* _elevator;
+  std::shared_ptr<Client> _client;
+  std::shared_ptr<const Floor> _origin;
+  std::shared_ptr<const Elevator> _elevator;
   float _waitingTime;
   float _journeyTime;
   float _arrivalTime;
