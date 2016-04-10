@@ -89,7 +89,7 @@ set(TEST_FILES
         test/FloorTest.cpp)
 
 
-include_directories(include)
+include_directories(include ${GLOG_INCLUDE_DIRS})
 
 add_executable(intelevator ${SOURCE_FILES})
 add_executable(intelevatorTests ${TEST_FILES})
@@ -97,6 +97,9 @@ add_executable(intelevatorTests ${TEST_FILES})
 target_link_libraries(intelevatorTests gtest gtest_main)
 target_link_libraries(intelevatorTests yaml-cpp)
 target_link_libraries(intelevator yaml-cpp)
+target_link_libraries(intelevatorTests glog)
+target_link_libraries(intelevator glog)
+
 
 add_test(intelevatorTests intelevatorTests)
 
