@@ -7,14 +7,16 @@ class Floor; // forward declaration
 
 class Client {
 public:
-  Client(const int partySize, const float arrivalTime, int destination);
+  Client(const int partySize, const float arrivalTime, const int arrivalFloor, const int destination);
 
-int getPartySize() const;
-float getArrivalTime() const;
-int getDestination() const;
+  const int getPartySize() const;
+  const float getArrivalTime() const;
+  const int getDestination() const;
+  const int getArrivalFloor() const;
 
 private:
   const int _partySize;
   const float _arrivalTime;
   const int _destination;
+  const int _arrivalFloor;
 };

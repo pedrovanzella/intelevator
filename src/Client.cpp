@@ -1,23 +1,29 @@
 #include "Client.h"
 #include "Floor.h"
 
-Client::Client(int partySize, float arrivalTime, int destination)
+Client::Client(const int partySize, const float arrivalTime, const int arrivalFloor, const int destination)
   : _partySize(partySize)
   , _arrivalTime(arrivalTime)
   , _destination(destination)
+  , _arrivalFloor(arrivalFloor)
 {}
 
-int Client::getPartySize() const
+const int Client::getPartySize() const
 {
   return _partySize;
 }
 
-float Client::getArrivalTime() const
+const float Client::getArrivalTime() const
 {
   return _arrivalTime;
 }
 
-int Client::getDestination() const
+const int Client::getDestination() const
 {
   return _destination;
+}
+
+const int Client::getArrivalFloor() const
+{
+  return _arrivalFloor;
 }

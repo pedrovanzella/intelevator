@@ -21,9 +21,11 @@ Simulator::Simulator(const std::shared_ptr<const Scenario> scenario)
   _eventDispatcher->subscribe(std::static_pointer_cast<EventObserver>(_clock));
 
   auto destination = _building->getFloors()->back()->getNumber();
-  const auto client = std::shared_ptr<const Client>(new Client(1, 10, destination));
+
 
   auto location = _building->getFloors()->front()->getNumber();
+
+  const auto client = std::shared_ptr<const Client>(new Client(1, 10, location, destination));
   auto ca = std::shared_ptr<ClientArrival>(new ClientArrival(10, client, location));
 
   _eventQueue->push(std::static_pointer_cast<Event>(ca));
