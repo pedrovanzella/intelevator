@@ -56,6 +56,10 @@ int Elevator::getNextLocation() const {
   return _location;
 }
 
+bool Elevator::canEnter(std::shared_ptr<const Client> client) const {
+  return getAvailableCapacity() <= client->getPartySize();
+}
+
 void Elevator::setLocation(int location) { _location = location; }
 
 void Elevator::setDestination(int destination) { _destination = destination; }

@@ -3,6 +3,7 @@
 #include <memory>
 #include <queue>
 #include "Client.h"
+#include "Elevator.h"
 #include "EventObserver.h"
 #include "Direction.h"
 
@@ -15,10 +16,9 @@ public:
   int getNumber() const;
   int getPopulation() const;
   Direction compareTo(const Floor& other) const;
-  bool hasUpCall() const;
-  bool hasDownCall() const;
 
   void addClient(const std::shared_ptr<const Client> client);
+  void boardElevator(std::shared_ptr<Elevator> elevator);
 
 private:
   int _number;

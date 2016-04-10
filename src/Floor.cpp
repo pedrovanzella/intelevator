@@ -1,4 +1,5 @@
 #include "ClientArrival.h"
+#include "Direction.h"
 #include "Event.h"
 #include "Floor.h"
 #include <sstream>
@@ -20,16 +21,6 @@ int Floor::getPopulation() const
   return _population;
 }
 
-bool Floor::hasUpCall() const
-{
-  return _upLine.size() > 0;
-}
-
-bool Floor::hasDownCall() const
-{
-  return _downLine.size() > 0;
-}
-
 Direction Floor::compareTo(const Floor &other) const
 {
     if (other.getNumber() < _number)
@@ -44,16 +35,36 @@ void Floor::addClient(const std::shared_ptr<const Client> client)
 
   if (destination > _number) {
     _upLine.push(client);
-    LOG(INFO) << "Floor #" << _number << " received a client to go UP to floor #" << client->getDestination() << ".";
+    LOG(INFO) << "Floor #" << _number << " received a client (size " << client->getPartySize() << ") to go UP to floor #" << client->getDestination() << ".";
   }
   else if (destination < _number) {
     _downLine.push(client);
-   LOG(INFO) << "Floor #" << _number << " received a client to go DOWN to floor #" << client->getDestination() << ".";
+   LOG(INFO) << "Floor #" << _number << " received a client (size " << client->getPartySize() << ") to go DOWN to floor #" << client->getDestination() << ".";
   }
   else
   {
     std::ostringstream stream;
     stream << "Floor " << _number << " received a Client which destination is this own floor! This should never happen!";
     throw(stream.str());
+  }
+}
+
+void Floor::boardElevator(std::shared_ptr<Elevator> elevator)
+{
+  if (_upLine.size() > 0 && elevator->getDirection() == Direction::Up) {
+    auto client = _upLine.front();
+    while (elevator->canEnter(client)) {
+      elevator->addPassenger(client);
+      _upLine.pop();
+      client = _upLine.front();
+    }
+  }
+  else if (_downLine.size() > 0 && elevator->getDirection() == Direction::Down) {
+    auto client = _downLine.front();
+    while (elevator->canEnter(client)) {
+      elevator->addPassenger(client);
+      _downLine.pop();
+      client = _downLine.front();
+    }
   }
 }

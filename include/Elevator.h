@@ -25,6 +25,8 @@ public:
   int getAvailableCapacity() const;
   int getNextLocation() const;
 
+  bool canEnter(std::shared_ptr<const Client> client) const;
+
   void setLocation(int location);
   void setDestination(int destination);
   void setDirection(Direction direction);
