@@ -7,12 +7,12 @@
 
 class Trip {
 public:
-  std::shared_ptr<Client> _client;
-  std::shared_ptr<const Floor> _origin;
-  std::shared_ptr<const Elevator> _elevator;
-  float _waitingTime;
-  float _journeyTime;
-  float _arrivalTime;
+  std::shared_ptr<const Client> client;
+  std::shared_ptr<const Floor> origin;
+  std::shared_ptr<const Elevator> elevator;
+  float waitingTime;
+  float journeyTime;
+  float arrivalTime;
 
   Trip();
 };

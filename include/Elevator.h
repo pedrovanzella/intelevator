@@ -9,7 +9,7 @@
 #include <queue>
 #include <vector>
 
-class Elevator {
+class Elevator: public std::enable_shared_from_this<Elevator> {
 public:
   Elevator(int number, int capacity, int floor);
   virtual ~Elevator();

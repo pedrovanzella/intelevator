@@ -135,6 +135,8 @@ void Elevator::update() {
             << passenger->getPartySize() << std::endl;
 
         auto t = std::make_shared<Trip>();
+        t->client = passenger;
+        t->elevator = shared_from_this();
       }
 
       //  if there's no one left in the elevator, set it to idle

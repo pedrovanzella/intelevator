@@ -9,13 +9,15 @@ struct ClientTest : testing::Test
   int partySize;
   float arrivalTime;
   int destination;
+  int location;
   const std::shared_ptr<const Client> client;
 
   ClientTest()
   : partySize(1)
   , arrivalTime(10.f)
   , destination(0)
-  , client(new Client(partySize, arrivalTime, destination))
+    ,location(0)
+  , client(new Client(partySize, arrivalTime, location, destination))
   {}
 
   virtual ~ClientTest()

@@ -16,7 +16,7 @@ struct ClientArrivalTest : testing::Test
   , arrivalTime(10)
   , destination(0)
   , location(0)
-  , client(new Client(partySize, arrivalTime, destination))
+  , client(new Client(partySize, arrivalTime, location, destination))
   , clientArrival(new ClientArrival(arrivalTime, client, location))
   {}
 
