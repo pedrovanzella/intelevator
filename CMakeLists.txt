@@ -105,3 +105,4 @@ add_test(intelevatorTests intelevatorTests)
 
 install(TARGETS intelevator DESTINATION bin)
 install(TARGETS intelevatorTests DESTINATION bin)
+install(FILES ../config.yaml ../test_config.yaml DESTINATION bin)

@@ -127,6 +127,12 @@ void Elevator::update() {
     case Status::Stopped: {
       // Passos:
       //  1 - se houver alguém que queira descer aqui, desembarcá-los;
+      decltype(_passengers) this_floor_passengers;
+
+      std::copy_if(_passengers->begin(), _passengers->end(), std::back_inserter(*this_floor_passengers),
+      [&](std::shared_ptr<const Client> client) {
+        return client->getDestination() == _location;
+      });
       //  2 - se não tem mais nenhum passageiro e não tem mais pra onde ir, o
       //  elevador não tem mais nada pra fazer e deve ficar em IDLE
       //  3 - se tem pra onde ir, o elevador deve se mover pra lá
