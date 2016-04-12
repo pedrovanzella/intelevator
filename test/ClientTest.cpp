@@ -7,17 +7,15 @@
 struct ClientTest : testing::Test
 {
   int partySize;
-  float arrivalTime;
   int destination;
-  int location;
+  int arrivalFloor;
   const std::shared_ptr<const Client> client;
 
   ClientTest()
   : partySize(1)
-  , arrivalTime(10.f)
-  , destination(0)
-    ,location(0)
-  , client(new Client(partySize, arrivalTime, location, destination))
+  , destination(10)
+  , arrivalFloor(0)
+  , client(new Client(partySize, arrivalFloor, destination))
   {}
 
   virtual ~ClientTest()
@@ -29,10 +27,11 @@ TEST_F(ClientTest, GetPartySize_ReturnsPartySize)
   EXPECT_EQ(client->getPartySize(), partySize);
 }
 
-TEST_F(ClientTest, GetArrivalTime_ReturnsArrivalTime)
+TEST_F(ClientTest, GetArrivalFloor_ReturnsArrivalFloor)
 {
-  EXPECT_EQ(client->getArrivalTime(), arrivalTime);
+  EXPECT_EQ(client->getArrivalFloor(), arrivalFloor);
 }
+
 
 TEST_F(ClientTest, GetDestination_ReturnsDestination)
 {

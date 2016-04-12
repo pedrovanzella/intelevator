@@ -15,7 +15,7 @@ struct EventQueueTest : testing::Test
   EventQueueTest()
   : destination(0)
   , location(0)
-  , client(new Client(1, 0.f, location, destination))
+  , client(new Client(1, location, destination))
   , eventQueue(new EventQueue())
   {}
 
