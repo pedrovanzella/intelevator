@@ -81,6 +81,17 @@ void Building::doClientArrival(std::shared_ptr<const ClientArrival> event) {
 
 void Building::updateElevators() {
   for (auto e : *_elevators) {
+    if (e->getStatus() == Status::Idle && !_stops[e->getNumber()].empty()) {
+      // If a elevator is Status::Idle and has pending stops, it should receive a new destination.
+      if (e->getDirection() == Direction::Up) {
+        // If it was going up, we send it down.
+        e->setDestination(*_stops[e->getNumber()].begin());
+      }
+      else {
+        // If it was going down, we send it up.
+        e->setDestination(*_stops[e->getNumber()].rbegin());
+      }
+    }
 
     // Checks if elevator must stop at next floor.
     auto nextLocation = e->getNextLocation();
