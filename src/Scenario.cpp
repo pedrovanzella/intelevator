@@ -76,7 +76,7 @@ std::shared_ptr<Building> Scenario::createBuilding() const
       throw MissingCostFunctionError(std::to_string((int)_costFunctionType));
   }
 
-  LOG(INFO) << "Created scenario '" << _name << "' with "
+  LOG(INFO) << "Created '" << _name << "' scenario with "
             << floors->size() << " floors, "
             << elevators->size() << " elevators, '"
             << Helpers::dispatcherName(_dispatcherType) << "' dispatcher and '"

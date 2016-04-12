@@ -36,14 +36,14 @@ Simulator::~Simulator()
 
 void Simulator::run()
 {
-  LOG(INFO) << "Running scenario '" << _scenario->getName() << "'.";
+  LOG(INFO) << "Running '" << _scenario->getName() << "' scenario.";
   while (_statistics->keepRunning() && _eventQueue->hasNextEvent())
   {
     auto e = _eventQueue->pop();
     if (e)
       _eventDispatcher->broadcast(e);
   }
-  LOG(INFO) << "Finished scenario '" << _scenario->getName() << "'.";
+  LOG(INFO) << "Finished '" << _scenario->getName() << "' scenario.";
 }
 
 bool Simulator::nextStep()
