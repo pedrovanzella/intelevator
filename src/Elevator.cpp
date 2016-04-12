@@ -126,7 +126,6 @@ void Elevator::turn() {
 }
 
 void Elevator::update() {
-  LOG(INFO) << "ELEVATOR #" << _number << " UPDATE " << Helpers::statusName(_status) << " " << Helpers::directionName(_direction);
   switch (_status) {
     case Status::Moving: {
       if (_direction == Direction::Up) {
