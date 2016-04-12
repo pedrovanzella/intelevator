@@ -2,6 +2,7 @@
 #include "Direction.h"
 #include "Event.h"
 #include "Floor.h"
+#include <set>
 #include <sstream>
 #include <string>
 
@@ -49,12 +50,15 @@ void Floor::addClient(const std::shared_ptr<const Client> client)
   }
 }
 
-void Floor::boardElevator(std::shared_ptr<Elevator> elevator)
+std::set<int> Floor::boardElevator(std::shared_ptr<Elevator> elevator)
 {
-  if (_upLine.size() > 0 && elevator->getDirection() == Direction::Up) {
+  std::set<int> newStops;
+
+  if (_upLine.size() > 0 && elevator->getDirection() != Direction::Down) {
     auto client = _upLine.front();
     while (elevator->canEnter(client)) {
       elevator->addPassenger(client);
+      newStops.insert(client->getDestination());
       _upLine.pop();
       client = _upLine.front();
     }
@@ -63,8 +67,11 @@ void Floor::boardElevator(std::shared_ptr<Elevator> elevator)
     auto client = _downLine.front();
     while (elevator->canEnter(client)) {
       elevator->addPassenger(client);
+      newStops.insert(client->getDestination());
       _downLine.pop();
       client = _downLine.front();
     }
   }
+
+  return newStops;
 }

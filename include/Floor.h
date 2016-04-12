@@ -2,6 +2,7 @@
 
 #include <memory>
 #include <queue>
+#include <set>
 #include "Client.h"
 #include "Elevator.h"
 #include "EventObserver.h"
@@ -18,7 +19,7 @@ public:
   Direction compareTo(const Floor& other) const;
 
   void addClient(const std::shared_ptr<const Client> client);
-  void boardElevator(std::shared_ptr<Elevator> elevator);
+  std::set<int> boardElevator(std::shared_ptr<Elevator> elevator);
 
 private:
   int _number;
