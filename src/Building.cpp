@@ -1,6 +1,7 @@
 #include "Building.h"
 #include "Elevator.h"
 #include "Floor.h"
+#include "Trip.h"
 #include <algorithm>
 #include <glog/logging.h>
 #include <sstream>
@@ -101,12 +102,17 @@ void Building::updateElevators() {
       e->update();
       _stops[e->getNumber()].erase(nextLocation);
 
-    e->update();
+      auto passengersToDrop = e->dropPassengersToCurrentLocation();
 
+      for (auto passenger : *passengersToDrop) {
+        LOG(INFO) << "Elevator #" << e->getNumber()
+                  << " dropped " << passenger->getPartySize()
+                  << " clients at floor #" << e->getLocation() << ".";
 
-    /* Neste ponto, se o elevador estiver parado, é por que ele deveria estar. :P
-       Assim, as pessoas que querem descer neste andar devem sair e as pessoas que
-       irão embarcar no elevador devem entrar. */
+        auto t = std::make_shared<Trip>();
+        t->client = passenger;
+        t->elevator = e;
+      }
 
     if (e->getStatus() == Status::Stopped) {
       auto dropped = e->dropPassengersToCurrentLocation();
