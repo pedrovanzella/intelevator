@@ -114,20 +114,10 @@ void Building::updateElevators() {
         t->elevator = e;
       }
 
-    if (e->getStatus() == Status::Stopped) {
-      auto dropped = e->dropPassengersToCurrentLocation();
+      auto floor = _floors->at(e->getLocation());
+      auto newStops = floor->boardElevator(e);
 
-      LOG_IF(INFO, !dropped->empty())
-        << "Elevator #" << e->getNumber()
-        << " dropped " << dropped->size()
-        << " clients at floor #" << e->getLocation() << ".";
-
-      if (e->getDirection() == Direction::Up) {
-        /* Embarcar as pessoas que irão subir com o elevador. */
-      }
-      else if (e->getDirection() == Direction::Down) {
-        /* Embarcar as pessoas que irão descer com o elevador. */
-      }
+      e->start();
     } else {
       e->update();
     }
