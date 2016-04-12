@@ -13,6 +13,14 @@ class Simulator
 public:
   Simulator(std::shared_ptr<const Scenario> scenario);
   virtual ~Simulator();
+
+  const std::shared_ptr<const Scenario> getScenario() const;
+  const std::shared_ptr<Statistics> getStatistics() const;
+  const std::shared_ptr<Clock> getClock() const;
+  const std::shared_ptr<EventQueue> getEventQueue() const;
+  const std::shared_ptr<EventDispatcher> getEventDispatcher() const;
+  const std::shared_ptr<EventFactory> getEventFactory() const;
+
   void run();
 
 private:

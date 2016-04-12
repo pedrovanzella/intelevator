@@ -12,7 +12,19 @@ Simulator::Simulator(const std::shared_ptr<const Scenario> scenario)
   , _clock(std::shared_ptr<Clock>(new Clock()))
   , _eventQueue(std::shared_ptr<EventQueue>(new EventQueue()))
   , _eventDispatcher(std::shared_ptr<EventDispatcher>(new EventDispatcher()))
-  , _eventFactory(std::shared_ptr<EventFactory>(new EventFactory(_scenario, _clock, _eventQueue)))
+  , _eventFactory(std::shared_ptr<EventFactory>(new EventFactory(_scenario, _clock, _eventQueue))) {}
+
+Simulator::~Simulator()
+{}
+
+const std::shared_ptr<const Scenario> Simulator::getScenario() const { return _scenario; }
+const std::shared_ptr<Statistics> Simulator::getStatistics() const { return _statistics; }
+const std::shared_ptr<Clock> Simulator::getClock() const { return _clock; }
+const std::shared_ptr<EventQueue> Simulator::getEventQueue() const { return _eventQueue; }
+const std::shared_ptr<EventDispatcher> Simulator::getEventDispatcher() const { return _eventDispatcher; }
+const std::shared_ptr<EventFactory> Simulator::getEventFactory() const { return _eventFactory; }
+
+void Simulator::run()
 {
   _building = _scenario->createBuilding();
 
@@ -25,13 +37,7 @@ Simulator::Simulator(const std::shared_ptr<const Scenario> scenario)
 
   _eventQueue->push(std::static_pointer_cast<Event>(ca1));
   _eventQueue->push(std::static_pointer_cast<Event>(ca2));
-}
 
-Simulator::~Simulator()
-{}
-
-void Simulator::run()
-{
   LOG(INFO) << "Running '" << _scenario->getName() << "' scenario.";
   while (_statistics->keepRunning() && _eventQueue->hasNextEvent())
   {
