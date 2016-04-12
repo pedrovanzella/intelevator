@@ -23,6 +23,8 @@ void Building::notify(const std::shared_ptr<const Event> event) {
   if (event->getType() == EventType::clientArrival) {
     doClientArrival(std::static_pointer_cast<const ClientArrival>(event));
   }
+
+  _lastEventTime = event->getTime();
 }
 
 const std::shared_ptr<std::vector<std::shared_ptr<Elevator>>> Building::getElevators() const {
