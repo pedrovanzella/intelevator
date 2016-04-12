@@ -8,7 +8,7 @@ int NearestNeighbourDispatcher::pick_next_elevator(const std::shared_ptr<const C
 {
   auto elevators = building->getElevators();
   auto floors = building->getFloors();
-  auto request_floor = floors->at(ca->getLocation());
+  auto request_floor = floors->at(ca->getClient()->getArrivalFloor());
 
   auto closest = elevators->front();
 

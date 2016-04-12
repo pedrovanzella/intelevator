@@ -4,5 +4,5 @@
                                   const std::shared_ptr<const Elevator> elevator,
                                   const std::shared_ptr<const ClientArrival> ca) const
 {
-  return abs(ca->getLocation() - elevator->getLocation());
+  return abs(ca->getClient()->getArrivalFloor() - elevator->getLocation());
 }

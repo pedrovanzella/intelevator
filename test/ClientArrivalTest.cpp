@@ -17,7 +17,7 @@ struct ClientArrivalTest : testing::Test
   , destination(0)
   , location(0)
   , client(new Client(partySize, location, destination))
-  , clientArrival(new ClientArrival(arrivalTime, client, location))
+  , clientArrival(new ClientArrival(arrivalTime, client))
   {}
 
   virtual ~ClientArrivalTest()
