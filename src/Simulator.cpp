@@ -20,8 +20,8 @@ Simulator::Simulator(const std::shared_ptr<const Scenario> scenario)
   _eventDispatcher->subscribe(std::static_pointer_cast<EventObserver>(_statistics));
   _eventDispatcher->subscribe(std::static_pointer_cast<EventObserver>(_clock));
 
-  auto ca1 = std::shared_ptr<ClientArrival>(new ClientArrival(0, std::make_shared<const Client>(1, 0, 5)));
-  auto ca2 = std::shared_ptr<ClientArrival>(new ClientArrival(10, std::make_shared<const Client>(1, 3, 1)));
+  auto ca1 = std::shared_ptr<ClientArrival>(new ClientArrival(10, std::make_shared<const Client>(1, 0, 5)));
+  auto ca2 = std::shared_ptr<ClientArrival>(new ClientArrival(20, std::make_shared<const Client>(1, 3, 1)));
 
   _eventQueue->push(std::static_pointer_cast<Event>(ca1));
   _eventQueue->push(std::static_pointer_cast<Event>(ca2));
