@@ -18,7 +18,7 @@ Building::~Building() {}
 
 void Building::notify(const std::shared_ptr<const Event> event) {
   for (int time = _lastEventTime; time < event->getTime(); ++time) {
-    updateElevators();
+    updateElevators(time);
   }
 
   if (event->getType() == EventType::clientArrival) {
@@ -80,7 +80,7 @@ void Building::doClientArrival(std::shared_ptr<const ClientArrival> event) {
   }
 }
 
-void Building::updateElevators() {
+void Building::updateElevators(const unsigned long /* time */) {
   for (auto e : *_elevators) {
     if (e->getStatus() == Status::Idle && !_stops[e->getNumber()].empty()) {
       // If a elevator is Status::Idle and has pending stops, it should receive a new destination.

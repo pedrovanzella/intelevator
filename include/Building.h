@@ -41,5 +41,5 @@ private:
   int _lastEventTime;
 
   void doClientArrival(std::shared_ptr<const ClientArrival> event);
-  void updateElevators();
+  void updateElevators(const unsigned long time);
 };
