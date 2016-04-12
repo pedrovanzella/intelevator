@@ -6,7 +6,6 @@
 using namespace std;
 
 int main(int argc, char *argv[]) {
-  FLAGS_logtostderr = true;
   google::InitGoogleLogging(argv[0]);
 
   auto scenarios = Scenario::Load("config.yaml");

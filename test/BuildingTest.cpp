@@ -8,6 +8,7 @@
 #include "Elevator.h"
 #include "Floor.h"
 #include "Scenario.h"
+#include "Simulator.h"
 
 #define MAX_LOG_LEVEL -100
 
@@ -17,13 +18,15 @@ struct BuildingTest : testing::Test
 {
   YAML::Node config;
   std::shared_ptr<Scenario> scenario;
+  std::shared_ptr<Simulator> simulator;
   std::shared_ptr<Building> building;
 
   BuildingTest()
   {
     config = YAML::LoadFile("test_config.yaml")["scenarios"][0];
-    scenario = std::shared_ptr<Scenario>(new Scenario(config));
-    building = scenario->createBuilding();
+    scenario = std::make_shared<Scenario>(config);
+    simulator = std::make_shared<Simulator>(scenario);
+    building = scenario->createBuilding(simulator);
   }
 
   virtual ~BuildingTest()
