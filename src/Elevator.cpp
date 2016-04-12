@@ -9,8 +9,8 @@ Elevator::Elevator(int number, int capacity, int floor)
     _capacity(capacity),
     _location(floor),
     _destination(floor),
-    _status(Status::Stopped),
-    _direction(Direction::Up),
+    _status(Status::Idle),
+    _direction(Direction::None),
     _stopAtNextLocation(false),
     _passengers(new std::vector<std::shared_ptr<const Client>>) {}
 
@@ -57,12 +57,25 @@ int Elevator::getNextLocation() const {
 }
 
 bool Elevator::canEnter(std::shared_ptr<const Client> client) const {
-  return getAvailableCapacity() <= client->getPartySize();
+  return getAvailableCapacity() >= client->getPartySize();
 }
 
 void Elevator::setLocation(int location) { _location = location; }
 
-void Elevator::setDestination(int destination) { _destination = destination; }
+void Elevator::setDestination(int destination) {
+  LOG(INFO) << "Elevator #" << _number << " received new destination: floor #" << destination << ".";
+
+  _destination = destination;
+
+  if (_destination > _location)
+    setDirection(Direction::Up);
+  else if (_destination < _location)
+    setDirection(Direction::Down);
+  else
+    setDirection(Direction::None);
+
+  start();
+ }
 
 void Elevator::setDirection(Direction direction) { _direction = direction; }
 
@@ -98,6 +111,7 @@ void Elevator::stopAtNextLocation() { _stopAtNextLocation = true; }
 
 void Elevator::addPassenger(std::shared_ptr<const Client> client) {
   _passengers->push_back(client);
+  LOG(INFO) << "Client with size " << client->getPartySize() << " boarded elevator #" << getNumber() << ".";
 }
 
 void Elevator::start() { _status = Status::Moving; }
@@ -112,12 +126,21 @@ void Elevator::turn() {
 }
 
 void Elevator::update() {
+  LOG(INFO) << "ELEVATOR #" << _number << " UPDATE " << Helpers::statusName(_status) << " " << Helpers::directionName(_direction);
   switch (_status) {
     case Status::Moving: {
       if (_direction == Direction::Up) {
         _location++;
+        LOG(INFO) << "Elevator #" << getNumber()
+          << " went UP to floor #" << getLocation() << ".";
+
       } else if (_direction == Direction::Down) {
         _location--;
+        LOG(INFO) << "Elevator #" << getNumber()
+          << " went DOWN to floor #" << getLocation() << ".";
+      } else {
+        LOG(INFO) << "Elevator #" << getNumber()
+          << " stayed at floor #" << getLocation() << ".";
       }
 
       if (_stopAtNextLocation) {
@@ -126,30 +149,10 @@ void Elevator::update() {
       }
 
       if (_location == _destination) {
-        stop();
-        setDirection(Direction::None);
+        setStatus(Status::Idle);
       }
     } break;
     case Status::Stopped: {
-      //  if there's someone to be dropped
-      auto passengersToDrop = dropPassengersToCurrentLocation();
-      // log their arrival
-      for (auto passenger : *passengersToDrop) {
-        LOG(INFO) << "dropPassengersToCurrentLocation(): Dropping Client with party size: "
-            << passenger->getPartySize() << std::endl;
-
-        auto t = std::make_shared<Trip>();
-        t->client = passenger;
-        t->elevator = shared_from_this();
-      }
-
-      //  if there's no one left in the elevator, set it to idle
-      if (_passengers->size() == 0) {
-        _status = Status::Idle;
-      } else {
-        //  otherwise, move to next location
-        stopAtNextLocation();
-      }
     } break;
     default:
       break;
