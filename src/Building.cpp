@@ -58,9 +58,9 @@ void Building::doClientArrival(std::shared_ptr<const ClientArrival> event) {
     descida) e não há ninguém na fila, ele aperta o botão do sentido que
     deseja ir.
   */
-
-  auto location = _floors->at(event->getLocation());
-  location->addClient(event->getClient());
+  auto client = event->getClient();
+  auto location = _floors->at(client->getArrivalFloor());
+  location->addClient(client);
 
   /*
     O sistema, ao perceber que um novo botão foi pressionado, designa um
