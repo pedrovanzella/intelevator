@@ -11,10 +11,7 @@ Building::Building(
   std::shared_ptr<const Dispatcher> dispatcher,
   std::shared_ptr<const CostFunction> costFunction)
   : _floors(floors), _elevators(elevators), _dispatcher(dispatcher),
-    _costFunction(costFunction), _stops(), _lastEventTime(0) {
-
-  initializeStops();
-}
+    _costFunction(costFunction), _stops(), _lastEventTime(0) {}
 
 Building::~Building() {}
 
@@ -48,34 +45,6 @@ const std::shared_ptr<Elevator> Building::getElevator(int number) const {
   return _elevators->at(number);
 }
 
-std::string Building::stopsToString() const
-{
-  std::ostringstream stream;
-  stream << "\n";
-
-  for (auto el : _stops) {
-    stream << "Elevator #" << el.first << " stops: [ ";
-
-    for (auto b : el.second)
-      stream << b << " ";
-
-    stream << "]\n";
-  }
-
-  return stream.str();
-}
-
-void Building::initializeStops() {
-  for (auto e : *_elevators) {
-    std::vector<bool> stops(_floors->size());
-
-    for (auto f : *_floors)
-      stops[f->getNumber()] = false;
-
-    _stops[e->getNumber()] = stops;
-  }
-}
-
 void Building::doClientArrival(std::shared_ptr<const ClientArrival> event) {
   /*
     Um evento ClientArrival ocorre em um andar específico. O Building deve
@@ -99,9 +68,12 @@ void Building::doClientArrival(std::shared_ptr<const ClientArrival> event) {
   int elevatorNum = _dispatcher->pick_next_elevator(_costFunction, shared_from_this(), event);
 
   /* Agora, esse elevador deve parar no andar em que ocorreu o evento para buscar a pessoa. */
-  if (!_stops[elevatorNum][event->getLocation()]) {
-    _stops[elevatorNum][event->getLocation()] = true;
-    LOG(INFO) << "Elevator #" << elevatorNum << " will stop on floor " << event->getLocation() << " to pick up some clients.";
+
+  if (_stops[elevatorNum].find(client->getArrivalFloor()) == _stops[elevatorNum].end()) {
+    _stops[elevatorNum].insert(client->getArrivalFloor());
+    LOG(INFO) << "Elevator #" << elevatorNum
+              << " will stop on floor " << client->getArrivalFloor()
+              << " to pick up some clients.";
   }
 }
 
@@ -110,13 +82,14 @@ void Building::updateElevators() {
 
     // Checks if elevator must stop at next floor.
     auto nextLocation = e->getNextLocation();
-    bool shouldStop = _stops[e->getNumber()][nextLocation];
 
-    if (shouldStop) e->stopAtNextLocation();
+    if (_stops[e->getNumber()].find(nextLocation) != _stops[e->getNumber()].end()) {
+      e->stopAtNextLocation();
+      e->update();
+      _stops[e->getNumber()].erase(nextLocation);
 
     e->update();
 
-    if (shouldStop) _stops[e->getNumber()][nextLocation] = false;
 
     /* Neste ponto, se o elevador estiver parado, é por que ele deveria estar. :P
        Assim, as pessoas que querem descer neste andar devem sair e as pessoas que
@@ -136,6 +109,8 @@ void Building::updateElevators() {
       else if (e->getDirection() == Direction::Down) {
         /* Embarcar as pessoas que irão descer com o elevador. */
       }
+    } else {
+      e->update();
     }
   }
 }
