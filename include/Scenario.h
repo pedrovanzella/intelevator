@@ -13,10 +13,10 @@ public:
   Scenario(YAML::Node scenario);
   virtual ~Scenario();
 
+  static std::shared_ptr<std::vector<std::shared_ptr<const Scenario>>> Load(std::string file);
+
   const std::string getName() const;
   std::shared_ptr<Building> createBuilding(const std::shared_ptr<Simulator> simulator) const;
-
-  static std::shared_ptr<std::vector<std::shared_ptr<const Scenario>>> Load(std::string file);
 
 private:
   std::string _name;
@@ -25,4 +25,9 @@ private:
   std::vector<int> _population;
   DispatcherType _dispatcherType;
   CostFunctionType _costFunctionType;
+
+  std::shared_ptr<std::vector<std::shared_ptr<Floor>>> createFloors() const;
+  std::shared_ptr<std::vector<std::shared_ptr<Elevator>>> createElevators() const;
+  std::shared_ptr<const Dispatcher> createDispatcher() const;
+  std::shared_ptr<const CostFunction> createCostFunction() const;
 };
