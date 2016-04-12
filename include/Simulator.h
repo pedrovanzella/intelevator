@@ -8,7 +8,7 @@
 #include "EventQueue.h"
 #include "Statistics.h"
 
-class Simulator
+class Simulator : public std::enable_shared_from_this<Simulator>
 {
 public:
   Simulator(std::shared_ptr<const Scenario> scenario);

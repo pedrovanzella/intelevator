@@ -31,7 +31,7 @@ const std::string Scenario::getName() const
   return _name;
 }
 
-std::shared_ptr<Building> Scenario::createBuilding() const
+std::shared_ptr<Building> Scenario::createBuilding(const std::shared_ptr<Simulator> simulator) const
 {
   std::shared_ptr<std::vector<std::shared_ptr<Floor>>> floors(new std::vector<std::shared_ptr<Floor>>);
   for (int i = 0; i < _population.size(); i++)
@@ -82,7 +82,7 @@ std::shared_ptr<Building> Scenario::createBuilding() const
             << Helpers::dispatcherName(_dispatcherType) << "' dispatcher and '"
             << Helpers::costFunctionName(_costFunctionType) << "' cost function.";
 
-  std::shared_ptr<Building> b(new Building(floors, elevators, dispatcher, costFunction));
+  std::shared_ptr<Building> b(new Building(simulator, floors, elevators, dispatcher, costFunction));
   return b;
 }
 

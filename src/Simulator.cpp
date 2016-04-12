@@ -26,7 +26,7 @@ const std::shared_ptr<EventFactory> Simulator::getEventFactory() const { return 
 
 void Simulator::run()
 {
-  _building = _scenario->createBuilding();
+  _building = _scenario->createBuilding(shared_from_this());
 
   _eventDispatcher->subscribe(std::static_pointer_cast<EventObserver>(_building));
   _eventDispatcher->subscribe(std::static_pointer_cast<EventObserver>(_statistics));

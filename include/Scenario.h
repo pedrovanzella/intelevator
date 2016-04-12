@@ -14,7 +14,7 @@ public:
   virtual ~Scenario();
 
   const std::string getName() const;
-  std::shared_ptr<Building> createBuilding() const;
+  std::shared_ptr<Building> createBuilding(const std::shared_ptr<Simulator> simulator) const;
 
   static std::shared_ptr<std::vector<std::shared_ptr<const Scenario>>> Load(std::string file);
 

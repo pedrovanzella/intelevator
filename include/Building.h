@@ -9,13 +9,15 @@
 #include <string>
 #include <vector>
 
-class Elevator; // forward declaration
-class Floor;    // forward declaration
+class Elevator;  // forward declaration
+class Floor;     // forward declaration
+class Simulator; // forward declaration
 
 class Building : public EventObserver,
                  public std::enable_shared_from_this<Building> {
 public:
-  Building(std::shared_ptr<std::vector<std::shared_ptr<Floor>>> floors,
+  Building(std::shared_ptr<Simulator> simulator,
+           std::shared_ptr<std::vector<std::shared_ptr<Floor>>> floors,
            std::shared_ptr<std::vector<std::shared_ptr<Elevator>>> elevators,
            std::shared_ptr<const Dispatcher> dispatcher,
            std::shared_ptr<const CostFunction> costFunction);
@@ -33,6 +35,7 @@ public:
   std::string stopsToString() const;
 
 private:
+  std::shared_ptr<Simulator> _simulator;
   std::shared_ptr<std::vector<std::shared_ptr<Floor>>> _floors;
   std::shared_ptr<std::vector<std::shared_ptr<Elevator>>> _elevators;
   const std::shared_ptr<const Dispatcher> _dispatcher;
