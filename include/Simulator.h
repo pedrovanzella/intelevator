@@ -1,15 +1,14 @@
 #pragma once
 
-#include <memory>
 #include "Building.h"
 #include "Clock.h"
 #include "EventDispatcher.h"
 #include "EventFactory.h"
 #include "EventQueue.h"
 #include "Statistics.h"
+#include <memory>
 
-class Simulator : public std::enable_shared_from_this<Simulator>
-{
+class Simulator : public std::enable_shared_from_this<Simulator> {
 public:
   Simulator(std::shared_ptr<const Scenario> scenario);
   virtual ~Simulator();
@@ -24,8 +23,6 @@ public:
   void run();
 
 private:
-  bool nextStep();
-
   const std::shared_ptr<const Scenario> _scenario;
   const std::shared_ptr<Statistics> _statistics;
   const std::shared_ptr<Clock> _clock;
@@ -34,4 +31,6 @@ private:
   const std::shared_ptr<EventFactory> _eventFactory;
 
   std::shared_ptr<Building> _building;
+
+  bool nextStep();
 };
