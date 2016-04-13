@@ -1,7 +1,7 @@
 #pragma once
 
-#include <memory>
 #include <glog/logging.h>
+#include <memory>
 
 class Floor; // forward declaration
 
