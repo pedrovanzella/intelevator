@@ -110,9 +110,7 @@ void Building::updateElevators(const unsigned long /* time */) {
                   << " dropped " << passenger->getPartySize()
                   << " clients at floor #" << e->getLocation() << ".";
 
-        auto t = std::make_shared<Trip>();
-        t->client = passenger;
-        t->elevator = e;
+        auto t = Trip();
       }
 
       auto floor = _floors->at(e->getLocation());

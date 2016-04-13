@@ -19,7 +19,7 @@ void Statistics::notify(const std::shared_ptr<const Event> event)
   // Handle events
 }
 
-void Statistics::addTrip(std::shared_ptr<Trip> t)
+void Statistics::addTrip(Trip t)
 {
   _trips.push_back(t);
 }

@@ -11,11 +11,11 @@ public:
   Statistics();
   virtual ~Statistics();
 
-  void addTrip(std::shared_ptr<Trip>);
+  void addTrip(Trip);
 
   bool keepRunning() const;
   void notify(const std::shared_ptr<const Event> event);
 
 private:
-  std::vector<std::shared_ptr<Trip>> _trips;
+  std::vector<Trip> _trips;
 };
