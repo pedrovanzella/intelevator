@@ -7,6 +7,7 @@ public:
   float waitingTime;
   float journeyTime;
   float arrivalTime;
+  int elevatorID;
   int arrivalFloor;
   int dropOffFloor;
   int partySize;

@@ -111,6 +111,10 @@ void Building::updateElevators(const unsigned long /* time */) {
                   << " clients at floor #" << e->getLocation() << ".";
 
         auto t = Trip();
+        t.elevatorID = e->getNumber();
+        t.partySize = passenger->getPartySize();
+        t.dropOffFloor = e->getLocation();
+        t.arrivalFloor = passenger->getArrivalFloor();
       }
 
       auto floor = _floors->at(e->getLocation());
