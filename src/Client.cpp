@@ -16,3 +16,8 @@ const long Client::getCreateTime() const { return _createTime; }
 const int Client::getID() const { return _id; }
 
 const long Client::getPickupTime() const { return _pickupTime; }
+
+void Client::setPickupTime(long p)
+{
+  _pickupTime = p;
+}

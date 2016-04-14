@@ -16,6 +16,8 @@ public:
   const int getID() const;
   const long getPickupTime() const;
 
+  void setPickupTime(long p);
+
 
 private:
   const int _partySize;
