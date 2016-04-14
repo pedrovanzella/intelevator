@@ -21,5 +21,6 @@ void Statistics::notify(const std::shared_ptr<const Event> event)
 
 void Statistics::addTrip(Trip t)
 {
+  LOG(INFO) << "Adding trip to statistics";
   _trips.push_back(t);
 }

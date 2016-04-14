@@ -4,9 +4,9 @@
 
 class Trip {
 public:
-  float waitingTime;
-  float journeyTime;
-  float arrivalTime;
+  long waitingTime;
+  long journeyTime;
+  long arrivalTime;
   int elevatorID;
   int arrivalFloor;
   int dropOffFloor;

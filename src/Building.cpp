@@ -2,6 +2,7 @@
 #include "Elevator.h"
 #include "Floor.h"
 #include "Trip.h"
+#include "Simulator.h"
 #include <algorithm>
 #include <glog/logging.h>
 #include <sstream>
@@ -110,11 +111,16 @@ void Building::updateElevators(const unsigned long /* time */) {
                   << " dropped " << passenger->getPartySize()
                   << " clients at floor #" << e->getLocation() << ".";
 
+        // TODO: Tá faltando uma coisinha ou outra aqui ainda
         auto t = Trip();
         t.elevatorID = e->getNumber();
         t.partySize = passenger->getPartySize();
         t.dropOffFloor = e->getLocation();
         t.arrivalFloor = passenger->getArrivalFloor();
+        t.arrivalTime = _simulator->getClock()->currentTime();
+
+        auto stats = _simulator->getStatistics();
+        stats->addTrip(t);
       }
 
       auto floor = _floors->at(e->getLocation());
