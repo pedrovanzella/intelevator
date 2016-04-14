@@ -18,12 +18,12 @@ public:
   int getPopulation() const;
   Direction compareTo(const Floor& other) const;
 
-  void addClient(const std::shared_ptr<const Client> client);
+  void addClient(const std::shared_ptr<Client> client);
   std::set<int> boardElevator(std::shared_ptr<Elevator> elevator);
 
 private:
   int _number;
   int _population;
-  std::queue<std::shared_ptr<const Client>> _upLine;
-  std::queue<std::shared_ptr<const Client>> _downLine;
+  std::queue<std::shared_ptr<Client>> _upLine;
+  std::queue<std::shared_ptr<Client>> _downLine;
 };

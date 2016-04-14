@@ -108,7 +108,7 @@ TEST_F(ElevatorTest, DropPassengersToCurrentLocation)
     for (int i = 0; i < 3; i++)
     {
       int passengersBefore = elevator->getPassengers()->size();
-      std::shared_ptr<const Client> c(new Client(1, 0, destination, 0, 0));
+      std::shared_ptr<Client> c(new Client(1, 0, destination, 0, 0));
       elevator->addPassenger(c);
       EXPECT_EQ(passengersBefore + 1, elevator->getPassengers()->size());
     }

@@ -12,7 +12,7 @@ Elevator::Elevator(int number, int capacity, int floor)
     _status(Status::Idle),
     _direction(Direction::None),
     _stopAtNextLocation(false),
-    _passengers(new std::vector<std::shared_ptr<const Client>>) {}
+    _passengers(new std::vector<std::shared_ptr<Client>>) {}
 
 Elevator::~Elevator() {}
 
@@ -28,7 +28,7 @@ Status Elevator::getStatus() const { return _status; }
 
 Direction Elevator::getDirection() const { return _direction; }
 
-const std::shared_ptr<const std::vector<std::shared_ptr<const Client>>> Elevator::getPassengers() const {
+const std::shared_ptr<const std::vector<std::shared_ptr<Client>>> Elevator::getPassengers() const {
   return _passengers;
 }
 
@@ -81,19 +81,19 @@ void Elevator::setDirection(Direction direction) { _direction = direction; }
 
 void Elevator::setStatus(Status status) { _status = status; }
 
-std::shared_ptr<std::vector<std::shared_ptr<const Client>>> Elevator::dropPassengersToCurrentLocation() {
+std::shared_ptr<std::vector<std::shared_ptr<Client>>> Elevator::dropPassengersToCurrentLocation() {
   /* Copy every client bound to current _location into passengersToDrop container. */
-  decltype(_passengers) passengersToDrop(new std::vector<std::shared_ptr<const Client>>);
+  decltype(_passengers) passengersToDrop(new std::vector<std::shared_ptr<Client>>);
   std::copy_if(_passengers->begin(),
                _passengers->end(),
                std::back_inserter(*passengersToDrop),
-               [&](std::shared_ptr<const Client> c) {
+               [&](std::shared_ptr<Client> c) {
                  return (c->getDestination() == _location);
                });
 
   /* Creates a new container with the difference between all the clients inside
     the elevator and the passengers about to drop off the elevator. */
-  decltype(_passengers) remainingPassengers(new std::vector<std::shared_ptr<const Client>>);
+  decltype(_passengers) remainingPassengers(new std::vector<std::shared_ptr<Client>>);
   std::set_difference(_passengers->begin(),
                       _passengers->end(),
                       passengersToDrop->begin(),
@@ -109,7 +109,7 @@ std::shared_ptr<std::vector<std::shared_ptr<const Client>>> Elevator::dropPassen
 
 void Elevator::stopAtNextLocation() { _stopAtNextLocation = true; }
 
-void Elevator::addPassenger(std::shared_ptr<const Client> client) {
+void Elevator::addPassenger(std::shared_ptr<Client> client) {
   _passengers->push_back(client);
   LOG(INFO) << "Client with size " << client->getPartySize() << " boarded elevator #" << getNumber() << ".";
 }

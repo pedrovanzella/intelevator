@@ -21,7 +21,7 @@ public:
   Status getStatus() const;
   Direction getDirection() const;
 
-  const std::shared_ptr<const std::vector<std::shared_ptr<const Client>>> getPassengers() const;
+  const std::shared_ptr<const std::vector<std::shared_ptr<Client>>> getPassengers() const;
   int getAvailableCapacity() const;
   int getNextLocation() const;
 
@@ -32,9 +32,9 @@ public:
   void setDirection(Direction direction);
   void setStatus(Status status);
 
-  std::shared_ptr<std::vector<std::shared_ptr<const Client>>> dropPassengersToCurrentLocation();
+  std::shared_ptr<std::vector<std::shared_ptr<Client>>> dropPassengersToCurrentLocation();
   void stopAtNextLocation();
-  void addPassenger(std::shared_ptr<const Client> client);
+  void addPassenger(std::shared_ptr<Client> client);
 
   void start();
   void stop();
@@ -49,5 +49,5 @@ private:
   Status _status;
   Direction _direction;
   bool _stopAtNextLocation;
-  std::shared_ptr<std::vector<std::shared_ptr<const Client>>> _passengers;
+  std::shared_ptr<std::vector<std::shared_ptr<Client>>> _passengers;
 };

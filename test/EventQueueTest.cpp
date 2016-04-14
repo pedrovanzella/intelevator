@@ -9,7 +9,7 @@ struct EventQueueTest : testing::Test
 {
   int destination;
   int location;
-  const std::shared_ptr<const Client> client;
+  const std::shared_ptr<Client> client;
   const std::shared_ptr<EventQueue> eventQueue;
 
   EventQueueTest()

@@ -8,7 +8,7 @@ struct ClientArrivalTest : testing::Test
   float arrivalTime;
   int destination;
   int location;
-  const std::shared_ptr<const Client> client;
+  const std::shared_ptr<Client> client;
   const std::shared_ptr<const ClientArrival> clientArrival;
 
   ClientArrivalTest()

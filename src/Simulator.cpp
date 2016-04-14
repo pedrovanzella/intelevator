@@ -36,8 +36,8 @@ void Simulator::run() {
   _eventDispatcher->subscribe(std::static_pointer_cast<EventObserver>(_statistics));
   _eventDispatcher->subscribe(std::static_pointer_cast<EventObserver>(_clock));
 
-  auto ca1 = std::make_shared<ClientArrival>(10, std::make_shared<const Client>(1, 0, 5, 0, _clock->currentTime()));
-  auto ca2 = std::make_shared<ClientArrival>(20, std::make_shared<const Client>(1, 3, 1, 1, _clock->currentTime()));
+  auto ca1 = std::make_shared<ClientArrival>(10, std::make_shared<Client>(1, 0, 5, 0, _clock->currentTime()));
+  auto ca2 = std::make_shared<ClientArrival>(20, std::make_shared<Client>(1, 3, 1, 1, _clock->currentTime()));
 
   _eventQueue->push(std::static_pointer_cast<Event>(ca1));
   _eventQueue->push(std::static_pointer_cast<Event>(ca2));

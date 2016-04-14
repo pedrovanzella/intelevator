@@ -30,7 +30,7 @@ Direction Floor::compareTo(const Floor &other) const
     return Direction::Up;
 }
 
-void Floor::addClient(const std::shared_ptr<const Client> client)
+void Floor::addClient(const std::shared_ptr<Client> client)
 {
   int destination = client->getDestination();
 
