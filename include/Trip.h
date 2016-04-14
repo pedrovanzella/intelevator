@@ -4,9 +4,9 @@
 
 class Trip {
 public:
-  long waitingTime;
-  long journeyTime;
-  long arrivalTime;
+  long dropoffTime;
+  long pickupTime;
+  long createTime;
   int elevatorID;
   int arrivalFloor;
   int dropOffFloor;

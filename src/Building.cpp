@@ -117,7 +117,10 @@ void Building::updateElevators(const unsigned long /* time */) {
         t.partySize = passenger->getPartySize();
         t.dropOffFloor = e->getLocation();
         t.arrivalFloor = passenger->getArrivalFloor();
-        t.arrivalTime = _simulator->getClock()->currentTime();
+        t.dropoffTime = _simulator->getClock()->currentTime();
+        t.pickupTime = passenger->getPickupTime();
+        t.createTime = passenger->getCreateTime();
+        t.clientID = passenger->getID();
 
         auto stats = _simulator->getStatistics();
         stats->addTrip(t);
