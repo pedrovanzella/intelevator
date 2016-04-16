@@ -7,23 +7,24 @@ class Floor; // forward declaration
 
 class Client {
 public:
-  Client(const int partySize, const int arrivalFloor, const int destination, const int id, const long createTime);
+  Client(const int partySize, const int arrivalFloor, const int destination, const unsigned long createTime);
 
+  const unsigned long getId() const;
   const int getPartySize() const;
   const int getDestination() const;
   const int getArrivalFloor() const;
   const long getCreateTime() const;
-  const int getID() const;
   const long getPickupTime() const;
 
-  void setPickupTime(long p);
-
+  void setPickupTime(const unsigned long p);
 
 private:
+  static unsigned long nextId;
+
+  const unsigned long _id;
   const int _partySize;
   const int _destination;
   const int _arrivalFloor;
   const long _createTime;
-  const int _id;
-  long _pickupTime;
+  unsigned long _pickupTime;
 };
