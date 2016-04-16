@@ -84,17 +84,7 @@ void Building::doClientArrival(std::shared_ptr<const ClientArrival> event) {
 
 void Building::updateElevators(const unsigned long time) {
   for (auto e : *_elevators) {
-    if (e->getStatus() == Status::Idle && !_stops[e->getNumber()].empty()) {
-      // If a elevator is Status::Idle and has pending stops, it should receive a new destination.
-      if (e->getDirection() == Direction::Up) {
-        // If it was going up, we send it down.
-        e->setDestination(*_stops[e->getNumber()].begin());
-      }
-      else {
-        // If it was going down, we send it up.
-        e->setDestination(*_stops[e->getNumber()].rbegin());
-      }
-    }
+    assignDestinationForElevator(e);
 
     // Checks if elevator must stop at next floor.
     auto nextLocation = e->getNextLocation();
@@ -128,3 +118,19 @@ void Building::updateElevators(const unsigned long time) {
     }
   }
 }
+
+void Building::assignDestinationForElevator(const std::shared_ptr<Elevator> elevator) {
+  const int number = elevator->getNumber();
+  if (elevator->getStatus() == Status::Idle && !_stops[number].empty()) {
+    // If a elevator is idle and has pending stops, then it should receive a new destination.
+    if (elevator->getDirection() == Direction::Up) {
+      // If it was going up, we send it down.
+      elevator->setDestination(*_stops[number].begin());
+    }
+    else {
+      // If it was going down, we send it up.
+      elevator->setDestination(*_stops[number].rbegin());
+    }
+  }
+}
+
