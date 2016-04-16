@@ -15,7 +15,7 @@ struct ClientTest : testing::Test
   : partySize(1)
   , destination(10)
   , arrivalFloor(0)
-  , client(new Client(partySize, arrivalFloor, destination, 0, 0))
+  , client(new Client(partySize, arrivalFloor, destination, 0))
   {}
 
   virtual ~ClientTest()
