@@ -118,6 +118,8 @@ void Elevator::start() { _status = Status::Moving; }
 
 void Elevator::stop() { _status = Status::Stopped; }
 
+void Elevator::idle() { _status = Status::Idle; }
+
 void Elevator::turn() {
   if (_direction == Direction::Up)
     _direction = Direction::Down;
@@ -148,10 +150,9 @@ void Elevator::update() {
       }
 
       if (_location == _destination) {
-        setStatus(Status::Idle);
+        LOG(INFO) << "ARRIVED AT DESTINATION -- GOING IDLE";
+        idle();
       }
-    } break;
-    case Status::Stopped: {
     } break;
     default:
       break;

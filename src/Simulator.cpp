@@ -37,9 +37,11 @@ void Simulator::run() {
 
   auto ca1 = std::make_shared<ClientArrival>(10, std::make_shared<Client>(1, 0, 5, _clock->currentTime()));
   auto ca2 = std::make_shared<ClientArrival>(20, std::make_shared<Client>(1, 3, 1, _clock->currentTime()));
+  auto ca3 = std::make_shared<ClientArrival>(30, std::make_shared<Client>(1, 7, 4, _clock->currentTime()));
 
   _eventQueue->push(std::static_pointer_cast<Event>(ca1));
   _eventQueue->push(std::static_pointer_cast<Event>(ca2));
+  _eventQueue->push(std::static_pointer_cast<Event>(ca3));
 
   while (_statistics->keepRunning() && _eventQueue->hasNextEvent()) {
     auto e = _eventQueue->pop();
