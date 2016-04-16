@@ -102,13 +102,9 @@ void Building::updateElevators(const unsigned long time) {
         stats->addTrip(time, e, passenger);
       }
 
-
       auto floor = _floors->at(e->getLocation());
       auto newStops = floor->boardElevator(e);
-
-      for (auto stop : newStops) {
-        _stops[e->getNumber()].insert(stop);
-      }
+      registerNewStops(e, newStops);
     } else {
       e->update();
     }
