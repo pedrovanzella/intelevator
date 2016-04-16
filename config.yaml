@@ -12,13 +12,19 @@ elevator_config:
   large: &large
     capacity: 10
 
+# dispatchers:
+#  0 - dummy
+#  1 - random
+#  2 - nearest neighbour
+#  3 - better nearest neighbour
+
 scenarios:
   - name: Simple
-    elevators: 2
+    elevators: 5
     elevator_config: *small
     population: [ 5, 5, 5, 5, 5, 5 ]
-    dispatcher: 0
-    cost_function: 0
+    dispatcher: 1 # random
+    cost_function: 0 # dummy
 
   # - name: Scenario 01
   #   elevators: 2
