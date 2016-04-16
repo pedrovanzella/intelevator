@@ -38,6 +38,7 @@ public:
 
   void start();
   void stop();
+  void idle();
   void turn();
   void update();
 
