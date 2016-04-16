@@ -46,4 +46,5 @@ private:
   void doClientArrival(std::shared_ptr<const ClientArrival> event);
   void updateElevators(const unsigned long time);
   void assignDestinationForElevator(const std::shared_ptr<Elevator> elevator);
+  bool mustStopAtNextLocation(const std::shared_ptr<Elevator> elevator);
 };

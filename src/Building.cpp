@@ -86,13 +86,10 @@ void Building::updateElevators(const unsigned long time) {
   for (auto e : *_elevators) {
     assignDestinationForElevator(e);
 
-    // Checks if elevator must stop at next floor.
-    auto nextLocation = e->getNextLocation();
-
-    if (_stops[e->getNumber()].find(nextLocation) != _stops[e->getNumber()].end()) {
+    if (mustStopAtNextLocation(e)) {
       e->stopAtNextLocation();
       e->update();
-      _stops[e->getNumber()].erase(nextLocation);
+      _stops[e->getNumber()].erase(e->getNextLocation());
 
       auto passengersToDrop = e->dropPassengersToCurrentLocation();
 
@@ -134,3 +131,8 @@ void Building::assignDestinationForElevator(const std::shared_ptr<Elevator> elev
   }
 }
 
+bool Building::mustStopAtNextLocation(const std::shared_ptr<Elevator> elevator) {
+  auto nextLocation = elevator->getNextLocation();
+  const int number = elevator->getNumber();
+  return _stops[number].find(nextLocation) != _stops[number].end();
+}
