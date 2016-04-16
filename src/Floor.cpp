@@ -55,21 +55,19 @@ std::set<int> Floor::boardElevator(std::shared_ptr<Elevator> elevator)
   std::set<int> newStops;
 
   if (elevator->getDirection() != Direction::Down) {
-    auto client = _upLine.front();
-    while (_upLine.size() > 0 && elevator->canEnter(client)) {
+    while (_upLine.size() > 0 && elevator->canEnter(_upLine.front())) {
+      auto client = _upLine.front();
       elevator->addPassenger(client);
       newStops.insert(client->getDestination());
       _upLine.pop();
-      client = _upLine.front();
     }
   }
   else if (elevator->getDirection() == Direction::Down) {
-    auto client = _downLine.front();
-    while (_downLine.size() > 0 && elevator->canEnter(client)) {
+    while (_downLine.size() > 0 && elevator->canEnter(_downLine.front())) {
+      auto client = _downLine.front();
       elevator->addPassenger(client);
       newStops.insert(client->getDestination());
       _downLine.pop();
-      client = _downLine.front();
     }
   }
 
