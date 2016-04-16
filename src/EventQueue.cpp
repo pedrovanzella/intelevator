@@ -30,6 +30,4 @@ std::shared_ptr<const Event> EventQueue::pop() {
 
 void EventQueue::push(std::shared_ptr<const Event> event) {
   _eventQueue.push(event);
-
-  LOG(INFO) << "Scheduled event " << event->str() << ".";
 }
