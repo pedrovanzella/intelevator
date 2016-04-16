@@ -6,6 +6,7 @@
 #include "Floor.h"
 #include "MissingCostFunctionError.h"
 #include "MissingDispatcherError.h"
+#include "RandomDispatcher.h"
 #include "Scenario.h"
 #include <glog/logging.h>
 
@@ -80,6 +81,8 @@ std::shared_ptr<const Dispatcher> Scenario::createDispatcher() const {
   switch (_dispatcherType) {
   case DispatcherType::Dummy:
     return DispatcherCreator::create<DummyDispatcher>();
+  case DispatcherType::Random:
+    return DispatcherCreator::create<RandomDispatcher>();
   case DispatcherType::NearestNeighbour:
     return DispatcherCreator::create<NearestNeighbourDispatcher>();
   case DispatcherType::BetterNearestNeighbour:

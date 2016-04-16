@@ -4,6 +4,7 @@
 enum class DispatcherType : int
 {
   Dummy,
+  Random,
   NearestNeighbour,
   BetterNearestNeighbour
 };
@@ -15,6 +16,7 @@ namespace Helpers
     switch(type)
     {
       case DispatcherType::Dummy: return "Dummy";
+      case DispatcherType::Random: return "Random";
       case DispatcherType::NearestNeighbour: return "NearestNeighbour";
       case DispatcherType::BetterNearestNeighbour: return "BetterNearestNeighbour";
       default:
