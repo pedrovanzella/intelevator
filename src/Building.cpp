@@ -120,7 +120,7 @@ void Building::updateElevators(const unsigned long /* time */) {
         t.dropoffTime = _simulator->getClock()->currentTime();
         t.pickupTime = passenger->getPickupTime();
         t.createTime = passenger->getCreateTime();
-        t.clientID = passenger->getID();
+        t.clientID = passenger->getId();
 
         auto stats = _simulator->getStatistics();
         stats->addTrip(t);
