@@ -82,7 +82,7 @@ void Building::doClientArrival(std::shared_ptr<const ClientArrival> event) {
   }
 }
 
-void Building::updateElevators(const unsigned long /* time */) {
+void Building::updateElevators(const unsigned long time) {
   for (auto e : *_elevators) {
     if (e->getStatus() == Status::Idle && !_stops[e->getNumber()].empty()) {
       // If a elevator is Status::Idle and has pending stops, it should receive a new destination.
@@ -117,7 +117,7 @@ void Building::updateElevators(const unsigned long /* time */) {
         t.partySize = passenger->getPartySize();
         t.dropOffFloor = e->getLocation();
         t.arrivalFloor = passenger->getArrivalFloor();
-        t.dropoffTime = _simulator->getClock()->currentTime();
+        t.dropoffTime = time;
         t.pickupTime = passenger->getPickupTime();
         t.createTime = passenger->getCreateTime();
         t.clientID = passenger->getId();
