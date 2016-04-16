@@ -126,6 +126,7 @@ void Building::updateElevators(const unsigned long time) {
         stats->addTrip(t);
       }
 
+
       auto floor = _floors->at(e->getLocation());
       auto newStops = floor->boardElevator(e);
 

@@ -150,7 +150,6 @@ void Elevator::update() {
       }
 
       if (_location == _destination) {
-        LOG(INFO) << "ARRIVED AT DESTINATION -- GOING IDLE";
         idle();
       }
     } break;
