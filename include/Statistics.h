@@ -1,20 +1,23 @@
 #pragma once
 
+#include "Elevator.h"
+#include "Event.h"
+#include "Floor.h"
+#include "Trip.h"
 #include <list>
 #include <memory>
-#include "EventObserver.h"
-#include "Trip.h"
 
-class Statistics : public EventObserver
-{
+class Statistics : public EventObserver {
 public:
   Statistics();
   virtual ~Statistics();
 
-  void addTrip(Trip);
-
   bool keepRunning() const;
   void notify(const std::shared_ptr<const Event> event);
+
+  void addTrip(const unsigned long dropOffTime,
+               const std::shared_ptr<Elevator> elevator,
+               const std::shared_ptr<Client> passenger);
 
 private:
   std::vector<Trip> _trips;

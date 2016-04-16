@@ -112,18 +112,8 @@ void Building::updateElevators(const unsigned long time) {
                   << " clients at floor #" << e->getLocation() << ".";
 
         // TODO: Tá faltando uma coisinha ou outra aqui ainda
-        auto t = Trip();
-        t.elevatorID = e->getNumber();
-        t.partySize = passenger->getPartySize();
-        t.dropOffFloor = e->getLocation();
-        t.arrivalFloor = passenger->getArrivalFloor();
-        t.dropoffTime = time;
-        t.pickupTime = passenger->getPickupTime();
-        t.createTime = passenger->getCreateTime();
-        t.clientID = passenger->getId();
-
         auto stats = _simulator->getStatistics();
-        stats->addTrip(t);
+        stats->addTrip(time, e, passenger);
       }
 
 
