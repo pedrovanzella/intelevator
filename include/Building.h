@@ -40,7 +40,7 @@ private:
   std::shared_ptr<std::vector<std::shared_ptr<Elevator>>> _elevators;
   const std::shared_ptr<const Dispatcher> _dispatcher;
   const std::shared_ptr<const CostFunction> _costFunction;
-  std::map<int, std::set<int>> _stops;
+  std::map<std::shared_ptr<Elevator>, std::set<int>> _stops;
   int _lastEventTime;
 
   void doClientArrival(std::shared_ptr<const ClientArrival> event);
