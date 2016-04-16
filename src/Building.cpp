@@ -129,7 +129,9 @@ void Building::updateElevators(const unsigned long time) {
       auto floor = _floors->at(e->getLocation());
       auto newStops = floor->boardElevator(e);
 
-      e->start();
+      for (auto stop : newStops) {
+        _stops[e->getNumber()].insert(stop);
+      }
     } else {
       e->update();
     }
