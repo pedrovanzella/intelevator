@@ -1,7 +1,6 @@
 #include "Simulator.h"
 #include "ClientArrival.h"
 #include "CycleElevators.h"
-#include "Scenario.h"
 #include <glog/logging.h>
 #include <random>
 
@@ -9,8 +8,7 @@ Simulator::Simulator(const std::shared_ptr<const Scenario> scenario)
     : _scenario(scenario), _statistics(std::make_shared<Statistics>()),
       _clock(std::make_shared<Clock>()),
       _eventQueue(std::make_shared<EventQueue>()),
-      _eventDispatcher(std::make_shared<EventDispatcher>()),
-      _eventFactory(std::make_shared<EventFactory>(_scenario, _clock, _eventQueue)) {}
+      _eventDispatcher(std::make_shared<EventDispatcher>()) {}
 
 Simulator::~Simulator() {}
 
@@ -23,8 +21,6 @@ const std::shared_ptr<Clock> Simulator::getClock() const { return _clock; }
 const std::shared_ptr<EventQueue> Simulator::getEventQueue() const { return _eventQueue; }
 
 const std::shared_ptr<EventDispatcher> Simulator::getEventDispatcher() const { return _eventDispatcher; }
-
-const std::shared_ptr<EventFactory> Simulator::getEventFactory() const { return _eventFactory; }
 
 void Simulator::run() {
   LOG(INFO) << "Running '" << _scenario->getName() << "' scenario.";
