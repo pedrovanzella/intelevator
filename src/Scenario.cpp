@@ -46,7 +46,7 @@ const std::vector<int> Scenario::getPopulation() const { return _population; }
 std::shared_ptr<Building> Scenario::createBuilding(const std::shared_ptr<Simulator> simulator) const {
   auto floors = Floor::createFloors(shared_from_this());
   auto elevators = Elevator::createElevators(shared_from_this());
-  auto dispatcher = createDispatcher();
+  auto dispatcher = DispatcherCreator::create(_dispatcherType);
   auto costFunction = createCostFunction();
 
   auto building = std::make_shared<Building>(simulator, floors, elevators, dispatcher, costFunction);
@@ -59,21 +59,6 @@ std::shared_ptr<Building> Scenario::createBuilding(const std::shared_ptr<Simulat
             << "' cost function.";
 
   return building;
-}
-
-std::shared_ptr<Dispatcher> Scenario::createDispatcher() const {
-  switch (_dispatcherType) {
-  case DispatcherType::Dummy:
-    return DispatcherCreator::create<DummyDispatcher>();
-  case DispatcherType::Random:
-    return DispatcherCreator::create<RandomDispatcher>();
-  case DispatcherType::NearestNeighbour:
-    return DispatcherCreator::create<NearestNeighbourDispatcher>();
-  case DispatcherType::BetterNearestNeighbour:
-    return DispatcherCreator::create<BetterNearestNeighbourDispatcher>();
-  default:
-    throw MissingDispatcherError(std::to_string((int)_dispatcherType));
-  }
 }
 
 std::shared_ptr<const CostFunction> Scenario::createCostFunction() const {
