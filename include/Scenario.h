@@ -28,7 +28,6 @@ private:
   DispatcherType _dispatcherType;
   CostFunctionType _costFunctionType;
 
-  std::shared_ptr<std::vector<std::shared_ptr<Elevator>>> createElevators() const;
   std::shared_ptr<Dispatcher> createDispatcher() const;
   std::shared_ptr<const CostFunction> createCostFunction() const;
 };

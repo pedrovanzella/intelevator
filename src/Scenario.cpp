@@ -45,7 +45,7 @@ const std::vector<int> Scenario::getPopulation() const { return _population; }
 
 std::shared_ptr<Building> Scenario::createBuilding(const std::shared_ptr<Simulator> simulator) const {
   auto floors = Floor::createFloors(shared_from_this());
-  auto elevators = createElevators();
+  auto elevators = Elevator::createElevators(shared_from_this());
   auto dispatcher = createDispatcher();
   auto costFunction = createCostFunction();
 
@@ -59,17 +59,6 @@ std::shared_ptr<Building> Scenario::createBuilding(const std::shared_ptr<Simulat
             << "' cost function.";
 
   return building;
-}
-
-std::shared_ptr<std::vector<std::shared_ptr<Elevator>>> Scenario::createElevators() const {
-  std::shared_ptr<std::vector<std::shared_ptr<Elevator>>> elevators(new std::vector<std::shared_ptr<Elevator>>);
-
-  for (int i = 0; i < _elevators; i++) {
-    auto e = std::make_shared<Elevator>(i, _capacity, 0);
-    elevators->push_back(e);
-  }
-
-  return elevators;
 }
 
 std::shared_ptr<Dispatcher> Scenario::createDispatcher() const {
