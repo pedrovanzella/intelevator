@@ -6,7 +6,7 @@
 #include <memory>
 #include <yaml-cpp/yaml.h>
 
-class Scenario {
+class Scenario : public std::enable_shared_from_this<Scenario> {
 public:
   Scenario(YAML::Node scenario);
   virtual ~Scenario();
