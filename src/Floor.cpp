@@ -1,8 +1,4 @@
-#include "ClientArrival.h"
-#include "Direction.h"
-#include "Event.h"
 #include "Floor.h"
-#include <set>
 #include <sstream>
 #include <string>
 
@@ -73,4 +69,16 @@ std::set<int> Floor::boardElevator(std::shared_ptr<Elevator> elevator)
   }
 
   return newStops;
+}
+
+std::shared_ptr<std::vector<std::shared_ptr<Floor>>> Floor::createFloors(std::shared_ptr<Scenario> scenario) {
+  std::shared_ptr<std::vector<std::shared_ptr<Floor>>> floors(new std::vector<std::shared_ptr<Floor>>);
+
+  auto population = scenario->getPopulation();
+  for (int i = 0; i < population.size(); i++) {
+    auto f = std::make_shared<Floor>(i, population[i]);
+    floors->push_back(f);
+  }
+
+  return floors;
 }
