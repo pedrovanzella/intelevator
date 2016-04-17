@@ -11,10 +11,11 @@ public:
   Scenario(YAML::Node scenario);
   virtual ~Scenario();
 
-  static std::shared_ptr<std::vector<std::shared_ptr<const Scenario>>>
-  Load(std::string file);
+  static std::shared_ptr<std::vector<std::shared_ptr<const Scenario>>> Load(std::string file);
 
   const std::string getName() const;
+  const std::vector<int> getPopulation() const;
+
   std::shared_ptr<Building> createBuilding(const std::shared_ptr<Simulator> simulator) const;
 
 private:

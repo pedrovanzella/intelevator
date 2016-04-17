@@ -37,6 +37,8 @@ std::shared_ptr<std::vector<std::shared_ptr<const Scenario>>> Scenario::Load(std
 
 const std::string Scenario::getName() const { return _name; }
 
+const std::vector<int> Scenario::getPopulation() const { return _population; }
+
 std::shared_ptr<Building> Scenario::createBuilding(const std::shared_ptr<Simulator> simulator) const {
   auto floors = createFloors();
   auto elevators = createElevators();
