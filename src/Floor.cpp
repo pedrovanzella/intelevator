@@ -8,7 +8,8 @@
 
 Floor::Floor(int number, int population)
   : _number(number)
-  , _population(population) {}
+  , _population(population)
+  , _eventFactory(new EventFactory) {}
 
 Floor::~Floor() {}
 

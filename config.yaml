@@ -1,9 +1,3 @@
-poisson:
-  seed: Semente sementosa sementuda!
-  population: 150
-  event_interval: 50
-  experiments: 10000
-
 elevator_config:
   small: &small
     capacity: 5
@@ -18,6 +12,10 @@ elevator_config:
 #  2 - nearest neighbour
 #  3 - better nearest neighbour
 
+# cost functions:
+#  0 - dummy
+#  1 - nearest neighbour
+
 scenarios:
   - name: Simple
     elevators: 5
@@ -25,6 +23,7 @@ scenarios:
     population: [ 5, 5, 5, 5, 5, 5 ]
     dispatcher: 1 # random
     cost_function: 0 # dummy
+    seed: Semente sementosa sementuda!
 
   # - name: Scenario 01
   #   elevators: 2

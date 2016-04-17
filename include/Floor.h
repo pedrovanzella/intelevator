@@ -5,6 +5,7 @@
 #include <set>
 #include "Client.h"
 #include "Elevator.h"
+#include "EventFactory.h"
 #include "EventObserver.h"
 #include "Direction.h"
 
@@ -26,4 +27,6 @@ private:
   int _population;
   std::queue<std::shared_ptr<Client>> _upLine;
   std::queue<std::shared_ptr<Client>> _downLine;
+
+  std::unique_ptr<EventFactory> _eventFactory;
 };

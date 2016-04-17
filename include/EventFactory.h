@@ -1,22 +1,10 @@
 #pragma once
 
-#include <memory>
 #include <glog/logging.h>
-#include "Clock.h"
-#include "EventQueue.h"
-#include "Scenario.h"
 
 class EventFactory
 {
 public:
-  EventFactory(const std::shared_ptr<const Scenario> scenario,
-               const std::shared_ptr<Clock> clock,
-               const std::shared_ptr<EventQueue> queue);
+  EventFactory();
   virtual ~EventFactory();
-
-private:
-  const std::shared_ptr<const Scenario> _scenario;
-  const std::shared_ptr<Clock> _clock;
-  const std::shared_ptr<EventQueue> _queue;
-
 };
