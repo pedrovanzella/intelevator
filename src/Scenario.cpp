@@ -77,7 +77,7 @@ std::shared_ptr<std::vector<std::shared_ptr<Elevator>>> Scenario::createElevator
   return elevators;
 }
 
-std::shared_ptr<const Dispatcher> Scenario::createDispatcher() const {
+std::shared_ptr<Dispatcher> Scenario::createDispatcher() const {
   switch (_dispatcherType) {
   case DispatcherType::Dummy:
     return DispatcherCreator::create<DummyDispatcher>();
