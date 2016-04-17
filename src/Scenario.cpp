@@ -47,7 +47,7 @@ std::shared_ptr<Building> Scenario::createBuilding(const std::shared_ptr<Simulat
   auto floors = Floor::createFloors(shared_from_this());
   auto elevators = Elevator::createElevators(shared_from_this());
   auto dispatcher = DispatcherCreator::create(_dispatcherType);
-  auto costFunction = createCostFunction();
+  auto costFunction = CostFunctionCreator::create(_costFunctionType);
 
   auto building = std::make_shared<Building>(simulator, floors, elevators, dispatcher, costFunction);
 
@@ -59,15 +59,4 @@ std::shared_ptr<Building> Scenario::createBuilding(const std::shared_ptr<Simulat
             << "' cost function.";
 
   return building;
-}
-
-std::shared_ptr<const CostFunction> Scenario::createCostFunction() const {
-  switch (_costFunctionType) {
-  case CostFunctionType::Dummy:
-    return CostFunctionCreator::create<DummyCostFunction>();
-  case CostFunctionType::NearestNeighbour:
-    return CostFunctionCreator::create<NearestNeighbourCostFunction>();
-  default:
-    throw MissingCostFunctionError(std::to_string((int)_costFunctionType));
-  }
 }
