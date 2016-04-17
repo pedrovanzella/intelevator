@@ -1,12 +1,11 @@
 #pragma once
 
-#include <memory>
 #include "Elevator.h"
 #include "Event.h"
 #include "Floor.h"
+#include <memory>
 
-class ElevatorArrival : public Event
-{
+class ElevatorArrival : public Event {
 public:
   ElevatorArrival(const unsigned long eventTime, int elevator, int location);
   int getElevator() const;

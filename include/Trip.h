@@ -1,9 +1,6 @@
 #pragma once
 
-#include <memory>
-
-class Trip {
-public:
+struct Trip {
   long dropoffTime;
   long pickupTime;
   long createTime;
