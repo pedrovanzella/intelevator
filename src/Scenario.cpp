@@ -57,17 +57,6 @@ std::shared_ptr<Building> Scenario::createBuilding(const std::shared_ptr<Simulat
   return building;
 }
 
-std::shared_ptr<std::vector<std::shared_ptr<Floor>>> Scenario::createFloors() const {
-  std::shared_ptr<std::vector<std::shared_ptr<Floor>>> floors(new std::vector<std::shared_ptr<Floor>>);
-
-  for (int i = 0; i < _population.size(); i++) {
-    auto f = std::make_shared<Floor>(i, _population[i]);
-    floors->push_back(f);
-  }
-
-  return floors;
-}
-
 std::shared_ptr<std::vector<std::shared_ptr<Elevator>>> Scenario::createElevators() const {
   std::shared_ptr<std::vector<std::shared_ptr<Elevator>>> elevators(new std::vector<std::shared_ptr<Elevator>>);
 
