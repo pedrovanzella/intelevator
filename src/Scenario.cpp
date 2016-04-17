@@ -40,7 +40,7 @@ const std::string Scenario::getName() const { return _name; }
 const std::vector<int> Scenario::getPopulation() const { return _population; }
 
 std::shared_ptr<Building> Scenario::createBuilding(const std::shared_ptr<Simulator> simulator) const {
-  auto floors = createFloors();
+  auto floors = Floor::createFloors(shared_from_this());
   auto elevators = createElevators();
   auto dispatcher = createDispatcher();
   auto costFunction = createCostFunction();

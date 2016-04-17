@@ -71,7 +71,7 @@ std::set<int> Floor::boardElevator(std::shared_ptr<Elevator> elevator)
   return newStops;
 }
 
-std::shared_ptr<std::vector<std::shared_ptr<Floor>>> Floor::createFloors(std::shared_ptr<Scenario> scenario) {
+std::shared_ptr<std::vector<std::shared_ptr<Floor>>> Floor::createFloors(const std::shared_ptr<const Scenario> scenario) {
   std::shared_ptr<std::vector<std::shared_ptr<Floor>>> floors(new std::vector<std::shared_ptr<Floor>>);
 
   auto population = scenario->getPopulation();
