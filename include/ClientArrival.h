@@ -2,7 +2,6 @@
 
 #include "Client.h"
 #include "Event.h"
-#include "Floor.h"
 #include <glog/logging.h>
 #include <memory>
 
