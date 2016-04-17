@@ -1,23 +1,22 @@
 #pragma once
 
+#include "Client.h"
+#include "Direction.h"
+#include "Elevator.h"
+#include "EventFactory.h"
+#include "Scenario.h"
 #include <memory>
 #include <queue>
 #include <set>
-#include "Client.h"
-#include "Elevator.h"
-#include "EventFactory.h"
-#include "Direction.h"
-#include "Scenario.h"
 
-class Floor
-{
+class Floor {
 public:
   Floor(int number, int population);
   virtual ~Floor();
 
   int getNumber() const;
   int getPopulation() const;
-  Direction compareTo(const Floor& other) const;
+  Direction compareTo(const Floor &other) const;
 
   void addClient(const std::shared_ptr<Client> client);
   std::set<int> boardElevator(std::shared_ptr<Elevator> elevator);
@@ -29,6 +28,5 @@ private:
   int _population;
   std::queue<std::shared_ptr<Client>> _upLine;
   std::queue<std::shared_ptr<Client>> _downLine;
-
   std::unique_ptr<EventFactory> _eventFactory;
 };
