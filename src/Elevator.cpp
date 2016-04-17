@@ -157,3 +157,14 @@ void Elevator::update() {
       break;
   }
 }
+
+std::shared_ptr<std::vector<std::shared_ptr<Elevator>>> Elevator::createElevators(const std::shared_ptr<const Scenario> scenario) {
+  std::shared_ptr<std::vector<std::shared_ptr<Elevator>>> elevators(new std::vector<std::shared_ptr<Elevator>>);
+
+  for (int i = 0; i < scenario->getElevators(); i++) {
+    auto e = std::make_shared<Elevator>(i, scenario->getCapacity(), 0);
+    elevators->push_back(e);
+  }
+
+  return elevators;
+}

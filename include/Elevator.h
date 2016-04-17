@@ -3,6 +3,7 @@
 #include "Client.h"
 #include "Direction.h"
 #include "Event.h"
+#include "Scenario.h"
 #include "Status.h"
 #include <map>
 #include <memory>
@@ -41,6 +42,8 @@ public:
   void idle();
   void turn();
   void update();
+
+  static std::shared_ptr<std::vector<std::shared_ptr<Elevator>>> createElevators(const std::shared_ptr<const Scenario> scenario);
 
 private:
   const int _number;
