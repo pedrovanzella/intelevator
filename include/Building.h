@@ -1,7 +1,5 @@
 #pragma once
 
-#include "CostFunction.h"
-#include "Dispatcher.h"
 #include "EventObserver.h"
 #include <map>
 #include <memory>
@@ -9,9 +7,12 @@
 #include <string>
 #include <vector>
 
-class Elevator;  // forward declaration
-class Floor;     // forward declaration
-class Simulator; // forward declaration
+class ClientArrival; // forward declaration
+class CostFunction;  // forward declaration
+class Dispatcher;    // forward declaration
+class Elevator;      // forward declaration
+class Floor;         // forward declaration
+class Simulator;     // forward declaration
 
 class Building : public EventObserver,
                  public std::enable_shared_from_this<Building> {

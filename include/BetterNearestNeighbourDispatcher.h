@@ -1,12 +1,10 @@
 #pragma once
 
-#include <memory>
+#include "Dispatcher.h"
 #include "Building.h"
 #include "ClientArrival.h"
-#include "Dispatcher.h"
-#include "Elevator.h"
+#include "CostFunction.h"
 
-// BetterNearestNeighbourDispatcher
 class BetterNearestNeighbourDispatcher : public Dispatcher
 {
 public:

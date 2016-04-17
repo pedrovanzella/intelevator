@@ -1,8 +1,11 @@
 #include "Building.h"
+#include "ClientArrival.h"
+#include "CostFunction.h"
+#include "Dispatcher.h"
 #include "Elevator.h"
 #include "Floor.h"
-#include "Trip.h"
 #include "Simulator.h"
+#include "Trip.h"
 #include <algorithm>
 #include <glog/logging.h>
 #include <sstream>

@@ -1,8 +1,7 @@
 #include <algorithm>
-#include <memory>
 #include "BetterNearestNeighbourDispatcher.h"
 #include "Direction.h"
-#include "Elevator.h"
+#include "Floor.h"
 #include "NearestNeighbourDispatcher.h"
 
 int BetterNearestNeighbourDispatcher::pick_next_elevator(const std::shared_ptr<const CostFunction> costFunction,

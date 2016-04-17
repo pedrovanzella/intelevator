@@ -1,6 +1,5 @@
-#include <memory>
-#include "Elevator.h"
 #include "NearestNeighbourDispatcher.h"
+#include "Floor.h"
 
 int NearestNeighbourDispatcher::pick_next_elevator(const std::shared_ptr<const CostFunction> costFunction,
                                                    const std::shared_ptr<const Building> building,
