@@ -8,6 +8,7 @@ import numpy as np
 def makegraphs(filename):
     data = loadfile(filename)
     avgWaitingTime(data)
+    avgTravelTime(data)
 
 
 def loadfile(filename):
@@ -28,10 +29,20 @@ def getTimes(data):
     return data[:, [5, 6, 7]]
 
 
+def avgTravelTime(data):
+    times = getTimes(data)
+    travelTimes = [x[2] - x[1] for x in times]
+    plotNormal(travelTimes)
+
+
 def avgWaitingTime(data):
     times = getTimes(data)
     waits = [x[1] - x[0] for x in times]
-    h = sorted(waits)
+    plotNormal(waits)
+
+
+def plotNormal(data):
+    h = sorted(data)
 
     fit = stats.norm.pdf(h, np.mean(h), np.std(h))
     plt.plot(h, fit, '-o')
