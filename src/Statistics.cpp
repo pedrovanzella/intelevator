@@ -25,3 +25,13 @@ void Statistics::addTrip(const unsigned long dropOffTime,
   t.clientID = passenger->getId();
   _trips.push_back(t);
 }
+
+void Statistics::printToFile(std::string name)
+{
+  std::ofstream f;
+  f.open(name);
+
+  for (auto t: _trips) {
+    t.printToFile(f);
+  }
+}

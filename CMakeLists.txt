@@ -54,7 +54,7 @@ set(SOURCE_FILES
         src/EventDispatcher.cpp
         src/Floor.cpp
         src/Scenario.cpp
-        src/CycleElevators.cpp
+        src/RandomDispatcher.cpp
         src/Trip.cpp)
 
 set(TEST_FILES
@@ -79,7 +79,7 @@ set(TEST_FILES
         src/Floor.cpp
         src/Scenario.cpp
         src/Trip.cpp
-        src/CycleElevators.cpp
+        src/RandomDispatcher.cpp
         test/BuildingTest.cpp
         test/ClientArrivalTest.cpp
         test/ClientTest.cpp

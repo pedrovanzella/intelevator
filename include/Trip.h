@@ -1,4 +1,5 @@
 #pragma once
+#include <fstream>
 
 struct Trip {
   long dropoffTime;
@@ -11,4 +12,6 @@ struct Trip {
   int clientID;
 
   Trip();
+
+  void printToFile(std::ofstream &f);
 };
