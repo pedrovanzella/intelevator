@@ -3,12 +3,14 @@ from sys import argv
 import matplotlib.pyplot as plt
 import numpy as np
 
+
 def makegraphs(filename):
     data = loadfile(filename)
     print(data)
     plt.plot(data)
     plt.ylabel('some numbers')
     plt.show()
+
 
 def loadfile(filename):
     with open(filename, 'r') as f:
