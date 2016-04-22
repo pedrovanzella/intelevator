@@ -1,17 +1,13 @@
 #!/usr/bin/env python3
 from sys import argv
 import matplotlib.pyplot as plt
+import scipy.stats as stats
 import numpy as np
 
 
 def makegraphs(filename):
     data = loadfile(filename)
-    print(data)
-    times = getTimes(data)
-    print(times)
-    plt.plot(data)
-    plt.ylabel('some numbers')
-    plt.show()
+    avgWaitingTime(data)
 
 
 def loadfile(filename):
@@ -30,6 +26,17 @@ def loadfile(filename):
 
 def getTimes(data):
     return data[:, [5, 6, 7]]
+
+
+def avgWaitingTime(data):
+    times = getTimes(data)
+    waits = [x[1] - x[0] for x in times]
+    h = sorted(waits)
+
+    fit = stats.norm.pdf(h, np.mean(h), np.std(h))
+    plt.plot(h, fit, '-o')
+    plt.hist(h, normed=True)
+    plt.show()
 
 if __name__ == "__main__":
     if len(argv) < 2:
