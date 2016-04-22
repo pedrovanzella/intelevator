@@ -44,7 +44,9 @@ void Simulator::run() {
       _eventDispatcher->broadcast(e);
   }
 
-  _statistics->printToFile("logs/" + _scenario->getName() + ".run.log");
+  auto logfile = "logs/" + _scenario->getName() + ".run.log";
+  LOG(INFO) << "Writing statistics to file " << logfile;
+  _statistics->printToFile(logfile);
 
   LOG(INFO) << "Finished '" << _scenario->getName() << "' scenario.";
 }
