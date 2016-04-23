@@ -1,7 +1,8 @@
-# Ignore bin, build, lib and log dirs
+# Ignore bin, build, lib, log and output dirs
 bin
 build
 logs
+output
 
 # Emacs crap
 \#*#
@@ -11,6 +12,7 @@ logs
 # python
 *.pyc
 
+# cmake stuff
 .idea
 CMakeCache.txt
 CMakeFiles/
