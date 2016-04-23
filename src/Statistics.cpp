@@ -48,6 +48,6 @@ void Statistics::printToFile(std::string name)
     t.printToFile(f);
   }
 
-  command = "python3 tools/logparser.py " + filepath;
+  command = "./tools/logparser.py " + filepath;
   system(command.c_str());
 }
