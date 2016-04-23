@@ -2,9 +2,8 @@
 #include <sstream>
 #include <string>
 
-Floor::Floor(const int number, const int population, const std::string seed)
-    : _number(number), _population(population),
-      _eventFactory(new EventFactory(seed)) {}
+Floor::Floor(const int number, const int population)
+    : _number(number), _population(population) {}
 
 Floor::~Floor() {}
 
@@ -17,6 +16,10 @@ Direction Floor::compareTo(const Floor &other) const {
     return Direction::Down;
 
   return Direction::Up;
+}
+
+void Floor::setEventFactory(const std::shared_ptr<EventFactory> eventFactory) {
+  _eventFactory = eventFactory;
 }
 
 void Floor::addClient(const std::shared_ptr<Client> client) {
@@ -68,7 +71,7 @@ std::shared_ptr<std::vector<std::shared_ptr<Floor>>> Floor::createFloors(const s
 
   auto population = scenario->getPopulation();
   for (int i = 0; i < population.size(); i++) {
-    auto f = std::make_shared<Floor>(i, population[i], scenario->getSeed());
+    auto f = std::make_shared<Floor>(i, population[i]);
     floors->push_back(f);
   }
 
