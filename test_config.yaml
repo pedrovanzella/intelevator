@@ -6,6 +6,16 @@ elevator_config:
   large: &large
     capacity: 10
 
+# dispatchers:
+#  0 - dummy
+#  1 - random
+#  2 - nearest neighbour
+#  3 - better nearest neighbour
+
+# cost functions:
+#  0 - dummy
+#  1 - nearest neighbour
+
 scenarios:
   - name: Test Scenario
     elevators: 2
@@ -13,3 +23,4 @@ scenarios:
     population: [ 10, 10, 10, 10, 10 ]
     dispatcher: 0
     cost_function: 0
+    seed: some string
