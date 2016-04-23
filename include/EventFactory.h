@@ -1,14 +1,18 @@
 #pragma once
 
 #include <glog/logging.h>
-#include <random>
+#include <memory>
+
+class Simulator; // forward-declaration
 
 class EventFactory
 {
 public:
-  EventFactory(const std::string seed);
+  EventFactory(std::shared_ptr<Simulator> simulator);
   virtual ~EventFactory();
 
+  static std::shared_ptr<std::vector<std::shared_ptr<EventFactory>>> create(std::shared_ptr<Simulator> simulator);
+
 private:
-  std::seed_seq _seed_sequence;
+  std::shared_ptr<Simulator> _simulator;
 };

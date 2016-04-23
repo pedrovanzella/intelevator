@@ -3,6 +3,7 @@
 #include "CostFunction.h"
 #include "Dispatcher.h"
 #include "Elevator.h"
+#include "EventFactory.h"
 #include "Floor.h"
 #include "Simulator.h"
 #include "Trip.h"
@@ -11,13 +12,15 @@
 #include <sstream>
 
 Building::Building(
-  std::shared_ptr<Simulator> simulator,
-  std::shared_ptr<std::vector<std::shared_ptr<Floor>>> floors,
-  std::shared_ptr<std::vector<std::shared_ptr<Elevator>>> elevators,
-  std::shared_ptr<Dispatcher> dispatcher,
-  std::shared_ptr<const CostFunction> costFunction)
-  : _simulator(simulator), _floors(floors), _elevators(elevators), _dispatcher(dispatcher),
-    _costFunction(costFunction), _stops(), _lastEventTime(0) {}
+    std::shared_ptr<Simulator> simulator,
+    std::shared_ptr<std::vector<std::shared_ptr<Floor>>> floors,
+    std::shared_ptr<std::vector<std::shared_ptr<Elevator>>> elevators,
+    std::shared_ptr<std::vector<std::shared_ptr<EventFactory>>> factories,
+    std::shared_ptr<Dispatcher> dispatcher,
+    std::shared_ptr<const CostFunction> costFunction)
+    : _simulator(simulator), _floors(floors), _elevators(elevators),
+      _factories(factories), _dispatcher(dispatcher),
+      _costFunction(costFunction), _stops(), _lastEventTime(0) {}
 
 Building::~Building() {}
 

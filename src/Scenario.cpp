@@ -47,12 +47,13 @@ const std::vector<int> Scenario::getPopulation() const { return _population; }
 const std::string Scenario::getSeed() const { return _seed; }
 
 std::shared_ptr<Building> Scenario::createBuilding(const std::shared_ptr<Simulator> simulator) const {
-  auto floors = Floor::createFloors(shared_from_this());
-  auto elevators = Elevator::createElevators(shared_from_this());
+  auto floors = Floor::create(shared_from_this());
+  auto elevators = Elevator::create(shared_from_this());
   auto dispatcher = DispatcherCreator::create(_dispatcherType);
   auto costFunction = CostFunctionCreator::create(_costFunctionType);
+  auto factories = EventFactory::create(simulator);
 
-  auto building = std::make_shared<Building>(simulator, floors, elevators, dispatcher, costFunction);
+  auto building = std::make_shared<Building>(simulator, floors, elevators, factories, dispatcher, costFunction);
 
   LOG(INFO) << "Created '" << _name << "' scenario with "
             << floors->size() << " floors, "

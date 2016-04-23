@@ -22,7 +22,7 @@ public:
   void addClient(const std::shared_ptr<Client> client);
   std::set<int> boardElevator(std::shared_ptr<Elevator> elevator);
 
-  static std::shared_ptr<std::vector<std::shared_ptr<Floor>>> createFloors(const std::shared_ptr<const Scenario> scenario);
+  static std::shared_ptr<std::vector<std::shared_ptr<Floor>>> create(const std::shared_ptr<const Scenario> scenario);
 
 private:
   int _number;

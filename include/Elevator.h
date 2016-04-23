@@ -43,7 +43,7 @@ public:
   void turn();
   void update();
 
-  static std::shared_ptr<std::vector<std::shared_ptr<Elevator>>> createElevators(const std::shared_ptr<const Scenario> scenario);
+  static std::shared_ptr<std::vector<std::shared_ptr<Elevator>>> create(const std::shared_ptr<const Scenario> scenario);
 
 private:
   const int _number;

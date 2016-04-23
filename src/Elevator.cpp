@@ -158,7 +158,7 @@ void Elevator::update() {
   }
 }
 
-std::shared_ptr<std::vector<std::shared_ptr<Elevator>>> Elevator::createElevators(const std::shared_ptr<const Scenario> scenario) {
+std::shared_ptr<std::vector<std::shared_ptr<Elevator>>> Elevator::create(const std::shared_ptr<const Scenario> scenario) {
   std::shared_ptr<std::vector<std::shared_ptr<Elevator>>> elevators(new std::vector<std::shared_ptr<Elevator>>);
 
   for (int i = 0; i < scenario->getElevators(); i++) {
