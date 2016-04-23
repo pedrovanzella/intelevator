@@ -2,9 +2,9 @@
 #include <sstream>
 #include <string>
 
-Floor::Floor(int number, int population)
+Floor::Floor(const int number, const int population, const std::string seed)
     : _number(number), _population(population),
-      _eventFactory(new EventFactory) {}
+      _eventFactory(new EventFactory(seed)) {}
 
 Floor::~Floor() {}
 
@@ -68,7 +68,7 @@ std::shared_ptr<std::vector<std::shared_ptr<Floor>>> Floor::createFloors(const s
 
   auto population = scenario->getPopulation();
   for (int i = 0; i < population.size(); i++) {
-    auto f = std::make_shared<Floor>(i, population[i]);
+    auto f = std::make_shared<Floor>(i, population[i], scenario->getSeed());
     floors->push_back(f);
   }
 

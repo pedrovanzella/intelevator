@@ -11,7 +11,7 @@
 
 class Floor {
 public:
-  Floor(int number, int population);
+  Floor(const int number, const int population, const std::string seed);
   virtual ~Floor();
 
   int getNumber() const;
