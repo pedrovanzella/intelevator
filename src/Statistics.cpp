@@ -1,4 +1,6 @@
 #include "Statistics.h"
+#include <ctime>
+#include <cstdlib>
 #include <glog/logging.h>
 
 Statistics::Statistics() {}
@@ -28,9 +30,20 @@ void Statistics::addTrip(const unsigned long dropOffTime,
 
 void Statistics::printToFile(std::string name)
 {
-  std::ofstream f;
-  f.open(name);
+  std::time_t now = std::time(NULL);
+  std::tm* ptm = std::localtime(&now);
+  char buffer[32];
+  std::strftime(buffer, 32, "%Y%m%d_%H%M%S", ptm);
 
+  std::string path = "output/" + name + "_" + buffer;
+  std::string filepath = path + "/run.log";
+  LOG(INFO) << "Writing statistics to '" << filepath << "'.";
+
+  std::string command = "mkdir -p " + path;
+  system(command.c_str());
+
+  std::ofstream f;
+  f.open(filepath);
   for (auto t: _trips) {
     t.printToFile(f);
   }
