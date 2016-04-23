@@ -47,4 +47,7 @@ void Statistics::printToFile(std::string name)
   for (auto t: _trips) {
     t.printToFile(f);
   }
+
+  command = "python3 tools/logparser.py " + filepath;
+  system(command.c_str());
 }
