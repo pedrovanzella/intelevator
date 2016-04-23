@@ -16,6 +16,7 @@ Scenario::Scenario(YAML::Node scenario) {
   _capacity = scenario["elevator_config"]["capacity"].as<int>();
   _dispatcherType = static_cast<DispatcherType>(scenario["dispatcher"].as<int>());
   _costFunctionType = static_cast<CostFunctionType>(scenario["cost_function"].as<int>());
+  _seed = scenario["seed"].as<std::string>();
 
   for (auto it : scenario["population"]) {
     _population.push_back(it.as<int>());
@@ -42,6 +43,8 @@ const int Scenario::getElevators() const { return _elevators; }
 const int Scenario::getCapacity() const { return _capacity; }
 
 const std::vector<int> Scenario::getPopulation() const { return _population; }
+
+const std::string Scenario::getSeed() const { return _seed; }
 
 std::shared_ptr<Building> Scenario::createBuilding(const std::shared_ptr<Simulator> simulator) const {
   auto floors = Floor::createFloors(shared_from_this());

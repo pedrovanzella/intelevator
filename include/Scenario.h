@@ -17,6 +17,7 @@ public:
   const int getElevators() const;
   const int getCapacity() const;
   const std::vector<int> getPopulation() const;
+  const std::string getSeed() const;
 
   std::shared_ptr<Building> createBuilding(const std::shared_ptr<Simulator> simulator) const;
 
@@ -27,6 +28,7 @@ private:
   std::vector<int> _population;
   DispatcherType _dispatcherType;
   CostFunctionType _costFunctionType;
+  std::string _seed;
 
   std::shared_ptr<const CostFunction> createCostFunction() const;
 };
