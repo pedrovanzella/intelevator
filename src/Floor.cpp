@@ -78,7 +78,7 @@ std::shared_ptr<std::vector<std::shared_ptr<Floor>>> Floor::create(const std::sh
   int i = 0;
   for (auto it : scenario->getFloors()) {
     auto f = std::make_shared<Floor>(i++, it.first, it.second);
-    auto ef = std::make_shared<EventFactory>(clock, f);
+    auto ef = std::make_shared<EventFactory>(clock, f, scenario->getSeed());
     f->setEventFactory(ef);
     floors->push_back(f);
   }
