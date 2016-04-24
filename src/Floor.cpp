@@ -71,11 +71,12 @@ std::shared_ptr<std::vector<std::shared_ptr<Floor>>> Floor::create(const std::sh
   std::shared_ptr<std::vector<std::shared_ptr<Floor>>> floors(new std::vector<std::shared_ptr<Floor>>);
 
   auto scenario = simulator->getScenario();
+  auto clock = simulator->getClock();
 
   int i = 0;
   for (auto it : scenario->getFloors()) {
-    auto ef = std::make_shared<EventFactory>(simulator);
     auto f = std::make_shared<Floor>(i++, it.second);
+    auto ef = std::make_shared<EventFactory>(clock, f);
     f->setEventFactory(ef);
     floors->push_back(f);
   }

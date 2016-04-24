@@ -57,9 +57,8 @@ std::shared_ptr<Building> Scenario::createBuilding(const std::shared_ptr<Simulat
   auto elevators = Elevator::create(simulator);
   auto dispatcher = DispatcherCreator::create(_dispatcherType);
   auto costFunction = CostFunctionCreator::create(_costFunctionType);
-  auto factories = EventFactory::create(simulator);
 
-  auto building = std::make_shared<Building>(simulator, floors, elevators, factories, dispatcher, costFunction);
+  auto building = std::make_shared<Building>(simulator, floors, elevators, dispatcher, costFunction);
 
   LOG(INFO) << "Created '" << _name << "' scenario with "
             << floors->size() << " floors, "
