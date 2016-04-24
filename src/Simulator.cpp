@@ -25,18 +25,19 @@ void Simulator::run() {
   LOG(INFO) << "Running '" << _scenario->getName() << "' scenario.";
 
   _building = _scenario->createBuilding(shared_from_this());
+  _building->createFutureArrival();
 
   _eventDispatcher->subscribe(std::static_pointer_cast<EventObserver>(_building));
   _eventDispatcher->subscribe(std::static_pointer_cast<EventObserver>(_statistics));
   _eventDispatcher->subscribe(std::static_pointer_cast<EventObserver>(_clock));
 
-  auto ca1 = std::make_shared<ClientArrival>(10, std::make_shared<Client>(1, 0, 5, _clock->currentTime()));
-  auto ca2 = std::make_shared<ClientArrival>(20, std::make_shared<Client>(1, 3, 1, _clock->currentTime()));
-  auto ca3 = std::make_shared<ClientArrival>(30, std::make_shared<Client>(1, 5, 2, _clock->currentTime()));
+  // auto ca1 = std::make_shared<ClientArrival>(10, std::make_shared<Client>(1, 0, 5, _clock->currentTime()));
+  // auto ca2 = std::make_shared<ClientArrival>(20, std::make_shared<Client>(1, 3, 1, _clock->currentTime()));
+  // auto ca3 = std::make_shared<ClientArrival>(30, std::make_shared<Client>(1, 5, 2, _clock->currentTime()));
 
-  _eventQueue->push(std::static_pointer_cast<Event>(ca1));
-  _eventQueue->push(std::static_pointer_cast<Event>(ca2));
-  _eventQueue->push(std::static_pointer_cast<Event>(ca3));
+  // _eventQueue->push(std::static_pointer_cast<Event>(ca1));
+  // _eventQueue->push(std::static_pointer_cast<Event>(ca2));
+  // _eventQueue->push(std::static_pointer_cast<Event>(ca3));
 
   while (_statistics->keepRunning() && _eventQueue->hasNextEvent()) {
     auto e = _eventQueue->pop();
