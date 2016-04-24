@@ -7,13 +7,14 @@
 struct FloorTest : testing::Test
 {
   int number = 1;
+  float lambda = 5;
   int population = 10;
   std::shared_ptr<Floor> floor;
 
   FloorTest()
    : number(1)
    , population(10)
-   , floor(new Floor(number, population))
+   , floor(new Floor(number, lambda, population))
    {}
 
   virtual ~FloorTest()
@@ -32,9 +33,9 @@ TEST_F(FloorTest, GetPopulation)
 
 TEST_F(FloorTest, CompareTo)
 {
-  Floor down(0, 10);
+  Floor down(0, 0, 10);
   EXPECT_EQ(floor->compareTo(down), Direction::Down);
 
-  Floor up(2, 10);
+  Floor up(2, 0, 10);
   EXPECT_EQ(floor->compareTo(up), Direction::Up);
 }

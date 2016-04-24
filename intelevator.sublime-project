@@ -1,0 +1,20 @@
+{
+	"folders":
+	[
+		{
+			"path": "."
+		}
+	],
+  "settings":
+    {
+        "sublimeclang_options":
+        [
+            "-Wall",
+            "-Werror",
+            "-Wpedantic",
+            "-Wno-unused-function",
+            "-std=c++11",
+            "-I${folder:${project_path:intelevator.sublime-project}}/**"
+        ]
+    }
+}

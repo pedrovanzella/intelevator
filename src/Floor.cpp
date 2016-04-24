@@ -3,12 +3,14 @@
 #include <sstream>
 #include <string>
 
-Floor::Floor(const int number, const int population)
-    : _number(number), _population(population) {}
+Floor::Floor(const int number, const float lambda, const int population)
+    : _number(number), _lambda(lambda), _population(population) {}
 
 Floor::~Floor() {}
 
 int Floor::getNumber() const { return _number; }
+
+int Floor::getLambda() const { return _lambda; }
 
 int Floor::getPopulation() const { return _population; }
 
@@ -75,7 +77,7 @@ std::shared_ptr<std::vector<std::shared_ptr<Floor>>> Floor::create(const std::sh
 
   int i = 0;
   for (auto it : scenario->getFloors()) {
-    auto f = std::make_shared<Floor>(i++, it.second);
+    auto f = std::make_shared<Floor>(i++, it.first, it.second);
     auto ef = std::make_shared<EventFactory>(clock, f);
     f->setEventFactory(ef);
     floors->push_back(f);
