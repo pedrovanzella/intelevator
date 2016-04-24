@@ -3,7 +3,7 @@
 #include <sstream>
 #include <string>
 
-Floor::Floor(const int number, const float lambda, const int population)
+Floor::Floor(const int number, const int population, const float lambda)
     : _number(number), _lambda(lambda), _population(population) {}
 
 Floor::~Floor() {}

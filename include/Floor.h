@@ -13,7 +13,7 @@ class Simulator; // forward declaration
 
 class Floor {
 public:
-  Floor(const int number, const float lambda, const int population);
+  Floor(const int number, const int population, const float lambda);
   virtual ~Floor();
 
   int getNumber() const;
