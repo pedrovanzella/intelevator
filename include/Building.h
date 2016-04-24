@@ -33,6 +33,7 @@ public:
   const std::shared_ptr<Elevator> getElevator(int number) const;
 
   void notify(const std::shared_ptr<const Event> event);
+  void createFutureArrival();
 
   std::string stopsToString() const;
 

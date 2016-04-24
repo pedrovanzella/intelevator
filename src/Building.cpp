@@ -55,6 +55,11 @@ const std::shared_ptr<Elevator> Building::getElevator(int number) const {
   return _elevators->at(number);
 }
 
+void Building::createFutureArrival() {
+  for (auto floor : *_floors)
+    floor->createFutureArrival(_simulator->getEventQueue());
+}
+
 void Building::doClientArrival(std::shared_ptr<const ClientArrival> event) {
   /*
     Um evento ClientArrival ocorre em um andar específico. O Building deve
