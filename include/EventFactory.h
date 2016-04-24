@@ -23,4 +23,5 @@ private:
   std::seed_seq _seed;
   std::default_random_engine _generator;
   std::poisson_distribution<int> _distribution;
+  int _totalArrived;
 };
