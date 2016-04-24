@@ -23,7 +23,7 @@ struct BuildingTest : testing::Test
 
   BuildingTest()
   {
-    config = YAML::LoadFile("test_config.yaml")["scenarios"][0];
+    config = YAML::LoadFile("config.yaml")["scenarios"][0];
     scenario = std::make_shared<Scenario>(config);
     simulator = std::make_shared<Simulator>(scenario);
     building = scenario->createBuilding(simulator);
@@ -35,12 +35,12 @@ struct BuildingTest : testing::Test
 
 TEST_F(BuildingTest, GetFloors_ReturnsRightSize)
 {
-  EXPECT_EQ(config["population"].size(), building->getFloors()->size());
+  EXPECT_EQ(scenario->getFloors().size(), building->getFloors()->size());
 }
 
 TEST_F(BuildingTest, GetElevators_ReturnsRightSize)
 {
-  EXPECT_EQ(config["elevators"].as<int>(), building->getElevators()->size());
+  EXPECT_EQ(scenario->getElevators(), building->getElevators()->size());
 }
 
 TEST_F(BuildingTest, VerifyFloors)
