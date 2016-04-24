@@ -21,8 +21,6 @@ Scenario::Scenario(YAML::Node scenario) {
   _seed = scenario["seed"].as<std::string>();
 
   for (auto it : scenario["floors"]) {
-    _population.push_back(it[0].as<int>());
-    _lambda.push_back(it[1].as<float>());
     _floors.push_back(std::make_pair(it[0].as<int>(), it[1].as<float>()));
   }
 }
@@ -48,10 +46,6 @@ const int Scenario::getCapacity() const { return _capacity; }
 
 const int Scenario::getFloorCount() const { return _floorCount; }
 
-const std::vector<int> Scenario::getPopulation() const { return _population; }
-
-const std::vector<float> Scenario::getLambda() const { return _lambda; }
-
 const std::vector<std::pair<int, float>> Scenario::getFloors() const {
   return _floors;
 }
@@ -59,8 +53,8 @@ const std::vector<std::pair<int, float>> Scenario::getFloors() const {
 const std::string Scenario::getSeed() const { return _seed; }
 
 std::shared_ptr<Building> Scenario::createBuilding(const std::shared_ptr<Simulator> simulator) const {
-  auto floors = Floor::create(shared_from_this());
-  auto elevators = Elevator::create(shared_from_this());
+  auto floors = Floor::create(simulator);
+  auto elevators = Elevator::create(simulator);
   auto dispatcher = DispatcherCreator::create(_dispatcherType);
   auto costFunction = CostFunctionCreator::create(_costFunctionType);
   auto factories = EventFactory::create(simulator);

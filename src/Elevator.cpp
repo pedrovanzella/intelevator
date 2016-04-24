@@ -1,4 +1,5 @@
 #include "Elevator.h"
+#include "Simulator.h"
 #include <algorithm>
 #include <memory>
 #include <glog/logging.h>
@@ -158,9 +159,10 @@ void Elevator::update() {
   }
 }
 
-std::shared_ptr<std::vector<std::shared_ptr<Elevator>>> Elevator::create(const std::shared_ptr<const Scenario> scenario) {
+std::shared_ptr<std::vector<std::shared_ptr<Elevator>>> Elevator::create(const std::shared_ptr<Simulator> simulator) {
   std::shared_ptr<std::vector<std::shared_ptr<Elevator>>> elevators(new std::vector<std::shared_ptr<Elevator>>);
 
+  auto scenario = simulator->getScenario();
   for (int i = 0; i < scenario->getElevators(); i++) {
     auto e = std::make_shared<Elevator>(i, scenario->getCapacity(), 0);
     elevators->push_back(e);

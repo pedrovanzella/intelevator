@@ -10,6 +10,8 @@
 #include <queue>
 #include <vector>
 
+class Simulator; // forward declaration
+
 class Elevator: public std::enable_shared_from_this<Elevator> {
 public:
   Elevator(int number, int capacity, int floor);
@@ -43,7 +45,7 @@ public:
   void turn();
   void update();
 
-  static std::shared_ptr<std::vector<std::shared_ptr<Elevator>>> create(const std::shared_ptr<const Scenario> scenario);
+  static std::shared_ptr<std::vector<std::shared_ptr<Elevator>>> create(const std::shared_ptr<Simulator> simulator);
 
 private:
   const int _number;

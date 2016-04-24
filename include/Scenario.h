@@ -6,7 +6,7 @@
 #include <memory>
 #include <yaml-cpp/yaml.h>
 
-class Scenario : public std::enable_shared_from_this<Scenario> {
+class Scenario {
 public:
   Scenario(YAML::Node scenario);
   virtual ~Scenario();
@@ -17,8 +17,6 @@ public:
   const int getElevators() const;
   const int getCapacity() const;
   const int getFloorCount() const;
-  const std::vector<int> getPopulation() const;
-  const std::vector<float> getLambda() const;
   const std::vector<std::pair<int, float>> getFloors() const;
   const std::string getSeed() const;
 
@@ -29,8 +27,6 @@ private:
   int _elevators;
   int _capacity;
   int _floorCount;
-  std::vector<int> _population;
-  std::vector<float> _lambda;
   std::vector<std::pair<int, float>> _floors;
   DispatcherType _dispatcherType;
   CostFunctionType _costFunctionType;

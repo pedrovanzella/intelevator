@@ -1,4 +1,5 @@
 #include "Floor.h"
+#include "Simulator.h"
 #include <sstream>
 #include <string>
 
@@ -66,12 +67,16 @@ std::set<int> Floor::boardElevator(std::shared_ptr<Elevator> elevator) {
   return newStops;
 }
 
-std::shared_ptr<std::vector<std::shared_ptr<Floor>>> Floor::create(const std::shared_ptr<const Scenario> scenario) {
+std::shared_ptr<std::vector<std::shared_ptr<Floor>>> Floor::create(const std::shared_ptr<Simulator> simulator) {
   std::shared_ptr<std::vector<std::shared_ptr<Floor>>> floors(new std::vector<std::shared_ptr<Floor>>);
 
-  auto population = scenario->getPopulation();
-  for (int i = 0; i < population.size(); i++) {
-    auto f = std::make_shared<Floor>(i, population[i]);
+  auto scenario = simulator->getScenario();
+
+  int i = 0;
+  for (auto it : scenario->getFloors()) {
+    auto ef = std::make_shared<EventFactory>(simulator);
+    auto f = std::make_shared<Floor>(i++, it.second);
+    f->setEventFactory(ef);
     floors->push_back(f);
   }
 
