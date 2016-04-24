@@ -1,5 +1,6 @@
 #pragma once
 
+#include "EventQueue.h"
 #include <glog/logging.h>
 #include <memory>
 #include <random>
@@ -13,6 +14,8 @@ class EventFactory
 public:
   EventFactory(std::shared_ptr<Clock> clock, std::shared_ptr<Floor> floor, std::string seed);
   virtual ~EventFactory();
+
+  void createFutureArrival(const std::shared_ptr<EventQueue> eventQueue);
 
 private:
   std::shared_ptr<Clock> _clock;

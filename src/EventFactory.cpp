@@ -8,3 +8,5 @@ EventFactory::EventFactory(std::shared_ptr<Clock> clock,
       _generator(_seed), _distribution(floor->getLambda()) {}
 
 EventFactory::~EventFactory() {}
+
+void EventFactory::createFutureArrival(const std::shared_ptr<EventQueue> eventQueue) {}

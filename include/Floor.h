@@ -4,6 +4,7 @@
 #include "Direction.h"
 #include "Elevator.h"
 #include "EventFactory.h"
+#include "EventQueue.h"
 #include <memory>
 #include <queue>
 #include <set>
@@ -23,6 +24,8 @@ public:
   void setEventFactory(const std::shared_ptr<EventFactory> eventFactory);
   void addClient(const std::shared_ptr<Client> client);
   std::set<int> boardElevator(std::shared_ptr<Elevator> elevator);
+
+  void createFutureArrival(const std::shared_ptr<EventQueue> eventQueue);
 
   static std::shared_ptr<std::vector<std::shared_ptr<Floor>>> create(const std::shared_ptr<Simulator> simulator);
 

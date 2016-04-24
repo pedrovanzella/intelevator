@@ -69,6 +69,10 @@ std::set<int> Floor::boardElevator(std::shared_ptr<Elevator> elevator) {
   return newStops;
 }
 
+void Floor::createFutureArrival(const std::shared_ptr<EventQueue> eventQueue) {
+  _eventFactory->createFutureArrival(eventQueue);
+}
+
 std::shared_ptr<std::vector<std::shared_ptr<Floor>>> Floor::create(const std::shared_ptr<Simulator> simulator) {
   std::shared_ptr<std::vector<std::shared_ptr<Floor>>> floors(new std::vector<std::shared_ptr<Floor>>);
 
