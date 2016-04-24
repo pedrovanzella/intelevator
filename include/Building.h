@@ -21,7 +21,6 @@ public:
   Building(std::shared_ptr<Simulator> simulator,
            std::shared_ptr<std::vector<std::shared_ptr<Floor>>> floors,
            std::shared_ptr<std::vector<std::shared_ptr<Elevator>>> elevators,
-           std::shared_ptr<std::vector<std::shared_ptr<EventFactory>>> factories,
            std::shared_ptr<Dispatcher> dispatcher,
            std::shared_ptr<const CostFunction> costFunction);
 
@@ -41,7 +40,6 @@ private:
   std::shared_ptr<Simulator> _simulator;
   std::shared_ptr<std::vector<std::shared_ptr<Floor>>> _floors;
   std::shared_ptr<std::vector<std::shared_ptr<Elevator>>> _elevators;
-  std::shared_ptr<std::vector<std::shared_ptr<EventFactory>>> _factories;
   const std::shared_ptr<Dispatcher> _dispatcher;
   const std::shared_ptr<const CostFunction> _costFunction;
   std::map<std::shared_ptr<Elevator>, std::set<int>> _stops;
