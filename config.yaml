@@ -18,31 +18,15 @@ elevator_config:
 
 scenarios:
   - name: Simple
-    elevators: 5
-    elevator_config: *small
-    population: [ 5, 5, 5, 5, 5, 5 ]
     dispatcher: 1 # random
     cost_function: 0 # dummy
     seed: Semente sementosa sementuda!
-
-  # - name: Scenario 01
-  #   elevators: 2
-  #   elevator_config: *small
-  #   population: [ 30, 10, 10, 10, 10 ]
-  #   dispatcher: 0
-  #   cost_function: 0
-
-  # - name: Scenario 02
-  #   elevators: 3
-  #   capacity: 8
-  #   elevator_config: *medium
-  #   population: [ 50, 30, 30, 30, 30, 30, 30, 30 , 30, 30]
-  #   dispatcher: 1
-  #   cost_function: 1
-
-  # - name: Scenario 03
-  #   elevators: 8
-  #   elevator_config: *large
-  #   population: [ 160, 80, 80, 80, 80, 80, 80, 80, 80, 80, 80, 80, 80, 80, 80, 80, 80, 80, 80, 80 ]
-  #   dispatcher: 2
-  #   cost_function: 1
+    elevators: 2
+    elevator_config: *small
+    floors: # [ population, lambda ]
+      - [ 10,  5.0 ]
+      - [  8, 10.0 ]
+      - [  6, 15.0 ]
+      - [  4, 18.0 ]
+      - [  2, 20.0 ]
+      - [  2, 22.0 ]

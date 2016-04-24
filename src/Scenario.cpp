@@ -14,12 +14,16 @@ Scenario::Scenario(YAML::Node scenario) {
   _name = scenario["name"].as<std::string>();
   _elevators = scenario["elevators"].as<int>();
   _capacity = scenario["elevator_config"]["capacity"].as<int>();
+  _floorCount = scenario["floors"].size();
+
   _dispatcherType = static_cast<DispatcherType>(scenario["dispatcher"].as<int>());
   _costFunctionType = static_cast<CostFunctionType>(scenario["cost_function"].as<int>());
   _seed = scenario["seed"].as<std::string>();
 
-  for (auto it : scenario["population"]) {
-    _population.push_back(it.as<int>());
+  for (auto it : scenario["floors"]) {
+    _population.push_back(it[0].as<int>());
+    _lambda.push_back(it[1].as<float>());
+    _floors.push_back(std::make_pair(it[0].as<int>(), it[1].as<float>()));
   }
 }
 
@@ -42,7 +46,15 @@ const int Scenario::getElevators() const { return _elevators; }
 
 const int Scenario::getCapacity() const { return _capacity; }
 
+const int Scenario::getFloorCount() const { return _floorCount; }
+
 const std::vector<int> Scenario::getPopulation() const { return _population; }
+
+const std::vector<float> Scenario::getLambda() const { return _lambda; }
+
+const std::vector<std::pair<int, float>> Scenario::getFloors() const {
+  return _floors;
+}
 
 const std::string Scenario::getSeed() const { return _seed; }
 
