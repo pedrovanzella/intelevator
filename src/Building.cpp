@@ -33,6 +33,7 @@ void Building::notify(const std::shared_ptr<const Event> event) {
   }
 
   _lastEventTime = event->getTime();
+  createFutureArrival();
 }
 
 const std::shared_ptr<std::vector<std::shared_ptr<Elevator>>> Building::getElevators() const {
