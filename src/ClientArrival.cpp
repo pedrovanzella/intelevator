@@ -15,6 +15,7 @@ std::string ClientArrival::str() const {
   std::ostringstream stream;
   stream << "Client arrived at floor " << _client->getArrivalFloor()
          << " bound to floor " << _client->getDestination()
-         << ", with size " << _client->getPartySize() << ".";
+         << ", with size " << _client->getPartySize()
+         << " (t=" << _eventTime << ").";
   return stream.str();
 }
