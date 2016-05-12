@@ -11,6 +11,7 @@ public:
                 const std::shared_ptr<Client> client);
 
   const std::shared_ptr<Client> getClient() const;
+  std::string str() const;
 
 private:
   const std::shared_ptr<Client> _client;
