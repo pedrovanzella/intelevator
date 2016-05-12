@@ -20,3 +20,6 @@ cmake_install.cmake
 
 # google test
 googletest-*
+
+# sublime crap
+intelevator.sublime-workspace
