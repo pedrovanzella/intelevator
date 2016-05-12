@@ -19,6 +19,8 @@ public:
   int getNumber() const;
   int getLambda() const;
   int getPopulation() const;
+  int clientsOnUpLine() const;
+  int clientsOnDownLine() const;
   Direction compareTo(const Floor &other) const;
 
   void setEventFactory(const std::shared_ptr<EventFactory> eventFactory);
@@ -31,8 +33,8 @@ public:
 
 private:
   int _number;
-  int _lambda;
   int _population;
+  int _lambda;
   std::queue<std::shared_ptr<Client>> _upLine;
   std::queue<std::shared_ptr<Client>> _downLine;
   std::shared_ptr<EventFactory> _eventFactory;

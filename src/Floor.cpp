@@ -4,7 +4,7 @@
 #include <string>
 
 Floor::Floor(const int number, const int population, const float lambda)
-    : _number(number), _lambda(lambda), _population(population) {}
+    : _number(number), _population(population), _lambda(lambda) {}
 
 Floor::~Floor() {}
 
@@ -14,11 +14,18 @@ int Floor::getLambda() const { return _lambda; }
 
 int Floor::getPopulation() const { return _population; }
 
+int Floor::clientsOnUpLine() const { return _upLine.size(); }
+
+int Floor::clientsOnDownLine() const { return _downLine.size(); }
+
 Direction Floor::compareTo(const Floor &other) const {
   if (other.getNumber() < _number)
     return Direction::Down;
 
-  return Direction::Up;
+  if (other.getNumber() > _number)
+    return Direction::Up;
+
+  return Direction::None;
 }
 
 void Floor::setEventFactory(const std::shared_ptr<EventFactory> eventFactory) {
