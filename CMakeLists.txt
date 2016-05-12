@@ -50,7 +50,6 @@ set(SOURCE_FILES
         src/Statistics.cpp
         src/Client.cpp
         src/DummyCostFunction.cpp
-        src/ElevatorArrival.cpp
         src/EventDispatcher.cpp
         src/Floor.cpp
         src/Scenario.cpp

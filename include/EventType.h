@@ -5,8 +5,7 @@
 
 enum class EventType {
   clientArrival,
-  elevatorArrival,
-  cycleElevators
+  finishSimulation
 };
 
 namespace Helpers
@@ -16,8 +15,7 @@ namespace Helpers
     switch(type)
     {
       case EventType::clientArrival:   return "ClientArrival";
-      case EventType::elevatorArrival: return "ElevatorArrival";
-      case EventType::cycleElevators:  return "CycleElevators";
+      case EventType::finishSimulation: return "FinishSimulation";
       default:
         throw std::invalid_argument("");
     }
