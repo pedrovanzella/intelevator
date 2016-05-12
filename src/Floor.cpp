@@ -37,14 +37,14 @@ void Floor::addClient(const std::shared_ptr<Client> client) {
 
   if (destination > _number) {
     _upLine.push(client);
-    LOG(INFO) << "Floor #" << _number << " received a client (size "
-              << client->getPartySize() << ")"
-              << " to go UP to floor #" << client->getDestination() << ".";
+    // LOG(INFO) << "Floor #" << _number << " received a client (size "
+    //           << client->getPartySize() << ")"
+    //           << " to go UP to floor #" << client->getDestination() << ".";
   } else if (destination < _number) {
     _downLine.push(client);
-    LOG(INFO) << "Floor #" << _number << " received a client (size "
-              << client->getPartySize() << ")"
-              << " to go DOWN to floor #" << client->getDestination() << ".";
+    // LOG(INFO) << "Floor #" << _number << " received a client (size "
+    //           << client->getPartySize() << ")"
+    //           << " to go DOWN to floor #" << client->getDestination() << ".";
   } else {
     std::ostringstream stream;
     stream << "Floor " << _number << " received a Client which destination is "
