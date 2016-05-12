@@ -18,6 +18,7 @@ elevator_config:
 
 scenarios:
   - name: Simple
+    duration: 300
     dispatcher: 1 # random
     cost_function: 0 # dummy
     seed: Semente sementosa sementuda!

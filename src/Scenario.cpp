@@ -12,6 +12,7 @@
 
 Scenario::Scenario(YAML::Node scenario) {
   _name = scenario["name"].as<std::string>();
+  _duration = scenario["duration"].as<int>();
   _elevators = scenario["elevators"].as<int>();
   _capacity = scenario["elevator_config"]["capacity"].as<int>();
   _floorCount = scenario["floors"].size();
@@ -39,6 +40,8 @@ std::shared_ptr<std::vector<std::shared_ptr<const Scenario>>> Scenario::Load(std
 }
 
 const std::string Scenario::getName() const { return _name; }
+
+const int Scenario::getDuration() const { return _duration; }
 
 const int Scenario::getElevators() const { return _elevators; }
 

@@ -14,6 +14,7 @@ public:
   static std::shared_ptr<std::vector<std::shared_ptr<const Scenario>>> Load(std::string file);
 
   const std::string getName() const;
+  const int getDuration() const;
   const int getElevators() const;
   const int getCapacity() const;
   const int getFloorCount() const;
@@ -24,6 +25,7 @@ public:
 
 private:
   std::string _name;
+  int _duration;
   int _elevators;
   int _capacity;
   int _floorCount;
