@@ -128,7 +128,7 @@ void Elevator::turn() {
     _direction = Direction::Up;
 }
 
-void Elevator::update() {
+void Elevator::goToNextLocation() {
   switch (_status) {
     case Status::Moving: {
       if (_direction == Direction::Up) {

@@ -43,7 +43,7 @@ public:
   void stop();
   void idle();
   void turn();
-  void update();
+  void goToNextLocation();
 
   static std::shared_ptr<std::vector<std::shared_ptr<Elevator>>> create(const std::shared_ptr<Simulator> simulator);
 
