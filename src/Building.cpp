@@ -119,16 +119,9 @@ void Building::updateElevators(const unsigned long time) {
     elevator->goToNextLocation();
     _stops[elevator].erase(elevator->getLocation());
 
-    auto passengersToDrop = elevator->dropPassengersToCurrentLocation();
-    for (auto passenger : *passengersToDrop) {
-      LOG(INFO) << "Elevator #" << elevator->getNumber()
-                << " dropped " << passenger->getPartySize()
-                << " clients at floor #" << elevator->getLocation() << ".";
-
-      // TODO: Tá faltando uma coisinha ou outra aqui ainda
-      auto stats = _simulator->getStatistics();
-      stats->addTrip(time, elevator, passenger);
-    }
+    auto droppedPassengers = elevator->dropPassengersToCurrentLocation();
+    auto stats = _simulator->getStatistics();
+    stats->logDropOff(time, elevator, droppedPassengers);
 
     auto floor = _floors->at(elevator->getLocation());
     auto newStops = floor->boardElevator(elevator);

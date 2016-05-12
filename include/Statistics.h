@@ -17,6 +17,10 @@ public:
   bool keepRunning() const;
   void notify(const std::shared_ptr<const Event> event);
 
+  void logDropOff(const unsigned long dropOffTime,
+                  std::shared_ptr<Elevator> elevator,
+                  std::shared_ptr<std::vector<std::shared_ptr<Client>>> droppedPassengers);
+
   void addTrip(const unsigned long dropOffTime,
                const std::shared_ptr<Elevator> elevator,
                const std::shared_ptr<Client> passenger);

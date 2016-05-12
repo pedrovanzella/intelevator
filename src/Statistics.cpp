@@ -13,6 +13,18 @@ void Statistics::notify(const std::shared_ptr<const Event> event) {
   // Handle events
 }
 
+void Statistics::logDropOff(const unsigned long dropOffTime,
+                            std::shared_ptr<Elevator> elevator,
+                            std::shared_ptr<std::vector<std::shared_ptr<Client>>> droppedPassengers) {
+  for (auto passenger : *droppedPassengers) {
+    LOG(INFO) << "Elevator #" << elevator->getNumber()
+              << " dropped " << passenger->getPartySize()
+              << " clients at floor #" << elevator->getLocation() << ".";
+
+    addTrip(dropOffTime, elevator, passenger);
+  }
+}
+
 void Statistics::addTrip(const unsigned long dropOffTime,
                          const std::shared_ptr<Elevator> elevator,
                          const std::shared_ptr<Client> passenger) {
