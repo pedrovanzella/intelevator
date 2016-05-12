@@ -36,7 +36,7 @@ public:
   void setStatus(Status status);
 
   std::shared_ptr<std::vector<std::shared_ptr<Client>>> dropPassengersToCurrentLocation();
-  void stopAtNextLocation();
+  void mustStopAtNextLocation();
   void addPassenger(std::shared_ptr<Client> client);
 
   void start();

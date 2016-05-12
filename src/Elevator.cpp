@@ -108,7 +108,7 @@ std::shared_ptr<std::vector<std::shared_ptr<Client>>> Elevator::dropPassengersTo
   return passengersToDrop;
 }
 
-void Elevator::stopAtNextLocation() { _stopAtNextLocation = true; }
+void Elevator::mustStopAtNextLocation() { _stopAtNextLocation = true; }
 
 void Elevator::addPassenger(std::shared_ptr<Client> client) {
   _passengers->push_back(client);

@@ -23,19 +23,6 @@ Building::Building(
 
 Building::~Building() {}
 
-void Building::notify(const std::shared_ptr<const Event> event) {
-  for (int time = _lastEventTime; time < event->getTime(); ++time) {
-    updateElevators(time);
-  }
-
-  if (event->getType() == EventType::clientArrival) {
-    doClientArrival(std::static_pointer_cast<const ClientArrival>(event));
-    createFutureArrival();
-  }
-
-  _lastEventTime = event->getTime();
-}
-
 const std::shared_ptr<std::vector<std::shared_ptr<Elevator>>> Building::getElevators() const {
   return _elevators;
 }
@@ -54,6 +41,32 @@ const std::shared_ptr<Elevator> Building::getElevator(int number) const {
   if (number >= _elevators->size())
     throw std::out_of_range("Elevator number our of range: " + std::to_string(number));
   return _elevators->at(number);
+}
+
+void Building::notify(const std::shared_ptr<const Event> event) {
+  /*
+    Ao ser notificado de um evento, o sistema deve atualizar o seu estado para
+    refletir o que ocorreu no interim entre o momento do último evento
+    processado e o evento que está sendo notificado.
+  */
+  for (int time = _lastEventTime; time < event->getTime(); ++time) {
+    updateElevators(time);
+  }
+
+  /*
+    Após a atualização do estado do sistema, o novo evento deve ser processado
+    e o sistema deverá atualizar o seu estado de acordo com esse evento.
+  */
+  if (event->getType() == EventType::clientArrival) {
+    doClientArrival(std::static_pointer_cast<const ClientArrival>(event));
+    createFutureArrival();
+  }
+
+  /*
+    E depois salvar o tempo do último evento processo - e, não por coincidência,
+    este tempo é o valor do relógio de simulação atual.
+  */
+  _lastEventTime = event->getTime();
 }
 
 void Building::createFutureArrival() {
@@ -87,44 +100,45 @@ void Building::doClientArrival(std::shared_ptr<const ClientArrival> event) {
 
   if (_stops[elevator].find(client->getArrivalFloor()) == _stops[elevator].end()) {
     _stops[elevator].insert(client->getArrivalFloor());
-    LOG(INFO) << "Elevator #" << elevator->getNumber()
-              << " will stop on floor " << client->getArrivalFloor()
-              << " to pick up some clients.";
+    // LOG(INFO) << "Elevator #" << elevator->getNumber()
+    //           << " will stop on floor " << client->getArrivalFloor()
+    //           << " to pick up some clients.";
   }
 }
 
 void Building::updateElevators(const unsigned long time) {
-  for (auto e : *_elevators) {
-    assignDestinationForElevator(e);
+  for (auto elevator : *_elevators) {
+    assignDestinationForElevator(elevator);
 
-    if (mustStopAtNextLocation(e)) {
-      e->stopAtNextLocation();
-      e->goToNextLocation();
-      _stops[e].erase(e->getNextLocation());
-
-      auto passengersToDrop = e->dropPassengersToCurrentLocation();
-      for (auto passenger : *passengersToDrop) {
-        LOG(INFO) << "Elevator #" << e->getNumber()
-                  << " dropped " << passenger->getPartySize()
-                  << " clients at floor #" << e->getLocation() << ".";
-
-        // TODO: Tá faltando uma coisinha ou outra aqui ainda
-        auto stats = _simulator->getStatistics();
-        stats->addTrip(time, e, passenger);
-      }
-
-      auto floor = _floors->at(e->getLocation());
-      auto newStops = floor->boardElevator(e);
-      registerNewStops(e, newStops);
-    } else {
-      e->goToNextLocation();
+    if (!mustStopAtNextLocation(elevator)) {
+      elevator->goToNextLocation();
+      continue;
     }
+
+    elevator->mustStopAtNextLocation();
+    elevator->goToNextLocation();
+    _stops[elevator].erase(elevator->getLocation());
+
+    auto passengersToDrop = elevator->dropPassengersToCurrentLocation();
+    for (auto passenger : *passengersToDrop) {
+      LOG(INFO) << "Elevator #" << elevator->getNumber()
+                << " dropped " << passenger->getPartySize()
+                << " clients at floor #" << elevator->getLocation() << ".";
+
+      // TODO: Tá faltando uma coisinha ou outra aqui ainda
+      auto stats = _simulator->getStatistics();
+      stats->addTrip(time, elevator, passenger);
+    }
+
+    auto floor = _floors->at(elevator->getLocation());
+    auto newStops = floor->boardElevator(elevator);
+    registerNewStops(elevator, newStops);
   }
 }
 
 void Building::assignDestinationForElevator(const std::shared_ptr<Elevator> elevator) {
   if (elevator->getStatus() == Status::Idle && !_stops[elevator].empty()) {
-    // If a elevator is idle and has pending stops, then it should receive a new destination.
+    // If an elevator is idle and has pending stops, then it should receive a new destination.
     if (elevator->getDirection() == Direction::Up) {
       // If it was going up, we send it down.
       elevator->setDestination(*_stops[elevator].begin());
