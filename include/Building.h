@@ -28,14 +28,11 @@ public:
 
   const std::shared_ptr<std::vector<std::shared_ptr<Elevator>>> getElevators() const;
   const std::shared_ptr<std::vector<std::shared_ptr<Floor>>> getFloors() const;
-
   const std::shared_ptr<Floor> getFloor(int number) const;
   const std::shared_ptr<Elevator> getElevator(int number) const;
 
   void notify(const std::shared_ptr<const Event> event);
   void createFutureArrival();
-
-  std::string stopsToString() const;
 
 private:
   std::shared_ptr<Simulator> _simulator;
