@@ -99,7 +99,7 @@ void Building::updateElevators(const unsigned long time) {
 
     if (mustStopAtNextLocation(e)) {
       e->stopAtNextLocation();
-      e->update();
+      e->goToNextLocation();
       _stops[e].erase(e->getNextLocation());
 
       auto passengersToDrop = e->dropPassengersToCurrentLocation();
@@ -117,7 +117,7 @@ void Building::updateElevators(const unsigned long time) {
       auto newStops = floor->boardElevator(e);
       registerNewStops(e, newStops);
     } else {
-      e->update();
+      e->goToNextLocation();
     }
   }
 }
