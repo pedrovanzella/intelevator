@@ -8,7 +8,9 @@ Simulator::Simulator(const std::shared_ptr<const Scenario> scenario)
     : _scenario(scenario), _statistics(std::make_shared<Statistics>()),
       _clock(std::make_shared<Clock>()),
       _eventQueue(std::make_shared<EventQueue>()),
-      _eventDispatcher(std::make_shared<EventDispatcher>()) {}
+      _eventDispatcher(std::make_shared<EventDispatcher>()),
+      _seed_seq(std::seed_seq(scenario->getSeed().begin(), scenario->getSeed().end())),
+      _random_engine(std::make_shared<std::default_random_engine>(_seed_seq)) {}
 
 Simulator::~Simulator() {}
 
@@ -22,6 +24,8 @@ const std::shared_ptr<EventQueue> Simulator::getEventQueue() const { return _eve
 
 const std::shared_ptr<EventDispatcher> Simulator::getEventDispatcher() const { return _eventDispatcher; }
 
+const std::shared_ptr<std::default_random_engine> Simulator::getRandomEngine() const { return _random_engine; }
+
 void Simulator::run() {
   LOG(INFO) << "Running '" << _scenario->getName() << "' scenario.";
 
@@ -34,6 +38,12 @@ void Simulator::run() {
 
   auto finishSimulationEvent = std::make_shared<FinishSimulation>(_scenario->getDuration());
   _eventQueue->push(std::static_pointer_cast<Event>(finishSimulationEvent));
+
+  // auto ca1 = std::make_shared<ClientArrival>(0, std::make_shared<Client>(1, 0, 5, _clock->currentTime()));
+  // auto ca2 = std::make_shared<ClientArrival>(10, std::make_shared<Client>(1, 0, 2, _clock->currentTime()));
+
+  // _eventQueue->push(std::static_pointer_cast<Event>(ca1));
+  // _eventQueue->push(std::static_pointer_cast<Event>(ca2));
 
   while (_statistics->keepRunning() && _eventQueue->hasNextEvent()) {
     auto e = _eventQueue->pop();
