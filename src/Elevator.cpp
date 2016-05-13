@@ -68,12 +68,7 @@ void Elevator::setDestination(int destination) {
 
   _destination = destination;
 
-  if (_destination > _location)
-    setDirection(Direction::Up);
-  else if (_destination < _location)
-    setDirection(Direction::Down);
-  else
-    setDirection(Direction::None);
+  refreshDirection();
 
   start();
  }
@@ -117,7 +112,7 @@ void Elevator::addPassenger(std::shared_ptr<Client> client) {
 
 void Elevator::start() { _status = Status::Moving; }
 
-void Elevator::stop() { _status = Status::Stopped; }
+void Elevator::stop() { _status = Status::Stopped; refreshDirection(); }
 
 void Elevator::idle() { _status = Status::Idle; }
 
@@ -133,16 +128,16 @@ void Elevator::goToNextLocation() {
     case Status::Moving: {
       if (_direction == Direction::Up) {
         _location++;
-        LOG(INFO) << "Elevator #" << getNumber()
-          << " went UP to floor #" << getLocation() << ".";
+        // LOG(INFO) << "Elevator #" << getNumber()
+        //   << " went UP to floor #" << getLocation() << ".";
 
       } else if (_direction == Direction::Down) {
         _location--;
-        LOG(INFO) << "Elevator #" << getNumber()
-          << " went DOWN to floor #" << getLocation() << ".";
+        // LOG(INFO) << "Elevator #" << getNumber()
+        //   << " went DOWN to floor #" << getLocation() << ".";
       } else {
-        LOG(INFO) << "Elevator #" << getNumber()
-          << " stayed at floor #" << getLocation() << ".";
+        // LOG(INFO) << "Elevator #" << getNumber()
+        //   << " stayed at floor #" << getLocation() << ".";
       }
 
       if (_stopAtNextLocation) {
@@ -169,4 +164,13 @@ std::shared_ptr<std::vector<std::shared_ptr<Elevator>>> Elevator::create(const s
   }
 
   return elevators;
+}
+
+void Elevator::refreshDirection() {
+  if (_destination > _location)
+    setDirection(Direction::Up);
+  else if (_destination < _location)
+    setDirection(Direction::Down);
+  else
+    setDirection(Direction::None);
 }

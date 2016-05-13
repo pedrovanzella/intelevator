@@ -14,7 +14,7 @@ const std::shared_ptr<Client> ClientArrival::getClient() const {
 std::string ClientArrival::str() const {
   std::ostringstream stream;
   stream << "Client arrived at floor " << _client->getArrivalFloor()
-         << " bound to floor " << _client->getDestination()
+         << " bound to " << _client->getDestination()
          << ", with size " << _client->getPartySize()
          << " (t=" << _eventTime << ").";
   return stream.str();

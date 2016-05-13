@@ -7,7 +7,6 @@ EventDispatcher::~EventDispatcher() {}
 
 void EventDispatcher::broadcast(const std::shared_ptr<const Event> event) const {
   if (event) {
-    LOG(INFO) << event->str();
     for (auto &it : _observers) {
       it->notify(event);
     }

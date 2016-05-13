@@ -19,7 +19,7 @@ void Statistics::logDropOff(const unsigned long dropOffTime,
   for (auto passenger : *droppedPassengers) {
     LOG(INFO) << "Elevator #" << elevator->getNumber()
               << " dropped " << passenger->getPartySize()
-              << " clients at floor #" << elevator->getLocation() << ".";
+              << " clients at floor #" << elevator->getLocation() << " (t=" << dropOffTime << ").";
 
     addTrip(dropOffTime, elevator, passenger);
   }
@@ -60,6 +60,6 @@ void Statistics::printToFile(std::string name)
     t.printToFile(f);
   }
 
-  command = "./tools/logparser.py " + filepath;
-  system(command.c_str());
+  // command = "./tools/logparser.py " + filepath;
+  // system(command.c_str());
 }

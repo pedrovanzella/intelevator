@@ -56,4 +56,5 @@ private:
   Direction _direction;
   bool _stopAtNextLocation;
   std::shared_ptr<std::vector<std::shared_ptr<Client>>> _passengers;
+  void refreshDirection();
 };

@@ -49,9 +49,12 @@ void Building::notify(const std::shared_ptr<const Event> event) {
     refletir o que ocorreu no interim entre o momento do último evento
     processado e o evento que está sendo notificado.
   */
+
   for (int time = _lastEventTime; time < event->getTime(); ++time) {
     updateElevators(time);
   }
+
+  LOG(INFO) << event->str();
 
   /*
     Após a atualização do estado do sistema, o novo evento deve ser processado
@@ -70,8 +73,8 @@ void Building::notify(const std::shared_ptr<const Event> event) {
 }
 
 void Building::createFutureArrival() {
-  for (auto floor : *_floors)
-    floor->createFutureArrival(_simulator->getEventQueue());
+  // for (auto floor : *_floors)
+  //   floor->createFutureArrival(_simulator->getEventQueue());
 }
 
 void Building::doClientArrival(std::shared_ptr<const ClientArrival> event) {
@@ -118,6 +121,9 @@ void Building::updateElevators(const unsigned long time) {
     elevator->mustStopAtNextLocation();
     elevator->goToNextLocation();
     _stops[elevator].erase(elevator->getLocation());
+
+    LOG(INFO) << "Elevator #" << elevator->getNumber()
+              << " stopped at floor #" << elevator->getLocation() << " (t=" << time << ").";
 
     auto droppedPassengers = elevator->dropPassengersToCurrentLocation();
     auto stats = _simulator->getStatistics();
