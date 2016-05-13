@@ -38,34 +38,34 @@ TEST_F(BuildingTest, GetFloors_ReturnsRightSize)
   EXPECT_EQ(scenario->getFloors().size(), building->getFloors()->size());
 }
 
-TEST_F(BuildingTest, GetElevators_ReturnsRightSize)
-{
-  EXPECT_EQ(scenario->getElevators(), building->getElevators()->size());
-}
+// TEST_F(BuildingTest, GetElevators_ReturnsRightSize)
+// {
+//   EXPECT_EQ(scenario->getElevators(), building->getElevators()->size());
+// }
 
-TEST_F(BuildingTest, VerifyFloors)
-{
-  int i = 0;
-  for (auto f : *building->getFloors())
-  {
-    EXPECT_EQ(f->getNumber(), i++);
-  }
-}
+// TEST_F(BuildingTest, VerifyFloors)
+// {
+//   int i = 0;
+//   for (auto f : *building->getFloors())
+//   {
+//     EXPECT_EQ(f->getNumber(), i++);
+//   }
+// }
 
-TEST_F(BuildingTest, VerifyElevators)
-{
-  int i = 0;
-  for (auto e : *building->getElevators())
-  {
-    EXPECT_EQ(e->getNumber(), i++);
-  }
-}
+// TEST_F(BuildingTest, VerifyElevators)
+// {
+//   int i = 0;
+//   for (auto e : *building->getElevators())
+//   {
+//     EXPECT_EQ(e->getNumber(), i++);
+//   }
+// }
 
-TEST_F(BuildingTest, GetLocation_NewBuilding_ReturnsLobby)
-{
-  auto lobby = building->getFloor(0);
-  for (auto e : *building->getElevators())
-  {
-    EXPECT_EQ(lobby->getNumber(), e->getLocation());
-  }
-}
+// TEST_F(BuildingTest, GetLocation_NewBuilding_ReturnsLobby)
+// {
+//   auto lobby = building->getFloor(0);
+//   for (auto e : *building->getElevators())
+//   {
+//     EXPECT_EQ(lobby->getNumber(), e->getLocation());
+//   }
+// }
