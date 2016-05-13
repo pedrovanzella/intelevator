@@ -73,8 +73,8 @@ void Building::notify(const std::shared_ptr<const Event> event) {
 }
 
 void Building::createFutureArrival() {
-  // for (auto floor : *_floors)
-  //   floor->createFutureArrival(_simulator->getEventQueue());
+  for (auto floor : *_floors)
+    floor->createFutureArrival(_simulator->getEventQueue());
 }
 
 void Building::doClientArrival(std::shared_ptr<const ClientArrival> event) {
