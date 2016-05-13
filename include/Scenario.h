@@ -24,15 +24,15 @@ public:
   std::shared_ptr<Building> createBuilding(const std::shared_ptr<Simulator> simulator) const;
 
 private:
-  std::string _name;
-  int _duration;
-  int _elevators;
-  int _capacity;
-  int _floorCount;
+  const std::string _name;
+  const int _duration;
+  const int _elevators;
+  const int _capacity;
+  const int _floorCount;
+  const DispatcherType _dispatcherType;
+  const CostFunctionType _costFunctionType;
+  const std::string _seed;
   std::vector<std::pair<int, float>> _floors;
-  DispatcherType _dispatcherType;
-  CostFunctionType _costFunctionType;
-  std::string _seed;
 
   std::shared_ptr<const CostFunction> createCostFunction() const;
 };
