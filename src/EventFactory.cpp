@@ -1,13 +1,18 @@
 #include "ClientArrival.h"
 #include "Clock.h"
 #include "EventFactory.h"
+#include "EventQueue.h"
 #include "Floor.h"
+#include "Scenario.h"
 
 EventFactory::EventFactory(std::shared_ptr<Clock> clock,
-                           std::shared_ptr<Floor> floor, std::string seed)
-    : _clock(clock), _floor(floor), _seed(seed.begin(), seed.end()),
-      _generator(_seed), _distribution(floor->getLambda()),
-      _totalArrived(0) {}
+                           std::shared_ptr<Floor> floor,
+                           std::shared_ptr<const Scenario> scenario)
+    : _clock(clock), _floor(floor), _scenario(scenario), _distribution(floor->getLambda()), _totalArrived(0) {
+      std::string seed = _scenario->getSeed();
+      _seed_seq = std::seed_seq(seed.begin(), seed.end());
+      _generator = std::default_random_engine(_seed_seq);
+    }
 
 EventFactory::~EventFactory() {}
 
