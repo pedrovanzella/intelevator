@@ -18,7 +18,7 @@ class EventFactory;  // forward declaration
 class Building : public EventObserver,
                  public std::enable_shared_from_this<Building> {
 public:
-  Building(std::shared_ptr<Simulator> simulator,
+  Building(std::shared_ptr<const Simulator> simulator,
            std::shared_ptr<std::vector<std::shared_ptr<Floor>>> floors,
            std::shared_ptr<std::vector<std::shared_ptr<Elevator>>> elevators,
            std::shared_ptr<Dispatcher> dispatcher,
@@ -35,7 +35,7 @@ public:
   void createFutureArrival();
 
 private:
-  std::shared_ptr<Simulator> _simulator;
+  std::shared_ptr<const Simulator> _simulator;
   std::shared_ptr<std::vector<std::shared_ptr<Floor>>> _floors;
   std::shared_ptr<std::vector<std::shared_ptr<Elevator>>> _elevators;
   const std::shared_ptr<Dispatcher> _dispatcher;

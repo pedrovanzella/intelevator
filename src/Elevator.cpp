@@ -154,7 +154,7 @@ void Elevator::goToNextLocation() {
   }
 }
 
-std::shared_ptr<std::vector<std::shared_ptr<Elevator>>> Elevator::create(const std::shared_ptr<Simulator> simulator) {
+std::shared_ptr<std::vector<std::shared_ptr<Elevator>>> Elevator::create(const std::shared_ptr<const Simulator> simulator) {
   std::shared_ptr<std::vector<std::shared_ptr<Elevator>>> elevators(new std::vector<std::shared_ptr<Elevator>>);
 
   auto scenario = simulator->getScenario();

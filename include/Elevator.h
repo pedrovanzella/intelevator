@@ -45,7 +45,7 @@ public:
   void turn();
   void goToNextLocation();
 
-  static std::shared_ptr<std::vector<std::shared_ptr<Elevator>>> create(const std::shared_ptr<Simulator> simulator);
+  static std::shared_ptr<std::vector<std::shared_ptr<Elevator>>> create(const std::shared_ptr<const Simulator> simulator);
 
 private:
   const int _number;
