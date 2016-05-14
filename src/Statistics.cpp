@@ -1,5 +1,7 @@
 #include "Statistics.h"
+#include "Arrival.h"
 #include "Client.h"
+#include "ClientArrival.h"
 #include "Elevator.h"
 #include "Event.h"
 #include "Floor.h"
@@ -15,7 +17,9 @@ Statistics::~Statistics() {}
 bool Statistics::keepRunning() const { return true; }
 
 void Statistics::notify(const std::shared_ptr<const Event> event) {
-  // Handle events
+  if (event->getType() == EventType::clientArrival) {
+    logArrival(std::static_pointer_cast<const ClientArrival>(event));
+  }
 }
 
 void Statistics::logDropOff(const unsigned long dropOffTime,
@@ -45,6 +49,16 @@ void Statistics::addTrip(const unsigned long dropOffTime,
   _trips.push_back(t);
 }
 
+void Statistics::logArrival(std::shared_ptr<const ClientArrival> clientArrival) {
+  auto a = Arrival();
+  a.clientID = clientArrival->getClient()->getId();
+  a.arrivalTime = clientArrival->getTime();
+  a.arrivalFloor = clientArrival->getClient()->getArrivalFloor();
+  a.destinationFloor = clientArrival->getClient()->getDestination();
+  a.partySize = clientArrival->getClient()->getPartySize();
+  _arrivals.push_back(a);
+}
+
 void Statistics::printToFile(std::string name)
 {
   std::time_t now = std::time(NULL);
@@ -53,18 +67,27 @@ void Statistics::printToFile(std::string name)
   std::strftime(buffer, 32, "%Y%m%d_%H%M%S", ptm);
 
   std::string path = "output/" + name + "_" + buffer;
-  std::string filepath = path + "/run.log";
-  LOG(INFO) << "Writing statistics to '" << filepath << "'.";
-
   std::string command = "mkdir -p " + path;
   system(command.c_str());
 
-  std::ofstream f;
-  f.open(filepath);
-  for (auto t: _trips) {
-    t.printToFile(f);
+  {
+    LOG(INFO) << "Writing trips statistics to '" << path + "/trips.log" << "'.";
+    std::ofstream f;
+    f.open(path + "/trips.log");
+    for (auto t : _trips) {
+      t.printToFile(f);
+    }
   }
 
-  // command = "./tools/logparser.py " + filepath;
+  {
+    LOG(INFO) << "Writing arrivals statistics to '" << path + "/arrivals.log" << "'.";
+    std::ofstream f;
+    f.open(path + "/arrivals.log");
+    for (auto a : _arrivals) {
+      a.printToFile(f);
+    }
+  }
+
+  // command = "./tools/logparser.py " + path + "/trips.log";
   // system(command.c_str());
 }

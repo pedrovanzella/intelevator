@@ -7,11 +7,13 @@
 #include <string>
 #include <vector>
 
-class Client;   // forward declaration
-class Elevator; // forward declaration
-class Event;    // forward declaration
-class Floor;    // forward declaration
-struct Trip;    // forward declaration
+struct Arrival;      // forward declaration
+class Client;        // forward declaration
+class ClientArrival; // forward declaration
+class Elevator;      // forward declaration
+class Event;         // forward declaration
+class Floor;         // forward declaration
+struct Trip;         // forward declaration
 
 class Statistics : public EventObserver {
 public:
@@ -29,8 +31,11 @@ public:
                const std::shared_ptr<Elevator> elevator,
                const std::shared_ptr<Client> passenger);
 
+  void logArrival(std::shared_ptr<const ClientArrival> clientArrival);
+
   void printToFile(std::string name);
 
 private:
   std::vector<Trip> _trips;
+  std::vector<Arrival> _arrivals;
 };
