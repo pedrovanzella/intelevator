@@ -21,8 +21,6 @@ public:
   const std::vector<std::pair<int, float>> getFloors() const;
   const std::string getSeed() const;
 
-  std::shared_ptr<Building> createBuilding(const std::shared_ptr<Simulator> simulator) const;
-
 private:
   const std::string _name;
   const int _duration;
@@ -33,6 +31,4 @@ private:
   const CostFunctionType _costFunctionType;
   const std::string _seed;
   std::vector<std::pair<int, float>> _floors;
-
-  std::shared_ptr<const CostFunction> createCostFunction() const;
 };

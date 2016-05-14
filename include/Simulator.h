@@ -14,6 +14,8 @@ public:
   Simulator(std::shared_ptr<const Scenario> scenario);
   virtual ~Simulator();
 
+  std::shared_ptr<Building> createBuilding() const;
+
   const std::shared_ptr<const Scenario> getScenario() const;
   const std::shared_ptr<Statistics> getStatistics() const;
   const std::shared_ptr<Clock> getClock() const;

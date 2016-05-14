@@ -52,21 +52,3 @@ const std::vector<std::pair<int, float>> Scenario::getFloors() const {
 }
 
 const std::string Scenario::getSeed() const { return _seed; }
-
-std::shared_ptr<Building> Scenario::createBuilding(const std::shared_ptr<Simulator> simulator) const {
-  auto floors = Floor::create(simulator);
-  auto elevators = Elevator::create(simulator);
-  auto dispatcher = DispatcherCreator::create(_dispatcherType);
-  auto costFunction = CostFunctionCreator::create(_costFunctionType);
-
-  auto building = std::make_shared<Building>(simulator, floors, elevators, dispatcher, costFunction);
-
-  LOG(INFO) << "Created '" << _name << "' scenario with "
-            << floors->size() << " floors, "
-            << elevators->size() << " elevators, '"
-            << Helpers::dispatcherName(_dispatcherType) << "' dispatcher and '"
-            << Helpers::costFunctionName(_costFunctionType)
-            << "' cost function.";
-
-  return building;
-}

@@ -1,5 +1,7 @@
 #include "Simulator.h"
 #include "ClientArrival.h"
+#include "CostFunctionCreator.h"
+#include "DispatcherCreator.h"
 #include "FinishSimulation.h"
 #include <glog/logging.h>
 #include <random>
@@ -13,6 +15,24 @@ Simulator::Simulator(const std::shared_ptr<const Scenario> scenario)
       _random_engine(std::make_shared<std::default_random_engine>(_seed_seq)) {}
 
 Simulator::~Simulator() {}
+
+std::shared_ptr<Building> Simulator::createBuilding() const {
+  auto floors = Floor::create(shared_from_this());
+  auto elevators = Elevator::create(shared_from_this());
+  auto dispatcher = DispatcherCreator::create(_scenario->getDispatcherType());
+  auto costFunction = CostFunctionCreator::create(_scenario->getCostFunctionType());
+
+  auto building = std::make_shared<Building>(shared_from_this(), floors, elevators, dispatcher, costFunction);
+
+  LOG(INFO) << "Created '" << _scenario->getName() << "' scenario with "
+            << floors->size() << " floors, "
+            << elevators->size() << " elevators, '"
+            << Helpers::dispatcherName(_scenario->getDispatcherType()) << "' dispatcher and '"
+            << Helpers::costFunctionName(_scenario->getCostFunctionType())
+            << "' cost function.";
+
+  return building;
+}
 
 const std::shared_ptr<const Scenario> Simulator::getScenario() const { return _scenario; }
 
@@ -29,7 +49,7 @@ const std::shared_ptr<std::default_random_engine> Simulator::getRandomEngine() c
 void Simulator::run() {
   LOG(INFO) << "Running '" << _scenario->getName() << "' scenario.";
 
-  _building = _scenario->createBuilding(shared_from_this());
+  _building = createBuilding();
   _building->createFutureArrival();
 
   _eventDispatcher->subscribe(std::static_pointer_cast<EventObserver>(_building));
