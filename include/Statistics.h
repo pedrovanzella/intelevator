@@ -2,12 +2,13 @@
 
 #include "Elevator.h"
 #include "Event.h"
+#include "EventObserver.h"
 #include "Floor.h"
 #include "Trip.h"
+#include <fstream>
 #include <list>
 #include <memory>
 #include <string>
-#include <fstream>
 
 class Statistics : public EventObserver {
 public:
