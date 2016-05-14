@@ -11,7 +11,7 @@ Simulator::Simulator(const std::shared_ptr<const Scenario> scenario)
       _clock(std::make_shared<Clock>()),
       _eventQueue(std::make_shared<EventQueue>()),
       _eventDispatcher(std::make_shared<EventDispatcher>()),
-      _seed_seq(std::seed_seq(scenario->getSeed().begin(), scenario->getSeed().end())),
+      _seed_seq(scenario->getSeed().begin(), scenario->getSeed().end()),
       _random_engine(std::make_shared<std::default_random_engine>(_seed_seq)) {}
 
 Simulator::~Simulator() {}
