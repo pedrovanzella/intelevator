@@ -1,20 +1,22 @@
-#include "Building.h"
-#include "Scenario.h"
-#include "Clock.h"
-#include "Floor.h"
 #include "Simulator.h"
+#include "Building.h"
 #include "ClientArrival.h"
+#include "Clock.h"
 #include "CostFunctionCreator.h"
+#include "CostFunctionType.h"
 #include "DispatcherCreator.h"
-#include "FinishSimulation.h"
-#include "Statistics.h"
-#include "EventQueue.h"
+#include "DispatcherType.h"
 #include "EventDispatcher.h"
-#include <glog/logging.h>
-#include <random>
+#include "EventQueue.h"
+#include "FinishSimulation.h"
+#include "Floor.h"
+#include "Scenario.h"
+#include "Statistics.h"
 #include "DispatcherType.h"
 #include "CostFunctionType.h"
 #include "Elevator.h"
+#include <glog/logging.h>
+#include <random>
 
 Simulator::Simulator(const std::shared_ptr<const Scenario> scenario)
     : _scenario(scenario), _statistics(std::make_shared<Statistics>()),

@@ -1,8 +1,10 @@
 #include "Elevator.h"
-#include "Event.h"
 #include "Client.h"
-#include "Simulator.h"
+#include "Direction.h"
+#include "Event.h"
 #include "Scenario.h"
+#include "Simulator.h"
+#include "Status.h"
 #include <algorithm>
 #include <glog/logging.h>
 #include <memory>

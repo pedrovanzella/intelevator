@@ -4,8 +4,8 @@
 #include <list>
 #include <memory>
 
-class Event;
-class EventObserver;
+class Event;         // forward declaration
+class EventObserver; // forward declaration
 
 class EventDispatcher : public EventNotifier {
 public:

@@ -2,9 +2,9 @@
 
 #include <memory>
 
-class Building;
-class Client;
-class Elevator;
+class Building;      // forward declaration
+class Client; // forward declaration
+class Elevator;      // forward declaration
 
 class CostFunction {
 public:

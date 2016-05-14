@@ -1,7 +1,7 @@
 #pragma once
 
-#include <string>
 #include <stdexcept>
+#include <string>
 
 enum class Status {
   Moving,  // Elevator is moving. :P
@@ -9,17 +9,17 @@ enum class Status {
   Idle     // Elevator is stopped and has nothing to do with its life.
 };
 
-namespace Helpers
-{
-  static std::string statusName(Status type)
-  {
-    switch(type)
-    {
-      case Status::Moving:  return "moving";
-      case Status::Stopped: return "stopped";
-      case Status::Idle: return "idle";
-      default:
-        throw std::invalid_argument("");
+namespace Helpers {
+  static std::string statusName(Status type) {
+    switch (type) {
+    case Status::Moving:
+      return "moving";
+    case Status::Stopped:
+      return "stopped";
+    case Status::Idle:
+      return "idle";
+    default:
+      throw std::invalid_argument("");
     }
   }
 }

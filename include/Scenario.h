@@ -4,9 +4,9 @@
 #include <string>
 #include <vector>
 
-namespace YAML { class Node; }
-enum class CostFunctionType;
-enum class DispatcherType;
+namespace YAML { class Node; } // forward declaration
+enum class CostFunctionType;   // forward declaration
+enum class DispatcherType;     // forward declaration
 
 class Scenario {
 public:

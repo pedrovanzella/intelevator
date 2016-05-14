@@ -7,11 +7,11 @@
 #include <string>
 #include <vector>
 
-class Client;
-class Elevator;
-class Event;
-class Floor;
-struct Trip;
+class Client;   // forward declaration
+class Elevator; // forward declaration
+class Event;    // forward declaration
+class Floor;    // forward declaration
+struct Trip;    // forward declaration
 
 class Statistics : public EventObserver {
 public:

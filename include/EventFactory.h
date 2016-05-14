@@ -5,15 +5,16 @@
 #include <random>
 #include <string>
 
-class Clock;
-class EventQueue;
-class Floor;
-class Scenario;
+class Clock;      // forward declaration
+class EventQueue; // forward declaration
+class Floor;      // forward declaration
+class Scenario;   // forward declaration
 
-class EventFactory
-{
+class EventFactory {
 public:
-  EventFactory(std::shared_ptr<Clock> clock, std::shared_ptr<Floor> floor, std::shared_ptr<const Scenario> scenario, std::shared_ptr<std::default_random_engine> random_engine);
+  EventFactory(std::shared_ptr<Clock> clock, std::shared_ptr<Floor> floor,
+               std::shared_ptr<const Scenario> scenario,
+               std::shared_ptr<std::default_random_engine> random_engine);
   virtual ~EventFactory();
 
   void createFutureArrival(const std::shared_ptr<EventQueue> eventQueue);
