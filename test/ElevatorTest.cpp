@@ -1,5 +1,5 @@
 #include <gtest/gtest.h>
-
+#include "Client.h"
 #include "Elevator.h"
 #include "Floor.h"
 

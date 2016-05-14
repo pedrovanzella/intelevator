@@ -1,16 +1,16 @@
 #pragma once
 
-#include "Client.h"
 #include "Direction.h"
-#include "Event.h"
-#include "Scenario.h"
 #include "Status.h"
 #include <map>
 #include <memory>
 #include <queue>
 #include <vector>
 
-class Simulator; // forward declaration
+class Client;
+class Event;
+class Scenario;
+class Simulator;
 
 class Elevator: public std::enable_shared_from_this<Elevator> {
 public:

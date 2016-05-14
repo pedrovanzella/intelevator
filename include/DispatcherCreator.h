@@ -2,6 +2,7 @@
 
 #include "BetterNearestNeighbourDispatcher.h"
 #include "Dispatcher.h"
+#include "DispatcherType.h"
 #include "DummyDispatcher.h"
 #include "NearestNeighbourDispatcher.h"
 #include "RandomDispatcher.h"

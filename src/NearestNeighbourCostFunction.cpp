@@ -1,3 +1,4 @@
+#include "Client.h"
 #include "NearestNeighbourCostFunction.h"
 
 float NearestNeighbourCostFunction::calculate(

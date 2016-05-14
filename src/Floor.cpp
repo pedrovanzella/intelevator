@@ -1,4 +1,10 @@
 #include "Floor.h"
+#include "Client.h"
+#include "Direction.h"
+#include "Elevator.h"
+#include "EventFactory.h"
+#include "EventQueue.h"
+#include "Scenario.h"
 #include "Simulator.h"
 #include <sstream>
 #include <string>

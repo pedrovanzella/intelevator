@@ -1,9 +1,11 @@
 #include "Elevator.h"
+#include "Event.h"
+#include "Client.h"
 #include "Simulator.h"
+#include "Scenario.h"
 #include <algorithm>
-#include <memory>
 #include <glog/logging.h>
-#include "Trip.h"
+#include <memory>
 
 Elevator::Elevator(int number, int capacity, int floor)
   : _number(number),

@@ -1,13 +1,14 @@
 #pragma once
 
-#include "Building.h"
-#include "Clock.h"
-#include "EventDispatcher.h"
-#include "EventQueue.h"
-#include "Scenario.h"
-#include "Statistics.h"
 #include <memory>
 #include <random>
+
+class Clock;
+class Building;
+class Statistics;
+class EventQueue;
+class EventDispatcher;
+class Scenario;
 
 class Simulator : public std::enable_shared_from_this<Simulator> {
 public:

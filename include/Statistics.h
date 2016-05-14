@@ -1,14 +1,17 @@
 #pragma once
 
-#include "Elevator.h"
-#include "Event.h"
 #include "EventObserver.h"
-#include "Floor.h"
-#include "Trip.h"
 #include <fstream>
 #include <list>
 #include <memory>
 #include <string>
+#include <vector>
+
+class Client;
+class Elevator;
+class Event;
+class Floor;
+struct Trip;
 
 class Statistics : public EventObserver {
 public:
