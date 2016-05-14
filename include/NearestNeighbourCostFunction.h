@@ -1,13 +1,14 @@
 #pragma once
 
-#include "Building.h"
-#include "ClientArrival.h"
 #include "CostFunction.h"
-#include "Elevator.h"
+
+class Building;
+class Client;
+class Elevator;
 
 class NearestNeighbourCostFunction : public CostFunction {
 public:
   float calculate(const std::shared_ptr<const Building> building,
                   const std::shared_ptr<const Elevator> elevator,
-                  const std::shared_ptr<const ClientArrival> ca) const;
+                  const std::shared_ptr<const Client> c) const;
 };

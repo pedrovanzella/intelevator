@@ -14,6 +14,7 @@
 #include <random>
 #include "DispatcherType.h"
 #include "CostFunctionType.h"
+#include "Elevator.h"
 
 Simulator::Simulator(const std::shared_ptr<const Scenario> scenario)
     : _scenario(scenario), _statistics(std::make_shared<Statistics>()),

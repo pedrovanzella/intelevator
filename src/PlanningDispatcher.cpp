@@ -6,7 +6,16 @@ int PlanningDispatcher::pick_next_elevator(const std::shared_ptr<const CostFunct
                                            const std::shared_ptr<const Building> building,
                                            const std::shared_ptr<const ClientArrival> ca)
 {
-  return 0;
+  auto costs = calculate(costFunction, building, 5);
+  int lowestCost = 0;
+
+  for (auto const &c : costs) {
+    if (c.second < costs[lowestCost]) {
+        lowestCost = c.first;
+      }
+  }
+
+  return lowestCost;
 }
 
 std::map<int, int> PlanningDispatcher::calculate(const std::shared_ptr<const CostFunction> costFunction,
@@ -14,7 +23,7 @@ std::map<int, int> PlanningDispatcher::calculate(const std::shared_ptr<const Cos
                                                  int horizon)
 {
   std::map<int, int> costs;
-  for (auto e : *building->getElevators()) {
+  for (auto const &e : *building->getElevators()) {
     costs[e->getNumber()] = 0;
   }
 
