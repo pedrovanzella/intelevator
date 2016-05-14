@@ -58,15 +58,18 @@ void Building::notify(const std::shared_ptr<const Event> event) {
     updateElevators(time);
   }
 
-  LOG(INFO) << event->str();
-
   /*
     Após a atualização do estado do sistema, o novo evento deve ser processado
     e o sistema deverá atualizar o seu estado de acordo com esse evento.
   */
   if (event->getType() == EventType::clientArrival) {
     doClientArrival(std::static_pointer_cast<const ClientArrival>(event));
+    LOG(INFO) << event->str();
     createFutureArrival();
+  }
+
+  if (event->getType() == EventType::finishSimulation) {
+    LOG(INFO) << event->str();
   }
 
   /*
@@ -100,8 +103,8 @@ void Building::doClientArrival(std::shared_ptr<const ClientArrival> event) {
     O sistema, ao perceber que um novo botão foi pressionado, designa um
     elevador para atender aquela nova requisição.
   */
-    auto elevatorNum = _dispatcher->pick_next_elevator(_costFunction, shared_from_this(), event);
-    auto elevator = _elevators->at(elevatorNum);
+  auto elevatorNum = _dispatcher->pick_next_elevator(_costFunction, shared_from_this(), event);
+  auto elevator = _elevators->at(elevatorNum);
 
   /* Agora, esse elevador deve parar no andar em que ocorreu o evento para buscar a pessoa. */
 
