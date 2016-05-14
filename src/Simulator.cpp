@@ -68,14 +68,14 @@ void Simulator::run() {
   _eventDispatcher->subscribe(std::static_pointer_cast<EventObserver>(_statistics));
   _eventDispatcher->subscribe(std::static_pointer_cast<EventObserver>(_clock));
 
-  auto finishSimulationEvent = std::make_shared<FinishSimulation>(_scenario->getDuration());
-  _eventQueue->push(std::static_pointer_cast<Event>(finishSimulationEvent));
 
   // auto ca1 = std::make_shared<ClientArrival>(0, std::make_shared<Client>(1, 0, 5, _clock->currentTime()));
   // auto ca2 = std::make_shared<ClientArrival>(10, std::make_shared<Client>(1, 0, 2, _clock->currentTime()));
 
   // _eventQueue->push(std::static_pointer_cast<Event>(ca1));
   // _eventQueue->push(std::static_pointer_cast<Event>(ca2));
+  auto finishSimulationEvent = std::make_shared<FinishSimulation>(_scenario->getDuration());
+  _eventQueue->push(std::static_pointer_cast<Event>(finishSimulationEvent));
 
   while (_statistics->keepRunning() && _eventQueue->hasNextEvent()) {
     auto e = _eventQueue->pop();

@@ -25,7 +25,7 @@ void EventFactory::createFutureArrival(const std::shared_ptr<EventQueue> eventQu
   if (_totalArrived >= _floor->getPopulation()) return;
 
   auto partySize = 1u;
-  auto eventTime = getNextTime();
+  auto eventTime = _clock->currentTime() + getNextTime();
   auto destination = getNextDestination();
 
   auto client = std::make_shared<Client>(partySize, _floor->getNumber(), destination, eventTime);

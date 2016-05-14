@@ -68,12 +68,13 @@ bool Elevator::canEnter(std::shared_ptr<const Client> client) const {
 void Elevator::setLocation(int location) { _location = location; }
 
 void Elevator::setDestination(int destination) {
-  LOG(INFO) << "Elevator #" << _number << " received new destination: floor #" << destination << ".";
 
-  _destination = destination;
+  if (_destination != destination) {
+    _destination = destination;
+    LOG(INFO) << "Elevator #" << _number << " received new destination: floor #" << destination << ".";
+  }
 
   refreshDirection();
-
   start();
  }
 
@@ -111,7 +112,8 @@ void Elevator::mustStopAtNextLocation() { _stopAtNextLocation = true; }
 
 void Elevator::addPassenger(std::shared_ptr<Client> client) {
   _passengers->push_back(client);
-  LOG(INFO) << "Client with size " << client->getPartySize() << " boarded elevator #" << getNumber() << ".";
+  LOG(INFO) << "Client #" << client->getId()
+            << " boarded elevator #" << getNumber() << ".";
 }
 
 void Elevator::start() { _status = Status::Moving; }
