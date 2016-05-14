@@ -7,6 +7,7 @@ import numpy as np
 
 def makegraphs(filename):
     data = loadfile(filename)
+    totalNumberOfClientsDelivered(data)
     avgWaitingTime(data)
     avgTravelTime(data)
 
@@ -23,6 +24,11 @@ def loadfile(filename):
     with open(filename, 'r') as f:
         data = np.loadtxt(f)
         return data
+
+
+def totalNumberOfClientsDelivered(data):
+    print("Total number of clients: ", len(data))
+    return len(data)
 
 
 def getTimes(data):
