@@ -1,5 +1,6 @@
 #include "ClientArrival.h"
 #include "Clock.h"
+#include "Client.h"
 #include "EventFactory.h"
 #include "EventQueue.h"
 #include "Floor.h"

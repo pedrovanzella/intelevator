@@ -1,9 +1,12 @@
 #pragma once
 
 #include <memory>
-#include <yaml-cpp/yaml.h>
-#include "CostFunctionType.h"
-#include "DispatcherType.h"
+#include <string>
+#include <vector>
+
+namespace YAML { class Node; }
+enum class CostFunctionType;
+enum class DispatcherType;
 
 class Scenario {
 public:

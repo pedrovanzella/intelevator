@@ -1,8 +1,10 @@
+#include "Client.h"
 #include "BetterNearestNeighbourDispatcher.h"
 #include "Building.h"
 #include "ClientArrival.h"
 #include "CostFunction.h"
 #include "Direction.h"
+#include "Elevator.h"
 #include "Floor.h"
 #include "NearestNeighbourDispatcher.h"
 #include <algorithm>

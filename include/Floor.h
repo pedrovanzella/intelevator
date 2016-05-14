@@ -1,14 +1,14 @@
 #pragma once
 
-#include "Client.h"
-#include "Direction.h"
-#include "Elevator.h"
-#include "EventFactory.h"
-#include "EventQueue.h"
 #include <memory>
 #include <queue>
 #include <set>
 
+class Client;
+enum class Direction;
+class Elevator;
+class EventFactory;
+class EventQueue;
 class Simulator; // forward declaration
 
 class Floor {

@@ -10,6 +10,8 @@
 #include <algorithm>
 #include <glog/logging.h>
 #include <sstream>
+#include "Statistics.h"
+#include "Client.h"
 
 Building::Building(
     std::shared_ptr<const Simulator> simulator,

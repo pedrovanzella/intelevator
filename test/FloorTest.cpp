@@ -1,6 +1,6 @@
 #include <gtest/gtest.h>
 #include <memory>
-
+#include "Client.h"
 #include "Floor.h"
 #include "Direction.h"
 
