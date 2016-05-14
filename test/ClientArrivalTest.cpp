@@ -1,6 +1,7 @@
+#include "Client.h"
+#include "ClientArrival.h"
 #include <gtest/gtest.h>
 #include <memory>
-#include "ClientArrival.h"
 
 struct ClientArrivalTest : testing::Test
 {

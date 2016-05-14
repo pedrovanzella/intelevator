@@ -1,9 +1,10 @@
 #pragma once
 
-#include "Client.h"
 #include "Event.h"
 #include <glog/logging.h>
 #include <memory>
+
+class Client;
 
 class ClientArrival : public Event {
 public:

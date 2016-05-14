@@ -1,9 +1,10 @@
 #pragma once
 
 #include "Dispatcher.h"
-#include "Building.h"
-#include "ClientArrival.h"
-#include "CostFunction.h"
+
+class CostFunction;
+class Building;
+class ClientArrival;
 
 class BetterNearestNeighbourDispatcher : public Dispatcher
 {

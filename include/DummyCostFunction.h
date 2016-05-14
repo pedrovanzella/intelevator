@@ -1,9 +1,10 @@
 #pragma once
 
-#include "Building.h"
-#include "ClientArrival.h"
 #include "CostFunction.h"
-#include "Elevator.h"
+
+class Building;
+class ClientArrival;
+class Elevator;
 
 class DummyCostFunction : public CostFunction {
 public:

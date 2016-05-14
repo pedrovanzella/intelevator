@@ -1,8 +1,13 @@
-#include <algorithm>
 #include "BetterNearestNeighbourDispatcher.h"
+#include "Building.h"
+#include "ClientArrival.h"
+#include "CostFunction.h"
 #include "Direction.h"
 #include "Floor.h"
 #include "NearestNeighbourDispatcher.h"
+#include <algorithm>
+
+class Dispatcher;
 
 int BetterNearestNeighbourDispatcher::pick_next_elevator(const std::shared_ptr<const CostFunction> costFunction,
                                                          const std::shared_ptr<const Building> building,

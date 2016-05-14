@@ -1,4 +1,7 @@
 #include "DummyCostFunction.h"
+#include "Building.h"
+#include "ClientArrival.h"
+#include "Elevator.h"
 
 float DummyCostFunction::calculate(
     const std::shared_ptr<const Building> building,

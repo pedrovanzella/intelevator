@@ -1,9 +1,9 @@
-#include <gtest/gtest.h>
-#include <memory>
-
+#include "EventQueue.h"
+#include "Client.h"
 #include "ClientArrival.h"
 #include <glog/logging.h>
-#include "EventQueue.h"
+#include <gtest/gtest.h>
+#include <memory>
 
 struct EventQueueTest : testing::Test
 {

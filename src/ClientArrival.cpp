@@ -1,3 +1,4 @@
+#include "Client.h"
 #include "ClientArrival.h"
 #include "EventType.h"
 #include <sstream>
