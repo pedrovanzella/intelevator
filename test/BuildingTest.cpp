@@ -26,7 +26,7 @@ struct BuildingTest : testing::Test
     config = YAML::LoadFile("config.yaml")["scenarios"][0];
     scenario = std::make_shared<Scenario>(config);
     simulator = std::make_shared<Simulator>(scenario);
-    building = scenario->createBuilding(simulator);
+    building = simulator->createBuilding();
   }
 
   virtual ~BuildingTest()
