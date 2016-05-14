@@ -1,7 +1,9 @@
-#include <gtest/gtest.h>
-#include "Client.h"
 #include "Elevator.h"
+#include "Client.h"
+#include "Direction.h"
 #include "Floor.h"
+#include "Status.h"
+#include <gtest/gtest.h>
 
 struct ElevatorTest : testing::Test
 {

@@ -1,17 +1,19 @@
 #include "Building.h"
+#include "Client.h"
 #include "ClientArrival.h"
 #include "CostFunction.h"
+#include "Direction.h"
 #include "Dispatcher.h"
 #include "Elevator.h"
 #include "EventFactory.h"
 #include "Floor.h"
 #include "Simulator.h"
+#include "Statistics.h"
+#include "Status.h"
 #include "Trip.h"
 #include <algorithm>
 #include <glog/logging.h>
 #include <sstream>
-#include "Statistics.h"
-#include "Client.h"
 
 Building::Building(
     std::shared_ptr<const Simulator> simulator,
