@@ -4,12 +4,12 @@
 #include <queue>
 #include <set>
 
-class Client;
-enum class Direction;
-class Elevator;
-class EventFactory;
-class EventQueue;
-class Simulator; // forward declaration
+class Client;         // forward declaration
+enum class Direction; // forward declaration
+class Elevator;       // forward declaration
+class EventFactory;   // forward declaration
+class EventQueue;     // forward declaration
+class Simulator;      // forward declaration
 
 class Floor {
 public:

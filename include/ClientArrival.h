@@ -4,7 +4,7 @@
 #include <glog/logging.h>
 #include <memory>
 
-class Client;
+class Client; // forward declaration
 
 class ClientArrival : public Event {
 public:

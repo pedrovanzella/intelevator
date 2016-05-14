@@ -7,7 +7,8 @@ class Floor; // forward declaration
 
 class Client {
 public:
-  Client(const int partySize, const int arrivalFloor, const int destination, const unsigned long createTime);
+  Client(const int partySize, const int arrivalFloor, const int destination,
+         const unsigned long createTime);
 
   const unsigned long getId() const;
   const int getPartySize() const;

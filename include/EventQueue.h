@@ -16,5 +16,7 @@ public:
   void push(std::shared_ptr<const Event> event);
 
 private:
-  std::priority_queue<std::shared_ptr<const Event>, std::vector<std::shared_ptr<const Event>>, EventComparator> _eventQueue;
+  std::priority_queue<std::shared_ptr<const Event>,
+                      std::vector<std::shared_ptr<const Event>>,
+                      EventComparator> _eventQueue;
 };

@@ -11,9 +11,9 @@ class ClientArrival; // forward declaration
 class CostFunction;  // forward declaration
 class Dispatcher;    // forward declaration
 class Elevator;      // forward declaration
+class EventFactory;  // forward declaration
 class Floor;         // forward declaration
 class Simulator;     // forward declaration
-class EventFactory;  // forward declaration
 
 class Building : public EventObserver,
                  public std::enable_shared_from_this<Building> {
@@ -47,5 +47,6 @@ private:
   void updateElevators(const unsigned long time);
   void assignDestinationForElevator(const std::shared_ptr<Elevator> elevator);
   bool mustStopAtNextLocation(const std::shared_ptr<Elevator> elevator);
-  void registerNewStops(const std::shared_ptr<Elevator> elevator, const std::set<int> stops);
+  void registerNewStops(const std::shared_ptr<Elevator> elevator,
+                        const std::set<int> stops);
 };

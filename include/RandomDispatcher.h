@@ -1,11 +1,11 @@
 #pragma once
 
-#include "Dispatcher.h"
 #include "Building.h"
 #include "ClientArrival.h"
 #include "CostFunction.h"
-#include <memory>
+#include "Dispatcher.h"
 #include <chrono>
+#include <memory>
 #include <random>
 
 class RandomDispatcher : public Dispatcher {

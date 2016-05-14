@@ -2,7 +2,7 @@
 
 #include <memory>
 
-class Event;
+class Event; // forward declaration
 
 class EventComparator {
 public:

@@ -3,12 +3,12 @@
 #include <memory>
 #include <random>
 
-class Clock;
-class Building;
-class Statistics;
-class EventQueue;
-class EventDispatcher;
-class Scenario;
+class Clock;           // forward declaration
+class Building;        // forward declaration
+class Statistics;      // forward declaration
+class EventQueue;      // forward declaration
+class EventDispatcher; // forward declaration
+class Scenario;        // forward declaration
 
 class Simulator : public std::enable_shared_from_this<Simulator> {
 public:

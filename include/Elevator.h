@@ -7,10 +7,10 @@
 #include <queue>
 #include <vector>
 
-class Client;
-class Event;
-class Scenario;
-class Simulator;
+class Client;    // forward declaration
+class Event;     // forward declaration
+class Scenario;  // forward declaration
+class Simulator; // forward declaration
 
 class Elevator: public std::enable_shared_from_this<Elevator> {
 public:

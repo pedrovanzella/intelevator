@@ -5,8 +5,7 @@
 class Event;
 class EventObserver;
 
-class EventNotifier
-{
+class EventNotifier {
 protected:
   virtual void subscribe(std::shared_ptr<EventObserver> observer) = 0;
   virtual void unsubscribe(std::shared_ptr<EventObserver> observer) = 0;

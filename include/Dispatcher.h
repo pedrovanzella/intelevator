@@ -2,9 +2,9 @@
 
 #include <memory>
 
-class Building;
-class ClientArrival;
-class CostFunction;
+class Building;      // forward declaration
+class ClientArrival; // forward declaration
+class CostFunction;  // forward declaration
 
 class Dispatcher : public std::enable_shared_from_this<Dispatcher> {
 public:
