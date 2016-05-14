@@ -1,6 +1,6 @@
 #include "PlanningDispatcher.h"
-#include "Elevator.h"
 #include "Building.h"
+#include "Elevator.h"
 
 int PlanningDispatcher::pick_next_elevator(const std::shared_ptr<const CostFunction> costFunction,
                                            const std::shared_ptr<const Building> building,

@@ -1,5 +1,5 @@
-#include "Client.h"
 #include "NearestNeighbourCostFunction.h"
+#include "Client.h"
 
 float NearestNeighbourCostFunction::calculate(
     const std::shared_ptr<const Building> building,
