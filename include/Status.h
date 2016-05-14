@@ -1,5 +1,8 @@
 #pragma once
 
+#include <string>
+#include <stdexcept>
+
 enum class Status {
   Moving,  // Elevator is moving. :P
   Stopped, // Elevator is stopped in a floor but is still travelling.

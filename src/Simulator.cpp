@@ -1,3 +1,4 @@
+#include "Floor.h"
 #include "Simulator.h"
 #include "ClientArrival.h"
 #include "CostFunctionCreator.h"

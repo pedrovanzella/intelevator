@@ -1,6 +1,11 @@
 #include "Statistics.h"
-#include <ctime>
+#include "Client.h"
+#include "Elevator.h"
+#include "Event.h"
+#include "Floor.h"
+#include "Trip.h"
 #include <cstdlib>
+#include <ctime>
 #include <glog/logging.h>
 
 Statistics::Statistics() {}
