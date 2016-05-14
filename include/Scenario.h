@@ -1,10 +1,9 @@
 #pragma once
 
-#include "Building.h"
-#include "CostFunctionType.h"
-#include "DispatcherType.h"
 #include <memory>
 #include <yaml-cpp/yaml.h>
+#include "CostFunctionType.h"
+#include "DispatcherType.h"
 
 class Scenario {
 public:
@@ -18,6 +17,8 @@ public:
   const int getElevators() const;
   const int getCapacity() const;
   const int getFloorCount() const;
+  const DispatcherType getDispatcherType() const;
+  const CostFunctionType getCostFunctionType() const;
   const std::vector<std::pair<int, float>> getFloors() const;
   const std::string getSeed() const;
 

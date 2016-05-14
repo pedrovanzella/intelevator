@@ -11,7 +11,6 @@ namespace Helpers
 {
   static std::string costFunctionName(CostFunctionType type)
   {
-    std::shared_ptr<const CostFunction> costFunction;
     switch(type)
     {
       case CostFunctionType::Dummy: return "Dummy";

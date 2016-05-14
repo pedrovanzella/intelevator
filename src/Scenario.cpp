@@ -1,7 +1,5 @@
 #include <string>
 
-#include "CostFunctionCreator.h"
-#include "DispatcherCreator.h"
 #include "Elevator.h"
 #include "Floor.h"
 #include "MissingCostFunctionError.h"
@@ -46,6 +44,10 @@ const int Scenario::getElevators() const { return _elevators; }
 const int Scenario::getCapacity() const { return _capacity; }
 
 const int Scenario::getFloorCount() const { return _floorCount; }
+
+const DispatcherType Scenario::getDispatcherType() const { return _dispatcherType; }
+
+const CostFunctionType Scenario::getCostFunctionType() const { return _costFunctionType; }
 
 const std::vector<std::pair<int, float>> Scenario::getFloors() const {
   return _floors;
