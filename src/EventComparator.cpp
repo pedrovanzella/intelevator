@@ -1,3 +1,4 @@
+#include "Event.h"
 #include "EventComparator.h"
 
 bool EventComparator::operator()(std::shared_ptr<const Event> e1,

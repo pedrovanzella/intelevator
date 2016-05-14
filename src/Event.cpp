@@ -1,6 +1,5 @@
 #include "Event.h"
 #include <sstream>
-#include <string>
 
 unsigned long Event::totalEvents = 0;
 

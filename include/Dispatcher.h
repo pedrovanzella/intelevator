@@ -1,9 +1,10 @@
 #pragma once
 
-#include "Building.h"
-#include "ClientArrival.h"
-#include "CostFunction.h"
 #include <memory>
+
+class Building;
+class ClientArrival;
+class CostFunction;
 
 class Dispatcher : public std::enable_shared_from_this<Dispatcher> {
 public:

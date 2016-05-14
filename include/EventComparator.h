@@ -1,7 +1,8 @@
 #pragma once
 
-#include "Event.h"
 #include <memory>
+
+class Event;
 
 class EventComparator {
 public:

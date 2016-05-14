@@ -4,7 +4,7 @@
 #include "CostFunctionType.h"
 #include "DummyCostFunction.h"
 #include "NearestNeighbourCostFunction.h"
-
+#include <memory>
 
 class CostFunctionCreator {
 public:

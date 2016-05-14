@@ -1,4 +1,5 @@
 #pragma once
+
 #include "MissingCostFunctionError.h"
 
 enum class CostFunctionType

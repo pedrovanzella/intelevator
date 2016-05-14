@@ -1,6 +1,7 @@
 #pragma once
 
 #include "EventType.h"
+#include <string>
 
 class Event {
 public:

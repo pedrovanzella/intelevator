@@ -1,10 +1,11 @@
 #pragma once
 
-#include "Event.h"
 #include "EventNotifier.h"
-#include "EventObserver.h"
 #include <list>
 #include <memory>
+
+class Event;
+class EventObserver;
 
 class EventDispatcher : public EventNotifier {
 public:
