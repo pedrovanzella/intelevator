@@ -3,26 +3,31 @@ from sys import argv
 import matplotlib.pyplot as plt
 import scipy.stats as stats
 import numpy as np
+import pprint
 
 
 def makegraphs(filename):
     data = loadfile(filename)
+    arrivalsPerFloor(data)
+    dropOffsPerFloor(data)
     totalNumberOfClientsDelivered(data)
     avgWaitingTime(data)
     avgTravelTime(data)
 
 
 def loadfile(filename):
-    # 0: clientID
-    # 1: partySize
-    # 2: elevatorID
-    # 3: arrivalFloor
-    # 4: dropoffFloor'
-    # 5: createTime
-    # 6: pickupTime
-    # 7: dropoffTime
+    types = np.dtype([
+        ('clientID', np.int64),
+        ('partySize', np.int8),
+        ('elevatorID', np.int8),
+        ('arrivalFloor', np.int8),
+        ('dropoffFloor', np.int8),
+        ('createTime', np.int64),
+        ('pickupTime', np.int64),
+        ('dropoffTime', np.int64)
+    ])
     with open(filename, 'r') as f:
-        data = np.loadtxt(f)
+        data = np.loadtxt(f, dtype=types)
         return data
 
 
@@ -31,19 +36,59 @@ def totalNumberOfClientsDelivered(data):
     return len(data)
 
 
-def getTimes(data):
-    return data[:, [5, 6, 7]]
+def findTopFloor(data):
+    topfloor = 0
+
+    for d in data:
+        if d['arrivalFloor'] > topfloor:
+            topfloor = d['arrivalFloor']
+        if d['dropoffFloor'] > topfloor:
+            topfloor = d['dropoffFloor']
+
+    return topfloor
+
+
+def arrivalsPerFloor(data):
+    maxfloors = findTopFloor(data)
+    print("Total number of floors: ", maxfloors)
+    fls = []
+    for x in range(0, maxfloors):
+        fls.append(0)
+
+    for d in data:
+        fls[d['arrivalFloor'] - 1] += 1
+
+    N = len(fls)
+    x = range(1, N+1)
+
+    plt.bar(x, fls, 1/1.5)
+    plt.show()
+
+
+def dropOffsPerFloor(data):
+    maxfloors = findTopFloor(data)
+    fls = []
+    for x in range(0, maxfloors):
+        fls.append(0)
+
+    for d in data:
+        fls[d['dropoffFloor'] - 1] += 1
+
+    N = len(fls)
+    x = range(1, N+1)
+
+    plt.bar(x, fls, 1/1.5)
+    plt.show()
+
 
 
 def avgTravelTime(data):
-    times = getTimes(data)
-    travelTimes = [x[2] - x[1] for x in times]
+    travelTimes = [x['dropoffTime'] - x['pickupTime'] for x in data]
     plotNormal(travelTimes)
 
 
 def avgWaitingTime(data):
-    times = getTimes(data)
-    waits = [x[1] - x[0] for x in times]
+    waits = [x['pickupTime'] - x['createTime'] for x in data]
     plotNormal(waits)
 
 
