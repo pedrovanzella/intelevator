@@ -1,5 +1,6 @@
 #include "Simulator.h"
 #include "Building.h"
+#include "Client.h"
 #include "ClientArrival.h"
 #include "Clock.h"
 #include "CostFunctionCreator.h"
@@ -68,12 +69,16 @@ void Simulator::run() {
   _eventDispatcher->subscribe(std::static_pointer_cast<EventObserver>(_statistics));
   _eventDispatcher->subscribe(std::static_pointer_cast<EventObserver>(_clock));
 
-
-  // auto ca1 = std::make_shared<ClientArrival>(0, std::make_shared<Client>(1, 0, 5, _clock->currentTime()));
-  // auto ca2 = std::make_shared<ClientArrival>(10, std::make_shared<Client>(1, 0, 2, _clock->currentTime()));
+  // auto ca1 = std::make_shared<ClientArrival>(5, std::make_shared<Client>(1, 0, 17, _clock->currentTime()));
+  // auto ca2 = std::make_shared<ClientArrival>(15, std::make_shared<Client>(1, 14, 16, _clock->currentTime()));
+  // auto ca3 = std::make_shared<ClientArrival>(10, std::make_shared<Client>(1, 4, 1, _clock->currentTime()));
+  // auto ca4 = std::make_shared<ClientArrival>(11, std::make_shared<Client>(1, 0, 10, _clock->currentTime()));
 
   // _eventQueue->push(std::static_pointer_cast<Event>(ca1));
   // _eventQueue->push(std::static_pointer_cast<Event>(ca2));
+  // _eventQueue->push(std::static_pointer_cast<Event>(ca3));
+  // _eventQueue->push(std::static_pointer_cast<Event>(ca4));
+
   auto finishSimulationEvent = std::make_shared<FinishSimulation>(_scenario->getDuration());
   _eventQueue->push(std::static_pointer_cast<Event>(finishSimulationEvent));
 

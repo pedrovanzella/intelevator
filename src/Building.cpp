@@ -55,7 +55,9 @@ void Building::notify(const std::shared_ptr<const Event> event) {
   */
 
   for (int time = _lastEventTime; time < event->getTime(); ++time) {
-    updateElevators(time);
+    for (auto elevator : *_elevators) {
+      updateElevator(time, elevator);
+    }
   }
 
   /*
@@ -116,49 +118,51 @@ void Building::doClientArrival(std::shared_ptr<const ClientArrival> event) {
   }
 }
 
-void Building::updateElevators(const unsigned long time) {
-  for (auto elevator : *_elevators) {
-    assignDestinationForElevator(elevator);
+void Building::updateElevator(const unsigned long time, const std::shared_ptr<Elevator> elevator) {
 
-    if (!mustStopAtNextLocation(elevator)) {
-      elevator->goToNextLocation();
-      continue;
-    }
+  if (elevator->getDestination() == -1) {
+    auto newDestination = getDestinationForElevator(elevator);
+    elevator->setDestination(newDestination);
+  }
 
-    elevator->mustStopAtNextLocation();
-    elevator->goToNextLocation();
-    _stops[elevator].erase(elevator->getLocation());
+  if (elevator->getDestination() == -1) return;
 
-    LOG(INFO) << "Elevator #" << elevator->getNumber()
-              << " stopped at floor #" << elevator->getLocation() << " (t=" << time << ").";
+  elevator->move();
+  if (mustStop(elevator)) {
+    stop(elevator);
 
     auto droppedPassengers = elevator->dropPassengersToCurrentLocation();
     auto stats = _simulator->getStatistics();
     stats->logDropOff(time, elevator, droppedPassengers);
-
     auto floor = _floors->at(elevator->getLocation());
     auto newStops = floor->boardElevator(elevator);
     registerNewStops(elevator, newStops);
   }
 }
 
-void Building::assignDestinationForElevator(const std::shared_ptr<Elevator> elevator) {
-  if (elevator->getStatus() == Status::Idle && !_stops[elevator].empty()) {
-    // If an elevator is idle and has pending stops, then it should receive a new destination.
-    if (elevator->getDirection() == Direction::Up) {
-      // If it was going up, we send it down.
-      elevator->setDestination(*_stops[elevator].begin());
-    }
-    else {
-      // If it was going down, we send it up.
-      elevator->setDestination(*_stops[elevator].rbegin());
-    }
+int Building::getDestinationForElevator(const std::shared_ptr<Elevator> elevator) {
+  if (_stops[elevator].empty()) return -1;
+
+  if (elevator->getDirection() == Direction::Up) {
+    // If it was going up, we send it down.
+    return *_stops[elevator].begin();
   }
+  else {
+    // If it was going down or nowhere, we send it up.
+    return *_stops[elevator].rbegin();
+    }
 }
 
-bool Building::mustStopAtNextLocation(const std::shared_ptr<Elevator> elevator) {
-  auto nextLocation = elevator->getNextLocation();
-  return _stops[elevator].find(nextLocation) != _stops[elevator].end();
+bool Building::mustStop(const std::shared_ptr<Elevator> elevator) {
+  return _stops[elevator].find(elevator->getLocation()) != _stops[elevator].end();
+}
+
+void Building::stop(const std::shared_ptr<Elevator> elevator) {
+  _stops[elevator].erase(elevator->getLocation());
+  LOG(INFO) << "Elevator #" << elevator->getNumber()
+            << " stopped at floor #" << elevator->getLocation() << ".";
+  if (elevator->getLocation() == elevator->getDestination())
+    elevator->setDestination(-1);
 }
 
 void Building::registerNewStops(std::shared_ptr<Elevator> elevator, std::set<int> stops) {
