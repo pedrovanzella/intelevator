@@ -28,9 +28,6 @@ void EventFactory::createFutureArrival(const std::shared_ptr<EventQueue> eventQu
   auto eventTime = _clock->currentTime() + getNextTime();
   auto destination = getNextDestination();
 
-  // LOG(INFO) << "Current time: " << _clock->currentTime()
-  //           << " eventTime: " << eventTime;
-
   auto client = std::make_shared<Client>(partySize, _floor->getNumber(), destination, eventTime);
   auto ca = std::make_shared<ClientArrival>(eventTime, client);
   eventQueue->push(std::static_pointer_cast<Event>(ca));

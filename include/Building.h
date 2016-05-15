@@ -8,6 +8,7 @@
 #include <vector>
 
 class ClientArrival; // forward declaration
+class Clock;         // forward declaration
 class CostFunction;  // forward declaration
 class Dispatcher;    // forward declaration
 class Elevator;      // forward declaration
@@ -32,19 +33,19 @@ public:
   const std::shared_ptr<Elevator> getElevator(int number) const;
 
   void notify(const std::shared_ptr<const Event> event);
-  void createFutureArrival();
+  void initializeArrivals();
 
 private:
   std::shared_ptr<const Simulator> _simulator;
+  std::shared_ptr<Clock> _clock;
   std::shared_ptr<std::vector<std::shared_ptr<Floor>>> _floors;
   std::shared_ptr<std::vector<std::shared_ptr<Elevator>>> _elevators;
   const std::shared_ptr<Dispatcher> _dispatcher;
   const std::shared_ptr<const CostFunction> _costFunction;
   std::map<std::shared_ptr<Elevator>, std::set<int>> _stops;
-  int _lastEventTime;
 
   void doClientArrival(std::shared_ptr<const ClientArrival> event);
-  void updateElevator(const unsigned long time, const std::shared_ptr<Elevator> elevator);
+  void updateElevator(const std::shared_ptr<Elevator> elevator);
   int getDestinationForElevator(const std::shared_ptr<Elevator> elevator);
   bool mustStop(const std::shared_ptr<Elevator> elevator);
   void stop(const std::shared_ptr<Elevator> elevator);

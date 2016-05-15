@@ -63,10 +63,10 @@ void Simulator::run() {
   LOG(INFO) << "Running '" << _scenario->getName() << "' scenario.";
 
   _building = createBuilding();
-  _building->createFutureArrival();
+  _building->initializeArrivals();
 
-  _eventDispatcher->subscribe(std::static_pointer_cast<EventObserver>(_clock));
   _eventDispatcher->subscribe(std::static_pointer_cast<EventObserver>(_building));
+  _eventDispatcher->subscribe(std::static_pointer_cast<EventObserver>(_clock));
   _eventDispatcher->subscribe(std::static_pointer_cast<EventObserver>(_statistics));
 
   // auto ca1 = std::make_shared<ClientArrival>(5, std::make_shared<Client>(1, 0, 17, _clock->currentTime()));

@@ -1,6 +1,7 @@
 #include "Building.h"
 #include "Client.h"
 #include "ClientArrival.h"
+#include "Clock.h"
 #include "CostFunction.h"
 #include "Direction.h"
 #include "Dispatcher.h"
@@ -21,9 +22,9 @@ Building::Building(
     std::shared_ptr<std::vector<std::shared_ptr<Elevator>>> elevators,
     std::shared_ptr<Dispatcher> dispatcher,
     std::shared_ptr<const CostFunction> costFunction)
-    : _simulator(simulator), _floors(floors), _elevators(elevators),
-      _dispatcher(dispatcher), _costFunction(costFunction), _stops(),
-      _lastEventTime(0) {}
+    : _simulator(simulator), _clock(_simulator->getClock()), _floors(floors),
+      _elevators(elevators), _dispatcher(dispatcher),
+      _costFunction(costFunction), _stops() {}
 
 Building::~Building() {}
 
@@ -54,9 +55,10 @@ void Building::notify(const std::shared_ptr<const Event> event) {
     processado e o evento que está sendo notificado.
   */
 
-  for (int time = _lastEventTime; time < event->getTime(); ++time) {
+  for (int time = _clock->currentTime(); time < event->getTime(); ++time) {
+    _clock->advanceBy(1);
     for (auto elevator : *_elevators) {
-      updateElevator(time, elevator);
+      updateElevator(elevator);
     }
   }
 
@@ -67,21 +69,14 @@ void Building::notify(const std::shared_ptr<const Event> event) {
   if (event->getType() == EventType::clientArrival) {
     doClientArrival(std::static_pointer_cast<const ClientArrival>(event));
     LOG(INFO) << event->str();
-    createFutureArrival();
   }
 
   if (event->getType() == EventType::finishSimulation) {
     LOG(INFO) << event->str();
   }
-
-  /*
-    E depois salvar o tempo do último evento processo - e, não por coincidência,
-    este tempo é o valor do relógio de simulação atual.
-  */
-  _lastEventTime = event->getTime();
 }
 
-void Building::createFutureArrival() {
+void Building::initializeArrivals() {
   for (auto floor : *_floors)
     floor->createFutureArrival(_simulator->getEventQueue());
 }
@@ -100,6 +95,7 @@ void Building::doClientArrival(std::shared_ptr<const ClientArrival> event) {
   auto client = event->getClient();
   auto location = _floors->at(client->getArrivalFloor());
   location->addClient(client);
+  location->createFutureArrival(_simulator->getEventQueue());
 
   /*
     O sistema, ao perceber que um novo botão foi pressionado, designa um
@@ -118,7 +114,7 @@ void Building::doClientArrival(std::shared_ptr<const ClientArrival> event) {
   }
 }
 
-void Building::updateElevator(const unsigned long time, const std::shared_ptr<Elevator> elevator) {
+void Building::updateElevator(const std::shared_ptr<Elevator> elevator) {
 
   if (elevator->getDestination() == -1) {
     auto newDestination = getDestinationForElevator(elevator);
@@ -133,9 +129,9 @@ void Building::updateElevator(const unsigned long time, const std::shared_ptr<El
 
     auto droppedPassengers = elevator->dropPassengersToCurrentLocation();
     auto stats = _simulator->getStatistics();
-    stats->logDropOff(time, elevator, droppedPassengers);
+    stats->logDropOff(_clock->currentTime(), elevator, droppedPassengers);
     auto floor = _floors->at(elevator->getLocation());
-    auto newStops = floor->boardElevator(time, elevator);
+    auto newStops = floor->boardElevator(_clock->currentTime(), elevator);
     registerNewStops(elevator, newStops);
   }
 }
@@ -158,11 +154,15 @@ bool Building::mustStop(const std::shared_ptr<Elevator> elevator) {
 }
 
 void Building::stop(const std::shared_ptr<Elevator> elevator) {
+  // LOG(INFO) << "BEFORE: Elevator #" << elevator->getNumber()
+  //           << " stopped at floor #" << elevator->getLocation()
+  //           << " (direction=" << Helpers::directionName(elevator->getDirection()) << ").";
   _stops[elevator].erase(elevator->getLocation());
-  LOG(INFO) << "Elevator #" << elevator->getNumber()
-            << " stopped at floor #" << elevator->getLocation() << ".";
   if (elevator->getLocation() == elevator->getDestination())
     elevator->setDestination(-1);
+  LOG(INFO) << "Elevator #" << elevator->getNumber()
+            << " stopped at floor #" << elevator->getLocation()
+            << " (t=" << _clock->currentTime() << ").";
 }
 
 void Building::registerNewStops(std::shared_ptr<Elevator> elevator, std::set<int> stops) {
