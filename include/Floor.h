@@ -24,7 +24,7 @@ public:
   Direction compareTo(const Floor &other) const;
 
   void setEventFactory(const std::shared_ptr<EventFactory> eventFactory);
-  void addClient(const std::shared_ptr<Client> client);
+  Direction addClient(const std::shared_ptr<Client> client);
   std::set<int> boardElevator(const unsigned long time, std::shared_ptr<Elevator> elevator);
 
   void createFutureArrival(const std::shared_ptr<EventQueue> eventQueue);

@@ -101,6 +101,7 @@ void Building::doClientArrival(std::shared_ptr<const ClientArrival> event) {
     O sistema, ao perceber que um novo botão foi pressionado, designa um
     elevador para atender aquela nova requisição.
   */
+
   auto elevatorNum = _dispatcher->pick_next_elevator(_costFunction, shared_from_this(), event);
   auto elevator = _elevators->at(elevatorNum);
 

@@ -38,7 +38,7 @@ void Floor::setEventFactory(const std::shared_ptr<EventFactory> eventFactory) {
   _eventFactory = eventFactory;
 }
 
-void Floor::addClient(const std::shared_ptr<Client> client) {
+Direction Floor::addClient(const std::shared_ptr<Client> client) {
   int destination = client->getDestination();
 
   if (destination > _number) {
@@ -46,11 +46,13 @@ void Floor::addClient(const std::shared_ptr<Client> client) {
     // LOG(INFO) << "Floor #" << _number << " received a client (size "
     //           << client->getPartySize() << ")"
     //           << " to go UP to floor #" << client->getDestination() << ".";
+    return Direction::Up;
   } else if (destination < _number) {
     _downLine.push(client);
     // LOG(INFO) << "Floor #" << _number << " received a client (size "
     //           << client->getPartySize() << ")"
     //           << " to go DOWN to floor #" << client->getDestination() << ".";
+    return Direction::Down;
   } else {
     std::ostringstream stream;
     stream << "Floor " << _number << " received a Client which destination is "
