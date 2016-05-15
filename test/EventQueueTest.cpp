@@ -1,7 +1,6 @@
 #include "EventQueue.h"
 #include "Client.h"
 #include "ClientArrival.h"
-#include "Clock.h"
 #include <glog/logging.h>
 #include <gtest/gtest.h>
 #include <memory>
@@ -11,15 +10,13 @@ struct EventQueueTest : testing::Test
   int destination;
   int location;
   const std::shared_ptr<Client> client;
-  const std::shared_ptr<Clock> clock;
   const std::shared_ptr<EventQueue> eventQueue;
 
   EventQueueTest()
   : destination(0)
   , location(0)
   , client(new Client(1, location, destination, 0))
-  , clock(new Clock())
-  , eventQueue(new EventQueue(clock))
+  , eventQueue(new EventQueue())
   {}
 
   virtual ~EventQueueTest()
