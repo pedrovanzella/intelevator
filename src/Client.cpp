@@ -6,7 +6,7 @@ unsigned long Client::nextId = 0ul;
 Client::Client(const int partySize, const int arrivalFloor,
                const int destination, const unsigned long createTime)
     : _id(++Client::nextId), _partySize(partySize), _destination(destination),
-      _arrivalFloor(arrivalFloor), _createTime(createTime) {}
+      _arrivalFloor(arrivalFloor), _createTime(createTime), _pickupTime(0) {}
 
 const unsigned long Client::getId() const { return _id; }
 

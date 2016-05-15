@@ -27,7 +27,7 @@ int Elevator::getLocation() const { return _location; }
 int Elevator::getDestination() const { return _destination; }
 
 Direction Elevator::getDirection() const {
-  return Direction::Up;
+  return _direction;
 }
 
 const std::shared_ptr<const std::vector<std::shared_ptr<Client>>> Elevator::getPassengers() const {
@@ -49,9 +49,8 @@ bool Elevator::canEnter(std::shared_ptr<const Client> client) const {
 void Elevator::setDestination(int destination) {
 
   _destination = destination;
-  LOG_IF(INFO, _destination != -1) << "Elevator #" << _number << " received new destination: floor #" << _destination << ".";
 
-  if (destination == -1) {
+  if (_destination == -1) {
     _direction = Direction::None;
   }
   else {
@@ -62,6 +61,10 @@ void Elevator::setDestination(int destination) {
     else
       _direction = Direction::None;
   }
+
+  // LOG_IF(INFO, _destination != -1)
+  //   << "Elevator #" << _number << " received new destination: floor #" << _destination
+  //   << " (direction=" << Helpers::directionName(_direction) << ").";
  }
 
 std::shared_ptr<std::vector<std::shared_ptr<Client>>> Elevator::dropPassengersToCurrentLocation() {
@@ -92,8 +95,6 @@ std::shared_ptr<std::vector<std::shared_ptr<Client>>> Elevator::dropPassengersTo
 
 void Elevator::addPassenger(std::shared_ptr<Client> client) {
   _passengers->push_back(client);
-  LOG(INFO) << "Client #" << client->getId()
-            << " boarded elevator #" << getNumber() << ".";
 }
 
 void Elevator::move() {

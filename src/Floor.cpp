@@ -60,23 +60,32 @@ void Floor::addClient(const std::shared_ptr<Client> client) {
   }
 }
 
-std::set<int> Floor::boardElevator(std::shared_ptr<Elevator> elevator) {
+std::set<int> Floor::boardElevator(const unsigned long time, std::shared_ptr<Elevator> elevator) {
   std::set<int> newStops;
 
-  if (elevator->getDirection() != Direction::Down) {
-    while (_upLine.size() > 0 && elevator->canEnter(_upLine.front())) {
-      auto client = _upLine.front();
-      elevator->addPassenger(client);
-      newStops.insert(client->getDestination());
-      _upLine.pop();
-    }
+  std::queue<std::shared_ptr<Client>>* lineToBoard = nullptr;
+
+  if (elevator->getDirection() == Direction::Up) {
+    lineToBoard = &_upLine;
   } else if (elevator->getDirection() == Direction::Down) {
-    while (_downLine.size() > 0 && elevator->canEnter(_downLine.front())) {
-      auto client = _downLine.front();
-      elevator->addPassenger(client);
-      newStops.insert(client->getDestination());
-      _downLine.pop();
-    }
+    lineToBoard = &_downLine;
+  } else {
+    if (_upLine.size() > _downLine.size())
+      lineToBoard = &_upLine;
+    else
+      lineToBoard = &_downLine;
+  }
+
+  while (lineToBoard->size() > 0 && elevator->canEnter(lineToBoard->front())) {
+    auto client = lineToBoard->front();
+    client->setPickupTime(time);
+    elevator->addPassenger(client);
+    newStops.insert(client->getDestination());
+    lineToBoard->pop();
+
+    LOG(INFO) << "Client #" << client->getId()
+              << " boarded elevator #" << elevator->getNumber()
+              << " (t=" << time << ").";
   }
 
   return newStops;

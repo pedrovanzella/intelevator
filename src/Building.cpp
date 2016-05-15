@@ -135,7 +135,7 @@ void Building::updateElevator(const unsigned long time, const std::shared_ptr<El
     auto stats = _simulator->getStatistics();
     stats->logDropOff(time, elevator, droppedPassengers);
     auto floor = _floors->at(elevator->getLocation());
-    auto newStops = floor->boardElevator(elevator);
+    auto newStops = floor->boardElevator(time, elevator);
     registerNewStops(elevator, newStops);
   }
 }
