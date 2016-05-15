@@ -33,10 +33,10 @@ struct BuildingTest : testing::Test
   {}
 };
 
-TEST_F(BuildingTest, GetFloors_ReturnsRightSize)
-{
-  EXPECT_EQ(scenario->getFloors().size(), building->getFloors()->size());
-}
+// TEST_F(BuildingTest, GetFloors_ReturnsRightSize)
+// {
+//   EXPECT_EQ(scenario->getFloors().size(), building->getFloors()->size());
+// }
 
 // TEST_F(BuildingTest, GetElevators_ReturnsRightSize)
 // {
