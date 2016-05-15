@@ -18,6 +18,6 @@ std::string ClientArrival::str() const {
          << " arrived at floor " << _client->getArrivalFloor()
          << " bound to " << _client->getDestination()
          << ", with size " << _client->getPartySize()
-         << " (t=" << _eventTime << ").";
+         << " (t=" << _time << ").";
   return stream.str();
 }

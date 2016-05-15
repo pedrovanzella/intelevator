@@ -8,6 +8,6 @@ FinishSimulation::FinishSimulation(const unsigned long eventTime)
 
 std::string FinishSimulation::str() const {
   std::ostringstream stream;
-  stream << "Simulation reached specified duration (t=" << _eventTime << ").";
+  stream << "Simulation reached specified duration (t=" << _time << ").";
   return stream.str();
 }

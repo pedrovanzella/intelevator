@@ -13,16 +13,16 @@ EventQueue::~EventQueue() {
 
 bool EventQueue::hasNextEvent() const { return !_eventQueue.empty(); }
 
-std::shared_ptr<const Event> EventQueue::top() const {
+std::shared_ptr<Event> EventQueue::top() const {
   if (_eventQueue.empty())
-    return std::shared_ptr<const Event>(nullptr);
+    return std::shared_ptr<Event>(nullptr);
 
   return _eventQueue.top();
 }
 
-std::shared_ptr<const Event> EventQueue::pop() {
+std::shared_ptr<Event> EventQueue::pop() {
   if (_eventQueue.empty())
-    return std::shared_ptr<const Event>(nullptr);
+    return std::shared_ptr<Event>(nullptr);
 
   auto event = _eventQueue.top();
   _eventQueue.pop();
@@ -30,12 +30,12 @@ std::shared_ptr<const Event> EventQueue::pop() {
   return event;
 }
 
-void EventQueue::push(std::shared_ptr<const Event> event) {
+void EventQueue::push(std::shared_ptr<Event> event) {
   _eventQueue.push(event);
 }
 
 void EventQueue::refresh(const unsigned long currentTime) {
-  std::vector<std::shared_ptr<const Event>> events;
+  std::vector<std::shared_ptr<Event>> events;
 
   while (!_eventQueue.empty()) {
     auto event = _eventQueue.top();
