@@ -5,6 +5,8 @@
 #include <memory>
 #include <queue>
 
+class Clock; // forward declaration
+
 class EventQueue {
 public:
   EventQueue();
@@ -14,6 +16,8 @@ public:
   std::shared_ptr<const Event> top() const;
   std::shared_ptr<const Event> pop();
   void push(std::shared_ptr<const Event> event);
+
+  void refresh(const unsigned long currentTime);
 
 private:
   std::priority_queue<std::shared_ptr<const Event>,

@@ -1,5 +1,7 @@
 #include "EventQueue.h"
+#include "Clock.h"
 #include <glog/logging.h>
+#include <vector>
 
 EventQueue::EventQueue() {}
 
@@ -22,7 +24,7 @@ std::shared_ptr<const Event> EventQueue::pop() {
   if (_eventQueue.empty())
     return std::shared_ptr<const Event>(nullptr);
 
-  std::shared_ptr<const Event> event = _eventQueue.top();
+  auto event = _eventQueue.top();
   _eventQueue.pop();
 
   return event;
@@ -30,4 +32,18 @@ std::shared_ptr<const Event> EventQueue::pop() {
 
 void EventQueue::push(std::shared_ptr<const Event> event) {
   _eventQueue.push(event);
+}
+
+void EventQueue::refresh(const unsigned long currentTime) {
+  std::vector<std::shared_ptr<const Event>> events;
+
+  while (!_eventQueue.empty()) {
+    auto event = _eventQueue.top();
+    // event->setTime(event->getTime() - currentTime);
+    _eventQueue.pop();
+    events.push_back(event);
+  }
+
+  for (auto event : events)
+    _eventQueue.push(event);
 }

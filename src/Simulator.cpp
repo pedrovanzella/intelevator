@@ -84,8 +84,10 @@ void Simulator::run() {
 
   while (_statistics->keepRunning() && _eventQueue->hasNextEvent()) {
     auto e = _eventQueue->pop();
-    if (e)
+    if (e) {
       _eventDispatcher->broadcast(e);
+      _eventQueue->refresh(_clock->currentTime());
+    }
   }
 
   LOG(INFO) << "Finished '" << _scenario->getName() << "' scenario.";
