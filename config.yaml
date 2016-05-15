@@ -18,28 +18,15 @@ elevator_config:
 
 scenarios:
   - name: Simple
-    duration: 100
+    duration: 2000
     dispatcher: 1 # random
     cost_function: 0 # dummy
     seed: Semente sementosa sementuda!
     elevators: 1
     elevator_config: *small
     floors: # [ population, lambda ]
-      - [ 2,  5.0 ]
-      - [ 2, 10.0 ]
-      - [ 2, 15.0 ]
-      - [ 2, 18.0 ]
-      - [ 2, 20.0 ]
-      - [ 2, 22.0 ]
-      - [ 2,  5.0 ]
-      - [ 2, 10.0 ]
-      - [ 2, 15.0 ]
-      - [ 2, 18.0 ]
-      - [ 2, 20.0 ]
-      - [ 2, 22.0 ]
-      - [ 2,  5.0 ]
-      - [ 2, 10.0 ]
-      - [ 2, 15.0 ]
-      - [ 2, 18.0 ]
-      - [ 2, 20.0 ]
-      - [ 2, 22.0 ]
+      - [ 80,  20.0 ]
+      - [ 20,  40.0 ]
+      - [ 20,  80.0 ]
+      - [ 20, 100.0 ]
+      - [ 20, 150.0 ]

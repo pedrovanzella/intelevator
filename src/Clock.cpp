@@ -21,5 +21,5 @@ void Clock::advanceBy(const unsigned long amount) {
 }
 
 void Clock::notify(const std::shared_ptr<const Event> event) {
-  advanceTo(event->getTime());
+  advanceBy(event->getTime());
 }

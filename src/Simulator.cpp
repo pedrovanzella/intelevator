@@ -65,9 +65,9 @@ void Simulator::run() {
   _building = createBuilding();
   _building->createFutureArrival();
 
+  _eventDispatcher->subscribe(std::static_pointer_cast<EventObserver>(_clock));
   _eventDispatcher->subscribe(std::static_pointer_cast<EventObserver>(_building));
   _eventDispatcher->subscribe(std::static_pointer_cast<EventObserver>(_statistics));
-  _eventDispatcher->subscribe(std::static_pointer_cast<EventObserver>(_clock));
 
   // auto ca1 = std::make_shared<ClientArrival>(5, std::make_shared<Client>(1, 0, 17, _clock->currentTime()));
   // auto ca2 = std::make_shared<ClientArrival>(15, std::make_shared<Client>(1, 14, 16, _clock->currentTime()));
