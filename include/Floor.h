@@ -19,8 +19,8 @@ public:
   int getNumber() const;
   int getLambda() const;
   int getPopulation() const;
-  const std::queue<std::shared_ptr<Client>> getUpLine() const;
-  const std::queue<std::shared_ptr<Client>> getDownLine() const;
+  const std::vector<std::shared_ptr<Client>> getUpLine() const;
+  const std::vector<std::shared_ptr<Client>> getDownLine() const;
   int clientsOnUpLine() const;
   int clientsOnDownLine() const;
   Direction compareTo(const Floor &other) const;
@@ -37,7 +37,7 @@ private:
   int _number;
   int _population;
   int _lambda;
-  std::queue<std::shared_ptr<Client>> _upLine;
-  std::queue<std::shared_ptr<Client>> _downLine;
+  std::vector<std::shared_ptr<Client>> _upLine;
+  std::vector<std::shared_ptr<Client>> _downLine;
   std::shared_ptr<EventFactory> _eventFactory;
 };

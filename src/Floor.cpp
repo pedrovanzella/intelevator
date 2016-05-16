@@ -24,9 +24,9 @@ int Floor::clientsOnUpLine() const { return _upLine.size(); }
 
 int Floor::clientsOnDownLine() const { return _downLine.size(); }
 
-const std::queue<std::shared_ptr<Client>> Floor::getUpLine() const { return _upLine; }
+const std::vector<std::shared_ptr<Client>> Floor::getUpLine() const { return _upLine; }
 
-const std::queue<std::shared_ptr<Client>> Floor::getDownLine() const { return _downLine; }
+const std::vector<std::shared_ptr<Client>> Floor::getDownLine() const { return _downLine; }
 
 Direction Floor::compareTo(const Floor &other) const {
   if (other.getNumber() < _number)
@@ -46,13 +46,13 @@ Direction Floor::addClient(const std::shared_ptr<Client> client) {
   int destination = client->getDestination();
 
   if (destination > _number) {
-    _upLine.push(client);
+    _upLine.push_back(client);
     // LOG(INFO) << "Floor #" << _number << " received a client (size "
     //           << client->getPartySize() << ")"
     //           << " to go UP to floor #" << client->getDestination() << ".";
     return Direction::Up;
   } else if (destination < _number) {
-    _downLine.push(client);
+    _downLine.push_back(client);
     // LOG(INFO) << "Floor #" << _number << " received a client (size "
     //           << client->getPartySize() << ")"
     //           << " to go DOWN to floor #" << client->getDestination() << ".";
@@ -69,7 +69,7 @@ Direction Floor::addClient(const std::shared_ptr<Client> client) {
 std::set<int> Floor::boardElevator(const unsigned long time, std::shared_ptr<Elevator> elevator) {
   std::set<int> newStops;
 
-  std::queue<std::shared_ptr<Client>>* lineToBoard = nullptr;
+  std::vector<std::shared_ptr<Client>>* lineToBoard = nullptr;
 
   if (elevator->getDirection() == Direction::Up) {
     lineToBoard = &_upLine;
@@ -87,7 +87,7 @@ std::set<int> Floor::boardElevator(const unsigned long time, std::shared_ptr<Ele
     client->setPickupTime(time);
     elevator->addPassenger(client);
     newStops.insert(client->getDestination());
-    lineToBoard->pop();
+    lineToBoard->erase(lineToBoard->begin());
 
     LOG(INFO) << "Client #" << client->getId()
               << " boarded elevator #" << elevator->getNumber()
