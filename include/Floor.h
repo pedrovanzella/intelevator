@@ -37,7 +37,7 @@ private:
   int _number;
   int _population;
   int _lambda;
-  std::vector<std::shared_ptr<Client>> _upLine;
-  std::vector<std::shared_ptr<Client>> _downLine;
+  std::queue<std::shared_ptr<Client>> _upLine;
+  std::queue<std::shared_ptr<Client>> _downLine;
   std::shared_ptr<EventFactory> _eventFactory;
 };

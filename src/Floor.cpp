@@ -8,6 +8,7 @@
 #include "Simulator.h"
 #include <sstream>
 #include <string>
+#include <vector>
 
 Floor::Floor(const int number, const int population, const float lambda)
     : _number(number), _population(population), _lambda(lambda) {}
@@ -24,9 +25,27 @@ int Floor::clientsOnUpLine() const { return _upLine.size(); }
 
 int Floor::clientsOnDownLine() const { return _downLine.size(); }
 
-const std::vector<std::shared_ptr<Client>> Floor::getUpLine() const { return _upLine; }
+const std::vector<std::shared_ptr<Client>> Floor::getUpLine() const
+{
+  decltype(_upLine) upLine(_upLine);
+  std::vector<std::shared_ptr<Client>> line;
+  while (!upLine.empty()) {
+    line.push_back(upLine.front());
+    upLine.pop();
+  }
+  return line;
+}
 
-const std::vector<std::shared_ptr<Client>> Floor::getDownLine() const { return _downLine; }
+const std::vector<std::shared_ptr<Client>> Floor::getDownLine() const
+{
+  decltype(_downLine) downLine(_downLine);
+  std::vector<std::shared_ptr<Client>> line;
+  while (!downLine.empty()) {
+    line.push_back(downLine.front());
+    downLine.pop();
+  }
+  return line;
+}
 
 Direction Floor::compareTo(const Floor &other) const {
   if (other.getNumber() < _number)
@@ -46,13 +65,13 @@ Direction Floor::addClient(const std::shared_ptr<Client> client) {
   int destination = client->getDestination();
 
   if (destination > _number) {
-    _upLine.push_back(client);
+    _upLine.push(client);
     // LOG(INFO) << "Floor #" << _number << " received a client (size "
     //           << client->getPartySize() << ")"
     //           << " to go UP to floor #" << client->getDestination() << ".";
     return Direction::Up;
   } else if (destination < _number) {
-    _downLine.push_back(client);
+    _downLine.push(client);
     // LOG(INFO) << "Floor #" << _number << " received a client (size "
     //           << client->getPartySize() << ")"
     //           << " to go DOWN to floor #" << client->getDestination() << ".";
@@ -69,7 +88,7 @@ Direction Floor::addClient(const std::shared_ptr<Client> client) {
 std::set<int> Floor::boardElevator(const unsigned long time, std::shared_ptr<Elevator> elevator) {
   std::set<int> newStops;
 
-  std::vector<std::shared_ptr<Client>>* lineToBoard = nullptr;
+  std::queue<std::shared_ptr<Client>>* lineToBoard = nullptr;
 
   if (elevator->getDirection() == Direction::Up) {
     lineToBoard = &_upLine;
@@ -87,7 +106,7 @@ std::set<int> Floor::boardElevator(const unsigned long time, std::shared_ptr<Ele
     client->setPickupTime(time);
     elevator->addPassenger(client);
     newStops.insert(client->getDestination());
-    lineToBoard->erase(lineToBoard->begin());
+    lineToBoard->pop();
 
     LOG(INFO) << "Client #" << client->getId()
               << " boarded elevator #" << elevator->getNumber()
