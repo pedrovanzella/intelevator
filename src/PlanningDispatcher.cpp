@@ -1,6 +1,10 @@
 #include "PlanningDispatcher.h"
 #include "Building.h"
 #include "Elevator.h"
+#include "Client.h"
+#include "Floor.h"
+#include <memory>
+#include <algorithm>
 
 int PlanningDispatcher::pick_next_elevator(const std::shared_ptr<const CostFunction> costFunction,
                                            const std::shared_ptr<const Building> building,
@@ -27,11 +31,33 @@ std::map<int, int> PlanningDispatcher::calculate(const std::shared_ptr<const Cos
     costs[e->getNumber()] = 0;
   }
 
-  return next_step(costFunction, building, costs, horizon);
+  return next_step(costFunction, getAllWaitingClients(building), costs, horizon);
+}
+
+std::vector<std::shared_ptr<Client>> PlanningDispatcher::getAllWaitingClients(const std::shared_ptr<const Building> b)
+{
+  std::vector<std::shared_ptr<Client>> all;
+
+  for (auto f : *b->getFloors()) {
+    // Get all clients on this floor and add them to all
+    for (auto c : f->getUpLine()) {
+      all.push_back(c);
+    }
+    for (auto c : f->getDownLine()) {
+      all.push_back(c);
+    }
+  }
+
+  // sort all
+  std::sort(all.begin(), all.end(), [](std::shared_ptr<Client> c1, std::shared_ptr<Client> c2) {
+      return c1->getCreateTime() > c2->getCreateTime();
+    });
+
+  return all;
 }
 
 std::map<int, int> PlanningDispatcher::next_step(const std::shared_ptr<const CostFunction> costFunction,
-                                                 const std::shared_ptr<const Building> building,
+                                                 const std::vector<std::shared_ptr<Client>> clients,
                                                  std::map<int, int> current_costs,
                                                  int horizon)
 {
