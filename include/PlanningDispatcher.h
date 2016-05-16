@@ -22,7 +22,7 @@ private:
                                int horizon);
   std::vector<std::shared_ptr<Client>> getAllWaitingClients(const std::shared_ptr<const Building> b);
   std::map<int, int> next_step(const std::shared_ptr<const CostFunction> costFunction,
-                               const std::vector<std::shared_ptr<Client>> clients,
+                               std::vector<std::shared_ptr<Client>> clients,
                                std::map<int, int> current_costs,
                                int horizon);
 };

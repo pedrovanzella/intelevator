@@ -3,6 +3,7 @@
 #include "Elevator.h"
 #include "Client.h"
 #include "Floor.h"
+#include "CostFunction.h"
 #include <memory>
 #include <algorithm>
 
@@ -57,9 +58,15 @@ std::vector<std::shared_ptr<Client>> PlanningDispatcher::getAllWaitingClients(co
 }
 
 std::map<int, int> PlanningDispatcher::next_step(const std::shared_ptr<const CostFunction> costFunction,
-                                                 const std::vector<std::shared_ptr<Client>> clients,
+                                                 std::vector<std::shared_ptr<Client>> clients,
                                                  std::map<int, int> current_costs,
                                                  int horizon)
 {
-  return current_costs;
+  if (horizon <= 0) {
+    return current_costs;
+  }
+
+  //costFunction->calculate( const std::shared_ptr<const Building> building, const std::shared_ptr<const Elevator> elevator, const std::shared_ptr<const Client> c )
+
+  return next_step(costFunction, clients, current_costs, horizon - 1);
 }
