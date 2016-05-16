@@ -24,6 +24,10 @@ int Floor::clientsOnUpLine() const { return _upLine.size(); }
 
 int Floor::clientsOnDownLine() const { return _downLine.size(); }
 
+const std::queue<std::shared_ptr<Client>> Floor::getUpLine() const { return _upLine; }
+
+const std::queue<std::shared_ptr<Client>> Floor::getDownLine() const { return _downLine; }
+
 Direction Floor::compareTo(const Floor &other) const {
   if (other.getNumber() < _number)
     return Direction::Down;
