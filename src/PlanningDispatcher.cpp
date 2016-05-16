@@ -69,7 +69,23 @@ PlanningDispatcher::next_step(const std::shared_ptr<const CostFunction> costFunc
     return current_costs;
   }
 
-  //costFunction->calculate( const std::shared_ptr<const Elevator> elevator, const std::shared_ptr<const Client> c )
+  for (auto m : current_costs) {
+    // m.first is the elevator
+    std::shared_ptr<Client> lowestCostClient = nullptr;
+    auto lowestCost = 0;
+
+    // find out the lowest cost for this elevator
+    for (auto c : clients) {
+      auto cost = costFunction->calculate(m.first, c);
+      if (cost < lowestCost) {
+        lowestCost = cost;
+        lowestCostClient = c;
+      }
+    }
+    current_costs[m.first] += lowestCost;
+    // remove client from list
+    clients.erase(std::remove(clients.begin(), clients.end(), lowestCostClient), clients.end());
+  }
 
   return next_step(costFunction, clients, current_costs, horizon - 1);
 }
