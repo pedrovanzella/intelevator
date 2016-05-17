@@ -28,13 +28,9 @@ Building::Building(
 
 Building::~Building() {}
 
-const std::shared_ptr<std::vector<std::shared_ptr<Elevator>>> Building::getElevators() const {
-  return _elevators;
-}
+const std::shared_ptr<std::vector<std::shared_ptr<Elevator>>> Building::getElevators() const { return _elevators; }
 
-const std::shared_ptr<std::vector<std::shared_ptr<Floor>>> Building::getFloors() const {
-  return _floors;
-}
+const std::shared_ptr<std::vector<std::shared_ptr<Floor>>> Building::getFloors() const { return _floors; }
 
 const std::shared_ptr<Floor> Building::getFloor(int number) const {
   if (number >= _floors->size())

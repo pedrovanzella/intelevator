@@ -26,13 +26,9 @@ int Elevator::getLocation() const { return _location; }
 
 int Elevator::getDestination() const { return _destination; }
 
-Direction Elevator::getDirection() const {
-  return _direction;
-}
+Direction Elevator::getDirection() const { return _direction; }
 
-const std::shared_ptr<const std::vector<std::shared_ptr<Client>>> Elevator::getPassengers() const {
-  return _passengers;
-}
+const std::shared_ptr<const std::vector<std::shared_ptr<Client>>> Elevator::getPassengers() const { return _passengers; }
 
 int Elevator::getAvailableCapacity() const {
   if (_capacity == 0) return 0.0;
