@@ -20,7 +20,6 @@ public:
   int getCapacity() const;
   int getLocation() const;
   int getDestination() const;
-  Direction getDirection() const;
 
   const std::shared_ptr<const std::vector<std::shared_ptr<Client>>> getPassengers() const;
   int getAvailableCapacity() const;
@@ -28,6 +27,7 @@ public:
   bool canEnter(std::shared_ptr<const Client> client) const;
 
   void setDestination(int destination);
+  Direction getDirection() const;
 
   std::shared_ptr<std::vector<std::shared_ptr<Client>>> dropPassengersToCurrentLocation();
   void addPassenger(std::shared_ptr<Client> client);
@@ -41,6 +41,5 @@ private:
   const int _capacity;
   int _location;
   int _destination;
-  Direction _direction;
   std::shared_ptr<std::vector<std::shared_ptr<Client>>> _passengers;
 };

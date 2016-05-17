@@ -64,12 +64,9 @@ void Building::notify(const std::shared_ptr<const Event> event) {
   */
   if (event->getType() == EventType::clientArrival) {
     doClientArrival(std::static_pointer_cast<const ClientArrival>(event));
-    LOG(INFO) << event->str();
   }
 
-  if (event->getType() == EventType::finishSimulation) {
-    LOG(INFO) << event->str();
-  }
+  LOG(INFO) << event->str();
 }
 
 void Building::initializeArrivals() {

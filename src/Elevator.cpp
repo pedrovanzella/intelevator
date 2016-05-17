@@ -13,7 +13,6 @@ Elevator::Elevator(int number, int capacity, int floor)
     _capacity(capacity),
     _location(floor),
     _destination(floor),
-    _direction(Direction::None),
     _passengers(new std::vector<std::shared_ptr<Client>>) {}
 
 Elevator::~Elevator() {}
@@ -25,8 +24,6 @@ int Elevator::getCapacity() const { return _capacity; }
 int Elevator::getLocation() const { return _location; }
 
 int Elevator::getDestination() const { return _destination; }
-
-Direction Elevator::getDirection() const { return _direction; }
 
 const std::shared_ptr<const std::vector<std::shared_ptr<Client>>> Elevator::getPassengers() const { return _passengers; }
 
@@ -42,26 +39,17 @@ bool Elevator::canEnter(std::shared_ptr<const Client> client) const {
   return getAvailableCapacity() >= client->getPartySize();
 }
 
-void Elevator::setDestination(int destination) {
+void Elevator::setDestination(int destination) { _destination = destination; }
 
-  _destination = destination;
+Direction Elevator::getDirection() const {
+  if (_destination == -1 || _destination == _location)
+    return Direction::None;
 
-  if (_destination == -1) {
-    _direction = Direction::None;
-  }
-  else {
-    if (_destination > _location)
-      _direction = Direction::Up;
-    else if (_destination < _location)
-      _direction = Direction::Down;
-    else
-      _direction = Direction::None;
-  }
+  if (_destination > _location)
+      return Direction::Up;
 
-  // LOG_IF(INFO, _destination != -1)
-  //   << "Elevator #" << _number << " received new destination: floor #" << _destination
-  //   << " (direction=" << Helpers::directionName(_direction) << ").";
- }
+  return Direction::Down;
+}
 
 std::shared_ptr<std::vector<std::shared_ptr<Client>>> Elevator::dropPassengersToCurrentLocation() {
   /* Copy every client bound to current _location into passengersToDrop container. */
@@ -94,18 +82,16 @@ void Elevator::addPassenger(std::shared_ptr<Client> client) {
 }
 
 void Elevator::move() {
-    if (_direction == Direction::Up) {
-      _location++;
-      // LOG(INFO) << "Elevator #" << _number
-      //   << " went UP to floor #" << _location << ".";
-    } else if (_direction == Direction::Down) {
-      _location--;
-      // LOG(INFO) << "Elevator #" << _number
-      //   << " went DOWN to floor #" << _location << ".";
-    } else {
-      // LOG(INFO) << "Elevator #" << _number
-      //   << " stayed at floor #" << _location << ".";
-    }
+  switch (getDirection()) {
+  case Direction::Up:
+    _location++;
+    break;
+  case Direction::Down:
+    _location--;
+    break;
+  default:
+    break;
+  }
 }
 
 std::shared_ptr<std::vector<std::shared_ptr<Elevator>>> Elevator::create(const std::shared_ptr<const Simulator> simulator) {
