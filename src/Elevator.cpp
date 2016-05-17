@@ -39,8 +39,6 @@ bool Elevator::canEnter(std::shared_ptr<const Client> client) const {
   return getAvailableCapacity() >= client->getPartySize();
 }
 
-void Elevator::setDestination(int destination) { _destination = destination; }
-
 Direction Elevator::getDirection() const {
   if (_destination == -1 || _destination == _location)
     return Direction::None;
@@ -50,6 +48,8 @@ Direction Elevator::getDirection() const {
 
   return Direction::Down;
 }
+
+void Elevator::setDestination(int destination) { _destination = destination; }
 
 std::shared_ptr<std::vector<std::shared_ptr<Client>>> Elevator::dropPassengersToCurrentLocation() {
   /* Copy every client bound to current _location into passengersToDrop container. */
