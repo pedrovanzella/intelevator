@@ -16,12 +16,25 @@ elevator_config:
 #  0 - dummy
 #  1 - nearest neighbour
 
+# some seeds
+#
+# 54TH7hboAG1iOsDIDhJp
+# AKx40EMj7do2NA8nrKLn
+# 0bhx1tTm923L5uRgFxO8
+# sTJMhgDL8rrDOaMXQcOo
+# s1j8DZw6Y9TPvo7hiuTY
+# UU60LQNjhMa09GZGiVVV
+# I0Ayf7VMqvaOAnUQvZCB
+# UzTg5GXiQ7SxNa492Y2i
+# bP5Y9E7CvVtnBn0qK9fS
+# FJtPpvmANuEaBLBaaGB5
+
 scenarios:
   - name: Simple
     duration: 30
     dispatcher: 1 # random
     cost_function: 0 # dummy
-    seed: Semente sementosa sementuda!
+    seed: 54TH7hboAG1iOsDIDhJp
     elevators: 1
     elevator_config: *small
     floors: # [ population, lambda ]
