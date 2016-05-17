@@ -64,10 +64,9 @@ void Building::notify(const std::shared_ptr<const Event> event) {
     e o sistema deverá atualizar o seu estado de acordo com esse evento.
   */
   if (event->getType() == EventType::clientArrival) {
+    LOG(INFO) << event->str();
     doClientArrival(std::static_pointer_cast<const ClientArrival>(event));
   }
-
-  LOG(INFO) << event->str();
 }
 
 void Building::initializeArrivals() {
