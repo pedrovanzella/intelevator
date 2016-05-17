@@ -11,6 +11,7 @@
 #include "Simulator.h"
 #include "Statistics.h"
 #include "Status.h"
+#include "StopManager.h"
 #include "Trip.h"
 #include <algorithm>
 #include <glog/logging.h>
@@ -24,7 +25,7 @@ Building::Building(
     std::shared_ptr<const CostFunction> costFunction)
     : _simulator(simulator), _clock(_simulator->getClock()), _floors(floors),
       _elevators(elevators), _dispatcher(dispatcher),
-      _costFunction(costFunction), _stops() {}
+      _costFunction(costFunction), _stops(), _stopManager(new StopManager()) {}
 
 Building::~Building() {}
 
