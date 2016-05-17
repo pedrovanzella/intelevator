@@ -12,7 +12,7 @@ Elevator::Elevator(int number, int capacity, int floor)
   : _number(number),
     _capacity(capacity),
     _location(floor),
-    _destination(floor),
+    _destination(-1),
     _passengers(new std::vector<std::shared_ptr<Client>>) {}
 
 Elevator::~Elevator() {}
@@ -34,12 +34,8 @@ bool Elevator::canEnter(std::shared_ptr<const Client> client) const {
 }
 
 Direction Elevator::getDirection() const {
-  if (_destination == -1 || _destination == _location)
-    return Direction::None;
-
-  if (_destination > _location)
-      return Direction::Up;
-
+  if (_destination == -1 || _destination == _location) return Direction::None;
+  if (_destination > _location) return Direction::Up;
   return Direction::Down;
 }
 
