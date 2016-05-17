@@ -36,6 +36,7 @@ public:
   void printToFile(std::string name);
 
 private:
+  bool _keepRunning;
   std::vector<Trip> _trips;
   std::vector<Arrival> _arrivals;
 };

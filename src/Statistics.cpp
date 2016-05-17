@@ -10,15 +10,19 @@
 #include <ctime>
 #include <glog/logging.h>
 
-Statistics::Statistics() {}
+Statistics::Statistics() : _keepRunning(true) {}
 
 Statistics::~Statistics() {}
 
-bool Statistics::keepRunning() const { return true; }
+bool Statistics::keepRunning() const { return _keepRunning; }
 
 void Statistics::notify(const std::shared_ptr<const Event> event) {
   if (event->getType() == EventType::clientArrival) {
     logArrival(std::static_pointer_cast<const ClientArrival>(event));
+  }
+
+  if (event->getType() == EventType::finishSimulation) {
+    _keepRunning = false;
   }
 }
 
