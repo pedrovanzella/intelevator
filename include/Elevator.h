@@ -21,15 +21,14 @@ public:
   int getLocation() const;
   int getDestination() const;
   const std::shared_ptr<const std::vector<std::shared_ptr<Client>>> getPassengers() const;
-  int getAvailableCapacity() const;
+
   bool canEnter(std::shared_ptr<const Client> client) const;
   Direction getDirection() const;
 
   void setDestination(int destination);
-
-  std::shared_ptr<std::vector<std::shared_ptr<Client>>> dropPassengersToCurrentLocation();
   void addPassenger(std::shared_ptr<Client> client);
   void move();
+  std::shared_ptr<std::vector<std::shared_ptr<Client>>> dropPassengersToCurrentLocation();
 
   static std::shared_ptr<std::vector<std::shared_ptr<Elevator>>> create(const std::shared_ptr<const Simulator> simulator);
 

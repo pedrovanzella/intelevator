@@ -27,16 +27,10 @@ int Elevator::getDestination() const { return _destination; }
 
 const std::shared_ptr<const std::vector<std::shared_ptr<Client>>> Elevator::getPassengers() const { return _passengers; }
 
-int Elevator::getAvailableCapacity() const {
-  if (_capacity == 0) return 0.0;
-
+bool Elevator::canEnter(std::shared_ptr<const Client> client) const {
   int total_passengers = 0;
   for (auto client : *_passengers) total_passengers += client->getPartySize();
-  return _capacity - total_passengers;
-}
-
-bool Elevator::canEnter(std::shared_ptr<const Client> client) const {
-  return getAvailableCapacity() >= client->getPartySize();
+  return (_capacity - total_passengers) >= client->getPartySize();
 }
 
 Direction Elevator::getDirection() const {
@@ -50,6 +44,23 @@ Direction Elevator::getDirection() const {
 }
 
 void Elevator::setDestination(int destination) { _destination = destination; }
+
+void Elevator::addPassenger(std::shared_ptr<Client> client) {
+  _passengers->push_back(client);
+}
+
+void Elevator::move() {
+  switch (getDirection()) {
+  case Direction::Up:
+    _location++;
+    break;
+  case Direction::Down:
+    _location--;
+    break;
+  default:
+    break;
+  }
+}
 
 std::shared_ptr<std::vector<std::shared_ptr<Client>>> Elevator::dropPassengersToCurrentLocation() {
   /* Copy every client bound to current _location into passengersToDrop container. */
@@ -75,23 +86,6 @@ std::shared_ptr<std::vector<std::shared_ptr<Client>>> Elevator::dropPassengersTo
 
   /* Returns the passengers about to drop off the elevador. */
   return passengersToDrop;
-}
-
-void Elevator::addPassenger(std::shared_ptr<Client> client) {
-  _passengers->push_back(client);
-}
-
-void Elevator::move() {
-  switch (getDirection()) {
-  case Direction::Up:
-    _location++;
-    break;
-  case Direction::Down:
-    _location--;
-    break;
-  default:
-    break;
-  }
 }
 
 std::shared_ptr<std::vector<std::shared_ptr<Elevator>>> Elevator::create(const std::shared_ptr<const Simulator> simulator) {
