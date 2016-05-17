@@ -23,6 +23,7 @@ void Statistics::notify(const std::shared_ptr<const Event> event) {
 
   if (event->getType() == EventType::finishSimulation) {
     _keepRunning = false;
+    LOG(INFO) << event->str();
   }
 }
 

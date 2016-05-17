@@ -1,5 +1,6 @@
 #include "Clock.h"
 #include "Event.h"
+#include <sstream>
 #include <glog/logging.h>
 
 Clock::Clock() : _time(0) {}
@@ -22,4 +23,10 @@ void Clock::advanceBy(const unsigned long amount) {
 
 void Clock::notify(const std::shared_ptr<const Event> event) {
   advanceTo(event->getTime());
+}
+
+std::string Clock::str() const {
+  std::ostringstream stream;
+  stream << "t=" << _time;
+  return stream.str();
 }
