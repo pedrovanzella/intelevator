@@ -45,8 +45,9 @@ void Elevator::addPassenger(std::shared_ptr<Client> client) {
   _passengers->push_back(client);
 }
 
-void Elevator::move() {
-  switch (getDirection()) {
+Direction Elevator::move() {
+  auto direction = getDirection();
+  switch (direction) {
   case Direction::Up:
     _location++;
     break;
@@ -56,6 +57,8 @@ void Elevator::move() {
   default:
     break;
   }
+
+  return direction;
 }
 
 std::shared_ptr<std::vector<std::shared_ptr<Client>>> Elevator::dropPassengersToCurrentLocation() {

@@ -27,7 +27,7 @@ public:
 
   void setDestination(int destination);
   void addPassenger(std::shared_ptr<Client> client);
-  void move();
+  Direction move();
   std::shared_ptr<std::vector<std::shared_ptr<Client>>> dropPassengersToCurrentLocation();
 
   static std::shared_ptr<std::vector<std::shared_ptr<Elevator>>> create(const std::shared_ptr<const Simulator> simulator);
