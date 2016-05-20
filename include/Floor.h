@@ -31,6 +31,7 @@ public:
 
   void createFutureArrival(const std::shared_ptr<EventQueue> eventQueue);
 
+  std::string str() const;
   static std::shared_ptr<std::vector<std::shared_ptr<Floor>>> create(const std::shared_ptr<const Simulator> simulator);
 
 private:

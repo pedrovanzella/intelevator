@@ -137,3 +137,9 @@ std::shared_ptr<std::vector<std::shared_ptr<Floor>>> Floor::create(const std::sh
 
   return floors;
 }
+
+std::string Floor::str() const {
+  std::ostringstream stream;
+  stream << "Floor #" << _number << " :: UP[" << _upLine.size() << "], DOWN[" << _downLine.size() << "]";
+  return stream.str();
+}
