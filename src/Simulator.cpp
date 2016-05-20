@@ -25,7 +25,7 @@ Simulator::Simulator(const std::shared_ptr<const Scenario> scenario)
       _eventQueue(std::make_shared<EventQueue>()),
       _eventDispatcher(std::make_shared<EventDispatcher>()) {
   auto seed = scenario->getSeed();
-  auto seed_seq = std::seed_seq(seed.begin(), seed.end());
+  std::seed_seq seed_seq(seed.begin(), seed.end());
   _random_engine = std::shared_ptr<std::default_random_engine>(new std::default_random_engine(seed_seq));
 }
 
