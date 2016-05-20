@@ -10,7 +10,7 @@
 #include <ctime>
 #include <glog/logging.h>
 
-Statistics::Statistics() : _keepRunning(true) {}
+Statistics::Statistics() : _keepRunning(true), _clientsArrived(0), _clientsServed(0) {}
 
 Statistics::~Statistics() {}
 
@@ -32,8 +32,8 @@ void Statistics::logDropOff(const unsigned long dropOffTime,
                             std::shared_ptr<std::vector<std::shared_ptr<Client>>> droppedPassengers) {
   for (auto passenger : *droppedPassengers) {
     LOG(INFO) << "Elevator #" << elevator->getNumber()
-              << " dropped " << passenger->getPartySize()
-              << " clients at floor #" << elevator->getLocation() << " (t=" << dropOffTime << ").";
+              << " dropped client #" << passenger->getId()
+              << " at floor #" << elevator->getLocation() << " (t=" << dropOffTime << ").";
 
     addTrip(dropOffTime, elevator, passenger);
   }
@@ -52,6 +52,7 @@ void Statistics::addTrip(const unsigned long dropOffTime,
   t.createTime = passenger->getCreateTime();
   t.clientID = passenger->getId();
   _trips.push_back(t);
+  _clientsServed++;
 }
 
 void Statistics::logArrival(std::shared_ptr<const ClientArrival> clientArrival) {
@@ -62,6 +63,7 @@ void Statistics::logArrival(std::shared_ptr<const ClientArrival> clientArrival) 
   a.destinationFloor = clientArrival->getClient()->getDestination();
   a.partySize = clientArrival->getClient()->getPartySize();
   _arrivals.push_back(a);
+  _clientsArrived++;
 }
 
 void Statistics::printToFile(std::string name)
@@ -74,6 +76,9 @@ void Statistics::printToFile(std::string name)
   std::string path = "output/" + name + "_" + buffer;
   std::string command = "mkdir -p " + path;
   system(command.c_str());
+
+  LOG(INFO) << "Clients arrived: " << _clientsArrived;
+  LOG(INFO) << "Clients served: " << _clientsServed;
 
   {
     LOG(INFO) << "Writing trips statistics to '" << path + "/trips.log" << "'.";

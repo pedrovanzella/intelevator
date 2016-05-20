@@ -39,4 +39,7 @@ private:
   bool _keepRunning;
   std::vector<Trip> _trips;
   std::vector<Arrival> _arrivals;
+
+  int _clientsArrived;
+  int _clientsServed;
 };
