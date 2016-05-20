@@ -69,9 +69,18 @@ void Building::notify(const std::shared_ptr<const Event> event) {
   }
 
   if (event->getType() == EventType::finishSimulation) {
+    int clientsOnLines = 0;
     for (auto floor : *_floors) {
-      LOG(INFO) << floor->str();
+      clientsOnLines += floor->clientsOnDownLine() + floor->clientsOnUpLine();
     }
+
+    int clientsOnElevators = 0;
+    for (auto elevator : *_elevators) {
+      clientsOnElevators += elevator->getPassengers()->size();
+    }
+
+    LOG(INFO) << "A total of " << clientsOnLines << " clients remains on lines.";
+    LOG(INFO) << "A total of " << clientsOnElevators << " clients remains inside elevators.";
   }
 }
 

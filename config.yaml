@@ -31,20 +31,20 @@ elevator_config:
 
 scenarios:
   - name: Simple
-    duration: 3000
-    dispatcher: 1 # random
+    duration: 10000
+    dispatcher: 2 # random
     cost_function: 0 # dummy
     seed: 54TH7hboAG1iOsDIDhJp
     elevators: 1
     elevator_config: *small
     floors: # [ population, lambda ]
-      - [ 10, 10 ]
-      - [ 10, 10 ]
-      - [ 10, 10 ]
-      - [ 10, 10 ]
-      - [ 10, 10 ]
-      - [ 10, 10 ]
-      - [ 10, 10 ]
-      - [ 10, 10 ]
-      - [ 10, 10 ]
-      - [ 10, 10 ]
+      - [ 300, 150 ]
+      - [ 300, 300 ]
+      - [ 300, 450 ]
+      - [ 300, 600 ]
+      - [ 300, 500 ]
+      - [ 300, 450 ]
+      - [ 300, 900 ]
+      - [ 300, 700 ]
+      - [ 300, 850 ]
+      - [ 300, 800 ]
