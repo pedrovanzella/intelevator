@@ -40,9 +40,6 @@ TEST_F(FloorTest, CompareTo)
 
   Floor up(2, 0, 0);
   EXPECT_EQ(floor->compareTo(up), Direction::Up);
-
-  Floor none(1, 0, 0);
-  EXPECT_EQ(floor->compareTo(none), Direction::None);
 }
 
 TEST_F(FloorTest, AddClient)

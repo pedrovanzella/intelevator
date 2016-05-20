@@ -17,11 +17,9 @@ TEST_F(StopManagerTest, GetNull) {
   auto e = std::make_shared<Elevator>(0, 0, 0);
   EXPECT_EQ(nullptr, sm->get(f, Direction::Up));
   EXPECT_EQ(nullptr, sm->get(f, Direction::Down));
-  EXPECT_EQ(nullptr, sm->get(f, Direction::None));
 
   EXPECT_EQ(0, sm->getStops(e, Direction::Up).size());
   EXPECT_EQ(0, sm->getStops(e, Direction::Down).size());
-  EXPECT_EQ(0, sm->getStops(e, Direction::None).size());
 }
 
 TEST_F(StopManagerTest, SetUp) {
@@ -31,7 +29,6 @@ TEST_F(StopManagerTest, SetUp) {
   sm->set(f, d, e);
   EXPECT_EQ(e, sm->get(f, d));
   EXPECT_EQ(nullptr, sm->get(f, Direction::Down));
-  EXPECT_EQ(nullptr, sm->get(f, Direction::None));
   auto stops = sm->getStops(e, d);
   EXPECT_EQ(1, stops.size());
   EXPECT_EQ(f, *stops.begin());
@@ -42,17 +39,6 @@ TEST_F(StopManagerTest, SetUp) {
   stops = sm->getStops(e, d);
   EXPECT_EQ(0, stops.size());
   EXPECT_EQ(stops.end(), stops.begin());
-}
-
-TEST_F(StopManagerTest, SetNone) {
-  auto f = std::make_shared<Floor>(0, 0, 0);
-  auto d = Direction::None;
-  auto e = std::make_shared<Elevator>(0, 0, 0);
-  sm->set(f, d, e);
-  EXPECT_EQ(nullptr, sm->get(f, Direction::Up));
-  EXPECT_EQ(nullptr, sm->get(f, Direction::Down));
-  EXPECT_EQ(nullptr, sm->get(f, Direction::None));
-  EXPECT_EQ(0, sm->getStops(e, d).size());
 }
 
 TEST_F(StopManagerTest, SetOverride) {

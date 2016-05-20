@@ -10,7 +10,7 @@ struct ElevatorTest : testing::Test
   int number;
   int capacity;
   int location;
-  int destination;
+  std::pair<int, Direction> destination;
 
   std::shared_ptr<Elevator> elevator;
 
@@ -18,7 +18,7 @@ struct ElevatorTest : testing::Test
   : number(0)
   , capacity(8)
   , location(0)
-  , destination(5)
+  , destination(5, Direction::Up)
   , elevator(new Elevator(number, capacity, location))
   {}
 
