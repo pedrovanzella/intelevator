@@ -3,7 +3,7 @@
 #include <stdexcept>
 #include <string>
 
-enum class Direction { Up, Down, None };
+enum class Direction { Up, Down };
 
 namespace Helpers {
   static std::string directionName(Direction type) {
@@ -12,8 +12,6 @@ namespace Helpers {
       return "Up";
     case Direction::Down:
       return "Down";
-    case Direction::None:
-      return "None";
     default:
       throw std::invalid_argument("");
     }

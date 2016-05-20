@@ -7,6 +7,7 @@
 #include "Elevator.h"
 #include "Floor.h"
 #include "NearestNeighbourDispatcher.h"
+#include "Status.h"
 #include <algorithm>
 
 class Dispatcher;
@@ -29,7 +30,7 @@ int BetterNearestNeighbourDispatcher::pick_next_elevator(
                  auto current_floor = building->getFloor(el->getLocation());
                  return (el->getDirection() ==
                          current_floor->compareTo(*request_floor)) ||
-                        (el->getDirection() == Direction::None);
+                        (el->getStatus() == Status::Idle);
                });
 
   // if no elevators are idle or going that way, then look through all elevators

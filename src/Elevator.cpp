@@ -4,6 +4,7 @@
 #include "Event.h"
 #include "Scenario.h"
 #include "Simulator.h"
+#include "Status.h"
 #include <algorithm>
 #include <glog/logging.h>
 #include <memory>
@@ -12,7 +13,9 @@ Elevator::Elevator(int number, int capacity, int floor)
   : _number(number),
     _capacity(capacity),
     _location(floor),
-    _destination(-1),
+    _destination({ floor, Direction::Up }),
+    _status(Status::Idle),
+    _direction(Direction::Up),
     _passengers(new std::vector<std::shared_ptr<Client>>) {}
 
 Elevator::~Elevator() {}
@@ -23,9 +26,27 @@ int Elevator::getCapacity() const { return _capacity; }
 
 int Elevator::getLocation() const { return _location; }
 
-int Elevator::getDestination() const { return _destination; }
+std::pair<int, Direction> Elevator::getDestination() const { return _destination; }
+
+Status Elevator::getStatus() const { return _status; }
+
+Direction Elevator::getDirection() const { return _direction; }
 
 const std::shared_ptr<const std::vector<std::shared_ptr<Client>>> Elevator::getPassengers() const { return _passengers; }
+
+void Elevator::setDestination(std::pair<int, Direction> destination) {
+  _destination = destination;
+
+  if (_destination.first > _location) {
+    _status = Status::Moving;
+    _direction = Direction::Up;
+  } else if (_destination.first < _location) {
+    _status = Status::Moving;
+    _direction = Direction::Down;
+  } else {
+    _status = Status::Idle;
+  }
+}
 
 bool Elevator::canEnter(std::shared_ptr<const Client> client) const {
   int total_passengers = 0;
@@ -33,32 +54,24 @@ bool Elevator::canEnter(std::shared_ptr<const Client> client) const {
   return (_capacity - total_passengers) >= client->getPartySize();
 }
 
-Direction Elevator::getDirection() const {
-  if (_destination == -1 || _destination == _location) return Direction::None;
-  if (_destination > _location) return Direction::Up;
-  return Direction::Down;
-}
-
-void Elevator::setDestination(int destination) { _destination = destination; }
-
 void Elevator::addPassenger(std::shared_ptr<Client> client) {
   _passengers->push_back(client);
 }
 
-Direction Elevator::move() {
-  auto direction = getDirection();
-  switch (direction) {
+void Elevator::move() {
+  if (_status == Status::Idle || _status == Status::Stopped) return;
+
+  switch (_direction) {
   case Direction::Up:
     _location++;
     break;
   case Direction::Down:
     _location--;
     break;
-  default:
-    break;
   }
 
-  return direction;
+  if (_location == _destination.first)
+    _status = Status::Idle;
 }
 
 std::shared_ptr<std::vector<std::shared_ptr<Client>>> Elevator::dropPassengersToCurrentLocation() {

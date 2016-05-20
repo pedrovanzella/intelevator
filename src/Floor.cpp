@@ -51,10 +51,7 @@ Direction Floor::compareTo(const Floor &other) const {
   if (other.getNumber() < _number)
     return Direction::Down;
 
-  if (other.getNumber() > _number)
-    return Direction::Up;
-
-  return Direction::None;
+  return Direction::Up;
 }
 
 void Floor::setEventFactory(const std::shared_ptr<EventFactory> eventFactory) {
@@ -90,9 +87,9 @@ std::set<int> Floor::boardElevator(const unsigned long time, std::shared_ptr<Ele
 
   std::queue<std::shared_ptr<Client>>* lineToBoard = nullptr;
 
-  if (elevator->getDirection() == Direction::Up) {
+  if (elevator->getDestination().second == Direction::Up) {
     lineToBoard = &_upLine;
-  } else if (elevator->getDirection() == Direction::Down) {
+  } else if (elevator->getDestination().second == Direction::Down) {
     lineToBoard = &_downLine;
   } else {
     if (_upLine.size() > _downLine.size())
@@ -112,6 +109,8 @@ std::set<int> Floor::boardElevator(const unsigned long time, std::shared_ptr<Ele
               << " boarded elevator #" << elevator->getNumber()
               << " (t=" << time << ").";
   }
+
+  LOG_IF(INFO, !lineToBoard->empty()) << "SOBROU";
 
   return newStops;
 }

@@ -10,6 +10,7 @@
 class ClientArrival; // forward declaration
 class Clock;         // forward declaration
 class CostFunction;  // forward declaration
+enum class Direction; // forward declaration
 class Dispatcher;    // forward declaration
 class Elevator;      // forward declaration
 class EventFactory;  // forward declaration
@@ -49,7 +50,7 @@ private:
 
   void doClientArrival(std::shared_ptr<const ClientArrival> event);
   void updateElevator(const std::shared_ptr<Elevator> elevator);
-  int getDestinationForElevator(const std::shared_ptr<Elevator> elevator);
+  std::pair<int, Direction> getDestinationForElevator(const std::shared_ptr<Elevator> elevator);
   bool mustStop(const std::shared_ptr<Elevator> elevator);
   void stop(const std::shared_ptr<Elevator> elevator);
   void registerNewStops(std::shared_ptr<Elevator> elevator, std::set<int> newStops);
