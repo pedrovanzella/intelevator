@@ -62,28 +62,17 @@ Direction Elevator::move() {
 }
 
 std::shared_ptr<std::vector<std::shared_ptr<Client>>> Elevator::dropPassengersToCurrentLocation() {
-  /* Copy every client bound to current _location into passengersToDrop container. */
   decltype(_passengers) passengersToDrop(new std::vector<std::shared_ptr<Client>>);
-  std::copy_if(_passengers->begin(),
-               _passengers->end(),
-               std::back_inserter(*passengersToDrop),
-               [&](std::shared_ptr<Client> c) {
-                 return (c->getDestination() == _location);
-               });
 
-  /* Creates a new container with the difference between all the clients inside
-    the elevator and the passengers about to drop off the elevator. */
-  decltype(_passengers) remainingPassengers(new std::vector<std::shared_ptr<Client>>);
-  std::set_difference(_passengers->begin(),
-                      _passengers->end(),
-                      passengersToDrop->begin(),
-                      passengersToDrop->end(),
-                      std::inserter(*remainingPassengers, remainingPassengers->begin()));
-
-  /* Swaps the Clients container with the Difference container. */
-  _passengers.swap(remainingPassengers);
-
-  /* Returns the passengers about to drop off the elevador. */
+  for (auto iter = _passengers->begin(); iter != _passengers->end();) {
+    auto passenger = *iter;
+    if (passenger->getDestination() == _location) {
+      passengersToDrop->push_back(passenger);
+      iter = _passengers->erase(iter);
+    } else {
+      ++iter;
+    }
+  }
   return passengersToDrop;
 }
 
