@@ -47,7 +47,7 @@ TEST_F(StopManagerTest, SetDown) {
   auto e = std::make_shared<Elevator>(0, 0, 0);
   sm->set(f, d, e);
   EXPECT_EQ(e, sm->get(f, d));
-  EXPECT_EQ(nullptr, sm->get(f, Direction::Down));
+  EXPECT_EQ(nullptr, sm->get(f, Direction::Up));
   auto stops = sm->getStops(e, d);
   EXPECT_EQ(1, stops.size());
   EXPECT_EQ(f, *stops.begin());
