@@ -13,14 +13,17 @@ class ClientArrival; // forward declaration
 class Elevator;      // forward declaration
 class Event;         // forward declaration
 class Floor;         // forward declaration
+class Scenario;      // forward declaration
 struct Trip;         // forward declaration
 
 class Statistics : public EventObserver {
 public:
-  Statistics();
+  Statistics(std::shared_ptr<const Scenario> scenario);
   virtual ~Statistics();
 
   bool keepRunning() const;
+
+  std::shared_ptr<const Scenario> getScenario() const;
   void notify(const std::shared_ptr<const Event> event);
 
   void logDropOff(const unsigned long dropOffTime,
@@ -33,9 +36,11 @@ public:
 
   void logArrival(std::shared_ptr<const ClientArrival> clientArrival);
 
-  void printToFile(std::string name);
+  void printToFile();
 
 private:
+  std::shared_ptr<const Scenario> _scenario;
+
   bool _keepRunning;
   std::vector<Trip> _trips;
   std::vector<Arrival> _arrivals;

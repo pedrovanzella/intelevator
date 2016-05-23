@@ -20,7 +20,7 @@
 #include <random>
 
 Simulator::Simulator(const std::shared_ptr<const Scenario> scenario)
-    : _scenario(scenario), _statistics(std::make_shared<Statistics>()),
+    : _scenario(scenario), _statistics(std::make_shared<Statistics>(scenario)),
       _clock(std::make_shared<Clock>()),
       _eventQueue(std::make_shared<EventQueue>()),
       _eventDispatcher(std::make_shared<EventDispatcher>()) {
@@ -71,16 +71,6 @@ void Simulator::run() {
   _eventDispatcher->subscribe(std::static_pointer_cast<EventObserver>(_clock));
   _eventDispatcher->subscribe(std::static_pointer_cast<EventObserver>(_statistics));
 
-  // auto ca1 = std::make_shared<ClientArrival>(5, std::make_shared<Client>(1, 0, 17, _clock->currentTime()));
-  // auto ca2 = std::make_shared<ClientArrival>(15, std::make_shared<Client>(1, 14, 16, _clock->currentTime()));
-  // auto ca3 = std::make_shared<ClientArrival>(10, std::make_shared<Client>(1, 4, 1, _clock->currentTime()));
-  // auto ca4 = std::make_shared<ClientArrival>(11, std::make_shared<Client>(1, 0, 10, _clock->currentTime()));
-
-  // _eventQueue->push(std::static_pointer_cast<Event>(ca1));
-  // _eventQueue->push(std::static_pointer_cast<Event>(ca2));
-  // _eventQueue->push(std::static_pointer_cast<Event>(ca3));
-  // _eventQueue->push(std::static_pointer_cast<Event>(ca4));
-
   auto finishSimulationEvent = std::make_shared<FinishSimulation>(_scenario->getDuration());
   _eventQueue->push(std::static_pointer_cast<Event>(finishSimulationEvent));
 
@@ -93,8 +83,6 @@ void Simulator::run() {
   }
 
   LOG(INFO) << "Finished '" << _scenario->getName() << "' scenario.";
-
-  _statistics->printToFile(_scenario->getName());
 }
 
 bool Simulator::nextStep() { return true; }

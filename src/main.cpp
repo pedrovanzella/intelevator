@@ -1,5 +1,6 @@
 #include "Scenario.h"
 #include "Simulator.h"
+#include "Statistics.h"
 #include <glog/logging.h>
 #include <memory>
 
@@ -12,6 +13,8 @@ int main(int argc, char *argv[]) {
   for (auto scenario : *scenarios) {
     auto simulator = std::make_shared<Simulator>(scenario);
     simulator->run();
+    auto statistics = simulator->getStatistics();
+    statistics->printToFile();
   }
 
   return 0;

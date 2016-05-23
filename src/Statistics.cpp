@@ -5,14 +5,19 @@
 #include "Elevator.h"
 #include "Event.h"
 #include "Floor.h"
+#include "Scenario.h"
 #include "Trip.h"
 #include <cstdlib>
 #include <ctime>
 #include <glog/logging.h>
 
-Statistics::Statistics() : _keepRunning(true), _clientsArrived(0), _clientsServed(0) {}
+Statistics::Statistics(std::shared_ptr<const Scenario> scenario)
+    : _scenario(scenario), _keepRunning(true), _clientsArrived(0),
+      _clientsServed(0) {}
 
 Statistics::~Statistics() {}
+
+std::shared_ptr<const Scenario> Statistics::getScenario() const { return _scenario; }
 
 bool Statistics::keepRunning() const { return _keepRunning; }
 
@@ -66,8 +71,10 @@ void Statistics::logArrival(std::shared_ptr<const ClientArrival> clientArrival) 
   _clientsArrived++;
 }
 
-void Statistics::printToFile(std::string name)
+void Statistics::printToFile()
 {
+  auto name = _scenario->getName();
+
   std::time_t now = std::time(NULL);
   std::tm* ptm = std::localtime(&now);
   char buffer[32];
