@@ -7,6 +7,7 @@
 #include "Floor.h"
 #include "Scenario.h"
 #include "Trip.h"
+#include <cmath>
 #include <cstdlib>
 #include <ctime>
 #include <glog/logging.h>
@@ -84,9 +85,6 @@ void Statistics::printToFile()
   std::string command = "mkdir -p " + path;
   system(command.c_str());
 
-  LOG(INFO) << "Clients arrived: " << _clientsArrived;
-  LOG(INFO) << "Clients served: " << _clientsServed;
-
   {
     LOG(INFO) << "Writing trips statistics to '" << path + "/trips.log" << "'.";
     std::ofstream f;
@@ -107,4 +105,58 @@ void Statistics::printToFile()
 
   // command = "./tools/logparser.py " + path + "/trips.log";
   // system(command.c_str());
+}
+
+int Statistics::getClientsArrived() const {
+  return _clientsArrived;
+}
+
+int Statistics::getClientsServed() const {
+  return _clientsServed;
+}
+
+double Statistics::getTotalWT() const {
+  double total = 0.0;
+  for (auto trip : _trips)
+    total += trip.pickupTime - trip.createTime;
+  return total;
+}
+
+double Statistics::getTotalJT() const {
+  double total = 0.0;
+  for (auto trip : _trips)
+    total += trip.dropoffTime - trip.pickupTime;
+  return total;
+}
+
+
+double Statistics::getAvgWT() const {
+  return getTotalWT() / _clientsServed;
+}
+
+double Statistics::getAvgJT() const {
+  return getTotalJT() / _clientsServed;
+}
+
+
+double Statistics::getDevWT() const {
+  auto awt = getAvgWT();
+  double sum = 0.0;
+  for (auto trip : _trips) {
+    auto wt = trip.pickupTime - trip.createTime;
+    sum += pow(wt - awt, 2.0);
+  }
+
+  return sqrt(sum / _clientsServed);
+}
+
+double Statistics::getDevJT() const {
+  auto awt = getAvgWT();
+  double sum = 0.0;
+  for (auto trip : _trips) {
+    auto wt = trip.dropoffTime - trip.pickupTime;
+    sum += pow(wt - awt, 2.0);
+  }
+
+  return sqrt(sum / _clientsServed);
 }

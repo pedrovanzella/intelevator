@@ -38,6 +38,18 @@ public:
 
   void printToFile();
 
+  int getClientsArrived() const;
+  int getClientsServed() const;
+
+  double getTotalWT() const;
+  double getTotalJT() const;
+
+  double getAvgWT() const;
+  double getAvgJT() const;
+
+  double getDevWT() const;
+  double getDevJT() const;
+
 private:
   std::shared_ptr<const Scenario> _scenario;
 
