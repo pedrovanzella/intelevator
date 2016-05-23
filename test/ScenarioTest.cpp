@@ -13,14 +13,13 @@ struct ScenarioTest : testing::Test {
   Scenario *s;
   ScenarioTest() {
     std::string config =
-      "name: teste\n"
-      "duration: 12345\n"
-      "dispatcher: 2\n"
-      "cost_function: 0 # dummy\n"
+      "name: A\n"
+      "duration: 10000\n"
+      "dispatcher: 0\n"
+      "cost_function: 0\n"
       "seed: 54TH7hboAG1iOsDIDhJp\n"
       "elevators: 3\n"
-      "elevator_config:\n"
-      "  capacity: 5\n"
+      "capacity: 5\n"
       "floors:\n"
       "  - [ 1, 150 ]\n"
       "  - [ 2, 300 ]\n"
@@ -36,9 +35,9 @@ struct ScenarioTest : testing::Test {
 };
 
 TEST_F(ScenarioTest, Getters) {
-  EXPECT_EQ("teste", s->getName());
-  EXPECT_EQ(12345, s->getDuration());
-  EXPECT_EQ(DispatcherType::NearestNeighbour, s->getDispatcherType());
+  EXPECT_EQ("A", s->getName());
+  EXPECT_EQ(10000, s->getDuration());
+  EXPECT_EQ(DispatcherType::Dummy, s->getDispatcherType());
   EXPECT_EQ(CostFunctionType::Dummy, s->getCostFunctionType());
   EXPECT_EQ("54TH7hboAG1iOsDIDhJp", s->getSeed());
   EXPECT_EQ(3, s->getElevators());
