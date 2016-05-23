@@ -13,7 +13,7 @@ Scenario::Scenario(YAML::Node scenario)
     : _name(scenario["name"].as<std::string>()),
       _duration(scenario["duration"].as<int>()),
       _elevators(scenario["elevators"].as<int>()),
-      _capacity(scenario["elevator_config"]["capacity"].as<int>()),
+      _capacity(scenario["capacity"].as<int>()),
       _floorCount(scenario["floors"].size()),
       _dispatcherType(static_cast<DispatcherType>(scenario["dispatcher"].as<int>())),
       _costFunctionType(static_cast<CostFunctionType>(scenario["cost_function"].as<int>())),
