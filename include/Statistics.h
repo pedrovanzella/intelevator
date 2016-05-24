@@ -1,6 +1,7 @@
 #pragma once
 
 #include "EventObserver.h"
+#include <ctime>
 #include <fstream>
 #include <list>
 #include <memory>
@@ -22,21 +23,8 @@ public:
   virtual ~Statistics();
 
   bool keepRunning() const;
-
   std::shared_ptr<const Scenario> getScenario() const;
-  void notify(const std::shared_ptr<const Event> event);
-
-  void logDropOff(const unsigned long dropOffTime,
-                  std::shared_ptr<Elevator> elevator,
-                  std::shared_ptr<std::vector<std::shared_ptr<Client>>> droppedPassengers);
-
-  void addTrip(const unsigned long dropOffTime,
-               const std::shared_ptr<Elevator> elevator,
-               const std::shared_ptr<Client> passenger);
-
-  void logArrival(std::shared_ptr<const ClientArrival> clientArrival);
-
-  void printToFile();
+  std::string getPath() const;
 
   int getClientsArrived() const;
   int getClientsServed() const;
@@ -50,12 +38,29 @@ public:
   double getDevWT() const;
   double getDevJT() const;
 
+  void notify(const std::shared_ptr<const Event> event);
+
+  void logDropOff(const unsigned long dropOffTime,
+                  std::shared_ptr<Elevator> elevator,
+                  std::shared_ptr<std::vector<std::shared_ptr<Client>>> droppedPassengers);
+
+  void addTrip(const unsigned long dropOffTime,
+               const std::shared_ptr<Elevator> elevator,
+               const std::shared_ptr<Client> passenger);
+
+  void logArrival(std::shared_ptr<const ClientArrival> clientArrival);
+
+  void generateReport();
+  void generateArrivals();
+  void generateDropOffs();
+  void generateCharts();
+
 private:
   std::shared_ptr<const Scenario> _scenario;
-
   bool _keepRunning;
   std::vector<Trip> _trips;
   std::vector<Arrival> _arrivals;
+  std::time_t _now;
 
   int _clientsArrived;
   int _clientsServed;

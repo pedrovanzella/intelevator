@@ -13,8 +13,12 @@ int main(int argc, char *argv[]) {
   for (auto scenario : *scenarios) {
     auto simulator = std::make_shared<Simulator>(scenario);
     simulator->run();
+
     auto statistics = simulator->getStatistics();
-    statistics->printToFile();
+    statistics->generateReport();
+    statistics->generateArrivals();
+    statistics->generateDropOffs();
+    statistics->generateCharts();
   }
 
   return 0;
