@@ -10,12 +10,12 @@
 
 namespace {
   template<typename T>
-  void print_type_1(std::ofstream &os, const std::string& text, const T value) {
+  void print(std::ofstream &os, const std::string& text, const T value) {
     os << std::left << std::setw(16) << std::setfill('.') << text << ": " << value << std::endl;
   }
 
   template<typename T>
-  void print_type_2(std::ofstream &os, const T value) {
+  void print(std::ofstream &os, const T value) {
     os << std::right << std::setw(13) << std::setfill(' ') << value;
   }
 }
@@ -31,39 +31,39 @@ void Reporter::generateReport() {
   std::ofstream f;
   f.open(_outputPath + "report.log");
 
-  print_type_1(f, "Name", _scenario->getName());
-  print_type_1(f, "Floors", _scenario->getFloorCount());
-  print_type_1(f, "Elevators", _scenario->getElevators());
-  print_type_1(f, "Capacity", _scenario->getCapacity());
-  print_type_1(f, "Dispatcher", Helpers::dispatcherName(_scenario->getDispatcherType()));
-  print_type_1(f, "Cost Function", Helpers::costFunctionName(_scenario->getCostFunctionType()));
-  print_type_1(f, "Duration", _scenario->getDuration());
-  print_type_1(f, "Seed", _scenario->getSeed());
+  print(f, "Name", _scenario->getName());
+  print(f, "Floors", _scenario->getFloorCount());
+  print(f, "Elevators", _scenario->getElevators());
+  print(f, "Capacity", _scenario->getCapacity());
+  print(f, "Dispatcher", Helpers::dispatcherName(_scenario->getDispatcherType()));
+  print(f, "Cost Function", Helpers::costFunctionName(_scenario->getCostFunctionType()));
+  print(f, "Duration", _scenario->getDuration());
+  print(f, "Seed", _scenario->getSeed());
 
   f << std::endl;
 
-  print_type_1(f, "Clients arrived", _statistics->getClientsArrived());
-  print_type_1(f, "Clients served", _statistics->getClientsServed());
+  print(f, "Clients arrived", _statistics->getClientsArrived());
+  print(f, "Clients served", _statistics->getClientsServed());
 
   f << std::endl;
 
-  print_type_2(f, "");
-  print_type_2(f, "Average");
-  print_type_2(f, "Deviant");
-  print_type_2(f, "Total");
+  print(f, "");
+  print(f, "Average");
+  print(f, "Deviant");
+  print(f, "Total");
 
   f << std::endl;
 
-  print_type_2(f, "Waiting Time");
-  print_type_2(f, _statistics->getAvgWT());
-  print_type_2(f, _statistics->getDevWT());
-  print_type_2(f, _statistics->getTotalWT());
+  print(f, "Waiting Time");
+  print(f, _statistics->getAvgWT());
+  print(f, _statistics->getDevWT());
+  print(f, _statistics->getTotalWT());
   f << std::endl;
 
-  print_type_2(f, "Journey Time ");
-  print_type_2(f, _statistics->getAvgJT());
-  print_type_2(f, _statistics->getDevJT());
-  print_type_2(f, _statistics->getTotalJT());
+  print(f, "Journey Time ");
+  print(f, _statistics->getAvgJT());
+  print(f, _statistics->getDevJT());
+  print(f, _statistics->getTotalJT());
 
   f << std::endl;
 }
