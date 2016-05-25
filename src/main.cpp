@@ -16,6 +16,9 @@ int main(int argc, char *argv[]) {
 
     auto reporter = std::make_shared<Reporter>(simulator);
     reporter->generateReport();
+    reporter->generateArrivals();
+    reporter->generateDropOffs();
+    reporter->generateCharts();
   }
 
   return 0;

@@ -1,9 +1,11 @@
 #include "Reporter.h"
+#include "Arrival.h"
 #include "CostFunctionType.h"
 #include "DispatcherType.h"
 #include "Scenario.h"
 #include "Simulator.h"
 #include "Statistics.h"
+#include "Trip.h"
 #include <iomanip>
 
 namespace {
@@ -67,21 +69,19 @@ void Reporter::generateReport() {
 }
 
 void Reporter::generateArrivals() {
-  // std::string path = getPath();
-  // std::ofstream f;
-  // f.open(path + "/trips.log");
-  // for (auto t : _trips) {
-  //   t.printToFile(f);
-  // }
+  std::ofstream f;
+  f.open(_outputPath + "arrivals.log");
+  for (auto a : _statistics->getArrivals()) {
+    a.printToFile(f);
+  }
 }
 
 void Reporter::generateDropOffs() {
-  // std::string path = getPath();
-  // std::ofstream f;
-  // f.open(path + "/arrivals.log");
-  // for (auto a : _arrivals) {
-  //   a.printToFile(f);
-  // }
+  std::ofstream f;
+  f.open(_outputPath + "trips.log");
+  for (auto t : _statistics->getTrips()) {
+    t.printToFile(f);
+  }
 }
 
 void Reporter::generateCharts() {

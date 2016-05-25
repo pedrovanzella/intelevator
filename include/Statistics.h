@@ -2,7 +2,6 @@
 
 #include "EventObserver.h"
 #include <ctime>
-#include <fstream>
 #include <list>
 #include <memory>
 #include <string>
@@ -36,6 +35,9 @@ public:
 
   double getDevWT() const;
   double getDevJT() const;
+
+  const std::vector<Trip>& getTrips() const;
+  const std::vector<Arrival>& getArrivals() const;
 
   void notify(const std::shared_ptr<const Event> event);
 

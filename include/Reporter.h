@@ -12,8 +12,6 @@ public:
   Reporter(std::shared_ptr<Simulator> simulator);
   virtual ~Reporter();
 
-  std::string getPath() const;
-
   void generateReport();
   void generateArrivals();
   void generateDropOffs();

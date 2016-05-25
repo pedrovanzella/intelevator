@@ -126,3 +126,11 @@ double Statistics::getDevJT() const {
 
   return sqrt(sum / _clientsServed);
 }
+
+const std::vector<Trip>& Statistics::getTrips() const {
+  return _trips;
+}
+
+const std::vector<Arrival>& Statistics::getArrivals() const {
+  return _arrivals;
+}
