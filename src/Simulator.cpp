@@ -23,10 +23,13 @@ Simulator::Simulator(const std::shared_ptr<const Scenario> scenario)
     : _scenario(scenario), _statistics(std::make_shared<Statistics>(scenario)),
       _clock(std::make_shared<Clock>()),
       _eventQueue(std::make_shared<EventQueue>()),
-      _eventDispatcher(std::make_shared<EventDispatcher>()) {
+      _eventDispatcher(std::make_shared<EventDispatcher>()),
+      _startedAt(std::time(nullptr)) {
   auto seed = scenario->getSeed();
   std::seed_seq seed_seq(seed.begin(), seed.end());
   _random_engine = std::shared_ptr<std::default_random_engine>(new std::default_random_engine(seed_seq));
+
+  google::SetLogDestination(google::INFO, getPath().c_str());
 }
 
 Simulator::~Simulator() {}
@@ -60,6 +63,17 @@ const std::shared_ptr<EventQueue> Simulator::getEventQueue() const { return _eve
 const std::shared_ptr<EventDispatcher> Simulator::getEventDispatcher() const { return _eventDispatcher; }
 
 const std::shared_ptr<std::default_random_engine> Simulator::getRandomEngine() const { return _random_engine; }
+
+const std::string Simulator::getPath() const {
+  std::tm* ptm = std::localtime(&_startedAt);
+  char buffer[32];
+  std::strftime(buffer, 32, "%Y%m%d_%H%M%S", ptm);
+  auto name = _scenario->getName();
+  std::string path = "output/" + name + "_" + buffer + "/";
+  std::string command = "mkdir -p " + path;
+  system(command.c_str());
+  return path;
+}
 
 void Simulator::run() {
   LOG(INFO) << "Running '" << _scenario->getName() << "' scenario.";

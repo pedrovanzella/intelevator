@@ -1,6 +1,6 @@
 #include "Scenario.h"
 #include "Simulator.h"
-#include "Statistics.h"
+#include "Reporter.h"
 #include <glog/logging.h>
 #include <memory>
 
@@ -14,11 +14,8 @@ int main(int argc, char *argv[]) {
     auto simulator = std::make_shared<Simulator>(scenario);
     simulator->run();
 
-    auto statistics = simulator->getStatistics();
-    statistics->generateReport();
-    statistics->generateArrivals();
-    statistics->generateDropOffs();
-    statistics->generateCharts();
+    auto reporter = std::make_shared<Reporter>(simulator);
+    reporter->generateReport();
   }
 
   return 0;

@@ -24,7 +24,6 @@ public:
 
   bool keepRunning() const;
   std::shared_ptr<const Scenario> getScenario() const;
-  std::string getPath() const;
 
   int getClientsArrived() const;
   int getClientsServed() const;
@@ -50,17 +49,11 @@ public:
 
   void logArrival(std::shared_ptr<const ClientArrival> clientArrival);
 
-  void generateReport();
-  void generateArrivals();
-  void generateDropOffs();
-  void generateCharts();
-
 private:
   std::shared_ptr<const Scenario> _scenario;
   bool _keepRunning;
   std::vector<Trip> _trips;
   std::vector<Arrival> _arrivals;
-  std::time_t _now;
 
   int _clientsArrived;
   int _clientsServed;

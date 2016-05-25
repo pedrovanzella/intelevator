@@ -36,7 +36,7 @@ test: $(TEST)
 	GLOG_minloglevel=100 ./$(TEST)
 
 run: $(TARGET)
-	GLOG_logtostderr=1 ./$(TARGET)
+	./$(TARGET)
 
 clean:
 	@echo " Cleaning...";
