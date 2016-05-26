@@ -109,9 +109,9 @@ void Building::doClientArrival(std::shared_ptr<const ClientArrival> event) {
     auto elevatorNum = _scheduler->pick_next_elevator(_costFunction, shared_from_this(), event);
     auto elevator = _elevators->at(elevatorNum);
     _stopManager->set(location, direction, elevator);
-    // LOG(INFO) << "Elevator #" << elevator->getNumber()
-    //           << " was assigned to stop at floor #" << location->getNumber()
-    //           << " to go " << Helpers::directionName(direction) << " (" << _clock->str() << ").";
+    LOG(INFO) << "Elevator #" << elevator->getNumber()
+              << " was assigned to stop at floor #" << location->getNumber()
+              << " to go " << Helpers::directionName(direction) << " (" << _clock->str() << ").";
   }
 
   location->createFutureArrival(_simulator->getEventQueue());

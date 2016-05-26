@@ -1,8 +1,9 @@
 #include "RandomScheduler.h"
 
 RandomScheduler::RandomScheduler()
- : _seed(std::chrono::high_resolution_clock::now().time_since_epoch().count())
- , _generator(_seed)
+ : _seed("54TH7hboAG1iOsDIDhJp")
+ , _seed_seq(_seed.begin(), _seed.end())
+ , _generator(_seed_seq)
 {}
 
 int RandomScheduler::pick_next_elevator(

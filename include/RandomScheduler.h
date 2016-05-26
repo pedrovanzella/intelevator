@@ -7,6 +7,7 @@
 #include <chrono>
 #include <memory>
 #include <random>
+#include <string>
 
 class RandomScheduler : public Scheduler {
 public:
@@ -17,7 +18,8 @@ public:
   RandomScheduler();
 
 private:
-  unsigned _seed;
+  std::string _seed;
+  std::seed_seq _seed_seq;
   std::default_random_engine _generator;
   std::shared_ptr<std::uniform_int_distribution<int>> _distribution;
 };
