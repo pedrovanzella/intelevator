@@ -6,7 +6,7 @@ RandomScheduler::RandomScheduler()
  , _generator(_seed_seq)
 {}
 
-int RandomScheduler::pick_next_elevator(
+int RandomScheduler::schedule(
     const std::shared_ptr<const CostFunction> costFunction,
     const std::shared_ptr<const Building> building,
     const std::shared_ptr<const ClientArrival>) {

@@ -10,7 +10,7 @@
 #include "Status.h"
 #include <algorithm>
 
-int BetterNearestNeighbourScheduler::pick_next_elevator(
+int BetterNearestNeighbourScheduler::schedule(
     const std::shared_ptr<const CostFunction> costFunction,
     const std::shared_ptr<const Building> building,
     const std::shared_ptr<const ClientArrival> ca) {
@@ -35,7 +35,7 @@ int BetterNearestNeighbourScheduler::pick_next_elevator(
   if (sd_elevators.size() == 0) {
     NearestNeighbourScheduler disp;
 
-    return disp.pick_next_elevator(costFunction, building, ca);
+    return disp.schedule(costFunction, building, ca);
   }
 
   for (auto elevator : sd_elevators) {

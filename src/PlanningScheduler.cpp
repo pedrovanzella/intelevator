@@ -7,9 +7,9 @@
 #include <memory>
 #include <algorithm>
 
-int PlanningScheduler::pick_next_elevator(const std::shared_ptr<const CostFunction> costFunction,
-                                           const std::shared_ptr<const Building> building,
-                                           const std::shared_ptr<const ClientArrival> ca)
+int PlanningScheduler::schedule(const std::shared_ptr<const CostFunction> costFunction,
+                                const std::shared_ptr<const Building> building,
+                                const std::shared_ptr<const ClientArrival> ca)
 {
   auto costs = calculate(costFunction, building, 5);
   std::shared_ptr<const Elevator> lowestCost = building->getElevators()->front();

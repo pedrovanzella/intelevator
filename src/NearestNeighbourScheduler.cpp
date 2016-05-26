@@ -3,9 +3,9 @@
 #include "Elevator.h"
 #include "Floor.h"
 
-int NearestNeighbourScheduler::pick_next_elevator(const std::shared_ptr<const CostFunction> costFunction,
-                                                   const std::shared_ptr<const Building> building,
-                                                   const std::shared_ptr<const ClientArrival> ca)
+int NearestNeighbourScheduler::schedule(const std::shared_ptr<const CostFunction> costFunction,
+                                        const std::shared_ptr<const Building> building,
+                                        const std::shared_ptr<const ClientArrival> ca)
 {
   auto elevators = building->getElevators();
   auto floors = building->getFloors();
