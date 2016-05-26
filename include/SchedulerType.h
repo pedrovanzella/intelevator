@@ -21,7 +21,7 @@ namespace Helpers {
     case DispatcherType::BetterNearestNeighbour:
       return "BetterNearestNeighbour";
     default:
-      throw MissingDispatcherError(std::to_string((int)type));
+      throw MissingSchedulerError(std::to_string((int)type));
     }
   }
 }

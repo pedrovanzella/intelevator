@@ -33,7 +33,7 @@ int BetterNearestNeighbourScheduler::pick_next_elevator(
 
   // if no elevators are idle or going that way, then look through all elevators
   if (sd_elevators.size() == 0) {
-    NearestNeighbourDispatcher disp;
+    NearestNeighbourScheduler disp;
 
     return disp.pick_next_elevator(costFunction, building, ca);
   }

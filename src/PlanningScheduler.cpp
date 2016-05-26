@@ -7,7 +7,7 @@
 #include <memory>
 #include <algorithm>
 
-int PlanningDispatcher::pick_next_elevator(const std::shared_ptr<const CostFunction> costFunction,
+int PlanningScheduler::pick_next_elevator(const std::shared_ptr<const CostFunction> costFunction,
                                            const std::shared_ptr<const Building> building,
                                            const std::shared_ptr<const ClientArrival> ca)
 {
@@ -24,7 +24,7 @@ int PlanningDispatcher::pick_next_elevator(const std::shared_ptr<const CostFunct
 }
 
 std::map<std::shared_ptr<const Elevator>, int>
-PlanningDispatcher::calculate(const std::shared_ptr<const CostFunction> costFunction,
+PlanningScheduler::calculate(const std::shared_ptr<const CostFunction> costFunction,
                               const std::shared_ptr<const Building> building,
                               int horizon)
 {
@@ -37,7 +37,7 @@ PlanningDispatcher::calculate(const std::shared_ptr<const CostFunction> costFunc
 }
 
 std::vector<std::shared_ptr<Client>>
-PlanningDispatcher::getAllWaitingClients(const std::shared_ptr<const Building> b)
+PlanningScheduler::getAllWaitingClients(const std::shared_ptr<const Building> b)
 {
   std::vector<std::shared_ptr<Client>> all;
 
@@ -60,7 +60,7 @@ PlanningDispatcher::getAllWaitingClients(const std::shared_ptr<const Building> b
 }
 
 std::map<std::shared_ptr<const Elevator>, int>
-PlanningDispatcher::next_step(const std::shared_ptr<const CostFunction> costFunction,
+PlanningScheduler::next_step(const std::shared_ptr<const CostFunction> costFunction,
                               std::vector<std::shared_ptr<Client>> clients,
                               std::map<std::shared_ptr<const Elevator>, int> current_costs,
                               int horizon)

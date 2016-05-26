@@ -1,11 +1,11 @@
 #include "RandomScheduler.h"
 
-RandomDispatcher::RandomDispatcher()
+RandomScheduler::RandomScheduler()
  : _seed(std::chrono::high_resolution_clock::now().time_since_epoch().count())
  , _generator(_seed)
 {}
 
-int RandomDispatcher::pick_next_elevator(
+int RandomScheduler::pick_next_elevator(
     const std::shared_ptr<const CostFunction> costFunction,
     const std::shared_ptr<const Building> building,
     const std::shared_ptr<const ClientArrival>) {

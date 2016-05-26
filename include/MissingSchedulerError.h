@@ -1,9 +1,9 @@
 #pragma once
 #include <stdexcept>
 
-class MissingDispatcherError : public std::runtime_error {
+class MissingSchedulerError : public std::runtime_error {
 public:
-  explicit MissingDispatcherError(const std::string &what)
-      : std::runtime_error("Dispatcher not found: " + what) {}
-  virtual ~MissingDispatcherError() {}
+  explicit MissingSchedulerError(const std::string &what)
+      : std::runtime_error("Scheduler not found: " + what) {}
+  virtual ~MissingSchedulerError() {}
 };

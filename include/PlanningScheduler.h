@@ -10,7 +10,7 @@ class CostFunction;
 class ClientArrival;
 class Elevator;
 
-class PlanningDispatcher : public Scheduler
+class PlanningScheduler : public Scheduler
 {
 public:
   int pick_next_elevator(const std::shared_ptr<const CostFunction> costFunction,

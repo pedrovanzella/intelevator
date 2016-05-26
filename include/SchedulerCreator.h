@@ -22,14 +22,14 @@ template <class T> const std::shared_ptr<Scheduler> DispatcherCreator::create() 
 const std::shared_ptr<Scheduler> DispatcherCreator::create(const DispatcherType dispatcherType) {
   switch (dispatcherType) {
   case DispatcherType::Dummy:
-    return DispatcherCreator::create<DummyDispatcher>();
+    return DispatcherCreator::create<DummyScheduler>();
   case DispatcherType::Random:
-    return DispatcherCreator::create<RandomDispatcher>();
+    return DispatcherCreator::create<RandomScheduler>();
   case DispatcherType::NearestNeighbour:
-    return DispatcherCreator::create<NearestNeighbourDispatcher>();
+    return DispatcherCreator::create<NearestNeighbourScheduler>();
   case DispatcherType::BetterNearestNeighbour:
     return DispatcherCreator::create<BetterNearestNeighbourScheduler>();
   default:
-    throw MissingDispatcherError(std::to_string((int)dispatcherType));
+    throw MissingSchedulerError(std::to_string((int)dispatcherType));
   }
 }

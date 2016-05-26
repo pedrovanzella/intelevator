@@ -5,7 +5,7 @@
 #include "CostFunction.h"
 #include "Scheduler.h"
 
-class NearestNeighbourDispatcher : public Scheduler {
+class NearestNeighbourScheduler : public Scheduler {
 public:
   int pick_next_elevator(const std::shared_ptr<const CostFunction> costFunction,
                          const std::shared_ptr<const Building> building,
