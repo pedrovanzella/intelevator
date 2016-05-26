@@ -28,7 +28,7 @@ const std::shared_ptr<Scheduler> DispatcherCreator::create(const DispatcherType 
   case DispatcherType::NearestNeighbour:
     return DispatcherCreator::create<NearestNeighbourDispatcher>();
   case DispatcherType::BetterNearestNeighbour:
-    return DispatcherCreator::create<BetterNearestNeighbourDispatcher>();
+    return DispatcherCreator::create<BetterNearestNeighbourScheduler>();
   default:
     throw MissingDispatcherError(std::to_string((int)dispatcherType));
   }

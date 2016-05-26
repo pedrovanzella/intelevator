@@ -10,9 +10,7 @@
 #include "Status.h"
 #include <algorithm>
 
-class Dispatcher;
-
-int BetterNearestNeighbourDispatcher::pick_next_elevator(
+int BetterNearestNeighbourScheduler::pick_next_elevator(
     const std::shared_ptr<const CostFunction> costFunction,
     const std::shared_ptr<const Building> building,
     const std::shared_ptr<const ClientArrival> ca) {
