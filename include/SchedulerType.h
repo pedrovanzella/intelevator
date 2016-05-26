@@ -6,7 +6,8 @@ enum class SchedulerType : int {
   Dummy,
   Random,
   NearestNeighbour,
-  BetterNearestNeighbour
+  BetterNearestNeighbour,
+  Planning
 };
 
 namespace Helpers {
@@ -20,6 +21,8 @@ namespace Helpers {
       return "NearestNeighbour";
     case SchedulerType::BetterNearestNeighbour:
       return "BetterNearestNeighbour";
+    case SchedulerType::Planning:
+      return "Planning";
     default:
       throw MissingSchedulerError(std::to_string((int)type));
     }

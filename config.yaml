@@ -8,20 +8,11 @@ schedulers:
   random: &random 1
   nearest_neighbour: &nearest_neighbour 2
   better_narest_neighbour: &better_nearest_neighbour 3
+  planning: &planning 4
 
 cost_functions:
   dummy_cost: &dummy_cost 0
   nearest_neighbour_cost: &nearest_neighbour_cost 1
-
-# some seeds
-#
-# sTJMhgDL8rrDOaMXQcOo
-# s1j8DZw6Y9TPvo7hiuTY
-# UU60LQNjhMa09GZGiVVV
-# I0Ayf7VMqvaOAnUQvZCB
-# UzTg5GXiQ7SxNa492Y2i
-# bP5Y9E7CvVtnBn0qK9fS
-# FJtPpvmANuEaBLBaaGB5
 
 scenarios:
   - name: A
@@ -47,7 +38,7 @@ scenarios:
     duration: 10000
     scheduler: *random
     cost_function: *nearest_neighbour_cost
-    seed: AKx40EMj7do2NA8nrKLn
+    seed: 54TH7hboAG1iOsDIDhJp
     elevators: 1
     capacity: *small
     floors: # [ population, lambda ]
@@ -66,7 +57,7 @@ scenarios:
     duration: 10000
     scheduler: *nearest_neighbour
     cost_function: *nearest_neighbour_cost
-    seed: 0bhx1tTm923L5uRgFxO8
+    seed: 54TH7hboAG1iOsDIDhJp
     elevators: 1
     capacity: *small
     floors: # [ population, lambda ]
@@ -85,7 +76,26 @@ scenarios:
     duration: 10000
     scheduler: *better_nearest_neighbour
     cost_function: *nearest_neighbour_cost
-    seed: 0bhx1tTm923L5uRgFxO8
+    seed: 54TH7hboAG1iOsDIDhJp
+    elevators: 1
+    capacity: *small
+    floors: # [ population, lambda ]
+      - [ 300, 150 ]
+      - [ 300, 300 ]
+      - [ 300, 450 ]
+      - [ 300, 600 ]
+      - [ 300, 500 ]
+      - [ 300, 450 ]
+      - [ 300, 900 ]
+      - [ 300, 700 ]
+      - [ 300, 850 ]
+      - [ 300, 800 ]
+
+  - name: E
+    duration: 10000
+    scheduler: *planning
+    cost_function: *nearest_neighbour_cost
+    seed: 54TH7hboAG1iOsDIDhJp
     elevators: 1
     capacity: *small
     floors: # [ population, lambda ]
