@@ -8,5 +8,5 @@ float WeightedCostFunction::calculate(const std::shared_ptr<const Elevator> elev
   if (elevator->getOccupation() == 0.0) {
     return abs(c->getArrivalFloor() - elevator->getLocation());
   }
-  return abs(c->getArrivalFloor() - elevator->getLocation()) / std::sqrt(elevator->getCapacity());
+  return abs(c->getArrivalFloor() - elevator->getLocation()) / std::sqrt(elevator->getOccupation());
 }
