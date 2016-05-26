@@ -21,10 +21,10 @@ Building::Building(
     std::shared_ptr<const Simulator> simulator,
     std::shared_ptr<std::vector<std::shared_ptr<Floor>>> floors,
     std::shared_ptr<std::vector<std::shared_ptr<Elevator>>> elevators,
-    std::shared_ptr<Scheduler> dispatcher,
+    std::shared_ptr<Scheduler> scheduler,
     std::shared_ptr<const CostFunction> costFunction)
     : _simulator(simulator), _clock(_simulator->getClock()), _floors(floors),
-      _elevators(elevators), _dispatcher(dispatcher),
+      _elevators(elevators), _scheduler(scheduler),
       _costFunction(costFunction), _stops(), _stopManager(new StopManager()) {}
 
 Building::~Building() {}
@@ -106,7 +106,7 @@ void Building::doClientArrival(std::shared_ptr<const ClientArrival> event) {
 
   auto currentElevator = _stopManager->get(location, direction);
   if (currentElevator == nullptr) {
-    auto elevatorNum = _dispatcher->pick_next_elevator(_costFunction, shared_from_this(), event);
+    auto elevatorNum = _scheduler->pick_next_elevator(_costFunction, shared_from_this(), event);
     auto elevator = _elevators->at(elevatorNum);
     _stopManager->set(location, direction, elevator);
     // LOG(INFO) << "Elevator #" << elevator->getNumber()

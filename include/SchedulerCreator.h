@@ -7,28 +7,28 @@
 #include "NearestNeighbourScheduler.h"
 #include "RandomScheduler.h"
 
-class DispatcherCreator {
+class SchedulerCreator {
 public:
   template <class T> static const std::shared_ptr<Scheduler> create();
 
   static const std::shared_ptr<Scheduler> create(const SchedulerType schedulerType);
 };
 
-template <class T> const std::shared_ptr<Scheduler> DispatcherCreator::create() {
+template <class T> const std::shared_ptr<Scheduler> SchedulerCreator::create() {
   const std::shared_ptr<Scheduler> d(new T());
   return d;
 }
 
-const std::shared_ptr<Scheduler> DispatcherCreator::create(const SchedulerType schedulerType) {
+const std::shared_ptr<Scheduler> SchedulerCreator::create(const SchedulerType schedulerType) {
   switch (schedulerType) {
   case SchedulerType::Dummy:
-    return DispatcherCreator::create<DummyScheduler>();
+    return SchedulerCreator::create<DummyScheduler>();
   case SchedulerType::Random:
-    return DispatcherCreator::create<RandomScheduler>();
+    return SchedulerCreator::create<RandomScheduler>();
   case SchedulerType::NearestNeighbour:
-    return DispatcherCreator::create<NearestNeighbourScheduler>();
+    return SchedulerCreator::create<NearestNeighbourScheduler>();
   case SchedulerType::BetterNearestNeighbour:
-    return DispatcherCreator::create<BetterNearestNeighbourScheduler>();
+    return SchedulerCreator::create<BetterNearestNeighbourScheduler>();
   default:
     throw MissingSchedulerError(std::to_string((int)schedulerType));
   }

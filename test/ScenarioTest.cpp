@@ -1,9 +1,6 @@
 #include "Scenario.h"
 #include "SchedulerType.h"
 #include "CostFunctionType.h"
-// #include "Direction.h"
-// #include "Elevator.h"
-// #include "Floor.h"
 #include <glog/logging.h>
 #include <gtest/gtest.h>
 #include <yaml-cpp/yaml.h>
@@ -15,7 +12,7 @@ struct ScenarioTest : testing::Test {
     std::string config =
       "name: A\n"
       "duration: 10000\n"
-      "dispatcher: 0\n"
+      "scheduler: 0\n"
       "cost_function: 0\n"
       "seed: 54TH7hboAG1iOsDIDhJp\n"
       "elevators: 3\n"
@@ -37,7 +34,7 @@ struct ScenarioTest : testing::Test {
 TEST_F(ScenarioTest, Getters) {
   EXPECT_EQ("A", s->getName());
   EXPECT_EQ(10000, s->getDuration());
-  EXPECT_EQ(DispatcherType::Dummy, s->getDispatcherType());
+  EXPECT_EQ(SchedulerType::Dummy, s->getSchedulerType());
   EXPECT_EQ(CostFunctionType::Dummy, s->getCostFunctionType());
   EXPECT_EQ("54TH7hboAG1iOsDIDhJp", s->getSeed());
   EXPECT_EQ(3, s->getElevators());

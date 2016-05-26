@@ -3,7 +3,7 @@ capacities:
   medium: &medium 8
   large: &large 10
 
-dispatchers:
+schedulers:
   dummy: &dummy 0
   random: &random 1
   nearest_neighbour: &nearest_neighbour 2
@@ -26,7 +26,7 @@ cost_functions:
 scenarios:
   - name: A
     duration: 10000
-    dispatcher: *dummy
+    scheduler: *dummy
     cost_function: *nearest_neighbour_cost
     seed: 54TH7hboAG1iOsDIDhJp
     elevators: 1
@@ -45,7 +45,7 @@ scenarios:
 
   - name: B
     duration: 10000
-    dispatcher: *random
+    scheduler: *random
     cost_function: *nearest_neighbour_cost
     seed: AKx40EMj7do2NA8nrKLn
     elevators: 1
@@ -64,7 +64,7 @@ scenarios:
 
   - name: C
     duration: 10000
-    dispatcher: *nearest_neighbour
+    scheduler: *nearest_neighbour
     cost_function: *nearest_neighbour_cost
     seed: 0bhx1tTm923L5uRgFxO8
     elevators: 1
@@ -83,7 +83,7 @@ scenarios:
 
   - name: D
     duration: 10000
-    dispatcher: *better_nearest_neighbour
+    scheduler: *better_nearest_neighbour
     cost_function: *nearest_neighbour_cost
     seed: 0bhx1tTm923L5uRgFxO8
     elevators: 1
