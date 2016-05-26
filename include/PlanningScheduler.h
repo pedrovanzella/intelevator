@@ -28,6 +28,7 @@ private:
 
   std::map<std::shared_ptr<const Elevator>, int>
   next_step(const std::shared_ptr<const CostFunction> costFunction,
+            const std::shared_ptr<const Building> building,
             std::vector<std::shared_ptr<Client>> clients,
             std::map<std::shared_ptr<const Elevator>, int> current_costs,
             int horizon);

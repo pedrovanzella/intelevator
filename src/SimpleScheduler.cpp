@@ -18,7 +18,7 @@ int SimpleScheduler::schedule(
   auto the_chosen_one = elevators->front();
 
   for (auto elevator : *elevators) {
-    auto cost = costFunction->calculate(elevator, ca->getClient());
+    auto cost = costFunction->calculate(building, elevator, ca->getClient());
     if (cost < best_cost) {
       best_cost = cost;
       the_chosen_one = elevator;

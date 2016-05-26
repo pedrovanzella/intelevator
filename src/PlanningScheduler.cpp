@@ -33,7 +33,7 @@ PlanningScheduler::calculate(const std::shared_ptr<const CostFunction> costFunct
     costs[e] = 0;
   }
 
-  return next_step(costFunction, getAllWaitingClients(building), costs, horizon);
+  return next_step(costFunction, building, getAllWaitingClients(building), costs, horizon);
 }
 
 std::vector<std::shared_ptr<Client>>
@@ -61,6 +61,7 @@ PlanningScheduler::getAllWaitingClients(const std::shared_ptr<const Building> b)
 
 std::map<std::shared_ptr<const Elevator>, int>
 PlanningScheduler::next_step(const std::shared_ptr<const CostFunction> costFunction,
+  const std::shared_ptr<const Building> building,
                               std::vector<std::shared_ptr<Client>> clients,
                               std::map<std::shared_ptr<const Elevator>, int> current_costs,
                               int horizon)
@@ -76,7 +77,7 @@ PlanningScheduler::next_step(const std::shared_ptr<const CostFunction> costFunct
 
     // find out the lowest cost for this elevator
     for (auto c : clients) {
-      auto cost = costFunction->calculate(m.first, c);
+      auto cost = costFunction->calculate(building, m.first, c);
       if (cost < lowestCost) {
         lowestCost = cost;
         lowestCostClient = c;
@@ -87,5 +88,5 @@ PlanningScheduler::next_step(const std::shared_ptr<const CostFunction> costFunct
     clients.erase(std::remove(clients.begin(), clients.end(), lowestCostClient), clients.end());
   }
 
-  return next_step(costFunction, clients, current_costs, horizon - 1);
+  return next_step(costFunction, building, clients, current_costs, horizon - 1);
 }
