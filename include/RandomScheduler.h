@@ -8,7 +8,7 @@
 #include <memory>
 #include <random>
 
-class RandomDispatcher : public Dispatcher {
+class RandomDispatcher : public Scheduler {
 public:
   int pick_next_elevator(const std::shared_ptr<const CostFunction> costFunction,
                          const std::shared_ptr<const Building> building,

@@ -21,7 +21,7 @@ Building::Building(
     std::shared_ptr<const Simulator> simulator,
     std::shared_ptr<std::vector<std::shared_ptr<Floor>>> floors,
     std::shared_ptr<std::vector<std::shared_ptr<Elevator>>> elevators,
-    std::shared_ptr<Dispatcher> dispatcher,
+    std::shared_ptr<Scheduler> dispatcher,
     std::shared_ptr<const CostFunction> costFunction)
     : _simulator(simulator), _clock(_simulator->getClock()), _floors(floors),
       _elevators(elevators), _dispatcher(dispatcher),

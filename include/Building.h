@@ -11,7 +11,7 @@ class ClientArrival; // forward declaration
 class Clock;         // forward declaration
 class CostFunction;  // forward declaration
 enum class Direction; // forward declaration
-class Dispatcher;    // forward declaration
+class Scheduler;     // forward declaration
 class Elevator;      // forward declaration
 class EventFactory;  // forward declaration
 class Floor;         // forward declaration
@@ -24,7 +24,7 @@ public:
   Building(std::shared_ptr<const Simulator> simulator,
            std::shared_ptr<std::vector<std::shared_ptr<Floor>>> floors,
            std::shared_ptr<std::vector<std::shared_ptr<Elevator>>> elevators,
-           std::shared_ptr<Dispatcher> dispatcher,
+           std::shared_ptr<Scheduler> dispatcher,
            std::shared_ptr<const CostFunction> costFunction);
 
   virtual ~Building();
@@ -42,7 +42,7 @@ private:
   std::shared_ptr<Clock> _clock;
   std::shared_ptr<std::vector<std::shared_ptr<Floor>>> _floors;
   std::shared_ptr<std::vector<std::shared_ptr<Elevator>>> _elevators;
-  const std::shared_ptr<Dispatcher> _dispatcher;
+  const std::shared_ptr<Scheduler> _dispatcher;
   const std::shared_ptr<const CostFunction> _costFunction;
   std::map<std::shared_ptr<Elevator>, std::set<int>> _stops;
 

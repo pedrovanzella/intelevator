@@ -9,17 +9,17 @@
 
 class DispatcherCreator {
 public:
-  template <class T> static const std::shared_ptr<Dispatcher> create();
+  template <class T> static const std::shared_ptr<Scheduler> create();
 
-  static const std::shared_ptr<Dispatcher> create(const DispatcherType dispatcherType);
+  static const std::shared_ptr<Scheduler> create(const DispatcherType dispatcherType);
 };
 
-template <class T> const std::shared_ptr<Dispatcher> DispatcherCreator::create() {
-  const std::shared_ptr<Dispatcher> d(new T());
+template <class T> const std::shared_ptr<Scheduler> DispatcherCreator::create() {
+  const std::shared_ptr<Scheduler> d(new T());
   return d;
 }
 
-const std::shared_ptr<Dispatcher> DispatcherCreator::create(const DispatcherType dispatcherType) {
+const std::shared_ptr<Scheduler> DispatcherCreator::create(const DispatcherType dispatcherType) {
   switch (dispatcherType) {
   case DispatcherType::Dummy:
     return DispatcherCreator::create<DummyDispatcher>();
