@@ -34,6 +34,20 @@ Direction Elevator::getDirection() const { return _direction; }
 
 const std::shared_ptr<const std::vector<std::shared_ptr<Client>>> Elevator::getPassengers() const { return _passengers; }
 
+float Elevator::getOccupation() const
+{
+  int totalweight = 0;
+  for (auto p : *_passengers) {
+    totalweight += p->getPartySize();
+  }
+
+  if (totalweight == 0) {
+    return 0.0;
+  }
+
+  return _capacity / totalweight;
+}
+
 void Elevator::setDestination(std::pair<int, Direction> destination) {
   _destination = destination;
 

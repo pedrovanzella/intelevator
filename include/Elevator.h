@@ -20,6 +20,7 @@ public:
   int getNumber() const;
   int getCapacity() const;
   int getLocation() const;
+  float getOccupation() const;
   std::pair<int, Direction> getDestination() const;
   Status getStatus() const;
   Direction getDirection() const;

@@ -4,6 +4,7 @@
 #include "CostFunctionType.h"
 #include "DummyCostFunction.h"
 #include "NearestNeighbourCostFunction.h"
+#include "WeightedCostFunction.h"
 #include <memory>
 
 class CostFunctionCreator {
@@ -24,6 +25,8 @@ const std::shared_ptr<const CostFunction> CostFunctionCreator::create(const Cost
     return CostFunctionCreator::create<DummyCostFunction>();
   case CostFunctionType::NearestNeighbour:
     return CostFunctionCreator::create<NearestNeighbourCostFunction>();
+  case CostFunctionType::Weighted:
+    return CostFunctionCreator::create<WeightedCostFunction>();
   default:
     throw MissingCostFunctionError(std::to_string((int)costFunctionType));
   }

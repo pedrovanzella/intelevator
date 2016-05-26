@@ -3,16 +3,15 @@ from sys import argv
 import matplotlib.pyplot as plt
 import scipy.stats as stats
 import numpy as np
-import pprint
 
 
 def makegraphs(filename):
     data = loadfile(filename)
+    avgWaitingTime(data)
+    avgTravelTime(data)
     arrivalsPerFloor(data)
     dropOffsPerFloor(data)
     totalNumberOfClientsDelivered(data)
-    avgWaitingTime(data)
-    avgTravelTime(data)
 
 
 def loadfile(filename):
@@ -81,13 +80,21 @@ def dropOffsPerFloor(data):
     plt.show()
 
 
-
 def avgTravelTime(data):
     travelTimes = [x['dropoffTime'] - x['pickupTime'] for x in data]
     plotNormal(travelTimes)
 
 
 def avgWaitingTime(data):
+    maxfloors = findTopFloor(data)
+
+    arrF = [0]
+    for f in range(1, maxfloors):
+        arrF.append(np.where(data['arrivalFloor'] == f))
+
+    print("oi")
+    print(arrF[1])
+
     waits = [x['pickupTime'] - x['createTime'] for x in data]
     plotNormal(waits)
 
