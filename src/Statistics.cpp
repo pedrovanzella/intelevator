@@ -2,7 +2,7 @@
 #include "Arrival.h"
 #include "Client.h"
 #include "ClientArrival.h"
-#include "DispatcherType.h"
+#include "SchedulerType.h"
 #include "CostFunctionType.h"
 #include "Elevator.h"
 #include "Event.h"

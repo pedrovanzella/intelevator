@@ -1,11 +1,11 @@
 #pragma once
 
-#include "BetterNearestNeighbourDispatcher.h"
-#include "Dispatcher.h"
-#include "DispatcherType.h"
-#include "DummyDispatcher.h"
-#include "NearestNeighbourDispatcher.h"
-#include "RandomDispatcher.h"
+#include "BetterNearestNeighbourScheduler.h"
+#include "Scheduler.h"
+#include "SchedulerType.h"
+#include "DummyScheduler.h"
+#include "NearestNeighbourScheduler.h"
+#include "RandomScheduler.h"
 
 class DispatcherCreator {
 public:

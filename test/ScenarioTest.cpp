@@ -1,5 +1,5 @@
 #include "Scenario.h"
-#include "DispatcherType.h"
+#include "SchedulerType.h"
 #include "CostFunctionType.h"
 // #include "Direction.h"
 // #include "Elevator.h"

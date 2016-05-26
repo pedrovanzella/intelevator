@@ -1,7 +1,7 @@
 #include "Reporter.h"
 #include "Arrival.h"
 #include "CostFunctionType.h"
-#include "DispatcherType.h"
+#include "SchedulerType.h"
 #include "Scenario.h"
 #include "Simulator.h"
 #include "Statistics.h"

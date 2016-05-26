@@ -1,6 +1,6 @@
 #pragma once
 
-#include "MissingDispatcherError.h"
+#include "MissingSchedulerError.h"
 
 enum class DispatcherType : int {
   Dummy,

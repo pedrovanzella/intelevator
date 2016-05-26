@@ -12,9 +12,21 @@
             "-Wall",
             "-Werror",
             "-Wpedantic",
-            "-Wno-unused-function",
             "-std=c++11",
+            "-Wno-unused-function",
             "-I${folder:${project_path:intelevator.sublime-project}}/**"
-        ]
-    }
+        ],
+    },
+    "SublimeLinter":
+        {
+            "linters":
+            {
+                "clang": {
+                    "extra_flags": "-Wall -Werror -Wpedantic -std=c++11 -Wno-unused-function",
+                    "include_dirs": [
+                        "/home/taschetto/Projects/intelevator/include/"
+                    ]
+                }
+            }
+        }
 }

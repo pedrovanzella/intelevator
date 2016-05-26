@@ -4,7 +4,7 @@
 #include "Clock.h"
 #include "CostFunction.h"
 #include "Direction.h"
-#include "Dispatcher.h"
+#include "Scheduler.h"
 #include "Elevator.h"
 #include "EventFactory.h"
 #include "Floor.h"

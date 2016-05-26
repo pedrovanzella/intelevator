@@ -1,11 +1,11 @@
 #include "Scenario.h"
 #include "CostFunctionType.h"
-#include "DispatcherType.h"
+#include "SchedulerType.h"
 #include "Elevator.h"
 #include "Floor.h"
 #include "MissingCostFunctionError.h"
-#include "MissingDispatcherError.h"
-#include "RandomDispatcher.h"
+#include "MissingSchedulerError.h"
+#include "RandomScheduler.h"
 #include <glog/logging.h>
 #include <yaml-cpp/yaml.h>
 

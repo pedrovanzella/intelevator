@@ -1,4 +1,4 @@
-#include "BetterNearestNeighbourDispatcher.h"
+#include "BetterNearestNeighbourScheduler.h"
 #include "Building.h"
 #include "Client.h"
 #include "ClientArrival.h"
@@ -6,7 +6,7 @@
 #include "Direction.h"
 #include "Elevator.h"
 #include "Floor.h"
-#include "NearestNeighbourDispatcher.h"
+#include "NearestNeighbourScheduler.h"
 #include "Status.h"
 #include <algorithm>
 

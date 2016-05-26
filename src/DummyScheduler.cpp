@@ -1,4 +1,4 @@
-#include "DummyDispatcher.h"
+#include "DummyScheduler.h"
 #include "Building.h"
 #include "ClientArrival.h"
 #include "CostFunction.h"

@@ -1,4 +1,4 @@
-#include "RandomDispatcher.h"
+#include "RandomScheduler.h"
 
 RandomDispatcher::RandomDispatcher()
  : _seed(std::chrono::high_resolution_clock::now().time_since_epoch().count())
