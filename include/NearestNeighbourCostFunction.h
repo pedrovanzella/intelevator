@@ -2,12 +2,13 @@
 
 #include "CostFunction.h"
 
-class Building;
-class Client;
-class Elevator;
+class Building; // forward declaration
+class Client;   // forward declaration
+class Elevator; // forward declaration
 
 class NearestNeighbourCostFunction : public CostFunction {
 public:
-  float calculate(const std::shared_ptr<const Elevator> elevator,
-                  const std::shared_ptr<const Client> c) const;
+  float calculate(const std::shared_ptr<const Building> building,
+                  const std::shared_ptr<const Elevator> elevator,
+                  const std::shared_ptr<const Client> client) const;
 };
