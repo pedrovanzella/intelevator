@@ -1,12 +1,14 @@
 #include "WeightedCostFunction.h"
-#include "Elevator.h"
 #include "Client.h"
+#include "Elevator.h"
 #include <cmath>
 
-float WeightedCostFunction::calculate(const std::shared_ptr<const Elevator> elevator, const std::shared_ptr<const Client> c) const
-{
-  if (elevator->getOccupation() == 0.0) {
-    return abs(c->getArrivalFloor() - elevator->getLocation());
-  }
-  return abs(c->getArrivalFloor() - elevator->getLocation()) / std::sqrt(elevator->getOccupation());
+float WeightedCostFunction::calculate(
+    const std::shared_ptr<const Building> building,
+    const std::shared_ptr<const Elevator> elevator,
+    const std::shared_ptr<const Client> client) const {
+  if (elevator->getOccupation() == 0.0)
+    return abs(client->getArrivalFloor() - elevator->getLocation());
+
+  return abs(client->getArrivalFloor() - elevator->getLocation()) / std::sqrt(elevator->getOccupation());
 }
