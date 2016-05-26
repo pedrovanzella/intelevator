@@ -11,7 +11,7 @@ class DispatcherCreator {
 public:
   template <class T> static const std::shared_ptr<Scheduler> create();
 
-  static const std::shared_ptr<Scheduler> create(const DispatcherType dispatcherType);
+  static const std::shared_ptr<Scheduler> create(const SchedulerType schedulerType);
 };
 
 template <class T> const std::shared_ptr<Scheduler> DispatcherCreator::create() {
@@ -19,17 +19,17 @@ template <class T> const std::shared_ptr<Scheduler> DispatcherCreator::create() 
   return d;
 }
 
-const std::shared_ptr<Scheduler> DispatcherCreator::create(const DispatcherType dispatcherType) {
-  switch (dispatcherType) {
-  case DispatcherType::Dummy:
+const std::shared_ptr<Scheduler> DispatcherCreator::create(const SchedulerType schedulerType) {
+  switch (schedulerType) {
+  case SchedulerType::Dummy:
     return DispatcherCreator::create<DummyScheduler>();
-  case DispatcherType::Random:
+  case SchedulerType::Random:
     return DispatcherCreator::create<RandomScheduler>();
-  case DispatcherType::NearestNeighbour:
+  case SchedulerType::NearestNeighbour:
     return DispatcherCreator::create<NearestNeighbourScheduler>();
-  case DispatcherType::BetterNearestNeighbour:
+  case SchedulerType::BetterNearestNeighbour:
     return DispatcherCreator::create<BetterNearestNeighbourScheduler>();
   default:
-    throw MissingSchedulerError(std::to_string((int)dispatcherType));
+    throw MissingSchedulerError(std::to_string((int)schedulerType));
   }
 }

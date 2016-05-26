@@ -15,7 +15,7 @@ Scenario::Scenario(YAML::Node scenario)
       _elevators(scenario["elevators"].as<int>()),
       _capacity(scenario["capacity"].as<int>()),
       _floorCount(scenario["floors"].size()),
-      _dispatcherType(static_cast<DispatcherType>(scenario["dispatcher"].as<int>())),
+      _schedulerType(static_cast<SchedulerType>(scenario["dispatcher"].as<int>())),
       _costFunctionType(static_cast<CostFunctionType>(scenario["cost_function"].as<int>())),
       _seed(scenario["seed"].as<std::string>()) {
   for (auto it : scenario["floors"]) {
@@ -46,7 +46,7 @@ const int Scenario::getCapacity() const { return _capacity; }
 
 const int Scenario::getFloorCount() const { return _floorCount; }
 
-const DispatcherType Scenario::getDispatcherType() const { return _dispatcherType; }
+const SchedulerType Scenario::getSchedulerType() const { return _schedulerType; }
 
 const CostFunctionType Scenario::getCostFunctionType() const { return _costFunctionType; }
 

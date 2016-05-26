@@ -35,7 +35,7 @@ void Reporter::generateReport() {
   print(f, "Floors", _scenario->getFloorCount());
   print(f, "Elevators", _scenario->getElevators());
   print(f, "Capacity", _scenario->getCapacity());
-  print(f, "Dispatcher", Helpers::dispatcherName(_scenario->getDispatcherType()));
+  print(f, "Scheduler", Helpers::schedulerName(_scenario->getSchedulerType()));
   print(f, "Cost Function", Helpers::costFunctionName(_scenario->getCostFunctionType()));
   print(f, "Duration", _scenario->getDuration());
   print(f, "Seed", _scenario->getSeed());

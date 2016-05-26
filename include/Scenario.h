@@ -6,7 +6,7 @@
 
 namespace YAML { class Node; } // forward declaration
 enum class CostFunctionType;   // forward declaration
-enum class DispatcherType;     // forward declaration
+enum class SchedulerType;      // forward declaration
 
 class Scenario {
 public:
@@ -20,7 +20,7 @@ public:
   const int getElevators() const;
   const int getCapacity() const;
   const int getFloorCount() const;
-  const DispatcherType getDispatcherType() const;
+  const SchedulerType getSchedulerType() const;
   const CostFunctionType getCostFunctionType() const;
   const std::vector<std::pair<int, float>> getFloors() const;
   const std::string getSeed() const;
@@ -31,7 +31,7 @@ private:
   const int _elevators;
   const int _capacity;
   const int _floorCount;
-  const DispatcherType _dispatcherType;
+  const SchedulerType _schedulerType;
   const CostFunctionType _costFunctionType;
   const std::string _seed;
   std::vector<std::pair<int, float>> _floors;

@@ -2,7 +2,7 @@
 
 #include "MissingSchedulerError.h"
 
-enum class DispatcherType : int {
+enum class SchedulerType : int {
   Dummy,
   Random,
   NearestNeighbour,
@@ -10,15 +10,15 @@ enum class DispatcherType : int {
 };
 
 namespace Helpers {
-  static std::string dispatcherName(DispatcherType type) {
+  static std::string schedulerName(SchedulerType type) {
     switch (type) {
-    case DispatcherType::Dummy:
+    case SchedulerType::Dummy:
       return "Dummy";
-    case DispatcherType::Random:
+    case SchedulerType::Random:
       return "Random";
-    case DispatcherType::NearestNeighbour:
+    case SchedulerType::NearestNeighbour:
       return "NearestNeighbour";
-    case DispatcherType::BetterNearestNeighbour:
+    case SchedulerType::BetterNearestNeighbour:
       return "BetterNearestNeighbour";
     default:
       throw MissingSchedulerError(std::to_string((int)type));
