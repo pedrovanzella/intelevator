@@ -4,23 +4,23 @@ capacities:
   large: &large 10
 
 schedulers:
+  simple: &simple 0
+  planning: &planning 1
+
+cost_functions:
   dummy: &dummy 0
   random: &random 1
   nearest_neighbour: &nearest_neighbour 2
-  better_narest_neighbour: &better_nearest_neighbour 3
-  planning: &planning 4
-
-cost_functions:
-  dummy_cost: &dummy_cost 0
-  nearest_neighbour_cost: &nearest_neighbour_cost 1
+  better_nearest_neighbour: &better_nearest_neighbour 3
+  weighted: &weighted 4
 
 scenarios:
   - name: A
     duration: 10000
-    scheduler: *dummy
-    cost_function: *nearest_neighbour_cost
+    scheduler: *simple
+    cost_function: *dummy
     seed: 54TH7hboAG1iOsDIDhJp
-    elevators: 1
+    elevators: 5
     capacity: *small
     floors: # [ population, lambda ]
       - [ 300, 150 ]
@@ -30,131 +30,3 @@ scenarios:
       - [ 300, 500 ]
       - [ 300, 450 ]
       - [ 300, 900 ]
-      - [ 300, 700 ]
-      - [ 300, 850 ]
-      - [ 300, 800 ]
-      - [ 300, 150 ]
-      - [ 300, 300 ]
-      - [ 300, 450 ]
-      - [ 300, 600 ]
-      - [ 300, 500 ]
-      - [ 300, 450 ]
-      - [ 300, 900 ]
-      - [ 300, 700 ]
-      - [ 300, 850 ]
-      - [ 300, 800 ]
-
-  - name: B
-    duration: 10000
-    scheduler: *random
-    cost_function: *nearest_neighbour_cost
-    seed: 54TH7hboAG1iOsDIDhJp
-    elevators: 1
-    capacity: *small
-    floors: # [ population, lambda ]
-      - [ 300, 150 ]
-      - [ 300, 300 ]
-      - [ 300, 450 ]
-      - [ 300, 600 ]
-      - [ 300, 500 ]
-      - [ 300, 450 ]
-      - [ 300, 900 ]
-      - [ 300, 700 ]
-      - [ 300, 850 ]
-      - [ 300, 800 ]
-      - [ 300, 150 ]
-      - [ 300, 300 ]
-      - [ 300, 450 ]
-      - [ 300, 600 ]
-      - [ 300, 500 ]
-      - [ 300, 450 ]
-      - [ 300, 900 ]
-      - [ 300, 700 ]
-      - [ 300, 850 ]
-      - [ 300, 800 ]
-
-  - name: C
-    duration: 10000
-    scheduler: *nearest_neighbour
-    cost_function: *nearest_neighbour_cost
-    seed: 54TH7hboAG1iOsDIDhJp
-    elevators: 1
-    capacity: *small
-    floors: # [ population, lambda ]
-      - [ 300, 150 ]
-      - [ 300, 300 ]
-      - [ 300, 450 ]
-      - [ 300, 600 ]
-      - [ 300, 500 ]
-      - [ 300, 450 ]
-      - [ 300, 900 ]
-      - [ 300, 700 ]
-      - [ 300, 850 ]
-      - [ 300, 800 ]
-      - [ 300, 150 ]
-      - [ 300, 300 ]
-      - [ 300, 450 ]
-      - [ 300, 600 ]
-      - [ 300, 500 ]
-      - [ 300, 450 ]
-      - [ 300, 900 ]
-      - [ 300, 700 ]
-      - [ 300, 850 ]
-      - [ 300, 800 ]
-
-  - name: D
-    duration: 10000
-    scheduler: *better_nearest_neighbour
-    cost_function: *nearest_neighbour_cost
-    seed: 54TH7hboAG1iOsDIDhJp
-    elevators: 1
-    capacity: *small
-    floors: # [ population, lambda ]
-      - [ 300, 150 ]
-      - [ 300, 300 ]
-      - [ 300, 450 ]
-      - [ 300, 600 ]
-      - [ 300, 500 ]
-      - [ 300, 450 ]
-      - [ 300, 900 ]
-      - [ 300, 700 ]
-      - [ 300, 850 ]
-      - [ 300, 800 ]
-      - [ 300, 150 ]
-      - [ 300, 300 ]
-      - [ 300, 450 ]
-      - [ 300, 600 ]
-      - [ 300, 500 ]
-      - [ 300, 450 ]
-      - [ 300, 900 ]
-      - [ 300, 700 ]
-      - [ 300, 850 ]
-      - [ 300, 800 ]
-  - name: E
-    duration: 10000
-    scheduler: *planning
-    cost_function: *nearest_neighbour_cost
-    seed: 54TH7hboAG1iOsDIDhJp
-    elevators: 1
-    capacity: *small
-    floors: # [ population, lambda ]
-      - [ 300, 150 ]
-      - [ 300, 300 ]
-      - [ 300, 450 ]
-      - [ 300, 600 ]
-      - [ 300, 500 ]
-      - [ 300, 450 ]
-      - [ 300, 900 ]
-      - [ 300, 700 ]
-      - [ 300, 850 ]
-      - [ 300, 800 ]
-      - [ 300, 150 ]
-      - [ 300, 300 ]
-      - [ 300, 450 ]
-      - [ 300, 600 ]
-      - [ 300, 500 ]
-      - [ 300, 450 ]
-      - [ 300, 900 ]
-      - [ 300, 700 ]
-      - [ 300, 850 ]
-      - [ 300, 800 ]
