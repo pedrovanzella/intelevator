@@ -21,9 +21,11 @@ float BetterNearestNeighbourCostFunction::calculate(
   auto current_floor = floors->at(where_it_is);
   auto request_floor = floors->at(where_to);
 
-  if (elevator->getDirection() == current_floor->compareTo(*request_floor) || elevator->getStatus() == Status::Idle) {
+  if (elevator->getStatus() == Status::Idle)
+    return abs(distance) / std::sqrt(4.0);
+
+  if (elevator->getDirection() == current_floor->compareTo(*request_floor))
     return abs(distance) / std::sqrt(2.0);
-  }
 
   return abs(distance);
 }
