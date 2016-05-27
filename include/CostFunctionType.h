@@ -3,15 +3,19 @@
 #include "MissingCostFunctionError.h"
 #include <string>
 
-enum class CostFunctionType { Dummy, NearestNeighbour, Weighted };
+enum class CostFunctionType { Dummy, Random, NearestNeighbour, BetterNearestNeighbour, Weighted };
 
 namespace Helpers {
   static std::string costFunctionName(CostFunctionType type) {
     switch (type) {
     case CostFunctionType::Dummy:
       return "Dummy";
+    case CostFunctionType::Random:
+      return "Random";
     case CostFunctionType::NearestNeighbour:
       return "NearestNeighbour";
+    case CostFunctionType::BetterNearestNeighbour:
+      return "BetterNearestNeighbour";
     case CostFunctionType::Weighted:
       return "Weighted";
     default:
