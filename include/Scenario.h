@@ -1,5 +1,6 @@
 #pragma once
 
+#include <ctime>
 #include <memory>
 #include <string>
 #include <vector>
@@ -25,6 +26,7 @@ public:
   const CostFunctionType getCostFunctionType() const;
   const std::vector<std::pair<int, float>> getFloors() const;
   const std::string getSeed() const;
+  const std::string getPath() const;
 
 private:
   const std::string _group;
@@ -37,4 +39,5 @@ private:
   const CostFunctionType _costFunctionType;
   const std::string _seed;
   std::vector<std::pair<int, float>> _floors;
+  std::time_t _timestamp;
 };

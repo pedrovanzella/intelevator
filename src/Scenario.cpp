@@ -17,7 +17,8 @@ Scenario::Scenario(YAML::Node scenario)
       _floorCount(scenario["floors"].size()),
       _schedulerType(static_cast<SchedulerType>(scenario["scheduler"].as<int>())),
       _costFunctionType(static_cast<CostFunctionType>(scenario["cost_function"].as<int>())),
-      _seed(scenario["seed"].as<std::string>()) {
+      _seed(scenario["seed"].as<std::string>()),
+      _timestamp(std::time(nullptr)) {
   for (auto it : scenario["floors"]) {
     _floors.push_back(std::make_pair(it[0].as<int>(), it[1].as<float>()));
   }
@@ -57,3 +58,15 @@ const std::vector<std::pair<int, float>> Scenario::getFloors() const {
 }
 
 const std::string Scenario::getSeed() const { return _seed; }
+
+const std::string Scenario::getPath() const {
+  auto timestamp = _timestamp;
+  std::tm* ptm = std::localtime(&timestamp);
+  char buffer[32];
+  std::strftime(buffer, 32, "%Y%m%d_%H%M%S", ptm);
+
+  std::string path = "output/" + _group + "_" + buffer + "/";
+  std::string command = "mkdir -p \"" + path + "\"";
+  system(command.c_str());
+  return path;
+}
