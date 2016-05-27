@@ -70,7 +70,7 @@ const std::string Simulator::getPath() const {
   std::strftime(buffer, 32, "%Y%m%d_%H%M%S", ptm);
   auto name = _scenario->getName();
   std::string path = "output/" + name + "_" + buffer + "/";
-  std::string command = "mkdir -p " + path;
+  std::string command = "mkdir -p \"" + path + "\"";
   system(command.c_str());
   return path;
 }

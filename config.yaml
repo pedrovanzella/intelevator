@@ -15,7 +15,7 @@ cost_functions:
   weighted: &weighted 4
 
 scenarios:
-  - name: A
+  - name: Simple with dummy
     duration: 10000
     scheduler: *simple
     cost_function: *dummy
@@ -23,10 +23,74 @@ scenarios:
     elevators: 5
     capacity: *small
     floors: # [ population, lambda ]
-      - [ 300, 150 ]
-      - [ 300, 300 ]
-      - [ 300, 450 ]
-      - [ 300, 600 ]
-      - [ 300, 500 ]
-      - [ 300, 450 ]
-      - [ 300, 900 ]
+      - [ 30, 150 ]
+      - [ 30, 300 ]
+      - [ 30, 450 ]
+      - [ 30, 600 ]
+      - [ 30, 500 ]
+      - [ 30, 450 ]
+      - [ 30, 900 ]
+
+  - name: Simple with random
+    duration: 10000
+    scheduler: *simple
+    cost_function: *random
+    seed: 54TH7hboAG1iOsDIDhJp
+    elevators: 5
+    capacity: *small
+    floors: # [ population, lambda ]
+      - [ 30, 150 ]
+      - [ 30, 300 ]
+      - [ 30, 450 ]
+      - [ 30, 600 ]
+      - [ 30, 500 ]
+      - [ 30, 450 ]
+      - [ 30, 900 ]
+
+  - name: Simple with nearest_neighbour
+    duration: 10000
+    scheduler: *simple
+    cost_function: *nearest_neighbour
+    seed: 54TH7hboAG1iOsDIDhJp
+    elevators: 5
+    capacity: *small
+    floors: # [ population, lambda ]
+      - [ 30, 150 ]
+      - [ 30, 300 ]
+      - [ 30, 450 ]
+      - [ 30, 600 ]
+      - [ 30, 500 ]
+      - [ 30, 450 ]
+      - [ 30, 900 ]
+
+  - name: Simple with better_nearest_neighbour
+    duration: 10000
+    scheduler: *simple
+    cost_function: *better_nearest_neighbour
+    seed: 54TH7hboAG1iOsDIDhJp
+    elevators: 5
+    capacity: *small
+    floors: # [ population, lambda ]
+      - [ 30, 150 ]
+      - [ 30, 300 ]
+      - [ 30, 450 ]
+      - [ 30, 600 ]
+      - [ 30, 500 ]
+      - [ 30, 450 ]
+      - [ 30, 900 ]
+
+  - name: Simple with weighted
+    duration: 10000
+    scheduler: *simple
+    cost_function: *weighted
+    seed: 54TH7hboAG1iOsDIDhJp
+    elevators: 5
+    capacity: *small
+    floors: # [ population, lambda ]
+      - [ 30, 150 ]
+      - [ 30, 300 ]
+      - [ 30, 450 ]
+      - [ 30, 600 ]
+      - [ 30, 500 ]
+      - [ 30, 450 ]
+      - [ 30, 900 ]
