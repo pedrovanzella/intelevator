@@ -6,6 +6,7 @@
 #include "Floor.h"
 #include "Status.h"
 #include <algorithm>
+#include <cmath>
 
 float BetterNearestNeighbourCostFunction::calculate(
     const std::shared_ptr<const Building> building,
@@ -21,7 +22,7 @@ float BetterNearestNeighbourCostFunction::calculate(
   auto request_floor = floors->at(where_to);
 
   if (elevator->getDirection() == current_floor->compareTo(*request_floor) || elevator->getStatus() == Status::Idle) {
-    return abs(distance) / sqrt(2.0);
+    return abs(distance) / std::sqrt(2.0);
   }
 
   return abs(distance);
