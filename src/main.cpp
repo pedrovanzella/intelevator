@@ -18,10 +18,11 @@ int main(int argc, char *argv[]) {
     reporter->add(simulator->getStatistics());
   }
 
-  reporter->generateReport();
-  reporter->generateArrivals();
-  reporter->generateDropOffs();
-  reporter->generateCharts();
+  reporter->generate();
+  // reporter->generateReport();
+  // reporter->generateArrivals();
+  // reporter->generateDropOffs();
+  // reporter->generateCharts();
 
   return 0;
 }

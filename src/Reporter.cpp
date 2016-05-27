@@ -7,6 +7,7 @@
 #include "Statistics.h"
 #include "Trip.h"
 #include <iomanip>
+#include <iostream>
 
 namespace {
   template<typename T>
@@ -22,16 +23,22 @@ namespace {
 
 Reporter::Reporter() {}
 
-// Reporter::Reporter(std::shared_ptr<Simulator> simulator)
-//     : _outputPath(simulator->getPath()),
-//       _scenario(simulator->getScenario()),
-//       _statistics(simulator->getStatistics()) {}
-
 Reporter::~Reporter() {}
 
 void Reporter::add(std::shared_ptr<Statistics> statistics) {
   auto group = statistics->getScenario()->getGroup();
   _stats[group].push_back(statistics);
+}
+
+void Reporter::generate() {
+  for (auto const &it : _stats) {
+    for (auto const &statistics : it.second) {
+      auto path = statistics->getScenario()->getPath();
+      auto scenarioPath = path + statistics->getScenario()->getName() + "/";
+      generateArrivals(scenarioPath, statistics);
+      generateDropOffs(scenarioPath, statistics);
+    }
+  }
 }
 
 void Reporter::generateReport() {
@@ -75,20 +82,20 @@ void Reporter::generateReport() {
   // f << std::endl;
 }
 
-void Reporter::generateArrivals() {
-  // std::ofstream f;
-  // f.open(_outputPath + "arrivals.log");
-  // for (auto a : _statistics->getArrivals()) {
-  //   a.printToFile(f);
-  // }
+void Reporter::generateArrivals(const std::string path, std::shared_ptr<Statistics> statistics) {
+  std::ofstream f;
+  f.open(path + "arrivals.log");
+  for (auto a : statistics->getArrivals()) {
+    a.printToFile(f);
+  }
 }
 
-void Reporter::generateDropOffs() {
-  // std::ofstream f;
-  // f.open(_outputPath + "trips.log");
-  // for (auto t : _statistics->getTrips()) {
-  //   t.printToFile(f);
-  // }
+void Reporter::generateDropOffs(const std::string path, std::shared_ptr<Statistics> statistics) {
+  std::ofstream f;
+  f.open(path + "trips.log");
+  for (auto t : statistics->getTrips()) {
+    t.printToFile(f);
+  }
 }
 
 void Reporter::generateCharts() {

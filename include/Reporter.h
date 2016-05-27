@@ -16,9 +16,11 @@ public:
 
   void add(std::shared_ptr<Statistics> statistics);
 
+  void generate();
+
   void generateReport();
-  void generateArrivals();
-  void generateDropOffs();
+  void generateArrivals(const std::string path, std::shared_ptr<Statistics> statistics);
+  void generateDropOffs(const std::string path, std::shared_ptr<Statistics> statistics);
   void generateCharts();
 
 private:
