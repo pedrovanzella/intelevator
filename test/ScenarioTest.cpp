@@ -10,6 +10,7 @@ struct ScenarioTest : testing::Test {
   Scenario *s;
   ScenarioTest() {
     std::string config =
+      "group: G\n"
       "name: A\n"
       "duration: 10000\n"
       "scheduler: 0\n"
@@ -32,6 +33,7 @@ struct ScenarioTest : testing::Test {
 };
 
 TEST_F(ScenarioTest, Getters) {
+  EXPECT_EQ("G", s->getGroup());
   EXPECT_EQ("A", s->getName());
   EXPECT_EQ(10000, s->getDuration());
   EXPECT_EQ(SchedulerType::Simple, s->getSchedulerType());
