@@ -8,7 +8,7 @@ class CostFunction;  // forward declaration
 
 class SimpleScheduler : public Scheduler {
 public:
-  int schedule(const std::shared_ptr<const CostFunction> costFunction,
+  int schedule(const std::shared_ptr<CostFunction> costFunction,
                const std::shared_ptr<const Building> building,
                const std::shared_ptr<const ClientArrival>);
 };

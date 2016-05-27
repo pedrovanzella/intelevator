@@ -10,7 +10,7 @@
 float BetterNearestNeighbourCostFunction::calculate(
     const std::shared_ptr<const Building> building,
     const std::shared_ptr<const Elevator> elevator,
-    const std::shared_ptr<const Client> client) const {
+    const std::shared_ptr<const Client> client) {
 
   auto where_it_is = elevator->getLocation();
   auto where_to = client->getArrivalFloor();

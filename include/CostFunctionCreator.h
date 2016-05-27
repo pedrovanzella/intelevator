@@ -9,17 +9,17 @@
 
 class CostFunctionCreator {
 public:
-  template <class T> static const std::shared_ptr<const CostFunction> create();
+  template <class T> static const std::shared_ptr<CostFunction> create();
 
-  static const std::shared_ptr<const CostFunction> create(const CostFunctionType costFunctionType);
+  static const std::shared_ptr<CostFunction> create(const CostFunctionType costFunctionType);
 };
 
-template <class T> const std::shared_ptr<const CostFunction> CostFunctionCreator::create() {
-  const std::shared_ptr<const CostFunction> cf(new T());
+template <class T> const std::shared_ptr<CostFunction> CostFunctionCreator::create() {
+  const std::shared_ptr<CostFunction> cf(new T());
   return cf;
 }
 
-const std::shared_ptr<const CostFunction> CostFunctionCreator::create(const CostFunctionType costFunctionType) {
+const std::shared_ptr<CostFunction> CostFunctionCreator::create(const CostFunctionType costFunctionType) {
   switch (costFunctionType) {
   case CostFunctionType::Dummy:
     return CostFunctionCreator::create<DummyCostFunction>();

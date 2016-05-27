@@ -6,7 +6,7 @@
 float WeightedCostFunction::calculate(
     const std::shared_ptr<const Building> building,
     const std::shared_ptr<const Elevator> elevator,
-    const std::shared_ptr<const Client> client) const {
+    const std::shared_ptr<const Client> client) {
   if (elevator->getOccupation() == 0.0)
     return abs(client->getArrivalFloor() - elevator->getLocation());
 

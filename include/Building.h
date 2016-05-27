@@ -25,7 +25,7 @@ public:
            std::shared_ptr<std::vector<std::shared_ptr<Floor>>> floors,
            std::shared_ptr<std::vector<std::shared_ptr<Elevator>>> elevators,
            std::shared_ptr<Scheduler> scheduler,
-           std::shared_ptr<const CostFunction> costFunction);
+           std::shared_ptr<CostFunction> costFunction);
 
   virtual ~Building();
 
@@ -43,7 +43,7 @@ private:
   std::shared_ptr<std::vector<std::shared_ptr<Floor>>> _floors;
   std::shared_ptr<std::vector<std::shared_ptr<Elevator>>> _elevators;
   const std::shared_ptr<Scheduler> _scheduler;
-  const std::shared_ptr<const CostFunction> _costFunction;
+  const std::shared_ptr<CostFunction> _costFunction;
   std::map<std::shared_ptr<Elevator>, std::set<int>> _stops;
 
   std::unique_ptr<StopManager> _stopManager;

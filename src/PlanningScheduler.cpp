@@ -7,7 +7,7 @@
 #include <memory>
 #include <algorithm>
 
-int PlanningScheduler::schedule(const std::shared_ptr<const CostFunction> costFunction,
+int PlanningScheduler::schedule(const std::shared_ptr<CostFunction> costFunction,
                                 const std::shared_ptr<const Building> building,
                                 const std::shared_ptr<const ClientArrival> ca)
 {
@@ -24,7 +24,7 @@ int PlanningScheduler::schedule(const std::shared_ptr<const CostFunction> costFu
 }
 
 std::map<std::shared_ptr<const Elevator>, int>
-PlanningScheduler::calculate(const std::shared_ptr<const CostFunction> costFunction,
+PlanningScheduler::calculate(const std::shared_ptr<CostFunction> costFunction,
                               const std::shared_ptr<const Building> building,
                               int horizon)
 {
@@ -60,7 +60,7 @@ PlanningScheduler::getAllWaitingClients(const std::shared_ptr<const Building> b)
 }
 
 std::map<std::shared_ptr<const Elevator>, int>
-PlanningScheduler::next_step(const std::shared_ptr<const CostFunction> costFunction,
+PlanningScheduler::next_step(const std::shared_ptr<CostFunction> costFunction,
   const std::shared_ptr<const Building> building,
                               std::vector<std::shared_ptr<Client>> clients,
                               std::map<std::shared_ptr<const Elevator>, int> current_costs,
