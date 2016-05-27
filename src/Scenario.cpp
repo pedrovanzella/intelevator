@@ -5,7 +5,6 @@
 #include "Floor.h"
 #include "MissingCostFunctionError.h"
 #include "MissingSchedulerError.h"
-#include "RandomScheduler.h"
 #include <glog/logging.h>
 #include <yaml-cpp/yaml.h>
 

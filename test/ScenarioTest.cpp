@@ -34,7 +34,7 @@ struct ScenarioTest : testing::Test {
 TEST_F(ScenarioTest, Getters) {
   EXPECT_EQ("A", s->getName());
   EXPECT_EQ(10000, s->getDuration());
-  EXPECT_EQ(SchedulerType::Dummy, s->getSchedulerType());
+  EXPECT_EQ(SchedulerType::Simple, s->getSchedulerType());
   EXPECT_EQ(CostFunctionType::Dummy, s->getCostFunctionType());
   EXPECT_EQ("54TH7hboAG1iOsDIDhJp", s->getSeed());
   EXPECT_EQ(3, s->getElevators());
