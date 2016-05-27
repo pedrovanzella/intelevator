@@ -9,7 +9,8 @@
 #include <yaml-cpp/yaml.h>
 
 Scenario::Scenario(YAML::Node scenario)
-    : _name(scenario["name"].as<std::string>()),
+    : _group(scenario["group"].as<std::string>()),
+      _name(scenario["name"].as<std::string>()),
       _duration(scenario["duration"].as<int>()),
       _elevators(scenario["elevators"].as<int>()),
       _capacity(scenario["capacity"].as<int>()),
@@ -34,6 +35,8 @@ std::shared_ptr<std::vector<std::shared_ptr<const Scenario>>> Scenario::Load(std
   }
   return scenarios;
 }
+
+const std::string Scenario::getGroup() const { return _group; }
 
 const std::string Scenario::getName() const { return _name; }
 

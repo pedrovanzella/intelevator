@@ -15,6 +15,7 @@ public:
 
   static std::shared_ptr<std::vector<std::shared_ptr<const Scenario>>> Load(std::string file);
 
+  const std::string getGroup() const;
   const std::string getName() const;
   const int getDuration() const;
   const int getElevators() const;
@@ -26,6 +27,7 @@ public:
   const std::string getSeed() const;
 
 private:
+  const std::string _group;
   const std::string _name;
   const int _duration;
   const int _elevators;
