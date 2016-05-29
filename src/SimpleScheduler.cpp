@@ -7,12 +7,20 @@
 #include "Floor.h"
 #include <limits>
 
+SimpleScheduler::SimpleScheduler() : _next(0) {}
+
 int SimpleScheduler::schedule(
     const std::shared_ptr<CostFunction> costFunction,
     const std::shared_ptr<const Building> building,
     const std::shared_ptr<const ClientArrival> ca) {
 
-  auto elevators = building->getElevators();
+  auto elevators = std::make_shared<std::vector<std::shared_ptr<Elevator>>>();
+  auto aux = building->getElevators();
+  for (int i = _next; i < aux->size(); i++)
+    elevators->push_back(aux->at(i));
+  for (int i = 0; i < _next; i++)
+    elevators->push_back(aux->at(i));
+  if (++_next >= aux->size()) _next = 0;
 
   float best_cost = std::numeric_limits<float>::infinity();
   auto the_chosen_one = elevators->front();

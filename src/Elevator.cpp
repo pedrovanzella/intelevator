@@ -107,7 +107,7 @@ std::shared_ptr<std::vector<std::shared_ptr<Elevator>>> Elevator::create(const s
   std::shared_ptr<std::vector<std::shared_ptr<Elevator>>> elevators(new std::vector<std::shared_ptr<Elevator>>);
 
   auto scenario = simulator->getScenario();
-  for (int i = 0; i < scenario->getElevators(); i++) {
+  for (int i = 0; i < scenario->getElevatorCount(); i++) {
     auto e = std::make_shared<Elevator>(i, scenario->getCapacity(), 0);
     elevators->push_back(e);
   }

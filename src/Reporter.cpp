@@ -63,7 +63,7 @@ void Reporter::generateUnifiedReport(std::vector<std::shared_ptr<Statistics>> st
       print(header, "Name", scenario->getName());
       print(header, "Duration", scenario->getDuration());
       print(header, "Seed", scenario->getSeed());
-      print(header, "Elevators", scenario->getElevators());
+      print(header, "Elevators", scenario->getElevatorCount());
       print(header, "Capacity", scenario->getCapacity());
       print(header, "Floors", scenario->getFloorCount());
 
@@ -127,7 +127,7 @@ void Reporter::generateReport(std::shared_ptr<Statistics> statistics) {
   print(f, "Scheduler", Helpers::schedulerName(scenario->getSchedulerType()));
   print(f, "Cost Function", Helpers::costFunctionName(scenario->getCostFunctionType()));
   print(f, "Seed", scenario->getSeed());
-  print(f, "Elevators", scenario->getElevators());
+  print(f, "Elevators", scenario->getElevatorCount());
   print(f, "Capacity", scenario->getCapacity());
   print(f, "Floors", scenario->getFloorCount());
 
