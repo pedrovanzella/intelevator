@@ -137,7 +137,6 @@ void Building::updateElevator(const std::shared_ptr<Elevator> elevator) {
 }
 
 std::pair<int, Direction> Building::getDestinationForElevator(const std::shared_ptr<Elevator> elevator) {
-  // LOG(INFO) << "GONNA GET NEW DEST";
   auto up = _stopManager->getStops(elevator, Direction::Up);
   auto down = _stopManager->getStops(elevator, Direction::Down);
 
