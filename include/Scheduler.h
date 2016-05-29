@@ -11,5 +11,6 @@ public:
   virtual int
   schedule(const std::shared_ptr<CostFunction> costFunction,
            const std::shared_ptr<const Building> building,
-           const std::shared_ptr<const Client> client) = 0;
+           const std::shared_ptr<const Client> client,
+           const int elevatorToExclude = -1) = 0;
 };

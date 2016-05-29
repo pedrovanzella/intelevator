@@ -15,7 +15,8 @@ class PlanningScheduler : public Scheduler
 public:
   int schedule(const std::shared_ptr<CostFunction> costFunction,
                const std::shared_ptr<const Building> building,
-               const std::shared_ptr<const Client> client);
+               const std::shared_ptr<const Client> client,
+               const int elevatorToExclude = -1);
 
 private:
   std::map<std::shared_ptr<const Elevator>, int>

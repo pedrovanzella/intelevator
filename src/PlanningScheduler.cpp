@@ -9,7 +9,8 @@
 
 int PlanningScheduler::schedule(const std::shared_ptr<CostFunction> costFunction,
                                 const std::shared_ptr<const Building> building,
-                                const std::shared_ptr<const Client> client)
+                                const std::shared_ptr<const Client> client,
+                                const int elevatorToExclude)
 {
   auto costs = calculate(costFunction, building, 5);
   std::shared_ptr<const Elevator> lowestCost = building->getElevators()->front();

@@ -11,14 +11,19 @@ SimpleScheduler::SimpleScheduler() : _next(0) {}
 int SimpleScheduler::schedule(
     const std::shared_ptr<CostFunction> costFunction,
     const std::shared_ptr<const Building> building,
-    const std::shared_ptr<const Client> client) {
+    const std::shared_ptr<const Client> client,
+    const int elevatorToExclude) {
 
   auto elevators = std::make_shared<std::vector<std::shared_ptr<Elevator>>>();
   auto aux = building->getElevators();
-  for (int i = _next; i < aux->size(); i++)
+  for (int i = _next; i < aux->size(); i++) {
+    if (i == elevatorToExclude) continue;
     elevators->push_back(aux->at(i));
-  for (int i = 0; i < _next; i++)
+  }
+  for (int i = 0; i < _next; i++) {
+    if (i == elevatorToExclude) continue;
     elevators->push_back(aux->at(i));
+  }
   if (++_next >= aux->size()) _next = 0;
 
   float best_cost = std::numeric_limits<float>::infinity();
