@@ -9,6 +9,7 @@ def makegraphs(filename):
     data = loadfile(filename)
     folderpath = os.path.dirname(filename) + '/'
     clientsPerElevator(data, folderpath)
+    arrivalsPerFloor(data, folderpath)
 
 
 def loadfile(filename):
@@ -18,9 +19,17 @@ def loadfile(filename):
 def clientsPerElevator(data, folderpath):
     ax = sns.barplot(x=data.elevatorID.value_counts().index,
                      y=data.elevatorID.value_counts())
-    ax.set(xlabel="Elevador",
-           ylabel="Clientes")
+    ax.set(xlabel="Elevator",
+           ylabel="Clients")
     ax.get_figure().savefig(folderpath + "clientsPerElevator.eps")
+
+
+def arrivalsPerFloor(data, folderpath):
+    ax = sns.barplot(x=data.arrivalFloor.value_counts().index,
+                     y=data.arrivalFloor.value_counts())
+    ax.set(xlabel="Floor",
+           ylabel="Clients")
+    ax.get_figure().savefig(folderpath + "arrivalsPerFloor.eps")
 
 
 if __name__ == "__main__":
