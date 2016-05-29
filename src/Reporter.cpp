@@ -85,6 +85,7 @@ void Reporter::generateReport() {
 void Reporter::generateArrivals(const std::string path, std::shared_ptr<Statistics> statistics) {
   std::ofstream f;
   f.open(path + "arrivals.log");
+  f << "arrivalFloor arrivalTime partySize destinationFloor clientID\n";
   for (auto a : statistics->getArrivals()) {
     a.printToFile(f);
   }
@@ -93,6 +94,7 @@ void Reporter::generateArrivals(const std::string path, std::shared_ptr<Statisti
 void Reporter::generateDropOffs(const std::string path, std::shared_ptr<Statistics> statistics) {
   std::ofstream f;
   f.open(path + "trips.log");
+  f << "clientID partySize elevatorID arrivalFloor dropoffFloor createTime pickupTime dropoffTime\n";
   for (auto t : statistics->getTrips()) {
     t.printToFile(f);
   }

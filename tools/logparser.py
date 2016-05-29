@@ -3,6 +3,7 @@ from sys import argv
 import matplotlib.pyplot as plt
 import scipy.stats as stats
 import numpy as np
+import pandas as pd
 
 
 def makegraphs(filename):
@@ -15,19 +16,7 @@ def makegraphs(filename):
 
 
 def loadfile(filename):
-    types = np.dtype([
-        ('clientID', np.int64),
-        ('partySize', np.int8),
-        ('elevatorID', np.int8),
-        ('arrivalFloor', np.int8),
-        ('dropoffFloor', np.int8),
-        ('createTime', np.int64),
-        ('pickupTime', np.int64),
-        ('dropoffTime', np.int64)
-    ])
-    with open(filename, 'r') as f:
-        data = np.loadtxt(f, dtype=types)
-        return data
+    return pd.read_csv(filename)
 
 
 def totalNumberOfClientsDelivered(data):
@@ -86,17 +75,9 @@ def avgTravelTime(data):
 
 
 def avgWaitingTime(data):
-    maxfloors = findTopFloor(data)
-
-    arrF = [0]
-    for f in range(1, maxfloors):
-        arrF.append(np.where(data['arrivalFloor'] == f))
-
-    print("oi")
-    print(arrF[1])
-
-    waits = [x['pickupTime'] - x['createTime'] for x in data]
-    plotNormal(waits)
+    df = pd.DataFrame(data=data)
+    waits = df.groupby('arrivalFloor').apply(lambda x: x['pickupTime'] - x['createTime'])
+    print(waits)
 
 
 def plotNormal(data):
