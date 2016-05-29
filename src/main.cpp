@@ -19,10 +19,6 @@ int main(int argc, char *argv[]) {
   }
 
   reporter->generate();
-  // reporter->generateReport();
-  // reporter->generateArrivals();
-  // reporter->generateDropOffs();
-  // reporter->generateCharts();
 
   return 0;
 }

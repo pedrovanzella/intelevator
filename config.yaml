@@ -15,79 +15,10 @@ cost_functions:
   weighted: &weighted 4
 
 scenarios:
-  - group: teste
-    name: Simple with dummy
+  - name: Simple
     duration: 10000
-    scheduler: *simple
-    cost_function: *dummy
-    seed: 54TH7hboAG1iOsDIDhJp
-    elevators: 5
-    capacity: *small
-    floors: # [ population, lambda ]
-      - [ 30, 150 ]
-      - [ 30, 300 ]
-      - [ 30, 450 ]
-      - [ 30, 600 ]
-      - [ 30, 500 ]
-      - [ 30, 450 ]
-      - [ 30, 900 ]
-
-  - group: teste
-    name: Simple with random
-    duration: 10000
-    scheduler: *simple
-    cost_function: *random
-    seed: 54TH7hboAG1iOsDIDhJp
-    elevators: 5
-    capacity: *small
-    floors: # [ population, lambda ]
-      - [ 30, 150 ]
-      - [ 30, 300 ]
-      - [ 30, 450 ]
-      - [ 30, 600 ]
-      - [ 30, 500 ]
-      - [ 30, 450 ]
-      - [ 30, 900 ]
-
-  - group: teste
-    name: Simple with nearest_neighbour
-    duration: 10000
-    scheduler: *simple
-    cost_function: *nearest_neighbour
-    seed: 54TH7hboAG1iOsDIDhJp
-    elevators: 5
-    capacity: *small
-    floors: # [ population, lambda ]
-      - [ 30, 150 ]
-      - [ 30, 300 ]
-      - [ 30, 450 ]
-      - [ 30, 600 ]
-      - [ 30, 500 ]
-      - [ 30, 450 ]
-      - [ 30, 900 ]
-
-  - group: teste
-    name: Simple with better_nearest_neighbour
-    duration: 10000
-    scheduler: *simple
-    cost_function: *better_nearest_neighbour
-    seed: 54TH7hboAG1iOsDIDhJp
-    elevators: 5
-    capacity: *small
-    floors: # [ population, lambda ]
-      - [ 30, 150 ]
-      - [ 30, 300 ]
-      - [ 30, 450 ]
-      - [ 30, 600 ]
-      - [ 30, 500 ]
-      - [ 30, 450 ]
-      - [ 30, 900 ]
-
-  - group: teste
-    name: Simple with weighted
-    duration: 10000
-    scheduler: *simple
-    cost_function: *weighted
+    scheduler: [ *simple, *planning ]
+    cost_function: [ *dummy, *random, *nearest_neighbour, *better_nearest_neighbour, *weighted ]
     seed: 54TH7hboAG1iOsDIDhJp
     elevators: 5
     capacity: *small
