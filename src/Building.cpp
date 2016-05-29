@@ -106,7 +106,7 @@ void Building::doClientArrival(std::shared_ptr<const ClientArrival> event) {
 
   auto currentElevator = _stopManager->get(location, direction);
   if (currentElevator == nullptr) {
-    auto elevatorNum = _scheduler->schedule(_costFunction, shared_from_this(), event);
+    auto elevatorNum = _scheduler->schedule(_costFunction, shared_from_this(), client);
     auto elevator = _elevators->at(elevatorNum);
     _stopManager->set(location, direction, elevator);
     LOG(INFO) << "Elevator #" << elevator->getNumber()

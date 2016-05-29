@@ -7,7 +7,7 @@
 class Client;
 class Building;
 class CostFunction;
-class ClientArrival;
+class Client;
 class Elevator;
 
 class PlanningScheduler : public Scheduler
@@ -15,7 +15,7 @@ class PlanningScheduler : public Scheduler
 public:
   int schedule(const std::shared_ptr<CostFunction> costFunction,
                const std::shared_ptr<const Building> building,
-               const std::shared_ptr<const ClientArrival>);
+               const std::shared_ptr<const Client> client);
 
 private:
   std::map<std::shared_ptr<const Elevator>, int>
