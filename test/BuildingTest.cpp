@@ -16,17 +16,17 @@ using namespace std;
 
 struct BuildingTest : testing::Test
 {
-  YAML::Node config;
-  std::shared_ptr<Scenario> scenario;
-  std::shared_ptr<Simulator> simulator;
-  std::shared_ptr<Building> building;
+  // YAML::Node config;
+  // std::shared_ptr<Scenario> scenario;
+  // std::shared_ptr<Simulator> simulator;
+  // std::shared_ptr<Building> building;
 
   BuildingTest()
   {
-    config = YAML::LoadFile("config.yaml")["scenarios"][0];
-    scenario = std::make_shared<Scenario>(config);
-    simulator = std::make_shared<Simulator>(scenario);
-    building = simulator->createBuilding();
+    // config = YAML::LoadFile("config.yaml")["scenarios"][0];
+    // scenario = std::make_shared<Scenario>(config);
+    // simulator = std::make_shared<Simulator>(scenario);
+    // building = simulator->createBuilding();
   }
 
   virtual ~BuildingTest()
