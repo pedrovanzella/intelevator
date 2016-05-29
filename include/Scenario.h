@@ -11,12 +11,14 @@ enum class SchedulerType;      // forward declaration
 
 class Scenario {
 public:
-  Scenario(YAML::Node scenario);
+  Scenario(std::string name, int duration, int elevators, int capacity,
+           int floorCount, SchedulerType schedulerType,
+           CostFunctionType costFunctionType, std::string seed,
+           std::vector<std::pair<int, float>> floors, std::time_t timestamp);
   virtual ~Scenario();
 
   static std::shared_ptr<std::vector<std::shared_ptr<const Scenario>>> Load(std::string file);
 
-  const std::string getGroup() const;
   const std::string getName() const;
   const int getDuration() const;
   const int getElevators() const;
@@ -26,10 +28,10 @@ public:
   const CostFunctionType getCostFunctionType() const;
   const std::vector<std::pair<int, float>> getFloors() const;
   const std::string getSeed() const;
+  const std::string getBasePath() const;
   const std::string getPath() const;
 
 private:
-  const std::string _group;
   const std::string _name;
   const int _duration;
   const int _elevators;
