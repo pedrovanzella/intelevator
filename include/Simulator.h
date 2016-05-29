@@ -25,8 +25,6 @@ public:
   const std::shared_ptr<EventDispatcher> getEventDispatcher() const;
   const std::shared_ptr<std::default_random_engine> getRandomEngine() const;
 
-  const std::string getLogPath() const;
-
   void run();
 
 private:
