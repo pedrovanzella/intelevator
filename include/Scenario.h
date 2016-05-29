@@ -11,7 +11,7 @@ enum class SchedulerType;      // forward declaration
 
 class Scenario {
 public:
-  Scenario(std::string name, int duration, int elevators, int capacity,
+  Scenario(std::string name, int duration, int elevatorCount, int capacity,
            int floorCount, SchedulerType schedulerType,
            CostFunctionType costFunctionType, std::string seed,
            std::vector<std::pair<int, float>> floors, std::time_t timestamp);
@@ -21,7 +21,7 @@ public:
 
   const std::string getName() const;
   const int getDuration() const;
-  const int getElevators() const;
+  const int getElevatorCount() const;
   const int getCapacity() const;
   const int getFloorCount() const;
   const SchedulerType getSchedulerType() const;
@@ -34,7 +34,7 @@ public:
 private:
   const std::string _name;
   const int _duration;
-  const int _elevators;
+  const int _elevatorCount;
   const int _capacity;
   const int _floorCount;
   const SchedulerType _schedulerType;

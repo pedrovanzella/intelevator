@@ -8,11 +8,11 @@
 #include <glog/logging.h>
 #include <yaml-cpp/yaml.h>
 
-Scenario::Scenario(std::string name, int duration, int elevators, int capacity,
+Scenario::Scenario(std::string name, int duration, int elevatorCount, int capacity,
                    int floorCount, SchedulerType schedulerType,
                    CostFunctionType costFunctionType, std::string seed,
                    std::vector<std::pair<int, float>> floors, std::time_t timestamp)
-    : _name(name), _duration(duration), _elevators(elevators),
+    : _name(name), _duration(duration), _elevatorCount(elevatorCount),
       _capacity(capacity), _floorCount(floorCount),
       _schedulerType(schedulerType), _costFunctionType(costFunctionType),
       _seed(seed), _floors(floors), _timestamp(timestamp) {}
@@ -27,7 +27,7 @@ std::shared_ptr<std::vector<std::shared_ptr<const Scenario>>> Scenario::Load(std
 
     auto name = scenario["name"].as<std::string>();
     auto duration = scenario["duration"].as<int>();
-    auto elevators = scenario["elevators"].as<int>();
+    auto elevatorCount = scenario["elevators"].as<int>();
     auto capacity = scenario["capacity"].as<int>();
     auto floorCount = scenario["floors"].size();
     auto seed = scenario["seed"].as<std::string>();
@@ -44,7 +44,7 @@ std::shared_ptr<std::vector<std::shared_ptr<const Scenario>>> Scenario::Load(std
       for (auto it : scenario["cost_function"]) {
         auto costFunctionType = static_cast<CostFunctionType>(it.as<int>());
 
-        auto s = std::make_shared<const Scenario>(name, duration, elevators, capacity, floorCount, schedulerType, costFunctionType, seed, floors, timestamp);
+        auto s = std::make_shared<const Scenario>(name, duration, elevatorCount, capacity, floorCount, schedulerType, costFunctionType, seed, floors, timestamp);
         scenarios->push_back(s);
       }
     }
@@ -56,7 +56,7 @@ const std::string Scenario::getName() const { return _name; }
 
 const int Scenario::getDuration() const { return _duration; }
 
-const int Scenario::getElevators() const { return _elevators; }
+const int Scenario::getElevatorCount() const { return _elevatorCount; }
 
 const int Scenario::getCapacity() const { return _capacity; }
 
