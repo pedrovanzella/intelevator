@@ -20,6 +20,10 @@ namespace {
     os << std::right << std::setw(16) << std::setfill(' ') << value;
   }
 
+  void printr(std::ostream &os, const double value) {
+    os << std::right << std::setw(16) << std::setfill(' ') << std::setprecision(4) << std::fixed << value;
+  }
+
   template<typename T>
   void printl(std::ostream &os, const T value) {
     os << std::left << std::setw(32) << std::setfill(' ') << value;
