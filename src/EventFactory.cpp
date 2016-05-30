@@ -22,7 +22,7 @@ EventFactory::EventFactory(std::shared_ptr<Clock> clock,
 EventFactory::~EventFactory() {}
 
 void EventFactory::createFutureArrival(const std::shared_ptr<EventQueue> eventQueue) {
-  if (_totalArrived >= _floor->getPopulation()) return;
+  // if (_totalArrived >= _floor->getPopulation()) return;
 
   auto partySize = 1u;
   auto eventTime = _clock->currentTime() + getNextTime();
