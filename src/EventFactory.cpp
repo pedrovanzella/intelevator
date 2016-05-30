@@ -11,8 +11,7 @@ EventFactory::EventFactory(std::shared_ptr<Clock> clock,
                            std::shared_ptr<const Scenario> scenario,
                            std::shared_ptr<std::mt19937> random_engine)
   : _clock(clock), _floor(floor), _scenario(scenario),
-    _arrival_distribution(floor->getLambda()), _random_engine(random_engine),
-    _totalArrived(0) {
+    _arrival_distribution(floor->getLambda()), _random_engine(random_engine) {
 
   std::vector<float> probabilities(_scenario->getFloorCount(), 1.f);
   probabilities[_floor->getNumber()] = 0.f;
@@ -22,8 +21,6 @@ EventFactory::EventFactory(std::shared_ptr<Clock> clock,
 EventFactory::~EventFactory() {}
 
 void EventFactory::createFutureArrival(const std::shared_ptr<EventQueue> eventQueue) {
-  // if (_totalArrived >= _floor->getPopulation()) return;
-
   auto partySize = 1u;
   auto eventTime = _clock->currentTime() + getNextTime();
   auto destination = getNextDestination();
@@ -31,8 +28,6 @@ void EventFactory::createFutureArrival(const std::shared_ptr<EventQueue> eventQu
   auto client = std::make_shared<Client>(partySize, _floor->getNumber(), destination, eventTime);
   auto ca = std::make_shared<ClientArrival>(eventTime, client);
   eventQueue->push(std::static_pointer_cast<Event>(ca));
-
-  _totalArrived += partySize;
 }
 
 int EventFactory::getNextTime() {

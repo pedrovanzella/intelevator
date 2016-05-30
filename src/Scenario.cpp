@@ -11,7 +11,7 @@
 Scenario::Scenario(std::string name, int duration, int elevatorCount, int capacity,
                    int floorCount, SchedulerType schedulerType,
                    CostFunctionType costFunctionType, std::string seed,
-                   std::vector<std::pair<int, float>> floors, std::time_t timestamp)
+                   std::vector<float> floors, std::time_t timestamp)
     : _name(name), _duration(duration), _elevatorCount(elevatorCount),
       _capacity(capacity), _floorCount(floorCount),
       _schedulerType(schedulerType), _costFunctionType(costFunctionType),
@@ -33,9 +33,9 @@ std::shared_ptr<std::vector<std::shared_ptr<const Scenario>>> Scenario::Load(std
     auto seed = scenario["seed"].as<std::string>();
     auto timestamp = std::time(nullptr);
 
-    std::vector<std::pair<int, float>> floors;
+    std::vector<float> floors;
     for (auto it : scenario["floors"]) {
-      floors.push_back(std::make_pair(it[0].as<int>(), it[1].as<float>()));
+      floors.push_back(it.as<float>());
     }
 
     for (auto it : scenario["scheduler"]) {
@@ -66,7 +66,7 @@ const SchedulerType Scenario::getSchedulerType() const { return _schedulerType; 
 
 const CostFunctionType Scenario::getCostFunctionType() const { return _costFunctionType; }
 
-const std::vector<std::pair<int, float>> Scenario::getFloors() const {
+const std::vector<float> Scenario::getFloors() const {
   return _floors;
 }
 

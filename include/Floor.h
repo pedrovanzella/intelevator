@@ -13,12 +13,11 @@ class Simulator;      // forward declaration
 
 class Floor {
 public:
-  Floor(const int number, const int population, const float lambda);
+  Floor(const int number, const float lambda);
   virtual ~Floor();
 
   int getNumber() const;
   int getLambda() const;
-  int getPopulation() const;
   const std::vector<std::shared_ptr<Client>> getUpLine() const;
   const std::vector<std::shared_ptr<Client>> getDownLine() const;
   int clientsOnUpLine() const;
@@ -36,7 +35,6 @@ public:
 
 private:
   int _number;
-  int _population;
   int _lambda;
   std::queue<std::shared_ptr<Client>> _upLine;
   std::queue<std::shared_ptr<Client>> _downLine;

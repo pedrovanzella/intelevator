@@ -29,8 +29,6 @@ private:
 
   std::shared_ptr<std::mt19937> _random_engine;
 
-  int _totalArrived;
-
   int getNextTime();
   int getNextDestination();
 };

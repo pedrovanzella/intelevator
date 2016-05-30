@@ -14,7 +14,7 @@ public:
   Scenario(std::string name, int duration, int elevatorCount, int capacity,
            int floorCount, SchedulerType schedulerType,
            CostFunctionType costFunctionType, std::string seed,
-           std::vector<std::pair<int, float>> floors, std::time_t timestamp);
+           std::vector<float> floors, std::time_t timestamp);
   virtual ~Scenario();
 
   static std::shared_ptr<std::vector<std::shared_ptr<const Scenario>>> Load(std::string file);
@@ -26,7 +26,7 @@ public:
   const int getFloorCount() const;
   const SchedulerType getSchedulerType() const;
   const CostFunctionType getCostFunctionType() const;
-  const std::vector<std::pair<int, float>> getFloors() const;
+  const std::vector<float> getFloors() const;
   const std::string getSeed() const;
   const std::string getBasePath() const;
   const std::string getPath() const;
@@ -40,6 +40,6 @@ private:
   const SchedulerType _schedulerType;
   const CostFunctionType _costFunctionType;
   const std::string _seed;
-  std::vector<std::pair<int, float>> _floors;
+  std::vector<float> _floors;
   std::time_t _timestamp;
 };
