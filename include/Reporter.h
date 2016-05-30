@@ -22,7 +22,7 @@ public:
   void generateReport(std::shared_ptr<Statistics> statistics);
   void generateArrivals(std::shared_ptr<Statistics> statistics);
   void generateDropOffs(std::shared_ptr<Statistics> statistics);
-  void generateCharts();
+  void generateCharts(std::shared_ptr<Statistics> statistics);
 
 private:
   std::map<std::string, std::vector<std::shared_ptr<Statistics>>> _stats;

@@ -47,6 +47,7 @@ void Reporter::generate() {
       generateReport(statistics);
       generateArrivals(statistics);
       generateDropOffs(statistics);
+      generateCharts(statistics);
     }
   }
 }
@@ -183,8 +184,8 @@ void Reporter::generateDropOffs(std::shared_ptr<Statistics> statistics) {
   }
 }
 
-void Reporter::generateCharts() {
-  // std::string path = getPath();
-  // std::string command = "./tools/logparser.py " + path + "/trips.log";
-  // system(command.c_str());
+void Reporter::generateCharts(std::shared_ptr<Statistics> statistics) {
+  auto scenario = statistics->getScenario();
+  std::string command = "./tools/logparser.py " + scenario->getPath() + "trips.log";
+  system(command.c_str());
 }
