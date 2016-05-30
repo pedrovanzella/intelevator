@@ -3,6 +3,7 @@ from sys import argv
 import os
 import pandas as pd
 import seaborn as sns
+import matplotlib.pyplot as plt
 
 
 def makegraphs(filename):
@@ -18,6 +19,7 @@ def loadfile(filename):
 
 
 def clientsPerElevator(data, folderpath):
+    plt.clf()
     ax = sns.barplot(x=data.elevatorID.value_counts().index,
                      y=data.elevatorID.value_counts())
     ax.set(xlabel="Elevator",
@@ -26,6 +28,7 @@ def clientsPerElevator(data, folderpath):
 
 
 def arrivalsPerFloor(data, folderpath):
+    plt.clf()
     ax = sns.barplot(x=data.arrivalFloor.value_counts().index,
                      y=data.arrivalFloor.value_counts())
     ax.set(xlabel="Floor",
@@ -34,6 +37,7 @@ def arrivalsPerFloor(data, folderpath):
 
 
 def dropoffsPerFloor(data, folderpath):
+    plt.clf()
     ax = sns.barplot(x=data.dropoffFloor.value_counts().index,
                      y=data.dropoffFloor.value_counts())
     ax.set(xlabel="Floor",
