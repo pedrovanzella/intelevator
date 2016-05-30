@@ -42,9 +42,6 @@ def dropoffsPerFloor(data, folderpath):
 
 
 if __name__ == "__main__":
-    sns.set(color_codes=True)
-    sns.set_style("whitegrid")
-
     if len(argv) < 2:
         print("Usage: %s logfile" % argv[0])
         exit()
