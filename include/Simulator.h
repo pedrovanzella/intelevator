@@ -23,7 +23,7 @@ public:
   const std::shared_ptr<Clock> getClock() const;
   const std::shared_ptr<EventQueue> getEventQueue() const;
   const std::shared_ptr<EventDispatcher> getEventDispatcher() const;
-  const std::shared_ptr<std::default_random_engine> getRandomEngine() const;
+  const std::shared_ptr<std::mt19937> getRandomEngine() const;
 
   void run();
 
@@ -33,7 +33,7 @@ private:
   const std::shared_ptr<Clock> _clock;
   const std::shared_ptr<EventQueue> _eventQueue;
   const std::shared_ptr<EventDispatcher> _eventDispatcher;
-  std::shared_ptr<std::default_random_engine> _random_engine;
+  std::shared_ptr<std::mt19937> _random_engine;
 
   std::shared_ptr<Building> _building;
 

@@ -9,7 +9,7 @@
 EventFactory::EventFactory(std::shared_ptr<Clock> clock,
                            std::shared_ptr<Floor> floor,
                            std::shared_ptr<const Scenario> scenario,
-                           std::shared_ptr<std::default_random_engine> random_engine)
+                           std::shared_ptr<std::mt19937> random_engine)
   : _clock(clock), _floor(floor), _scenario(scenario),
     _arrival_distribution(floor->getLambda()), _random_engine(random_engine),
     _totalArrived(0) {
