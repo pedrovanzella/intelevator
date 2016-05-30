@@ -17,8 +17,8 @@ cost_functions:
 scenarios:
   - name: Low-rise
     duration: 14400 # 4 hours
-    scheduler: [ *simple ] #, *planning ]
-    cost_function: [ *dummy ] #, *random, *nearest_neighbour, *better_nearest_neighbour, *weighted ]
+    scheduler: [ *simple, *planning ]
+    cost_function: [ *dummy, *random, *nearest_neighbour, *better_nearest_neighbour, *weighted ]
     seed: 54TH7hboAG1iOsDIDhJp
     elevators: 2
     capacity: *small
