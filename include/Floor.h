@@ -27,7 +27,7 @@ public:
 
   void setEventFactory(const std::shared_ptr<EventFactory> eventFactory);
   Direction addClient(const std::shared_ptr<Client> client);
-  std::set<int> boardElevator(const unsigned long time, std::shared_ptr<Elevator> elevator);
+  std::pair<std::set<int>, std::shared_ptr<Client>> boardElevator(const unsigned long time, std::shared_ptr<Elevator> elevator);
 
   void createFutureArrival(const std::shared_ptr<EventQueue> eventQueue);
 

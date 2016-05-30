@@ -131,8 +131,28 @@ void Building::updateElevator(const std::shared_ptr<Elevator> elevator) {
     stats->logDropOff(_clock->currentTime(), elevator, droppedPassengers);
 
     auto floor = _floors->at(elevator->getLocation());
-    auto newStops = floor->boardElevator(_clock->currentTime(), elevator);
-    registerNewStops(elevator, newStops);
+    auto result = floor->boardElevator(_clock->currentTime(), elevator);
+    registerNewStops(elevator, result.first);
+
+    if (result.second) {
+      auto client = result.second;
+      auto location = _floors->at(client->getArrivalFloor());
+      int destination = client->getDestination();
+
+      Direction direction = Direction::Up;
+      if (destination < location->getNumber())
+        direction = Direction::Down;
+
+      auto currentElevator = _stopManager->get(location, direction);
+      if (currentElevator == nullptr) {
+        auto elevatorNum = _scheduler->schedule(_costFunction, shared_from_this(), client, elevator->getNumber());
+        auto elevator = _elevators->at(elevatorNum);
+        _stopManager->set(location, direction, elevator);
+        LOG(INFO) << "Elevator #" << elevator->getNumber()
+                  << " was assigned to stop at floor #" << location->getNumber()
+                  << " to go " << Helpers::directionName(direction) << " (" << _clock->str() << ").";
+      }
+    }
   }
 }
 

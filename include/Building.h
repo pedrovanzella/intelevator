@@ -7,16 +7,16 @@
 #include <string>
 #include <vector>
 
-class ClientArrival; // forward declaration
-class Clock;         // forward declaration
-class CostFunction;  // forward declaration
+class ClientArrival;  // forward declaration
+class Clock;          // forward declaration
+class CostFunction;   // forward declaration
 enum class Direction; // forward declaration
-class Scheduler;     // forward declaration
-class Elevator;      // forward declaration
-class EventFactory;  // forward declaration
-class Floor;         // forward declaration
-class Simulator;     // forward declaration
-class StopManager;   // forward declaration
+class Scheduler;      // forward declaration
+class Elevator;       // forward declaration
+class EventFactory;   // forward declaration
+class Floor;          // forward declaration
+class Simulator;      // forward declaration
+class StopManager;    // forward declaration
 
 class Building : public EventObserver,
                  public std::enable_shared_from_this<Building> {

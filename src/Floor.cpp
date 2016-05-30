@@ -82,7 +82,7 @@ Direction Floor::addClient(const std::shared_ptr<Client> client) {
   }
 }
 
-std::set<int> Floor::boardElevator(const unsigned long time, std::shared_ptr<Elevator> elevator) {
+std::pair<std::set<int>, std::shared_ptr<Client>> Floor::boardElevator(const unsigned long time, std::shared_ptr<Elevator> elevator) {
   std::set<int> newStops;
 
   std::queue<std::shared_ptr<Client>>* lineToBoard = nullptr;
@@ -110,9 +110,10 @@ std::set<int> Floor::boardElevator(const unsigned long time, std::shared_ptr<Ele
               << " (t=" << time << ").";
   }
 
-  LOG_IF(INFO, !lineToBoard->empty()) << "SOBROU";
+  if (lineToBoard->empty())
+    return { newStops, nullptr };
 
-  return newStops;
+  return { newStops, lineToBoard->front() };
 }
 
 void Floor::createFutureArrival(const std::shared_ptr<EventQueue> eventQueue) {
