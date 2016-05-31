@@ -13,7 +13,7 @@ struct StopManagerTest : testing::Test {
 };
 
 TEST_F(StopManagerTest, GetNull) {
-  auto f = std::make_shared<Floor>(0, 0, 0);
+  auto f = std::make_shared<Floor>(0, 0);
   auto e = std::make_shared<Elevator>(0, 0, 0);
   EXPECT_EQ(nullptr, sm->get(f, Direction::Up));
   EXPECT_EQ(nullptr, sm->get(f, Direction::Down));
@@ -23,7 +23,7 @@ TEST_F(StopManagerTest, GetNull) {
 }
 
 TEST_F(StopManagerTest, SetUp) {
-  auto f = std::make_shared<Floor>(0, 0, 0);
+  auto f = std::make_shared<Floor>(0, 0);
   auto d = Direction::Up;
   auto e = std::make_shared<Elevator>(0, 0, 0);
   sm->set(f, d, e);
@@ -42,7 +42,7 @@ TEST_F(StopManagerTest, SetUp) {
 }
 
 TEST_F(StopManagerTest, SetDown) {
-  auto f = std::make_shared<Floor>(0, 0, 0);
+  auto f = std::make_shared<Floor>(0, 0);
   auto d = Direction::Down;
   auto e = std::make_shared<Elevator>(0, 0, 0);
   sm->set(f, d, e);
@@ -61,7 +61,7 @@ TEST_F(StopManagerTest, SetDown) {
 }
 
 TEST_F(StopManagerTest, SetOverride) {
-  auto f = std::make_shared<Floor>(0, 0, 0);
+  auto f = std::make_shared<Floor>(0, 0);
   auto d = Direction::Down;
   auto e1 = std::make_shared<Elevator>(0, 0, 0);
   auto e2 = std::make_shared<Elevator>(0, 0, 0);
@@ -90,9 +90,9 @@ TEST_F(StopManagerTest, SetOverride) {
 }
 
 TEST_F(StopManagerTest, SetAndClear) {
-  auto f1 = std::make_shared<Floor>(0, 0, 0);
-  auto f2 = std::make_shared<Floor>(0, 0, 0);
-  auto f3 = std::make_shared<Floor>(0, 0, 0);
+  auto f1 = std::make_shared<Floor>(0, 0);
+  auto f2 = std::make_shared<Floor>(0, 0);
+  auto f3 = std::make_shared<Floor>(0, 0);
   auto e = std::make_shared<Elevator>(0, 0, 0);
   auto d = Direction::Down;
 

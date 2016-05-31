@@ -14,8 +14,7 @@ public:
   Reporter();
   virtual ~Reporter();
 
-  void add(std::shared_ptr<Statistics> statistics);
-
+  void generate(std::shared_ptr<Statistics> statistics);
   void generate();
 
   void generateUnifiedReport(std::vector<std::shared_ptr<Statistics>> stats);

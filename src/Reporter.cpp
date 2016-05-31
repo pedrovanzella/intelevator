@@ -8,6 +8,7 @@
 #include "Trip.h"
 #include <iomanip>
 #include <sstream>
+#include <iostream>
 
 namespace {
   template<typename T>
@@ -34,12 +35,15 @@ Reporter::Reporter() {}
 
 Reporter::~Reporter() {}
 
-void Reporter::add(std::shared_ptr<Statistics> statistics) {
+void Reporter::generate(std::shared_ptr<Statistics> statistics) {
   auto name = statistics->getScenario()->getName();
   _stats[name].push_back(statistics);
 }
 
 void Reporter::generate() {
+  std::cout << "Generating reports... ";
+  std::cout.flush();
+
   for (auto const &it : _stats) {
     generateUnifiedReport(it.second);
 
@@ -50,6 +54,9 @@ void Reporter::generate() {
       generateCharts(statistics);
     }
   }
+
+  std::cout << "done!\n";
+  std::cout.flush();
 }
 
 void Reporter::generateUnifiedReport(std::vector<std::shared_ptr<Statistics>> stats) {

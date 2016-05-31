@@ -4,8 +4,6 @@
 #include <glog/logging.h>
 #include <memory>
 
-using namespace std;
-
 int main(int argc, char *argv[]) {
   google::InitGoogleLogging(argv[0]);
 
@@ -15,7 +13,7 @@ int main(int argc, char *argv[]) {
   for (auto scenario : *scenarios) {
     auto simulator = std::make_shared<Simulator>(scenario);
     simulator->run();
-    reporter->add(simulator->getStatistics());
+    reporter->generate(simulator->getStatistics());
   }
 
   reporter->generate();

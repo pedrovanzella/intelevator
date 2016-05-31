@@ -18,6 +18,7 @@
 #include "Elevator.h"
 #include <glog/logging.h>
 #include <random>
+#include <iostream>
 
 Simulator::Simulator(const std::shared_ptr<const Scenario> scenario)
     : _scenario(scenario), _statistics(std::make_shared<Statistics>(scenario)),
@@ -64,7 +65,12 @@ const std::shared_ptr<EventDispatcher> Simulator::getEventDispatcher() const { r
 const std::shared_ptr<std::mt19937> Simulator::getRandomEngine() const { return _random_engine; }
 
 void Simulator::run() {
-  LOG(INFO) << "Running '" << _scenario->getName() << "' scenario.";
+  std::cout << "Simulating '" << _scenario->getName() << "' scenario with '"
+      << Helpers::schedulerName(_scenario->getSchedulerType()) << "' scheduler and '"
+      << Helpers::costFunctionName(_scenario->getCostFunctionType())
+      << "' cost function... ";
+
+  std::cout.flush();
 
   _building = createBuilding();
   _building->initializeArrivals();
@@ -84,7 +90,8 @@ void Simulator::run() {
     }
   }
 
-  LOG(INFO) << "Finished '" << _scenario->getName() << "' scenario.";
+  std::cout << "done!" << std::endl;
+  std::cout.flush();
 }
 
 bool Simulator::nextStep() { return true; }
