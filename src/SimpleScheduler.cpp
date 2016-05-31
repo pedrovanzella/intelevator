@@ -6,7 +6,7 @@
 #include "Floor.h"
 #include <limits>
 
-SimpleScheduler::SimpleScheduler() : _next(0) {}
+SimpleScheduler::SimpleScheduler() {}
 
 int SimpleScheduler::schedule(
     const std::shared_ptr<CostFunction> costFunction,
@@ -14,17 +14,7 @@ int SimpleScheduler::schedule(
     const std::shared_ptr<const Client> client,
     const int elevatorToExclude) {
 
-  auto elevators = std::make_shared<std::vector<std::shared_ptr<Elevator>>>();
-  auto aux = building->getElevators();
-  for (int i = _next; i < aux->size(); i++) {
-    if (i == elevatorToExclude) continue;
-    elevators->push_back(aux->at(i));
-  }
-  for (int i = 0; i < _next; i++) {
-    if (i == elevatorToExclude) continue;
-    elevators->push_back(aux->at(i));
-  }
-  if (++_next >= aux->size()) _next = 0;
+  auto elevators = getAvailableElevators(building, elevatorToExclude);
 
   float best_cost = std::numeric_limits<float>::infinity();
   auto the_chosen_one = elevators->front();

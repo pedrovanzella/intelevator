@@ -14,7 +14,4 @@ public:
                const std::shared_ptr<const Building> building,
                const std::shared_ptr<const Client> client,
                const int elevatorToExclude = -1);
-
-private:
-  int _next;
 };
