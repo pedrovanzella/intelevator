@@ -12,10 +12,6 @@ unsigned long Event::getTime() const { return _time; }
 
 EventType Event::getType() const { return _type; }
 
-void Event::setTime(unsigned long time) {
-  _time = time;
-}
-
 std::string Event::str() const {
   std::ostringstream stream;
   stream << "#" << getId() << " (" << Helpers::eventTypeName(getType()) << ")";
