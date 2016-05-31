@@ -203,5 +203,12 @@ void Building::registerNewStops(std::shared_ptr<Elevator> elevator, std::set<int
     auto location = _floors->at(elevator->getLocation());
     auto destination = _floors->at(floorNumber);
     _stopManager->set(destination, location->compareTo(*destination), elevator);
+
+    if (elevator->getDirection() == Direction::Up && floorNumber > elevator->getDestination().first) {
+      elevator->setDestination({floorNumber, Direction::Up});
+    }
+    else if (elevator->getDirection() == Direction::Down && floorNumber < elevator->getDestination().first) {
+      elevator->setDestination({floorNumber, Direction::Down});
+    }
   }
 }
