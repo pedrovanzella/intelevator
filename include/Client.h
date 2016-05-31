@@ -3,7 +3,8 @@
 #include <glog/logging.h>
 #include <memory>
 
-class Floor; // forward declaration
+enum class Direction; // forward declaration
+class Floor;          // forward declaration
 
 class Client {
 public:
@@ -13,6 +14,7 @@ public:
   const unsigned long getId() const;
   const int getPartySize() const;
   const int getDestination() const;
+  const Direction getDirection() const;
   const int getArrivalFloor() const;
   const long getCreateTime() const;
   const long getPickupTime() const;

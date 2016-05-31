@@ -137,11 +137,7 @@ void Building::updateElevator(const std::shared_ptr<Elevator> elevator) {
     if (result.second) {
       auto client = result.second;
       auto location = _floors->at(client->getArrivalFloor());
-      int destination = client->getDestination();
-
-      Direction direction = Direction::Up;
-      if (destination < location->getNumber())
-        direction = Direction::Down;
+      auto direction = client->getDirection();
 
       auto currentElevator = _stopManager->get(location, direction);
       if (currentElevator == nullptr) {
