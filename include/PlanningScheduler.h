@@ -22,6 +22,7 @@ private:
   std::map<std::shared_ptr<const Elevator>, int>
   calculate(const std::shared_ptr<CostFunction> costFunction,
             const std::shared_ptr<const Building> building,
+            std::shared_ptr<std::vector<std::shared_ptr<Elevator>>> elevators,
             int horizon);
 
   std::vector<std::shared_ptr<Client>>

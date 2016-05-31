@@ -6,31 +6,38 @@
 #include "CostFunction.h"
 #include <memory>
 #include <algorithm>
+#include <limits>
 
 int PlanningScheduler::schedule(const std::shared_ptr<CostFunction> costFunction,
                                 const std::shared_ptr<const Building> building,
                                 const std::shared_ptr<const Client> client,
                                 const int elevatorToExclude)
 {
-  auto costs = calculate(costFunction, building, 5);
-  std::shared_ptr<const Elevator> lowestCost = building->getElevators()->front();
+  auto elevators = getAvailableElevators(building, elevatorToExclude);
+  auto costs = calculate(costFunction, building, elevators, 5);
 
-  for (auto const c : costs) {
-    if (c.second < costs[lowestCost]) {
-        lowestCost = c.first;
-      }
+  float best_cost = std::numeric_limits<float>::infinity();
+  auto the_chosen_one = elevators->front();
+
+  for (auto elevator : *elevators) {
+    auto cost = costs[elevator];
+    if (cost < best_cost) {
+      best_cost = cost;
+      the_chosen_one = elevator;
+    }
   }
 
-  return lowestCost->getNumber();
+  return the_chosen_one->getNumber();
 }
 
 std::map<std::shared_ptr<const Elevator>, int>
 PlanningScheduler::calculate(const std::shared_ptr<CostFunction> costFunction,
                               const std::shared_ptr<const Building> building,
+                              std::shared_ptr<std::vector<std::shared_ptr<Elevator>>> elevators,
                               int horizon)
 {
   std::map<std::shared_ptr<const Elevator>, int> costs;
-  for (auto const e : *building->getElevators()) {
+  for (auto const e : *elevators) {
     costs[e] = 0;
   }
 
