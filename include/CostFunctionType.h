@@ -5,6 +5,8 @@
 
 enum class CostFunctionType { Dummy, Random, NearestNeighbour, BetterNearestNeighbour, Weighted };
 
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Wunused-function"
 namespace Helpers {
   static std::string costFunctionName(CostFunctionType type) {
     switch (type) {
@@ -23,3 +25,4 @@ namespace Helpers {
     }
   }
 }
+#pragma clang diagnostic pop

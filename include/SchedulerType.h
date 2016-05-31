@@ -7,6 +7,8 @@ enum class SchedulerType : int {
   Planning
 };
 
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Wunused-function"
 namespace Helpers {
   static std::string schedulerName(SchedulerType type) {
     switch (type) {
@@ -19,3 +21,4 @@ namespace Helpers {
     }
   }
 }
+#pragma clang diagnostic pop

@@ -5,6 +5,8 @@
 
 enum class EventType { clientArrival, finishSimulation };
 
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Wunused-function"
 namespace Helpers {
   static std::string eventTypeName(EventType type) {
     switch (type) {
@@ -17,3 +19,4 @@ namespace Helpers {
     }
   }
 }
+#pragma clang diagnostic pop

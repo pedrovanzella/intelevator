@@ -9,6 +9,8 @@ enum class Status {
   Idle     // Elevator is stopped and has nothing to do with its life.
 };
 
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Wunused-function"
 namespace Helpers {
   static std::string statusName(Status type) {
     switch (type) {
@@ -23,3 +25,4 @@ namespace Helpers {
     }
   }
 }
+#pragma clang diagnostic pop

@@ -5,6 +5,8 @@
 
 enum class Direction { Up, Down };
 
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Wunused-function"
 namespace Helpers {
   static std::string directionName(Direction type) {
     switch (type) {
@@ -17,3 +19,4 @@ namespace Helpers {
     }
   }
 }
+#pragma clang diagnostic pop
