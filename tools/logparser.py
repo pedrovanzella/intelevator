@@ -12,6 +12,7 @@ def makegraphs(filename):
     clientsPerElevator(data, folderpath)
     arrivalsPerFloor(data, folderpath)
     dropoffsPerFloor(data, folderpath)
+    averageTravelTime(data, folderpath)
 
 
 def loadfile(filename):
@@ -43,6 +44,14 @@ def dropoffsPerFloor(data, folderpath):
     ax.set(xlabel="Floor",
            ylabel="Clients")
     ax.get_figure().savefig(folderpath + "dropoffsPerFloor.eps")
+
+
+def averageTravelTime(data, folderpath):
+    plt.clf()
+    data['travelTime'] = data['dropoffTime'] - data['pickupTime']
+    g = sns.FacetGrid(data, col='dropoffFloor', row='arrivalFloor')
+    g = g.map(sns.barplot, "travelTime", orient='v')
+    g.get_figure().savefig(folderpath + "averageTravelTime.eps")
 
 
 if __name__ == "__main__":
