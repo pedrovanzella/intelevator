@@ -29,6 +29,8 @@ Building::Building(
 
 Building::~Building() {}
 
+const std::shared_ptr<const Simulator> Building::getSimulator() const { return _simulator; }
+
 const std::shared_ptr<std::vector<std::shared_ptr<Elevator>>> Building::getElevators() const { return _elevators; }
 
 const std::shared_ptr<std::vector<std::shared_ptr<Floor>>> Building::getFloors() const { return _floors; }

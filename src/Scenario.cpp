@@ -11,11 +11,12 @@
 Scenario::Scenario(std::string name, int duration, int elevatorCount, int capacity,
                    int floorCount, SchedulerType schedulerType,
                    CostFunctionType costFunctionType, std::string seed,
-                   std::vector<float> floors, std::time_t timestamp)
+                   std::vector<float> floors, std::time_t timestamp, int planningHorizon)
     : _name(name), _duration(duration), _elevatorCount(elevatorCount),
       _capacity(capacity), _floorCount(floorCount),
       _schedulerType(schedulerType), _costFunctionType(costFunctionType),
-      _seed(seed), _floors(floors), _timestamp(timestamp) {}
+      _seed(seed), _floors(floors), _timestamp(timestamp),
+      _planningHorizon(planningHorizon) {}
 
 Scenario::~Scenario() {}
 
@@ -32,6 +33,7 @@ std::shared_ptr<std::vector<std::shared_ptr<const Scenario>>> Scenario::Load(std
     auto floorCount = scenario["floors"].size();
     auto seed = scenario["seed"].as<std::string>();
     auto timestamp = std::time(nullptr);
+    auto planningHorizon = scenario["planningHorizon"].as<int>();
 
     std::vector<float> floors;
     for (auto it : scenario["floors"]) {
@@ -44,7 +46,7 @@ std::shared_ptr<std::vector<std::shared_ptr<const Scenario>>> Scenario::Load(std
       for (auto it : scenario["cost_function"]) {
         auto costFunctionType = static_cast<CostFunctionType>(it.as<int>());
 
-        auto s = std::make_shared<const Scenario>(name, duration, elevatorCount, capacity, floorCount, schedulerType, costFunctionType, seed, floors, timestamp);
+        auto s = std::make_shared<const Scenario>(name, duration, elevatorCount, capacity, floorCount, schedulerType, costFunctionType, seed, floors, timestamp, planningHorizon);
         scenarios->push_back(s);
       }
     }
@@ -65,6 +67,8 @@ const int Scenario::getFloorCount() const { return _floorCount; }
 const SchedulerType Scenario::getSchedulerType() const { return _schedulerType; }
 
 const CostFunctionType Scenario::getCostFunctionType() const { return _costFunctionType; }
+
+const int Scenario::getPlanningHorizon() const { return _planningHorizon; }
 
 const std::vector<float> Scenario::getFloors() const {
   return _floors;

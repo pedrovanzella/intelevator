@@ -33,6 +33,7 @@ public:
   const std::shared_ptr<std::vector<std::shared_ptr<Floor>>> getFloors() const;
   const std::shared_ptr<Floor> getFloor(int number) const;
   const std::shared_ptr<Elevator> getElevator(int number) const;
+  const std::shared_ptr<const Simulator> getSimulator() const;
 
   void notify(const std::shared_ptr<const Event> event);
   void initializeArrivals();

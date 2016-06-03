@@ -4,6 +4,8 @@
 #include "Client.h"
 #include "Floor.h"
 #include "CostFunction.h"
+#include "Scenario.h"
+#include "Simulator.h"
 #include <memory>
 #include <algorithm>
 #include <limits>
@@ -13,8 +15,10 @@ int PlanningScheduler::schedule(const std::shared_ptr<CostFunction> costFunction
                                 const std::shared_ptr<const Client> client,
                                 const int elevatorToExclude)
 {
+  auto scenario = building->getSimulator()->getScenario();
+  auto horizon = scenario->getPlanningHorizon();
   auto elevators = getAvailableElevators(building, elevatorToExclude);
-  auto costs = calculate(costFunction, building, elevators, 5);
+  auto costs = calculate(costFunction, building, elevators, horizon);
 
   float best_cost = std::numeric_limits<float>::infinity();
   auto the_chosen_one = elevators->front();
