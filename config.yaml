@@ -16,29 +16,32 @@ cost_functions:
 
 scenarios:
   - name: Low-rise
-    duration: 14400 # 4 hours
+    duration: 43200 # 12 hours
     scheduler: [ *simple, *planning ]
-    planningHorizon: 50
-    cost_function: [ *dummy, *random, *nearest_neighbour, *better_nearest_neighbour, *weighted ]
+    planningHorizon: 5
+    cost_function: [ *random, *nearest_neighbour, *better_nearest_neighbour, *weighted ]
     seed: 54TH7hboAG1iOsDIDhJp
     elevators: 2
     capacity: *small
     floors: [ 60, 520, 360, 360, 360, 240, 240, 240, 90, 90, 90 ]
 
-  # - name: High-rise
-  #   duration: 14400 # 4 hours
-  #   scheduler: [ *simple, *planning ]
-  #   cost_function: [ *dummy, *random, *nearest_neighbour, *better_nearest_neighbour, *weighted ]
-  #   seed: w9JwgykwejtoL2icSgHo
-  #   elevators: 8
-  #   capacity: *medium
-  #   floors: [ 60, 520, 520, 520, 360, 360, 360, 360, 360, 360, 360, 360, 360, 360, 360, 360, 360, 360, 360, 360, 360, 360, 360, 360, 360, 360, 360, 360, 240, 240, 240, 240, 240, 240, 90, 90, 90, 90, 90 ]
+  - name: High-rise
+    duration: 43200 # 12 hours
+    scheduler: [ *simple, *planning ]
+    planningHorizon: 5
+    cost_function: [ *random, *nearest_neighbour, *better_nearest_neighbour, *weighted ]
+    seed: w9JwgykwejtoL2icSgHo
+    elevators: 8
+    capacity: *medium
+    floors: [ 60, 520, 520, 520, 360, 360, 360, 360, 360, 360, 360, 360, 360, 360, 360, 360, 360, 360, 360, 360, 360, 360, 360, 360, 360, 360, 360, 360, 240, 240, 240, 240, 240, 240, 90, 90, 90, 90, 90 ]
 
-  # - name: Skyscraper
-  #   duration: 10000
-  #   scheduler: [ *simple, *planning ] # [ *simple, *planning ]
-  #   cost_function: [ *nearest_neighbour ] # [ *dummy, *random, *nearest_neighbour, *better_nearest_neighbour, *weighted ]
-  #   seed: NimatYvEnU9QeE3GkF4J
-  #   elevators: 16
-  #   capacity: *large
-  #   floors: [ 150, 300, 450, 600, 150, 300, 450, 600, 150, 300, 450, 450, 150, 300, 450, 600, 150, 300, 450, 600, 150, 300, 450, 450, 150, 300, 450, 600, 150, 300, 450, 600, 150, 300, 450, 450, 300, 450, 450, 450, 150, 300, 450, 600, 150, 300, 450, 600, 150, 300, 450, 450, 150, 300, 450, 600, 150, 300, 450, 600, 150, 300, 450, 450, 150, 300, 450, 600, 150, 300, 450, 600, 150, 300, 450, 450, 300, 450, 450, 450, 150, 300, 450, 600, 150, 300, 450, 600, 150, 300, 450, 450, 150, 300, 450, 600, 150, 300, 450, 600, 150, 300, 450, 450, 150, 300, 450, 600, 150, 300, 450, 600, 150, 300, 450, 450, 300, 450, 450, 450, 150, 300, 450, 600, 150, 300, 450, 600, 150, 300, 450, 450, 150, 300, 450, 600, 150, 300, 450, 600, 150, 300, 450, 450, 150, 300, 450, 600, 150, 300, 450, 600, 150, 300, 450, 450, 300, 450, 450, 450, 450, 450, 450 ]
+  - name: Skyscraper
+    duration: 43200 # 12 hours
+    scheduler: [ *simple, *planning ] # [ *simple, *planning ]
+    planningHorizon: 5
+    # cost_function: [ *nearest_neighbour ] # [ *dummy, *random, *nearest_neighbour, *better_nearest_neighbour, *weighted ]
+    cost_function: [ *random, *nearest_neighbour, *better_nearest_neighbour, *weighted ]
+    seed: NimatYvEnU9QeE3GkF4J
+    elevators: 16
+    capacity: *large
+    floors: [ 150, 300, 450, 600, 150, 300, 450, 600, 150, 300, 450, 450, 150, 300, 450, 600, 150, 300, 450, 600, 150, 300, 450, 450, 150, 300, 450, 600, 150, 300, 450, 600, 150, 300, 450, 450, 300, 450, 450, 450, 150, 300, 450, 600, 150, 300, 450, 600, 150, 300, 450, 450, 150, 300, 450, 600, 150, 300, 450, 600, 150, 300, 450, 450, 150, 300, 450, 600, 150, 300, 450, 600, 150, 300, 450, 450, 300, 450, 450, 450, 150, 300, 450, 600, 150, 300, 450, 600, 150, 300, 450, 450, 150, 300, 450, 600, 150, 300, 450, 600, 150, 300, 450, 450, 150, 300, 450, 600, 150, 300, 450, 600, 150, 300, 450, 450, 300, 450, 450, 450, 150, 300, 450, 600, 150, 300, 450, 600, 150, 300, 450, 450, 150, 300, 450, 600, 150, 300, 450, 600, 150, 300, 450, 450, 150, 300, 450, 600, 150, 300, 450, 600, 150, 300, 450, 450, 300, 450, 450, 450, 450, 450, 450 ]

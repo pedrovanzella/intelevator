@@ -78,6 +78,7 @@ void Reporter::generateUnifiedReport(std::vector<std::shared_ptr<Statistics>> st
       print(header, "Elevators", scenario->getElevatorCount());
       print(header, "Capacity", scenario->getCapacity());
       print(header, "Floors", scenario->getFloorCount());
+      print(header, "Horizon", scenario->getPlanningHorizon());
 
       waitingTime << "WAITING TIME" << std::endl;
       printl(waitingTime, "");
@@ -142,6 +143,7 @@ void Reporter::generateReport(std::shared_ptr<Statistics> statistics) {
   print(f, "Elevators", scenario->getElevatorCount());
   print(f, "Capacity", scenario->getCapacity());
   print(f, "Floors", scenario->getFloorCount());
+  print(f, "Horizon", scenario->getPlanningHorizon());
 
   f << std::endl;
 
