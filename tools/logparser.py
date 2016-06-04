@@ -51,7 +51,7 @@ def averageTravelTime(data, folderpath):
     data['travelTime'] = data['dropoffTime'] - data['pickupTime']
     g = sns.FacetGrid(data, col='dropoffFloor', row='arrivalFloor')
     g = g.map(sns.barplot, "travelTime", orient='v')
-    g.get_figure().savefig(folderpath + "averageTravelTime.eps")
+    g.fig.savefig(folderpath + "averageTravelTime.eps")
 
 
 if __name__ == "__main__":
