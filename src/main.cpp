@@ -13,7 +13,7 @@ int main(int argc, char *argv[]) {
   for (auto scenario : *scenarios) {
     auto simulator = std::make_shared<Simulator>(scenario);
     simulator->run();
-    reporter->generate(simulator->getStatistics());
+    reporter->generate(simulator);
   }
 
   reporter->generate();

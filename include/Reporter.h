@@ -14,15 +14,15 @@ public:
   Reporter();
   virtual ~Reporter();
 
-  void generate(std::shared_ptr<Statistics> statistics);
+  void generate(std::shared_ptr<Simulator> simulator);
   void generate();
 
-  void generateUnifiedReport(std::vector<std::shared_ptr<Statistics>> stats);
-  void generateReport(std::shared_ptr<Statistics> statistics);
-  void generateArrivals(std::shared_ptr<Statistics> statistics);
-  void generateDropOffs(std::shared_ptr<Statistics> statistics);
-  void generateCharts(std::shared_ptr<Statistics> statistics);
+  void generateUnifiedReport(std::vector<std::shared_ptr<Simulator>> simulators);
+  void generateReport(std::shared_ptr<Simulator> simulator);
+  void generateArrivals(std::shared_ptr<Simulator> simulator);
+  void generateDropOffs(std::shared_ptr<Simulator> simulator);
+  void generateCharts(std::shared_ptr<Simulator> simulator);
 
 private:
-  std::map<std::string, std::vector<std::shared_ptr<Statistics>>> _stats;
+  std::map<std::string, std::vector<std::shared_ptr<Simulator>>> _simulators;
 };

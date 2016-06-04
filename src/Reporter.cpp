@@ -1,5 +1,6 @@
 #include "Reporter.h"
 #include "Arrival.h"
+#include "Clock.h"
 #include "CostFunctionType.h"
 #include "SchedulerType.h"
 #include "Scenario.h"
@@ -35,23 +36,23 @@ Reporter::Reporter() {}
 
 Reporter::~Reporter() {}
 
-void Reporter::generate(std::shared_ptr<Statistics> statistics) {
-  auto name = statistics->getScenario()->getName();
-  _stats[name].push_back(statistics);
+void Reporter::generate(std::shared_ptr<Simulator> simulator) {
+  auto name = simulator->getScenario()->getName();
+  _simulators[name].push_back(simulator);
 }
 
 void Reporter::generate() {
   std::cout << "Generating reports... ";
   std::cout.flush();
 
-  for (auto const &it : _stats) {
+  for (auto const &it : _simulators) {
     generateUnifiedReport(it.second);
 
-    for (auto const &statistics : it.second) {
-      generateReport(statistics);
-      generateArrivals(statistics);
-      generateDropOffs(statistics);
-      generateCharts(statistics);
+    for (auto const &simulator : it.second) {
+      generateReport(simulator);
+      generateArrivals(simulator);
+      generateDropOffs(simulator);
+      generateCharts(simulator);
     }
   }
 
@@ -59,19 +60,21 @@ void Reporter::generate() {
   std::cout.flush();
 }
 
-void Reporter::generateUnifiedReport(std::vector<std::shared_ptr<Statistics>> stats) {
-  auto scenario = stats[0]->getScenario();
+void Reporter::generateUnifiedReport(std::vector<std::shared_ptr<Simulator>> simulators) {
+  auto scenario = simulators[0]->getScenario();
 
   std::stringstream header;
   std::stringstream waitingTime;
   std::stringstream journeyTime;
   std::stringstream clients;
 
-  for (auto it = stats.begin(); it != stats.end(); ++it) {
-    auto statistics = *it;
-    auto scenario = statistics->getScenario();
+  for (auto it = simulators.begin(); it != simulators.end(); ++it) {
+    auto simulator = *it;
+    auto statistics = simulator->getStatistics();
+    auto scenario = simulator->getScenario();
+    auto clock = simulator->getClock();
 
-    if (it == stats.begin()) {
+    if (it == simulators.begin()) {
       print(header, "Name", scenario->getName());
       print(header, "Duration", scenario->getDuration());
       print(header, "Seed", scenario->getSeed());
@@ -98,6 +101,7 @@ void Reporter::generateUnifiedReport(std::vector<std::shared_ptr<Statistics>> st
       printl(clients, "");
       printr(clients, "Arrived");
       printr(clients, "Served");
+      printr(clients, "Duration");
       clients << std::endl;
     }
 
@@ -119,6 +123,7 @@ void Reporter::generateUnifiedReport(std::vector<std::shared_ptr<Statistics>> st
     printl(clients, scheduler + "/" + costFunction);
     printr(clients, statistics->getClientsArrived());
     printr(clients, statistics->getClientsServed());
+    printr(clients, clock->currentTime());
     clients << std::endl;
   }
 
@@ -130,8 +135,11 @@ void Reporter::generateUnifiedReport(std::vector<std::shared_ptr<Statistics>> st
     << clients.rdbuf() << std::endl;
 }
 
-void Reporter::generateReport(std::shared_ptr<Statistics> statistics) {
-  auto scenario = statistics->getScenario();
+void Reporter::generateReport(std::shared_ptr<Simulator> simulator) {
+  auto statistics = simulator->getStatistics();
+  auto scenario = simulator->getScenario();
+  auto clock = simulator->getClock();
+
   std::ofstream f;
   f.open(scenario->getPath() + "report.log");
 
@@ -149,6 +157,7 @@ void Reporter::generateReport(std::shared_ptr<Statistics> statistics) {
 
   print(f, "Clients arrived", statistics->getClientsArrived());
   print(f, "Clients served", statistics->getClientsServed());
+  print(f, "Duration", clock->currentTime());
 
   f << std::endl;
 
@@ -173,8 +182,10 @@ void Reporter::generateReport(std::shared_ptr<Statistics> statistics) {
   f << std::endl;
 }
 
-void Reporter::generateArrivals(std::shared_ptr<Statistics> statistics) {
+void Reporter::generateArrivals(std::shared_ptr<Simulator> simulator) {
+  auto statistics = simulator->getStatistics();
   auto scenario = statistics->getScenario();
+
   std::ofstream f;
   f.open(scenario->getPath() + "arrivals.log");
   f << "arrivalFloor arrivalTime partySize destinationFloor clientID\n";
@@ -183,8 +194,10 @@ void Reporter::generateArrivals(std::shared_ptr<Statistics> statistics) {
   }
 }
 
-void Reporter::generateDropOffs(std::shared_ptr<Statistics> statistics) {
+void Reporter::generateDropOffs(std::shared_ptr<Simulator> simulator) {
+  auto statistics = simulator->getStatistics();
   auto scenario = statistics->getScenario();
+
   std::ofstream f;
   f.open(scenario->getPath() + "trips.log");
   f << "clientID partySize elevatorID arrivalFloor dropoffFloor createTime pickupTime dropoffTime\n";
@@ -193,8 +206,9 @@ void Reporter::generateDropOffs(std::shared_ptr<Statistics> statistics) {
   }
 }
 
-void Reporter::generateCharts(std::shared_ptr<Statistics> statistics) {
-  auto scenario = statistics->getScenario();
-  std::string command = "./tools/logparser.py " + scenario->getPath() + "trips.log";
-  system(command.c_str());
+void Reporter::generateCharts(std::shared_ptr<Simulator> simulator) {
+  auto statistics = simulator->getStatistics();
+  // auto scenario = statistics->getScenario();
+  // std::string command = "./tools/logparser.py " + scenario->getPath() + "trips.log";
+  // system(command.c_str());
 }
