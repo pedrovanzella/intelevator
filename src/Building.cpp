@@ -71,18 +71,30 @@ void Building::notify(const std::shared_ptr<const Event> event) {
   }
 
   if (event->getType() == EventType::finishSimulation) {
+    auto statistics = _simulator->getStatistics();
+    while (statistics->getClientsArrived() > statistics->getClientsServed()) {
+      _clock->advanceBy(1);
+      for (auto elevator : *_elevators) {
+        updateElevator(elevator);
+      }
+    }
+
     int clientsOnLines = 0;
     for (auto floor : *_floors) {
-      clientsOnLines += floor->clientsOnDownLine() + floor->clientsOnUpLine();
+      auto up = floor->getUpLine();
+      auto down = floor->getDownLine();
+      clientsOnLines += up.size() + down.size();
     }
 
     int clientsOnElevators = 0;
+    std::ostringstream ele;
     for (auto elevator : *_elevators) {
-      clientsOnElevators += elevator->getPassengers()->size();
+      auto passengers = elevator->getPassengers();
+      clientsOnElevators += passengers->size();
     }
 
     LOG(INFO) << "A total of " << clientsOnLines << " clients remains on lines.";
-    LOG(INFO) << "A total of " << clientsOnElevators << " clients remains inside elevators.";
+    LOG(INFO) << "A total of " << clientsOnElevators << " clients remains inside elevators." << std::endl << ele.str();
   }
 }
 
@@ -106,8 +118,9 @@ void Building::doClientArrival(std::shared_ptr<const ClientArrival> event) {
   auto location = _floors->at(client->getArrivalFloor());
   auto direction = location->addClient(client);
 
-  auto currentElevator = _stopManager->get(location, direction);
-  if (currentElevator == nullptr) {
+  auto elevatorToStop = _stopManager->hasStop(location, direction);
+
+  if (elevatorToStop == nullptr) {
     auto elevatorNum = _scheduler->schedule(_costFunction, shared_from_this(), client);
     auto elevator = _elevators->at(elevatorNum);
     _stopManager->set(location, direction, elevator);
@@ -141,12 +154,11 @@ void Building::updateElevator(const std::shared_ptr<Elevator> elevator) {
       auto location = _floors->at(client->getArrivalFloor());
       auto direction = client->getDirection();
 
-      auto currentElevator = _stopManager->get(location, direction);
-      if (currentElevator == nullptr) {
+      if (!_stopManager->hasStop(location, direction)) {
         auto elevatorNum = _scheduler->schedule(_costFunction, shared_from_this(), client, elevator->getNumber());
         auto elevator = _elevators->at(elevatorNum);
         _stopManager->set(location, direction, elevator);
-        LOG(INFO) << "Elevator #" << elevator->getNumber()
+        LOG(INFO) << "Elevator #" << elevator->getNumber() << "(" << elevator->getDestination().first << ")"
                   << " was assigned to stop at floor #" << location->getNumber()
                   << " to go " << Helpers::directionName(direction) << " (" << _clock->str() << ").";
       }
@@ -194,10 +206,12 @@ bool Building::mustStop(const std::shared_ptr<Elevator> elevator) {
 
 void Building::stop(const std::shared_ptr<Elevator> elevator) {
   auto location = _floors->at(elevator->getLocation());
-  _stopManager->clear(location, elevator->getDestination().second);
-  // LOG(INFO) << "Elevator #" << elevator->getNumber()
-  //           << " stopped at floor #" << elevator->getLocation()
-  //           << " (" << _clock->str() << ").";
+  auto direction = elevator->getDestination().second;
+  _stopManager->clear(location, elevator, direction);
+  LOG(INFO) << "Elevator #" << elevator->getNumber()
+            << " stopped at floor #" << elevator->getLocation()
+            << " whilst going " << Helpers::directionName(direction)
+            << " (" << _clock->str() << ").";
 }
 
 void Building::registerNewStops(std::shared_ptr<Elevator> elevator, std::set<int> stops) {
