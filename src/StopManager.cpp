@@ -4,25 +4,28 @@
 #include "Floor.h"
 #include <glog/logging.h>
 
-std::shared_ptr<Elevator> StopManager::hasStop(std::shared_ptr<Floor> floor,
-                          Direction direction) const {
+bool StopManager::hasStop(std::shared_ptr<Floor> floor,
+                          Direction direction) {
 
-  for (auto it : _stops) {
-    if (it.first.second != direction) continue;
-    for (auto it2 : it.second) {
-      if (it2->getNumber() == floor->getNumber())
-        return it.first.first;
-    }
-  }
+  // for (auto it : _stopsPerElevator) {
+  //   if (it.first.second != direction) continue;
+  //   for (auto it2 : it.second) {
+  //     if (it2->getNumber() == floor->getNumber())
+  //       return true;
+  //   }
+  // }
 
-  return nullptr;
+  return !_stopsPerFloor[{floor, direction}].empty();
+
+  // return false;
 }
 
 void StopManager::set(std::shared_ptr<Floor> floor, Direction direction,
                       std::shared_ptr<Elevator> elevator) {
-  _stops[{elevator, direction}].insert(floor);
+  _stopsPerElevator[{elevator, direction}].insert(floor);
+  _stopsPerFloor[{floor, direction}].insert(elevator);
 
-  LOG(INFO) << "SET _stops[{ " << elevator->getNumber() << ", "
+  LOG(INFO) << "SET _stopsPerElevator[{ " << elevator->getNumber() << ", "
             << Helpers::directionName(direction) << " }] << "
             << floor->getNumber();
 }
@@ -30,17 +33,18 @@ void StopManager::set(std::shared_ptr<Floor> floor, Direction direction,
 void StopManager::clear(std::shared_ptr<Floor> floor,
                         std::shared_ptr<Elevator> elevator,
                         Direction direction) {
-  _stops[{elevator, direction}].erase(floor);
+  _stopsPerElevator[{elevator, direction}].erase(floor);
+  _stopsPerFloor[{floor, direction}].erase(elevator);
 
-  LOG(INFO) << "CLEAR _stops[{ " << elevator->getNumber() << ", "
+  LOG(INFO) << "CLEAR _stopsPerElevator[{ " << elevator->getNumber() << ", "
             << Helpers::directionName(direction) << " }] >> "
             << floor->getNumber() << ")";
 }
 
 std::set<std::shared_ptr<Floor>>
 StopManager::getStops(std::shared_ptr<Elevator> elevator, Direction direction) {
-  auto it = _stops.find({elevator, direction});
-  if (it == _stops.end())
+  auto it = _stopsPerElevator.find({elevator, direction});
+  if (it == _stopsPerElevator.end())
     return std::set<std::shared_ptr<Floor>>();
 
   return it->second;
