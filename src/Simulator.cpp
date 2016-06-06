@@ -71,6 +71,7 @@ void Simulator::run() {
       << "' cost function... ";
 
   std::cout.flush();
+  Client::resetIds();
 
   _building = createBuilding();
   _building->initializeArrivals();

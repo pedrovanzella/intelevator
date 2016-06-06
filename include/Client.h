@@ -11,6 +11,8 @@ public:
   Client(const int partySize, const int arrivalFloor, const int destination,
          const unsigned long createTime);
 
+  static void resetIds();
+
   const unsigned long getId() const;
   const int getPartySize() const;
   const int getDestination() const;

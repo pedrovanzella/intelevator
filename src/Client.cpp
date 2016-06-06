@@ -9,6 +9,10 @@ Client::Client(const int partySize, const int arrivalFloor,
     : _id(++Client::nextId), _partySize(partySize), _destination(destination),
       _arrivalFloor(arrivalFloor), _createTime(createTime), _pickupTime(0) {}
 
+void Client::resetIds() {
+  Client::nextId = 0ul;
+}
+
 const unsigned long Client::getId() const { return _id; }
 
 const int Client::getPartySize() const { return _partySize; }
