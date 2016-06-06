@@ -8,11 +8,11 @@
 #include <glog/logging.h>
 #include <yaml-cpp/yaml.h>
 
-Scenario::Scenario(std::string name, int duration, int elevatorCount, int capacity,
+Scenario::Scenario(const int seq, std::string name, int duration, int elevatorCount, int capacity,
                    int floorCount, SchedulerType schedulerType,
                    CostFunctionType costFunctionType, std::string seed,
                    std::vector<float> floors, std::time_t timestamp, int planningHorizon)
-    : _name(name), _duration(duration), _elevatorCount(elevatorCount),
+    : _seq(seq), _name(name), _duration(duration), _elevatorCount(elevatorCount),
       _capacity(capacity), _floorCount(floorCount),
       _schedulerType(schedulerType), _costFunctionType(costFunctionType),
       _seed(seed), _floors(floors), _timestamp(timestamp),
@@ -24,6 +24,7 @@ std::shared_ptr<std::vector<std::shared_ptr<const Scenario>>> Scenario::Load(std
   YAML::Node config = YAML::LoadFile(file);
 
   std::shared_ptr<std::vector<std::shared_ptr<const Scenario>>> scenarios(new std::vector<std::shared_ptr<const Scenario>>);
+  int seq = 0;
   for (auto scenario : config["scenarios"]) {
 
     auto name = scenario["name"].as<std::string>();
@@ -46,7 +47,7 @@ std::shared_ptr<std::vector<std::shared_ptr<const Scenario>>> Scenario::Load(std
       for (auto it : scenario["cost_function"]) {
         auto costFunctionType = static_cast<CostFunctionType>(it.as<int>());
 
-        auto s = std::make_shared<const Scenario>(name, duration, elevatorCount, capacity, floorCount, schedulerType, costFunctionType, seed, floors, timestamp, planningHorizon);
+        auto s = std::make_shared<const Scenario>(++seq, name, duration, elevatorCount, capacity, floorCount, schedulerType, costFunctionType, seed, floors, timestamp, planningHorizon);
         scenarios->push_back(s);
       }
     }
@@ -82,16 +83,16 @@ const std::string Scenario::getBasePath() const {
   char buffer[32];
   std::strftime(buffer, 32, "%Y%m%d_%H%M%S", ptm);
 
-  std::string path = "output/" + _name + "_" + buffer + "/";
+  std::string path = "output/" + _name + "/";
   std::string command = "mkdir -p \"" + path + "\"";
   system(command.c_str());
   return path;
 }
 
 const std::string Scenario::getPath() const {
-  std::string path = getBasePath() +
-      Helpers::schedulerName(_schedulerType) + "_" +
-      Helpers::costFunctionName(_costFunctionType) + "/";
+  std::string path = getBasePath() + std::to_string(_seq) + "_" +
+                     Helpers::schedulerName(_schedulerType) + "_" +
+                     Helpers::costFunctionName(_costFunctionType) + "/";
   std::string command = "mkdir -p \"" + path + "\"";
   system(command.c_str());
   return path;
