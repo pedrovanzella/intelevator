@@ -6,6 +6,7 @@ capacities:
 schedulers:
   simple: &simple 0
   planning: &planning 1
+  sayajin: &sayajin 2
 
 cost_functions:
   dummy: &dummy 0
@@ -15,35 +16,25 @@ cost_functions:
   weighted: &weighted 4
 
 scenarios:
-  - name: Dumb
-    duration: 10
-    scheduler: [ *simple ]
-    planningHorizon: 5
-    cost_function: [ *nearest_neighbour ]
-    seed: 54TH7hboAG1iOsDIDhJp
-    elevators: 2
-    capacity: *small
-    floors: [ 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1 ]
-
   - name: Low-rise
-    duration: 43200 # 12 hours
-    scheduler: [ *simple, *planning ]
+    duration: 2000 # 12 hours
+    scheduler: [ *simple, *planning, *sayajin ]
     planningHorizon: 5
-    cost_function: [ *random, *nearest_neighbour, *better_nearest_neighbour, *weighted ]
+    cost_function: [ *nearest_neighbour ] #*random, *nearest_neighbour, *better_nearest_neighbour, *weighted ]
     seed: 54TH7hboAG1iOsDIDhJp
     elevators: 2
     capacity: *small
     floors: [ 60, 520, 360, 360, 360, 240, 240, 240, 90, 90, 90 ]
 
-  - name: High-rise
-    duration: 43200 # 12 hours
-    scheduler: [ *simple, *planning ]
-    planningHorizon: 5
-    cost_function: [ *random, *nearest_neighbour, *better_nearest_neighbour, *weighted ]
-    seed: w9JwgykwejtoL2icSgHo
-    elevators: 8
-    capacity: *medium
-    floors: [ 60, 520, 520, 520, 360, 360, 360, 360, 360, 360, 360, 360, 360, 360, 360, 360, 360, 360, 360, 360, 360, 360, 360, 360, 360, 360, 360, 360, 240, 240, 240, 240, 240, 240, 90, 90, 90, 90, 90 ]
+  # - name: High-rise
+  #   duration: 43200 # 12 hours
+  #   scheduler: [ *simple, *planning ]
+  #   planningHorizon: 5
+  #   cost_function: [ *random, *nearest_neighbour, *better_nearest_neighbour, *weighted ]
+  #   seed: w9JwgykwejtoL2icSgHo
+  #   elevators: 8
+  #   capacity: *medium
+  #   floors: [ 60, 520, 520, 520, 360, 360, 360, 360, 360, 360, 360, 360, 360, 360, 360, 360, 360, 360, 360, 360, 360, 360, 360, 360, 360, 360, 360, 360, 240, 240, 240, 240, 240, 240, 90, 90, 90, 90, 90 ]
 
   # - name: Skyscraper
   #   duration: 43200 # 12 hours
