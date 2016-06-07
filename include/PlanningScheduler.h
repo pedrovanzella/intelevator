@@ -1,17 +1,30 @@
 #pragma once
 
+#include "Client.h"
 #include "Scheduler.h"
 #include <map>
+#include <queue>
 #include <vector>
 
-class Client;
 class Building;
 class CostFunction;
-class Client;
-class Elevator;
 
-class PlanningScheduler : public Scheduler
-{
+class ClientComparator {
+public:
+  bool operator()(std::shared_ptr<const Client> lhs,
+                  std::shared_ptr<const Client> rhs) const {
+    return lhs->getCreateTime() < rhs->getCreateTime();
+  }
+};
+
+using Clients = std::queue<std::shared_ptr<const Client>>;
+using Elevators = std::shared_ptr<std::vector<std::shared_ptr<Elevator>>>;
+using ClientsPriorityQueue =
+    std::priority_queue<std::shared_ptr<Client>,
+                        std::vector<std::shared_ptr<Client>>,
+                        ClientComparator>;
+
+class PlanningScheduler : public Scheduler {
 public:
   int schedule(const std::shared_ptr<CostFunction> costFunction,
                const std::shared_ptr<const Building> building,
@@ -19,19 +32,17 @@ public:
                const int elevatorToExclude = -1);
 
 private:
-  std::map<std::shared_ptr<const Elevator>, int>
+  Clients getClients(const int horizon,
+                     const std::shared_ptr<const Client> client,
+                     const std::shared_ptr<const Building> building);
+
+  std::pair<std::shared_ptr<Elevator>, float>
   calculate(const std::shared_ptr<CostFunction> costFunction,
             const std::shared_ptr<const Building> building,
-            std::shared_ptr<std::vector<std::shared_ptr<Elevator>>> elevators,
-            int horizon);
+            Elevators elevators,
+            Clients& clients);
 
-  std::vector<std::shared_ptr<Client>>
-  getAllWaitingClients(const std::shared_ptr<const Building> b);
-
-  std::map<std::shared_ptr<const Elevator>, int>
-  next_step(const std::shared_ptr<CostFunction> costFunction,
-            const std::shared_ptr<const Building> building,
-            std::vector<std::shared_ptr<Client>> clients,
-            std::map<std::shared_ptr<const Elevator>, int> current_costs,
-            int horizon);
+  ClientsPriorityQueue
+  getGlobalQueue(const int horizon,
+                 const std::shared_ptr<const Building> building);
 };

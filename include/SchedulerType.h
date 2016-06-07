@@ -5,7 +5,6 @@
 enum class SchedulerType : int {
   Simple,
   Planning,
-  Sayajin
 };
 
 #pragma clang diagnostic push
@@ -17,8 +16,6 @@ namespace Helpers {
       return "Simple";
     case SchedulerType::Planning:
       return "Planning";
-    case SchedulerType::Sayajin:
-      return "Sayajin";
     default:
       throw MissingSchedulerError(std::to_string((int)type));
     }
