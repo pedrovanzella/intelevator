@@ -1,10 +1,11 @@
 #include "SayajinScheduler.h"
 #include "Building.h"
-#include "Client.h"
 #include "CostFunction.h"
 #include "Elevator.h"
+#include "Floor.h"
 #include "Scenario.h"
 #include "Simulator.h"
+#include <algorithm>
 
 int SayajinScheduler::schedule(const std::shared_ptr<CostFunction> costFunction,
                                const std::shared_ptr<const Building> building,
@@ -50,5 +51,29 @@ SayajinScheduler::getClients(const int horizon,
                              const std::shared_ptr<const Building> building) {
   Clients clients;
   clients.push(client);
+  if (horizon > 1) {
+    auto globalQueue = getGlobalQueue(horizon, building);
+    while(!globalQueue.empty() && clients.size() < horizon) {
+      clients.push(globalQueue.top());
+      globalQueue.pop();
+    }
+  }
+  return clients;
+}
+
+ClientsPriorityQueue SayajinScheduler::getGlobalQueue(
+    const int horizon, const std::shared_ptr<const Building> building) {
+
+  std::priority_queue<std::shared_ptr<Client>,
+                      std::vector<std::shared_ptr<Client>>, ClientComparator>
+      clients;
+
+  for (auto floor : *building->getFloors()) {
+    for (auto client : floor->getUpLine(horizon))
+      clients.push(client);
+    for (auto client : floor->getDownLine(horizon))
+      clients.push(client);
+  }
+
   return clients;
 }

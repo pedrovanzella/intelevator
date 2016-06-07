@@ -1,17 +1,28 @@
 #pragma once
 
+#include "Client.h"
 #include "Scheduler.h"
 #include <map>
 #include <queue>
 #include <vector>
 
-class Client;
 class Building;
 class CostFunction;
 
+class ClientComparator {
+public:
+  bool operator()(std::shared_ptr<const Client> lhs,
+                  std::shared_ptr<const Client> rhs) const {
+    return lhs->getCreateTime() < rhs->getCreateTime();
+  }
+};
+
 using Clients = std::queue<std::shared_ptr<const Client>>;
 using Elevators = std::shared_ptr<std::vector<std::shared_ptr<Elevator>>>;
-using Costs = std::map<std::shared_ptr<const Elevator>, float>;
+using ClientsPriorityQueue =
+    std::priority_queue<std::shared_ptr<Client>,
+                        std::vector<std::shared_ptr<Client>>,
+                        ClientComparator>;
 
 class SayajinScheduler : public Scheduler {
 public:
@@ -30,4 +41,8 @@ private:
             const std::shared_ptr<const Building> building,
             Elevators elevators,
             Clients clients);
+
+  ClientsPriorityQueue
+  getGlobalQueue(const int horizon,
+                 const std::shared_ptr<const Building> building);
 };
