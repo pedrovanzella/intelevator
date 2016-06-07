@@ -25,7 +25,9 @@ private:
                      const std::shared_ptr<const Client> client,
                      const std::shared_ptr<const Building> building);
 
-  void calculate(const std::shared_ptr<CostFunction> costFunction,
-                 const std::shared_ptr<const Building> building,
-                 Clients& clients, Elevators& elevators, Costs& costs);
+  std::pair<std::shared_ptr<Elevator>, float>
+  calculate(const std::shared_ptr<CostFunction> costFunction,
+            const std::shared_ptr<const Building> building,
+            Elevators elevators,
+            Clients clients);
 };
