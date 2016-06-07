@@ -40,7 +40,7 @@ private:
   calculate(const std::shared_ptr<CostFunction> costFunction,
             const std::shared_ptr<const Building> building,
             Elevators elevators,
-            Clients clients);
+            Clients& clients);
 
   ClientsPriorityQueue
   getGlobalQueue(const int horizon,

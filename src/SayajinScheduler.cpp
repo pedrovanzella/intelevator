@@ -24,7 +24,7 @@ int SayajinScheduler::schedule(const std::shared_ptr<CostFunction> costFunction,
 std::pair<std::shared_ptr<Elevator>, float>
 SayajinScheduler::calculate(const std::shared_ptr<CostFunction> costFunction,
                             const std::shared_ptr<const Building> building,
-                            Elevators elevators, Clients clients) {
+                            Elevators elevators, Clients& clients) {
 
   if (clients.empty()) return {nullptr, 0.f};
   auto client = clients.front();
@@ -34,8 +34,9 @@ SayajinScheduler::calculate(const std::shared_ptr<CostFunction> costFunction,
   auto the_chosen_one = elevators->front();
 
   for (auto elevator : *elevators) {
-    auto cost = costFunction->calculate(building, elevator, client) +
-                calculate(costFunction, building, elevators, clients).second;
+    auto cost1 = costFunction->calculate(building, elevator, client);
+    auto cost2 = calculate(costFunction, building, elevators, clients).second;
+    auto cost = cost1 + cost2;
     if (cost < best_cost) {
       best_cost = cost;
       the_chosen_one = elevator;
@@ -54,7 +55,9 @@ SayajinScheduler::getClients(const int horizon,
   if (horizon > 1) {
     auto globalQueue = getGlobalQueue(horizon, building);
     while(!globalQueue.empty() && clients.size() < horizon) {
-      clients.push(globalQueue.top());
+      if (client->getId() != globalQueue.top()->getId()) {
+        clients.push(globalQueue.top());
+      }
       globalQueue.pop();
     }
   }
