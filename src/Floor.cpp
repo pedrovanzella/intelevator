@@ -45,6 +45,28 @@ const std::vector<std::shared_ptr<Client>> Floor::getDownLine() const
   return line;
 }
 
+const std::vector<std::shared_ptr<Client>> Floor::getUpLine(int n) const
+{
+  decltype(_upLine) upLine(_upLine);
+  std::vector<std::shared_ptr<Client>> line;
+  while (!upLine.empty() && line.size() < n) {
+    line.push_back(upLine.front());
+    upLine.pop();
+  }
+  return line;
+}
+
+const std::vector<std::shared_ptr<Client>> Floor::getDownLine(int n) const
+{
+  decltype(_downLine) downLine(_downLine);
+  std::vector<std::shared_ptr<Client>> line;
+  while (!downLine.empty() && line.size() < n) {
+    line.push_back(downLine.front());
+    downLine.pop();
+  }
+  return line;
+}
+
 Direction Floor::compareTo(const Floor &other) const {
   if (other.getNumber() < _number)
     return Direction::Down;

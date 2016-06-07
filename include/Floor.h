@@ -20,6 +20,8 @@ public:
   int getLambda() const;
   const std::vector<std::shared_ptr<Client>> getUpLine() const;
   const std::vector<std::shared_ptr<Client>> getDownLine() const;
+  const std::vector<std::shared_ptr<Client>> getUpLine(int n) const;
+  const std::vector<std::shared_ptr<Client>> getDownLine(int n) const;
   int clientsOnUpLine() const;
   int clientsOnDownLine() const;
   Direction compareTo(const Floor &other) const;
