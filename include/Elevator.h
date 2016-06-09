@@ -28,6 +28,7 @@ public:
   const std::shared_ptr<const std::vector<std::shared_ptr<Client>>> getPassengers() const;
 
   void setDestination(std::pair<int, Direction> destination);
+  void setLocation(int floor);
 
   bool canEnter(std::shared_ptr<const Client> client) const;
   void addPassenger(std::shared_ptr<Client> client);

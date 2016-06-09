@@ -74,6 +74,10 @@ void Elevator::setDestination(std::pair<int, Direction> destination) {
   }
 }
 
+void Elevator::setLocation(int floor) {
+  _location = floor;
+}
+
 bool Elevator::canEnter(std::shared_ptr<const Client> client) const {
   int total_passengers = 0;
   for (auto client : *_passengers) total_passengers += client->getPartySize();
