@@ -12,12 +12,16 @@ Scheduler::getAvailableElevators(const std::shared_ptr<const Building> building,
   for (int i = _next; i < aux->size(); i++) {
     if (i == elevatorToExclude)
       continue;
-    elevators->push_back(aux->at(i));
+    auto elevator = aux->at(i);
+    auto copy = std::make_shared<Elevator>(*elevator);
+    elevators->push_back(copy);
   }
   for (int i = 0; i < _next; i++) {
     if (i == elevatorToExclude)
       continue;
-    elevators->push_back(aux->at(i));
+    auto elevator = aux->at(i);
+    auto copy = std::make_shared<Elevator>(*elevator);
+    elevators->push_back(copy);
   }
   if (++_next >= aux->size())
     _next = 0;
