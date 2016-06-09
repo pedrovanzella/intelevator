@@ -18,6 +18,18 @@ Elevator::Elevator(int number, int capacity, int floor)
     _direction(Direction::Up),
     _passengers(new std::vector<std::shared_ptr<Client>>) {}
 
+Elevator::Elevator(const Elevator &elevator)
+  : _number(elevator.getNumber()),
+    _capacity(elevator.getCapacity()),
+    _location(elevator.getLocation()),
+    _destination(elevator.getDestination()),
+    _status(elevator.getStatus()),
+    _direction(elevator.getDirection()),
+    _passengers(new std::vector<std::shared_ptr<Client>>) {
+      for (auto p : *elevator.getPassengers())
+        _passengers->push_back(p);
+    }
+
 Elevator::~Elevator() {}
 
 int Elevator::getNumber() const { return _number; }

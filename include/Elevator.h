@@ -15,6 +15,7 @@ enum class Status;    // forward declaration
 class Elevator: public std::enable_shared_from_this<Elevator> {
 public:
   Elevator(int number, int capacity, int floor);
+  Elevator(const Elevator &elevator);
   virtual ~Elevator();
 
   int getNumber() const;
