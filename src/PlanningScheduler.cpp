@@ -43,6 +43,8 @@ PlanningScheduler::calculate(const std::shared_ptr<CostFunction> costFunction,
     }
   }
 
+  the_chosen_one->setLocation(client->getArrivalFloor());
+
   return {the_chosen_one, best_cost};
 }
 
