@@ -27,6 +27,8 @@ public:
            std::shared_ptr<Scheduler> scheduler,
            std::shared_ptr<CostFunction> costFunction);
 
+  Building(const Building& building, std::shared_ptr<const Simulator> simulator);
+
   virtual ~Building();
 
   const std::shared_ptr<std::vector<std::shared_ptr<Elevator>>> getElevators() const;
@@ -45,8 +47,6 @@ private:
   std::shared_ptr<std::vector<std::shared_ptr<Elevator>>> _elevators;
   const std::shared_ptr<Scheduler> _scheduler;
   const std::shared_ptr<CostFunction> _costFunction;
-  std::map<std::shared_ptr<Elevator>, std::set<int>> _stops;
-
   std::unique_ptr<StopManager> _stopManager;
 
   void doClientArrival(std::shared_ptr<const ClientArrival> event);

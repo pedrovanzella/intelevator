@@ -26,8 +26,10 @@ Elevator::Elevator(const Elevator &elevator)
     _status(elevator.getStatus()),
     _direction(elevator.getDirection()),
     _passengers(new std::vector<std::shared_ptr<Client>>) {
-      for (auto p : *elevator.getPassengers())
-        _passengers->push_back(p);
+      for (auto passenger : *elevator.getPassengers()) {
+        auto passengerCopy = std::make_shared<Client>(*passenger);
+        _passengers->push_back(passengerCopy);
+      }
     }
 
 Elevator::~Elevator() {}
