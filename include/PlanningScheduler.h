@@ -33,15 +33,15 @@ public:
                const int elevatorToExclude = -1);
 
 private:
-  Clients getClients(const int horizon,
-                     const std::shared_ptr<const Client> client,
-                     const std::shared_ptr<const Building> building);
-
   std::pair<std::shared_ptr<Elevator>, float>
   calculate(const std::shared_ptr<CostFunction> costFunction,
             std::shared_ptr<Simulator> simulator,
-            Elevators elevators,
-            Clients& clients);
+            Clients& clients,
+            const int elevatorToExclude);
+
+  Clients getClients(const int horizon,
+                     const std::shared_ptr<const Client> client,
+                     const std::shared_ptr<const Building> building);
 
   ClientsPriorityQueue
   getGlobalQueue(const int horizon,
