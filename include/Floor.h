@@ -19,8 +19,8 @@ public:
 
   int getNumber() const;
   int getLambda() const;
-  std::queue<std::shared_ptr<Client>> getUpLine() const;
-  std::queue<std::shared_ptr<Client>> getDownLine() const;
+  std::queue<std::shared_ptr<Client>> getUpLineCopy() const;
+  std::queue<std::shared_ptr<Client>> getDownLineCopy() const;
   const std::vector<std::shared_ptr<Client>> getUpLine(int n) const;
   const std::vector<std::shared_ptr<Client>> getDownLine(int n) const;
   int clientsOnUpLine() const;

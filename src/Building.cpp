@@ -78,23 +78,6 @@ void Building::notify(const std::shared_ptr<const Event> event) {
         updateElevator(elevator);
       }
     }
-
-    int clientsOnLines = 0;
-    for (auto floor : *_floors) {
-      auto up = floor->getUpLine();
-      auto down = floor->getDownLine();
-      clientsOnLines += up.size() + down.size();
-    }
-
-    int clientsOnElevators = 0;
-    std::ostringstream ele;
-    for (auto elevator : *_elevators) {
-      auto passengers = elevator->getPassengers();
-      clientsOnElevators += passengers->size();
-    }
-
-    LOG(INFO) << "A total of " << clientsOnLines << " clients remains on lines.";
-    LOG(INFO) << "A total of " << clientsOnElevators << " clients remains inside elevators." << std::endl << ele.str();
   }
 }
 
