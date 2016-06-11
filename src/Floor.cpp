@@ -13,6 +13,10 @@
 Floor::Floor(const int number, const float lambda)
     : _number(number), _lambda(lambda) {}
 
+Floor::Floor(const Floor &floor)
+    : _number(floor.getNumber()), _lambda(floor.getLambda()),
+      _upLine(floor.getUpLine()), _downLine(floor.getDownLine()) {}
+
 Floor::~Floor() {}
 
 int Floor::getNumber() const { return _number; }
@@ -23,26 +27,14 @@ int Floor::clientsOnUpLine() const { return _upLine.size(); }
 
 int Floor::clientsOnDownLine() const { return _downLine.size(); }
 
-const std::vector<std::shared_ptr<Client>> Floor::getUpLine() const
-{
-  decltype(_upLine) upLine(_upLine);
-  std::vector<std::shared_ptr<Client>> line;
-  while (!upLine.empty()) {
-    line.push_back(upLine.front());
-    upLine.pop();
-  }
-  return line;
+std::queue<std::shared_ptr<Client>> Floor::getUpLine() const {
+  auto upLine(_upLine);
+  return upLine;
 }
 
-const std::vector<std::shared_ptr<Client>> Floor::getDownLine() const
-{
-  decltype(_downLine) downLine(_downLine);
-  std::vector<std::shared_ptr<Client>> line;
-  while (!downLine.empty()) {
-    line.push_back(downLine.front());
-    downLine.pop();
-  }
-  return line;
+std::queue<std::shared_ptr<Client>> Floor::getDownLine() const {
+  auto downLine(_downLine);
+  return downLine;
 }
 
 const std::vector<std::shared_ptr<Client>> Floor::getUpLine(int n) const
