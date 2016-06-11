@@ -42,6 +42,9 @@ public:
   void notify(const std::shared_ptr<const Event> event);
   void initializeArrivals();
 
+  void setStop(const int destination, Direction direction, std::shared_ptr<Elevator> elevator);
+  bool mustStop(const int destination, Direction direction, std::shared_ptr<Elevator> elevator);
+
 private:
   std::shared_ptr<const Simulator> _simulator;
   std::shared_ptr<Clock> _clock;

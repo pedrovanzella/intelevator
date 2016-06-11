@@ -76,6 +76,17 @@ void Building::step() {
   }
 }
 
+void Building::setStop(const int destination, Direction direction, std::shared_ptr<Elevator> elevator) {
+  auto floor = _floors->at(destination);
+  _stopManager->set(floor, direction, elevator);
+}
+
+bool Building::mustStop(const int destination, Direction direction, std::shared_ptr<Elevator> elevator) {
+  auto floor = _floors->at(destination);
+  auto stops = _stopManager->getStops(elevator, direction);
+  return stops.find(floor) != stops.end();
+}
+
 void Building::notify(const std::shared_ptr<const Event> event) {
   /*
     Ao ser notificado de um evento, o sistema deve atualizar o seu estado para

@@ -1,10 +1,12 @@
 #include "PlanningScheduler.h"
-#include "Building.h"
 #include "CostFunction.h"
+#include "Direction.h"
+#include "Building.h"
 #include "Elevator.h"
 #include "Floor.h"
 #include "Scenario.h"
 #include "Simulator.h"
+#include "Status.h"
 #include <algorithm>
 
 int PlanningScheduler::schedule(const std::shared_ptr<CostFunction> costFunction,
@@ -44,10 +46,18 @@ PlanningScheduler::calculate(const std::shared_ptr<CostFunction> costFunction,
   for (auto elevator : *elevators) {
     auto simCopy = std::make_shared<Simulator>(*simulator);
     simCopy->copyBuilding(*simulator->getBuilding());
-    auto building = simCopy->getBuilding();
-    auto cost1 = costFunction->calculate(building, elevator, client);
 
-    /* aqui */
+    auto buildingCopy = simCopy->getBuilding();
+    auto elevatorCopy = buildingCopy->getElevator(elevator->getNumber());
+
+    auto cost1 = costFunction->calculate(buildingCopy, elevatorCopy, client);
+
+    auto arrivalFloor = client->getArrivalFloor();
+    Direction direction = client->getArrivalFloor() < client->getDestination() ? Direction::Up : Direction::Down;
+
+    buildingCopy->setStop(arrivalFloor, direction, elevatorCopy);
+    while (buildingCopy->mustStop(arrivalFloor, direction, elevatorCopy))
+      buildingCopy->step();
 
     auto cost2 = calculate(costFunction, simCopy, clients, elevatorToExclude).second;
     auto cost = cost1 + cost2;

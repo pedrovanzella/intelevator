@@ -28,7 +28,7 @@ void StopManager::set(std::shared_ptr<Floor> floor, Direction direction,
   _stopsPerFloor[{floor, direction}].insert(elevator);
 
   LOG(INFO) << "SET _stopsPerElevator[{ e=" << elevator->getNumber() << ", d="
-            << Helpers::directionName(direction) << ", f=" << floor->getNumber() << "}]";
+            << Helpers::directionName(direction) << ", f=" << floor->getNumber() << "}], " << this;
 }
 
 void StopManager::clear(std::shared_ptr<Floor> floor,
@@ -38,7 +38,7 @@ void StopManager::clear(std::shared_ptr<Floor> floor,
   _stopsPerFloor[{floor, direction}].erase(elevator);
 
   LOG(INFO) << "CLEAR _stopsPerElevator[{ e=" << elevator->getNumber() << ", d="
-            << Helpers::directionName(direction) << ", f=" << floor->getNumber() << "}]";
+            << Helpers::directionName(direction) << ", f=" << floor->getNumber() << "}], " << this;
 }
 
 std::set<std::shared_ptr<Floor>, FloorComparator>
