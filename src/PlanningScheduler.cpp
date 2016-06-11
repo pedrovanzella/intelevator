@@ -16,11 +16,11 @@ int PlanningScheduler::schedule(const std::shared_ptr<CostFunction> costFunction
 
   auto simulator = building->getSimulator();
   auto elevators = getAvailableElevators(building, elevatorToExclude);
-  auto horizon = simulator->getScenario()->getPlanningHorizon();
+  auto horizon = simulator.getScenario()->getPlanningHorizon();
   auto clients = getClients(horizon, client, building);
 
-  auto simCopy = std::make_shared<Simulator>(*simulator);
-  simCopy->copyBuilding(*simulator->getBuilding());
+  auto simCopy = Simulator(simulator);
+  simCopy.copyBuilding(*simulator.getBuilding());
 
   auto the_answer_to_life_the_universe_and_everything =
       calculate(costFunction, simCopy, clients, elevatorToExclude);
@@ -30,7 +30,7 @@ int PlanningScheduler::schedule(const std::shared_ptr<CostFunction> costFunction
 
 std::pair<std::shared_ptr<Elevator>, float>
 PlanningScheduler::calculate(const std::shared_ptr<CostFunction> costFunction,
-                            std::shared_ptr<Simulator> simulator,
+                            Simulator& simulator,
                             Clients& clients,
                             const int elevatorToExclude) {
 
@@ -38,16 +38,16 @@ PlanningScheduler::calculate(const std::shared_ptr<CostFunction> costFunction,
   auto client = clients.front();
   clients.pop();
 
-  auto elevators = getAvailableElevators(simulator->getBuilding(), elevatorToExclude);
+  auto elevators = getAvailableElevators(simulator.getBuilding(), elevatorToExclude);
 
   float best_cost = std::numeric_limits<float>::infinity();
   auto the_chosen_one = elevators->front();
 
   for (auto elevator : *elevators) {
-    auto simCopy = std::make_shared<Simulator>(*simulator);
-    simCopy->copyBuilding(*simulator->getBuilding());
+    auto simCopy = Simulator(simulator);
+    simCopy.copyBuilding(*simulator.getBuilding());
 
-    auto buildingCopy = simCopy->getBuilding();
+    auto buildingCopy = simCopy.getBuilding();
     auto elevatorCopy = buildingCopy->getElevator(elevator->getNumber());
 
     auto cost1 = costFunction->calculate(buildingCopy, elevatorCopy, client);
