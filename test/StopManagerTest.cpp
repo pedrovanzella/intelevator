@@ -91,8 +91,8 @@ TEST_F(StopManagerTest, SetOverride) {
 
 TEST_F(StopManagerTest, SetAndClear) {
   auto f1 = std::make_shared<Floor>(0, 0);
-  auto f2 = std::make_shared<Floor>(0, 0);
-  auto f3 = std::make_shared<Floor>(0, 0);
+  auto f2 = std::make_shared<Floor>(1, 0);
+  auto f3 = std::make_shared<Floor>(2, 0);
   auto e = std::make_shared<Elevator>(0, 0, 0);
   auto d = Direction::Down;
 
@@ -118,10 +118,3 @@ TEST_F(StopManagerTest, SetAndClear) {
   EXPECT_EQ(stops.end(), stops.find(f2));
   EXPECT_NE(stops.end(), stops.find(f3));
 }
-
-/*
-  std::shared_ptr<Elevator> get(std::shared_ptr<Floor> floor, Direction direction) const;
-  void set(std::shared_ptr<Floor> floor, Direction direction, std::shared_ptr<Elevator> elevator);
-  void clear(std::shared_ptr<Floor> floor, Direction direction);
-  std::set<std::shared_ptr<Floor>> getStops(std::shared_ptr<Elevator> elevator, Direction direction);
-*/
