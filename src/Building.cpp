@@ -69,6 +69,13 @@ const std::shared_ptr<Elevator> Building::getElevator(int number) const {
   return _elevators->at(number);
 }
 
+void Building::step() {
+  _clock->advanceBy(1);
+  for (auto elevator : *_elevators) {
+    updateElevator(elevator);
+  }
+}
+
 void Building::notify(const std::shared_ptr<const Event> event) {
   /*
     Ao ser notificado de um evento, o sistema deve atualizar o seu estado para
@@ -77,10 +84,7 @@ void Building::notify(const std::shared_ptr<const Event> event) {
   */
 
   for (int time = _clock->currentTime(); time < event->getTime(); ++time) {
-    _clock->advanceBy(1);
-    for (auto elevator : *_elevators) {
-      updateElevator(elevator);
-    }
+    step();
   }
 
   /*
@@ -152,7 +156,10 @@ void Building::updateElevator(const std::shared_ptr<Elevator> elevator) {
     auto result = floor->boardElevator(_clock->currentTime(), elevator);
     registerNewStops(elevator, result.first);
 
-    if (result.second) {
+    // se _scheduler for nullptr, não deverá reagendar
+    // isso ocorre nos casos onde o planning faz cópias do simulator e do building
+    // e não queremos entrar num loop infinito de scheduling
+    if (result.second && _scheduler) {
       auto client = result.second;
       auto location = _floors->at(client->getArrivalFloor());
       auto direction = client->getDirection();

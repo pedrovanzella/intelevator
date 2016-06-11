@@ -38,6 +38,7 @@ public:
   const std::shared_ptr<const Simulator> getSimulator() const;
   const std::shared_ptr<StopManager> getStopManager() const;
 
+  void step();
   void notify(const std::shared_ptr<const Event> event);
   void initializeArrivals();
 
