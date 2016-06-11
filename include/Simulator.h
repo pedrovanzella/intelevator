@@ -14,10 +14,13 @@ class Scenario;        // forward declaration
 class Simulator : public std::enable_shared_from_this<Simulator> {
 public:
   Simulator(std::shared_ptr<const Scenario> scenario);
+  Simulator(const Simulator& simulator);
   virtual ~Simulator();
 
   std::shared_ptr<Building> createBuilding() const;
+  void copyBuilding(const Building& building);
 
+  const std::shared_ptr<Building> getBuilding() const;
   const std::shared_ptr<const Scenario> getScenario() const;
   const std::shared_ptr<Statistics> getStatistics() const;
   const std::shared_ptr<Clock> getClock() const;

@@ -32,6 +32,13 @@ Simulator::Simulator(const std::shared_ptr<const Scenario> scenario)
   google::SetLogDestination(google::INFO, _scenario->getPath().c_str());
 }
 
+Simulator::Simulator(const Simulator &simulator)
+    : _scenario(std::make_shared<Scenario>(*simulator.getScenario())),
+      _statistics(std::make_shared<Statistics>(_scenario)),
+      _clock(std::make_shared<Clock>(*simulator.getClock())),
+      _eventQueue(std::make_shared<EventQueue>()),
+      _eventDispatcher(std::make_shared<EventDispatcher>()) {}
+
 Simulator::~Simulator() {}
 
 std::shared_ptr<Building> Simulator::createBuilding() const {
@@ -51,6 +58,12 @@ std::shared_ptr<Building> Simulator::createBuilding() const {
 
   return building;
 }
+
+void Simulator::copyBuilding(const Building& building) {
+  _building = std::make_shared<Building>(building, shared_from_this());
+}
+
+const std::shared_ptr<Building> Simulator::getBuilding() const { return _building; }
 
 const std::shared_ptr<const Scenario> Simulator::getScenario() const { return _scenario; }
 
