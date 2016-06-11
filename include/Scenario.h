@@ -16,10 +16,12 @@ public:
            CostFunctionType costFunctionType, std::string seed,
            std::vector<float> floors, std::time_t timestamp,
            int planningHorizon);
+  Scenario(const Scenario& scenario);
   virtual ~Scenario();
 
   static std::shared_ptr<std::vector<std::shared_ptr<const Scenario>>> Load(std::string file);
 
+  const int getSeq() const;
   const std::string getName() const;
   const int getDuration() const;
   const int getElevatorCount() const;
@@ -30,6 +32,7 @@ public:
   const CostFunctionType getCostFunctionType() const;
   const std::vector<float> getFloors() const;
   const std::string getSeed() const;
+  const std::time_t getTimestamp() const;
   const std::string getBasePath() const;
   const std::string getPath() const;
 

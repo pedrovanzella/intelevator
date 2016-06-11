@@ -18,6 +18,17 @@ Scenario::Scenario(const int seq, std::string name, int duration, int elevatorCo
       _seed(seed), _floors(floors), _timestamp(timestamp),
       _planningHorizon(planningHorizon) {}
 
+Scenario::Scenario(const Scenario &scenario)
+    : _seq(scenario.getSeq()), _name(scenario.getName()),
+      _duration(scenario.getDuration()),
+      _elevatorCount(scenario.getElevatorCount()),
+      _capacity(scenario.getCapacity()), _floorCount(scenario.getFloorCount()),
+      _schedulerType(scenario.getSchedulerType()),
+      _costFunctionType(scenario.getCostFunctionType()),
+      _seed(scenario.getSeed()), _floors(scenario.getFloors()),
+      _timestamp(scenario.getTimestamp()),
+      _planningHorizon(scenario.getPlanningHorizon()) {}
+
 Scenario::~Scenario() {}
 
 std::shared_ptr<std::vector<std::shared_ptr<const Scenario>>> Scenario::Load(std::string file) {
@@ -55,6 +66,8 @@ std::shared_ptr<std::vector<std::shared_ptr<const Scenario>>> Scenario::Load(std
   return scenarios;
 }
 
+const int Scenario::getSeq() const { return _seq; }
+
 const std::string Scenario::getName() const { return _name; }
 
 const int Scenario::getDuration() const { return _duration; }
@@ -76,6 +89,8 @@ const std::vector<float> Scenario::getFloors() const {
 }
 
 const std::string Scenario::getSeed() const { return _seed; }
+
+const std::time_t Scenario::getTimestamp() const { return _timestamp; }
 
 const std::string Scenario::getBasePath() const {
   auto timestamp = _timestamp;
