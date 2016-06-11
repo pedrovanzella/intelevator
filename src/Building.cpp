@@ -17,19 +17,18 @@
 #include <glog/logging.h>
 #include <sstream>
 
-Building::Building(
-    std::shared_ptr<const Simulator> simulator,
+Building::Building(const Simulator& simulator,
     std::shared_ptr<std::vector<std::shared_ptr<Floor>>> floors,
     std::shared_ptr<std::vector<std::shared_ptr<Elevator>>> elevators,
     std::shared_ptr<Scheduler> scheduler,
     std::shared_ptr<CostFunction> costFunction)
-    : _simulator(simulator), _clock(_simulator->getClock()), _floors(floors),
+    : _simulator(simulator), _clock(_simulator.getClock()), _floors(floors),
       _elevators(elevators), _scheduler(scheduler),
       _costFunction(costFunction), _stopManager(std::make_shared<StopManager>()) {}
 
 Building::Building(const Building &building,
-                   std::shared_ptr<const Simulator> simulator)
-    : _simulator(simulator), _clock(building.getSimulator()->getClock()),
+                   const Simulator& simulator)
+    : _simulator(simulator), _clock(building.getSimulator().getClock()),
       _floors(std::make_shared<std::vector<std::shared_ptr<Floor>>>()),
       _elevators(std::make_shared<std::vector<std::shared_ptr<Elevator>>>()),
       _scheduler(nullptr),    // acho que pode ficar nullptr
@@ -49,7 +48,7 @@ Building::Building(const Building &building,
 
 Building::~Building() {}
 
-const std::shared_ptr<const Simulator> Building::getSimulator() const { return _simulator; }
+const Simulator& Building::getSimulator() const { return _simulator; }
 
 const std::shared_ptr<std::vector<std::shared_ptr<Elevator>>> Building::getElevators() const { return _elevators; }
 
@@ -108,7 +107,7 @@ void Building::notify(const std::shared_ptr<const Event> event) {
   }
 
   if (event->getType() == EventType::finishSimulation) {
-    auto statistics = _simulator->getStatistics();
+    auto statistics = _simulator.getStatistics();
     while (statistics->getClientsArrived() > statistics->getClientsServed()) {
       _clock->advanceBy(1);
       for (auto elevator : *_elevators) {
@@ -120,7 +119,7 @@ void Building::notify(const std::shared_ptr<const Event> event) {
 
 void Building::initializeArrivals() {
   for (auto floor : *_floors)
-    floor->createFutureArrival(_simulator->getEventQueue());
+    floor->createFutureArrival(_simulator.getEventQueue());
 }
 
 void Building::doClientArrival(std::shared_ptr<const ClientArrival> event) {
@@ -147,7 +146,7 @@ void Building::doClientArrival(std::shared_ptr<const ClientArrival> event) {
               << " to go " << Helpers::directionName(direction) << " (" << _clock->str() << ").";
   }
 
-  location->createFutureArrival(_simulator->getEventQueue());
+  location->createFutureArrival(_simulator.getEventQueue());
 }
 
 void Building::updateElevator(const std::shared_ptr<Elevator> elevator) {
@@ -160,7 +159,7 @@ void Building::updateElevator(const std::shared_ptr<Elevator> elevator) {
     stop(elevator);
 
     auto droppedPassengers = elevator->dropPassengersToCurrentLocation();
-    auto stats = _simulator->getStatistics();
+    auto stats = _simulator.getStatistics();
     stats->logDropOff(_clock->currentTime(), elevator, droppedPassengers);
 
     auto floor = _floors->at(elevator->getLocation());

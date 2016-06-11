@@ -47,7 +47,7 @@ std::shared_ptr<Building> Simulator::createBuilding() const {
   auto scheduler = SchedulerCreator::create(_scenario->getSchedulerType());
   auto costFunction = CostFunctionCreator::create(_scenario->getCostFunctionType());
 
-  auto building = std::make_shared<Building>(shared_from_this(), floors, elevators, scheduler, costFunction);
+  auto building = std::make_shared<Building>(*this, floors, elevators, scheduler, costFunction);
 
   LOG(INFO) << "Created '" << _scenario->getName() << "' scenario with "
             << floors->size() << " floors, "
@@ -60,7 +60,7 @@ std::shared_ptr<Building> Simulator::createBuilding() const {
 }
 
 void Simulator::copyBuilding(const Building& building) {
-  _building = std::make_shared<Building>(building, shared_from_this());
+  _building = std::make_shared<Building>(building, *this);
 }
 
 const std::shared_ptr<Building> Simulator::getBuilding() const { return _building; }

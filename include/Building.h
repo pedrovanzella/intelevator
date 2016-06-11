@@ -21,13 +21,13 @@ class StopManager;    // forward declaration
 class Building : public EventObserver,
                  public std::enable_shared_from_this<Building> {
 public:
-  Building(std::shared_ptr<const Simulator> simulator,
+  Building(const Simulator& simulator,
            std::shared_ptr<std::vector<std::shared_ptr<Floor>>> floors,
            std::shared_ptr<std::vector<std::shared_ptr<Elevator>>> elevators,
            std::shared_ptr<Scheduler> scheduler,
            std::shared_ptr<CostFunction> costFunction);
 
-  Building(const Building& building, std::shared_ptr<const Simulator> simulator);
+  Building(const Building& building, const Simulator& simulator);
 
   virtual ~Building();
 
@@ -35,7 +35,7 @@ public:
   const std::shared_ptr<std::vector<std::shared_ptr<Floor>>> getFloors() const;
   const std::shared_ptr<Floor> getFloor(int number) const;
   const std::shared_ptr<Elevator> getElevator(int number) const;
-  const std::shared_ptr<const Simulator> getSimulator() const;
+  const Simulator& getSimulator() const;
   const std::shared_ptr<StopManager> getStopManager() const;
 
   void step();
@@ -46,7 +46,7 @@ public:
   bool mustStop(const int destination, Direction direction, std::shared_ptr<Elevator> elevator);
 
 private:
-  std::shared_ptr<const Simulator> _simulator;
+  const Simulator& _simulator;
   std::shared_ptr<Clock> _clock;
   std::shared_ptr<std::vector<std::shared_ptr<Floor>>> _floors;
   std::shared_ptr<std::vector<std::shared_ptr<Elevator>>> _elevators;
