@@ -12,18 +12,23 @@ int PlanningScheduler::schedule(const std::shared_ptr<CostFunction> costFunction
                                const std::shared_ptr<const Client> client,
                                const int elevatorToExclude) {
 
+  auto simulator = building->getSimulator();
   auto elevators = getAvailableElevators(building, elevatorToExclude);
-  auto horizon = building->getSimulator()->getScenario()->getPlanningHorizon();
+  auto horizon = simulator->getScenario()->getPlanningHorizon();
   auto clients = getClients(horizon, client, building);
+
+  auto simCopy = std::make_shared<Simulator>(*simulator);
+  simCopy->copyBuilding(*simulator->getBuilding());
+
   auto the_answer_to_life_the_universe_and_everything =
-      calculate(costFunction, building, elevators, clients);
+      calculate(costFunction, simCopy, elevators, clients);
 
   return the_answer_to_life_the_universe_and_everything.first->getNumber();
 }
 
 std::pair<std::shared_ptr<Elevator>, float>
 PlanningScheduler::calculate(const std::shared_ptr<CostFunction> costFunction,
-                            const std::shared_ptr<const Building> building,
+                            std::shared_ptr<Simulator> simulator,
                             Elevators elevators, Clients& clients) {
 
   if (clients.empty()) return {nullptr, 0.f};
@@ -34,8 +39,9 @@ PlanningScheduler::calculate(const std::shared_ptr<CostFunction> costFunction,
   auto the_chosen_one = elevators->front();
 
   for (auto elevator : *elevators) {
+    auto building = simulator->getBuilding();
     auto cost1 = costFunction->calculate(building, elevator, client);
-    auto cost2 = calculate(costFunction, building, elevators, clients).second;
+    auto cost2 = calculate(costFunction, simulator, elevators, clients).second;
     auto cost = cost1 + cost2;
     if (cost < best_cost) {
       best_cost = cost;

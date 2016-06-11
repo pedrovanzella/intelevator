@@ -8,6 +8,7 @@
 
 class Building;
 class CostFunction;
+class Simulator;
 
 class ClientComparator {
 public:
@@ -38,7 +39,7 @@ private:
 
   std::pair<std::shared_ptr<Elevator>, float>
   calculate(const std::shared_ptr<CostFunction> costFunction,
-            const std::shared_ptr<const Building> building,
+            std::shared_ptr<Simulator> simulator,
             Elevators elevators,
             Clients& clients);
 
