@@ -7,6 +7,7 @@
 class Clock : public EventObserver {
 public:
   Clock();
+  Clock(const Clock& clock);
   virtual ~Clock();
 
   unsigned long currentTime() const;

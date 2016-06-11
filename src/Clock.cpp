@@ -5,6 +5,8 @@
 
 Clock::Clock() : _time(0) {}
 
+Clock::Clock(const Clock& clock) : _time(clock.currentTime()) {}
+
 Clock::~Clock() {}
 
 unsigned long Clock::currentTime() const { return _time; }
