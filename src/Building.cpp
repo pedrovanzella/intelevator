@@ -25,7 +25,27 @@ Building::Building(
     std::shared_ptr<CostFunction> costFunction)
     : _simulator(simulator), _clock(_simulator->getClock()), _floors(floors),
       _elevators(elevators), _scheduler(scheduler),
-      _costFunction(costFunction), _stops(), _stopManager(new StopManager()) {}
+      _costFunction(costFunction), _stopManager(std::make_shared<StopManager>()) {}
+
+Building::Building(const Building &building,
+                   std::shared_ptr<const Simulator> simulator)
+    : _simulator(simulator), _clock(building.getSimulator()->getClock()),
+      _floors(std::make_shared<std::vector<std::shared_ptr<Floor>>>()),
+      _elevators(std::make_shared<std::vector<std::shared_ptr<Elevator>>>()),
+      _scheduler(nullptr),    // acho que pode ficar nullptr
+      _costFunction(nullptr), // acho que pode ficar nullptr
+      _stopManager(std::make_shared<StopManager>(*building.getStopManager(), *building.getElevators()))
+{
+  for (auto floor : *building.getFloors()) {
+    auto floorCopy = std::make_shared<Floor>(*floor);
+    _floors->push_back(floorCopy);
+  }
+
+  for (auto elevator : *building.getElevators()) {
+    auto elevatorCopy = std::make_shared<Elevator>(*elevator);
+    _elevators->push_back(elevatorCopy);
+  }
+}
 
 Building::~Building() {}
 
@@ -34,6 +54,8 @@ const std::shared_ptr<const Simulator> Building::getSimulator() const { return _
 const std::shared_ptr<std::vector<std::shared_ptr<Elevator>>> Building::getElevators() const { return _elevators; }
 
 const std::shared_ptr<std::vector<std::shared_ptr<Floor>>> Building::getFloors() const { return _floors; }
+
+const std::shared_ptr<StopManager> Building::getStopManager() const { return _stopManager; }
 
 const std::shared_ptr<Floor> Building::getFloor(int number) const {
   if (number >= _floors->size())

@@ -36,6 +36,7 @@ public:
   const std::shared_ptr<Floor> getFloor(int number) const;
   const std::shared_ptr<Elevator> getElevator(int number) const;
   const std::shared_ptr<const Simulator> getSimulator() const;
+  const std::shared_ptr<StopManager> getStopManager() const;
 
   void notify(const std::shared_ptr<const Event> event);
   void initializeArrivals();
@@ -47,7 +48,7 @@ private:
   std::shared_ptr<std::vector<std::shared_ptr<Elevator>>> _elevators;
   const std::shared_ptr<Scheduler> _scheduler;
   const std::shared_ptr<CostFunction> _costFunction;
-  std::unique_ptr<StopManager> _stopManager;
+  const std::shared_ptr<StopManager> _stopManager;
 
   void doClientArrival(std::shared_ptr<const ClientArrival> event);
   void updateElevator(const std::shared_ptr<Elevator> elevator);
