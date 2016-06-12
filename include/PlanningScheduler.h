@@ -35,7 +35,7 @@ public:
 private:
   std::pair<std::shared_ptr<Elevator>, float>
   calculate(const std::shared_ptr<CostFunction> costFunction,
-            Simulator& simulator,
+            std::shared_ptr<Simulator> simulator,
             Clients& clients,
             const int elevatorToExclude);
 
