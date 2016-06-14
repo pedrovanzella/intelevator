@@ -6,8 +6,6 @@
 #include "Floor.h"
 #include <limits>
 
-SimpleScheduler::SimpleScheduler() {}
-
 int SimpleScheduler::schedule(
     const std::shared_ptr<CostFunction> costFunction,
     const std::shared_ptr<const Building> building,

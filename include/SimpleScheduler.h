@@ -9,7 +9,6 @@ class Elevator;     // forward declaration
 
 class SimpleScheduler : public Scheduler {
 public:
-  SimpleScheduler();
   int schedule(const std::shared_ptr<CostFunction> costFunction,
                const std::shared_ptr<const Building> building,
                const std::shared_ptr<const Client> client,
