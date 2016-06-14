@@ -56,14 +56,18 @@ PlanningScheduler::calculate(const std::shared_ptr<CostFunction> costFunction,
     auto arrivalFloor = client->getArrivalFloor();
     Direction direction = client->getArrivalFloor() < client->getDestination() ? Direction::Up : Direction::Down;
 
+    auto timeCost = 0.f;
+
     buildingCopy->setStop(arrivalFloor, direction, elevatorCopy);
-    while (buildingCopy->mustStop(arrivalFloor, direction, elevatorCopy))
+    while (buildingCopy->mustStop(arrivalFloor, direction, elevatorCopy)) {
       buildingCopy->step();
+      timeCost += 1.f;
+    }
 
     auto clientsCopy = copyClients(clients);
 
     auto cost2 = calculate(costFunction, simCopy, clientsCopy, elevatorToExclude).second;
-    auto cost = cost1 + cost2;
+    auto cost = cost1 + cost2 + timeCost;
     if (cost < best_cost) {
       best_cost = cost;
       the_chosen_one = elevator;
