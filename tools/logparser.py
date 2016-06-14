@@ -1,6 +1,7 @@
 #!/usr/bin/env python3
 from sys import argv
 import os
+import numpy as np
 import pandas as pd
 import seaborn as sns
 import matplotlib.pyplot as plt
@@ -13,6 +14,7 @@ def makegraphs(filename):
     arrivalsPerFloor(data, folderpath)
     dropoffsPerFloor(data, folderpath)
     averageTravelTime(data, folderpath)
+    averageWaitTime(data, folderpath)
 
 
 def loadfile(filename):
@@ -52,6 +54,17 @@ def averageTravelTime(data, folderpath):
     g = sns.FacetGrid(data, col='dropoffFloor', row='arrivalFloor')
     g = g.map(sns.barplot, "travelTime", orient='v')
     g.fig.savefig(folderpath + "averageTravelTime.eps")
+
+
+def averageWaitTime(data, folderpath):
+    plt.clf()
+    data['waitTime'] = data['pickupTime'] - data['createTime']
+    waits = data.groupby('arrivalFloor',
+                         as_index=False).aggregate(np.average)['waitTime']
+    ax = sns.barplot(x=waits.index, y=waits)
+    ax.set(xlabel="Floor",
+           ylabel="Average Wait Time")
+    ax.get_figure().savefig(folderpath + "averageWaitTime.eps")
 
 
 if __name__ == "__main__":
