@@ -1,7 +1,6 @@
 #include "Clock.h"
 #include "Event.h"
 #include <sstream>
-#include <glog/logging.h>
 
 Clock::Clock() : _time(0) {}
 

@@ -14,7 +14,6 @@
 #include "StopManager.h"
 #include "Trip.h"
 #include <algorithm>
-#include <glog/logging.h>
 #include <sstream>
 
 Building::Building(
@@ -104,7 +103,6 @@ void Building::notify(const std::shared_ptr<const Event> event) {
     e o sistema deverá atualizar o seu estado de acordo com esse evento.
   */
   if (event->getType() == EventType::clientArrival) {
-    LOG(INFO) << event->str();
     doClientArrival(std::static_pointer_cast<const ClientArrival>(event));
   }
 
@@ -146,9 +144,6 @@ void Building::doClientArrival(std::shared_ptr<const ClientArrival> event) {
     auto elevatorNum = _scheduler->schedule(_costFunction, shared_from_this(), client);
     auto elevator = _elevators->at(elevatorNum);
     _stopManager->set(location, direction, elevator);
-    LOG(INFO) << "Elevator #" << elevator->getNumber()
-              << " was assigned to stop at floor #" << location->getNumber()
-              << " to go " << Helpers::directionName(direction) << " (" << _clock->str() << ").";
   }
 
   auto simulator = _simulator.lock();
@@ -186,9 +181,6 @@ void Building::updateElevator(const std::shared_ptr<Elevator> elevator) {
         auto elevatorNum = _scheduler->schedule(_costFunction, shared_from_this(), client, elevator->getNumber());
         auto elevator = _elevators->at(elevatorNum);
         _stopManager->set(location, direction, elevator);
-        LOG(INFO) << "Elevator #" << elevator->getNumber() << "(" << elevator->getDestination().first << ")"
-                  << " was assigned to stop at floor #" << location->getNumber()
-                  << " to go " << Helpers::directionName(direction) << " (" << _clock->str() << ").";
       }
     }
   }
@@ -236,10 +228,6 @@ void Building::stop(const std::shared_ptr<Elevator> elevator) {
   auto location = _floors->at(elevator->getLocation());
   auto direction = elevator->getDestination().second;
   _stopManager->clear(location, elevator, direction);
-  LOG(INFO) << "Elevator #" << elevator->getNumber()
-            << " stopped at floor #" << elevator->getLocation()
-            << " whilst going " << Helpers::directionName(direction)
-            << " (" << _clock->str() << ").";
 }
 
 void Building::registerNewStops(std::shared_ptr<Elevator> elevator, std::set<int> stops) {

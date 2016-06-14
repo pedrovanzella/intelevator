@@ -1,7 +1,6 @@
 #include "Scenario.h"
 #include "SchedulerType.h"
 #include "CostFunctionType.h"
-#include <glog/logging.h>
 #include <gtest/gtest.h>
 #include <yaml-cpp/yaml.h>
 #include <string>

@@ -1,7 +1,6 @@
 #pragma once
 
 #include "Event.h"
-#include <glog/logging.h>
 #include <memory>
 
 class Client; // forward declaration

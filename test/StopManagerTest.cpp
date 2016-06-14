@@ -2,7 +2,6 @@
 #include "Direction.h"
 #include "Elevator.h"
 #include "Floor.h"
-#include <glog/logging.h>
 #include <gtest/gtest.h>
 
 struct StopManagerTest : testing::Test {

@@ -2,7 +2,6 @@
 #include <memory>
 
 #include "Clock.h"
-#include <glog/logging.h>
 
 struct ClockTest : testing::Test
 {

@@ -1,4 +1,3 @@
-#include <glog/logging.h>
 #include <gtest/gtest.h>
 #include <iostream>
 #include <memory>
@@ -9,8 +8,6 @@
 #include "Floor.h"
 #include "Scenario.h"
 #include "Simulator.h"
-
-#define MAX_LOG_LEVEL -100
 
 using namespace std;
 

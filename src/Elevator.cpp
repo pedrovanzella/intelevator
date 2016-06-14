@@ -6,7 +6,6 @@
 #include "Simulator.h"
 #include "Status.h"
 #include <algorithm>
-#include <glog/logging.h>
 #include <memory>
 
 Elevator::Elevator(int number, int capacity, int floor)

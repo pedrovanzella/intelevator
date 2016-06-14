@@ -1,6 +1,5 @@
 #pragma once
 
-#include <glog/logging.h>
 #include <memory>
 
 enum class Direction; // forward declaration

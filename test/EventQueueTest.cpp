@@ -1,7 +1,6 @@
 #include "EventQueue.h"
 #include "Client.h"
 #include "ClientArrival.h"
-#include <glog/logging.h>
 #include <gtest/gtest.h>
 #include <memory>
 

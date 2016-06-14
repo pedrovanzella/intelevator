@@ -1,6 +1,5 @@
 #include "EventQueue.h"
 #include "Clock.h"
-#include <glog/logging.h>
 #include <vector>
 
 EventQueue::EventQueue() {}

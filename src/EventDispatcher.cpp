@@ -1,7 +1,6 @@
 #include "EventDispatcher.h"
 #include "Event.h"
 #include "EventObserver.h"
-#include <glog/logging.h>
 
 EventDispatcher::EventDispatcher() {}
 

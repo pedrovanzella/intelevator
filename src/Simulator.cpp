@@ -16,7 +16,6 @@
 #include "SchedulerType.h"
 #include "CostFunctionType.h"
 #include "Elevator.h"
-#include <glog/logging.h>
 #include <random>
 #include <iostream>
 
@@ -28,8 +27,6 @@ Simulator::Simulator(const std::shared_ptr<const Scenario> scenario)
   auto seed = scenario->getSeed();
   std::seed_seq seed_seq(seed.begin(), seed.end());
   _random_engine = std::shared_ptr<std::mt19937>(new std::mt19937(seed_seq));
-
-  google::SetLogDestination(google::INFO, _scenario->getPath().c_str());
 }
 
 Simulator::Simulator(const Simulator &simulator)
@@ -48,13 +45,6 @@ std::shared_ptr<Building> Simulator::createBuilding() const {
   auto costFunction = CostFunctionCreator::create(_scenario->getCostFunctionType());
 
   auto building = std::make_shared<Building>(shared_from_this(), _clock, floors, elevators, scheduler, costFunction);
-
-  LOG(INFO) << "Created '" << _scenario->getName() << "' scenario with "
-            << floors->size() << " floors, "
-            << elevators->size() << " elevators, '"
-            << Helpers::schedulerName(_scenario->getSchedulerType()) << "' scheduler and '"
-            << Helpers::costFunctionName(_scenario->getCostFunctionType())
-            << "' cost function.";
 
   return building;
 }

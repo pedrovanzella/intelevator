@@ -5,7 +5,6 @@
 #include "Floor.h"
 #include "MissingCostFunctionError.h"
 #include "MissingSchedulerError.h"
-#include <glog/logging.h>
 #include <yaml-cpp/yaml.h>
 
 Scenario::Scenario(const int seq, std::string name, int duration, int elevatorCount, int capacity,

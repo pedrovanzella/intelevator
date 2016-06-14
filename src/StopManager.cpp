@@ -2,7 +2,6 @@
 #include "Direction.h"
 #include "Elevator.h"
 #include "Floor.h"
-#include <glog/logging.h>
 
 StopManager::StopManager() {}
 
@@ -26,9 +25,6 @@ void StopManager::set(std::shared_ptr<Floor> floor, Direction direction,
                       std::shared_ptr<Elevator> elevator) {
   _stopsPerElevator[{elevator, direction}].insert(floor);
   _stopsPerFloor[{floor, direction}].insert(elevator);
-
-  LOG(INFO) << "SET _stopsPerElevator[{ e=" << elevator->getNumber() << ", d="
-            << Helpers::directionName(direction) << ", f=" << floor->getNumber() << "}], " << this;
 }
 
 void StopManager::clear(std::shared_ptr<Floor> floor,
@@ -36,9 +32,6 @@ void StopManager::clear(std::shared_ptr<Floor> floor,
                         Direction direction) {
   _stopsPerElevator[{elevator, direction}].erase(floor);
   _stopsPerFloor[{floor, direction}].erase(elevator);
-
-  LOG(INFO) << "CLEAR _stopsPerElevator[{ e=" << elevator->getNumber() << ", d="
-            << Helpers::directionName(direction) << ", f=" << floor->getNumber() << "}], " << this;
 }
 
 std::set<std::shared_ptr<Floor>, FloorComparator>

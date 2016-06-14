@@ -130,10 +130,6 @@ std::pair<std::set<int>, std::shared_ptr<Client>> Floor::boardElevator(const uns
     elevator->addPassenger(client);
     newStops.insert(client->getDestination());
     lineToBoard->pop();
-
-    LOG(INFO) << "Client #" << client->getId()
-              << " boarded elevator #" << elevator->getNumber()
-              << " (t=" << time << ").";
   }
 
   if (lineToBoard->empty())

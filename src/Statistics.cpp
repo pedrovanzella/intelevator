@@ -11,7 +11,6 @@
 #include "Trip.h"
 #include <cmath>
 #include <cstdlib>
-#include <glog/logging.h>
 
 Statistics::Statistics(std::shared_ptr<const Scenario> scenario)
     : _scenario(scenario), _keepRunning(true), _clientsArrived(0),
@@ -30,7 +29,6 @@ void Statistics::notify(const std::shared_ptr<const Event> event) {
 
   if (event->getType() == EventType::finishSimulation) {
     _keepRunning = false;
-    LOG(INFO) << event->str();
   }
 }
 
@@ -38,10 +36,6 @@ void Statistics::logDropOff(const unsigned long dropOffTime,
                             std::shared_ptr<Elevator> elevator,
                             std::shared_ptr<std::vector<std::shared_ptr<Client>>> droppedPassengers) {
   for (auto passenger : *droppedPassengers) {
-    LOG(INFO) << "Elevator #" << elevator->getNumber()
-              << " dropped client #" << passenger->getId()
-              << " at floor #" << elevator->getLocation() << " (t=" << dropOffTime << ").";
-
     addTrip(dropOffTime, elevator, passenger);
   }
 }
