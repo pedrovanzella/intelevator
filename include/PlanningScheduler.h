@@ -43,6 +43,8 @@ private:
                      const std::shared_ptr<const Client> client,
                      const std::shared_ptr<const Building> building);
 
+  Clients copyClients(const Clients& clients);
+
   ClientsPriorityQueue
   getGlobalQueue(const int horizon,
                  const std::shared_ptr<const Building> building);

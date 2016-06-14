@@ -60,7 +60,9 @@ PlanningScheduler::calculate(const std::shared_ptr<CostFunction> costFunction,
     while (buildingCopy->mustStop(arrivalFloor, direction, elevatorCopy))
       buildingCopy->step();
 
-    auto cost2 = calculate(costFunction, simCopy, clients, elevatorToExclude).second;
+    auto clientsCopy = copyClients(clients);
+
+    auto cost2 = calculate(costFunction, simCopy, clientsCopy, elevatorToExclude).second;
     auto cost = cost1 + cost2;
     if (cost < best_cost) {
       best_cost = cost;
@@ -87,6 +89,20 @@ PlanningScheduler::getClients(const int horizon,
     }
   }
   return clients;
+}
+
+Clients
+PlanningScheduler::copyClients(const Clients& clients) {
+  Clients shallowCopy(clients);
+  Clients deepCopy;
+
+  while (!shallowCopy.empty()) {
+    auto clientCopy = std::make_shared<Client>(*shallowCopy.front());
+    shallowCopy.pop();
+    deepCopy.push(clientCopy);
+  }
+
+  return deepCopy;
 }
 
 ClientsPriorityQueue PlanningScheduler::getGlobalQueue(
