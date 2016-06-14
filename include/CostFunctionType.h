@@ -3,15 +3,13 @@
 #include "MissingCostFunctionError.h"
 #include <string>
 
-enum class CostFunctionType { Dummy, Random, NearestNeighbour, BetterNearestNeighbour, Weighted };
+enum class CostFunctionType { Random, NearestNeighbour, BetterNearestNeighbour, Weighted };
 
 #pragma clang diagnostic push
 #pragma clang diagnostic ignored "-Wunused-function"
 namespace Helpers {
   static std::string costFunctionName(CostFunctionType type) {
     switch (type) {
-    case CostFunctionType::Dummy:
-      return "Dummy";
     case CostFunctionType::Random:
       return "Random";
     case CostFunctionType::NearestNeighbour:

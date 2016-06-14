@@ -8,11 +8,10 @@ schedulers:
   planning: &planning 1
 
 cost_functions:
-  dummy: &dummy 0
-  random: &random 1
-  nearest_neighbour: &nearest_neighbour 2
-  better_nearest_neighbour: &better_nearest_neighbour 3
-  weighted: &weighted 4
+  random: &random 0
+  nearest_neighbour: &nearest_neighbour 1
+  better_nearest_neighbour: &better_nearest_neighbour 2
+  weighted: &weighted 3
 
 scenarios:
 

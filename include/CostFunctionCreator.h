@@ -3,7 +3,6 @@
 #include "BetterNearestNeighbourCostFunction.h"
 #include "CostFunction.h"
 #include "CostFunctionType.h"
-#include "DummyCostFunction.h"
 #include "NearestNeighbourCostFunction.h"
 #include "RandomCostFunction.h"
 #include "WeightedCostFunction.h"
@@ -23,8 +22,6 @@ template <class T> const std::shared_ptr<CostFunction> CostFunctionCreator::crea
 
 const std::shared_ptr<CostFunction> CostFunctionCreator::create(const CostFunctionType costFunctionType) {
   switch (costFunctionType) {
-  case CostFunctionType::Dummy:
-    return CostFunctionCreator::create<DummyCostFunction>();
   case CostFunctionType::Random:
     return CostFunctionCreator::create<RandomCostFunction>();
   case CostFunctionType::NearestNeighbour:
