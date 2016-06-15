@@ -7,6 +7,7 @@
 #include "Status.h"
 #include <algorithm>
 #include <cmath>
+#include <cstdlib>
 
 float BetterNearestNeighbourCostFunction::calculate(
     const std::shared_ptr<const Building> building,
