@@ -22,5 +22,5 @@ private:
   std::string _seed;
   std::seed_seq _seed_seq;
   std::default_random_engine _generator;
-  std::uniform_real_distribution<double> _distribution;
+  std::shared_ptr<std::uniform_real_distribution<double>> _distribution;
 };

@@ -24,14 +24,13 @@ int PlanningScheduler::schedule(const std::shared_ptr<CostFunction> costFunction
   simCopy->copyBuilding(*simulator->getBuilding());
 
   auto the_answer_to_life_the_universe_and_everything =
-      calculate(costFunction, simCopy, clients, elevatorToExclude);
+      calculate(simCopy, clients, elevatorToExclude);
 
   return the_answer_to_life_the_universe_and_everything.first->getNumber();
 }
 
 std::pair<std::shared_ptr<Elevator>, float>
-PlanningScheduler::calculate(const std::shared_ptr<CostFunction> costFunction,
-                            std::shared_ptr<Simulator> simulator,
+PlanningScheduler::calculate(std::shared_ptr<Simulator> simulator,
                             Clients& clients,
                             const int elevatorToExclude) {
 
@@ -51,23 +50,19 @@ PlanningScheduler::calculate(const std::shared_ptr<CostFunction> costFunction,
     auto buildingCopy = simCopy->getBuilding();
     auto elevatorCopy = buildingCopy->getElevator(elevator->getNumber());
 
-    auto cost1 = costFunction->calculate(buildingCopy, elevatorCopy, client);
-
     auto arrivalFloor = client->getArrivalFloor();
     Direction direction = client->getArrivalFloor() < client->getDestination() ? Direction::Up : Direction::Down;
 
-    auto timeCost = 0.f;
-
+    auto baseCost = 0.f;
     buildingCopy->setStop(arrivalFloor, direction, elevatorCopy);
     while (buildingCopy->mustStop(arrivalFloor, direction, elevatorCopy)) {
       buildingCopy->step();
-      timeCost += 1.f;
+      baseCost += 1.f;
     }
 
     auto clientsCopy = copyClients(clients);
-
-    auto cost2 = calculate(costFunction, simCopy, clientsCopy, elevatorToExclude).second;
-    auto cost = cost1 + cost2 + timeCost;
+    auto futureCost = calculate(simCopy, clientsCopy, elevatorToExclude).second;
+    auto cost = baseCost + futureCost;
     if (cost < best_cost) {
       best_cost = cost;
       the_chosen_one = elevator;

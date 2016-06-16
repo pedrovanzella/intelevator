@@ -54,11 +54,18 @@ std::shared_ptr<std::vector<std::shared_ptr<const Scenario>>> Scenario::Load(std
     for (auto it : scenario["scheduler"]) {
       auto schedulerType = static_cast<SchedulerType>(it.as<int>());
 
-      for (auto it : scenario["cost_function"]) {
-        auto costFunctionType = static_cast<CostFunctionType>(it.as<int>());
+      if (schedulerType == SchedulerType::Simple) {
+        for (auto it : scenario["cost_function"]) {
+          auto costFunctionType = static_cast<CostFunctionType>(it.as<int>());
 
-        auto s = std::make_shared<const Scenario>(++seq, name, duration, elevatorCount, capacity, floorCount, schedulerType, costFunctionType, seed, floors, timestamp, planningHorizon);
-        scenarios->push_back(s);
+          auto s = std::make_shared<const Scenario>(++seq, name, duration, elevatorCount, capacity, floorCount, schedulerType, costFunctionType, seed, floors, timestamp, planningHorizon);
+          scenarios->push_back(s);
+        }
+      } else {
+          auto costFunctionType = CostFunctionType::Random;
+
+          auto s = std::make_shared<const Scenario>(++seq, name, duration, elevatorCount, capacity, floorCount, schedulerType, costFunctionType, seed, floors, timestamp, planningHorizon);
+          scenarios->push_back(s);
       }
     }
   }
