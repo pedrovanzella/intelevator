@@ -1,0 +1,32 @@
+Name............: High-rise
+Duration........: 43200
+Seed............: w9JwgykwejtoL2icSgHo
+Elevators.......: 8
+Capacity........: 10
+Floors..........: 39
+Horizon.........: 2
+
+WAITING TIME
+                                         Average         Deviant           Total
+Simple/Random                            25.9981         28.0464     190124.0000
+Simple/NearestNeighbour                  20.3395         37.1902     148743.0000
+Simple/BetterNearestNeighbour            13.5243         23.5950      98903.0000
+Simple/Weighted                          31.0373         54.5909     226976.0000
+Planning                                 8.6901         16.2139      63551.0000
+
+JOURNEY TIME
+                                         Average         Deviant           Total
+Simple/Random                            15.2595         14.9190     111593.0000
+Simple/NearestNeighbour                  15.0993         11.4479     110421.0000
+Simple/BetterNearestNeighbour            15.0550         10.2476     110097.0000
+Simple/Weighted                          14.9915         18.9700     109633.0000
+Planning                                 15.1627         12.0920     110885.0000
+
+CLIENTS
+                                         Arrived          Served        Duration
+Simple/Random                               7313            7313           43275
+Simple/NearestNeighbour                     7313            7313           43334
+Simple/BetterNearestNeighbour               7313            7313           43349
+Simple/Weighted                             7313            7313           43372
+Planning                                    7313            7313           43341
+

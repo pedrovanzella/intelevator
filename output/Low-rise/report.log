@@ -1,0 +1,32 @@
+Name............: Low-rise
+Duration........: 43200
+Seed............: 54TH7hboAG1iOsDIDhJp
+Elevators.......: 2
+Capacity........: 6
+Floors..........: 11
+Horizon.........: 5
+
+WAITING TIME
+                                         Average         Deviant           Total
+Simple/Random                             5.4064          4.1792      16933.0000
+Simple/NearestNeighbour                   3.5144          3.5768      11007.0000
+Simple/BetterNearestNeighbour             3.3547          3.2931      10507.0000
+Simple/Weighted                           3.7149          3.8036      11635.0000
+Planning                                  3.1731          2.9171       9938.0000
+
+JOURNEY TIME
+                                         Average         Deviant           Total
+Simple/Random                             4.4949          2.8676      14078.0000
+Simple/NearestNeighbour                   4.4700          2.8565      14000.0000
+Simple/BetterNearestNeighbour             4.4674          2.9163      13992.0000
+Simple/Weighted                           4.4719          2.7997      14006.0000
+Planning                                  4.4770          3.0009      14022.0000
+
+CLIENTS
+                                         Arrived          Served        Duration
+Simple/Random                               3132            3132           43200
+Simple/NearestNeighbour                     3132            3132           43200
+Simple/BetterNearestNeighbour               3132            3132           43200
+Simple/Weighted                             3132            3132           43200
+Planning                                    3132            3132           43200
+

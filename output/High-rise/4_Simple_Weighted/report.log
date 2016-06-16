@@ -1,0 +1,17 @@
+Name............: High-rise
+Duration........: 43200
+Scheduler.......: Simple
+Cost Function...: Weighted
+Seed............: w9JwgykwejtoL2icSgHo
+Elevators.......: 8
+Capacity........: 10
+Floors..........: 39
+Horizon.........: 2
+
+Clients arrived.: 7313
+Clients served..: 7313
+Duration........: 43372
+
+                                         Average         Deviant           Total
+Waiting Time                             31.0373         54.5909     226976.0000
+Journey Time                             14.9915         18.9700     109633.0000

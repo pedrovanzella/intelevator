@@ -1,0 +1,17 @@
+Name............: Skyscraper
+Duration........: 43200
+Scheduler.......: Simple
+Cost Function...: Random
+Seed............: NimatYvEnU9QeE3GkF4J
+Elevators.......: 16
+Capacity........: 12
+Floors..........: 163
+Horizon.........: 2
+
+Clients arrived.: 23832
+Clients served..: 23832
+Duration........: 45037
+
+                                         Average         Deviant           Total
+Waiting Time                            442.2165       1775.3156   10538904.0000
+Journey Time                             54.7816        389.3520    1305554.0000
