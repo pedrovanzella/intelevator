@@ -10,11 +10,11 @@ import matplotlib.pyplot as plt
 def makegraphs(filename):
     data = loadfile(filename)
     folderpath = os.path.dirname(filename) + '/'
-    # clientsPerElevator(data, folderpath)
-    # arrivalsPerFloor(data, folderpath)
-    # dropoffsPerFloor(data, folderpath)
+    clientsPerElevator(data, folderpath)
+    arrivalsPerFloor(data, folderpath)
+    dropoffsPerFloor(data, folderpath)
     averageTravelTime(data, folderpath)
-    # averageWaitTime(data, folderpath)
+    averageWaitTime(data, folderpath)
 
 
 def loadfile(filename):
