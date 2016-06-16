@@ -1,0 +1,17 @@
+Name............: Low-rise
+Duration........: 43200
+Scheduler.......: Planning
+Cost Function...: NearestNeighbour
+Seed............: 54TH7hboAG1iOsDIDhJp
+Elevators.......: 2
+Capacity........: 6
+Floors..........: 11
+Horizon.........: 20
+
+Clients arrived.: 3130
+Clients served..: 3130
+Duration........: 43200
+
+                                         Average         Deviant           Total
+Waiting Time                              3.1489          3.0151       9856.0000
+Journey Time                              4.5492          3.0979      14239.0000
