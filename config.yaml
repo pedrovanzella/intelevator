@@ -28,7 +28,7 @@ scenarios:
   - name: High-rise
     duration: 43200 # 12 hours
     scheduler: [ *simple, *planning ]
-    planningHorizon: 5
+    planningHorizon: 2
     cost_function: [ *random, *nearest_neighbour, *better_nearest_neighbour, *weighted ]
     seed: w9JwgykwejtoL2icSgHo
     elevators: 8
@@ -38,7 +38,7 @@ scenarios:
   - name: Skyscraper
     duration: 43200 # 12 hours
     scheduler: [ *simple , *planning ]
-    planningHorizon: 5
+    planningHorizon: 2
     cost_function: [ *random, *nearest_neighbour, *better_nearest_neighbour, *weighted ]
     seed: NimatYvEnU9QeE3GkF4J
     elevators: 16
