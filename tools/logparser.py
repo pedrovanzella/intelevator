@@ -10,10 +10,10 @@ import matplotlib.pyplot as plt
 def makegraphs(filename):
     data = loadfile(filename)
     folderpath = os.path.dirname(filename) + '/'
-    clientsPerElevator(data, folderpath)
-    arrivalsPerFloor(data, folderpath)
-    dropoffsPerFloor(data, folderpath)
-    averageTravelTime(data, folderpath)
+    # clientsPerElevator(data, folderpath)
+    # arrivalsPerFloor(data, folderpath)
+    # dropoffsPerFloor(data, folderpath)
+    # averageTravelTime(data, folderpath)
     averageWaitTime(data, folderpath)
 
 
@@ -61,9 +61,10 @@ def averageWaitTime(data, folderpath):
     data['waitTime'] = data['pickupTime'] - data['createTime']
     waits = data.groupby('arrivalFloor',
                          as_index=False).aggregate(np.average)['waitTime']
+    waits = np.log10(waits)
     ax = sns.barplot(x=waits.index, y=waits)
     ax.set(xlabel="Floor",
-           ylabel="Average Wait Time")
+           ylabel="Average Wait Time (in log scale)")
     ax.get_figure().savefig(folderpath + "averageWaitTime.eps")
 
 
