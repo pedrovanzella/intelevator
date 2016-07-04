@@ -1,0 +1,17 @@
+Name............: FACIN
+Duration........: 43200
+Scheduler.......: Simple
+Cost Function...: NearestNeighbour
+Seed............: 54TH7hboAG1iOsDIDhJp
+Elevators.......: 4
+Capacity........: 10
+Floors..........: 8
+Horizon.........: 5
+
+Clients arrived.: 1701
+Clients served..: 1701
+Duration........: 43200
+
+                                         Average         Deviant           Total
+Waiting Time                              1.7825          1.5307       3032.0000
+Journey Time                              3.3427          2.4505       5686.0000

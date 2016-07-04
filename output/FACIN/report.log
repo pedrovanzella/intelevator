@@ -1,0 +1,32 @@
+Name............: FACIN
+Duration........: 43200
+Seed............: 54TH7hboAG1iOsDIDhJp
+Elevators.......: 4
+Capacity........: 10
+Floors..........: 8
+Horizon.........: 5
+
+WAITING TIME
+                                         Average         Deviant           Total
+Simple/Random                             3.1764          2.0524       5403.0000
+Simple/NearestNeighbour                   1.7825          1.5307       3032.0000
+Simple/BetterNearestNeighbour             1.7460          1.4180       2970.0000
+Simple/Weighted                           1.8483          1.6532       3144.0000
+Planning/Random                           1.6790          1.2526       2856.0000
+
+JOURNEY TIME
+                                         Average         Deviant           Total
+Simple/Random                             3.3416          1.8963       5684.0000
+Simple/NearestNeighbour                   3.3427          2.4505       5686.0000
+Simple/BetterNearestNeighbour             3.3416          2.4728       5684.0000
+Simple/Weighted                           3.3416          2.4080       5684.0000
+Planning/Random                           3.3416          2.5165       5684.0000
+
+CLIENTS
+                                         Arrived          Served        Duration
+Simple/Random                               1701            1701           43202
+Simple/NearestNeighbour                     1701            1701           43200
+Simple/BetterNearestNeighbour               1701            1701           43200
+Simple/Weighted                             1701            1701           43200
+Planning/Random                             1701            1701           43200
+

@@ -61,10 +61,10 @@ def averageWaitTime(data, folderpath):
     data['waitTime'] = data['pickupTime'] - data['createTime']
     waits = data.groupby('arrivalFloor',
                          as_index=False).aggregate(np.average)['waitTime']
-    waits = np.log10(waits)
+    # waits = np.log10(waits)
     ax = sns.barplot(x=waits.index, y=waits)
     ax.set(xlabel="Floor",
-           ylabel="Average Wait Time (in log scale)")
+           ylabel="Average Wait Time")
     ax.get_figure().savefig(folderpath + "averageWaitTime.eps")
 
 

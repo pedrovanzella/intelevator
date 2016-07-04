@@ -1,0 +1,46 @@
+capacities:
+  small: &small 6
+  medium: &medium 10
+  large: &large 12
+
+schedulers:
+  simple: &simple 0
+  planning: &planning 1
+
+cost_functions:
+  random: &random 0
+  nearest_neighbour: &nearest_neighbour 1
+  better_nearest_neighbour: &better_nearest_neighbour 2
+  weighted: &weighted 3
+
+scenarios:
+
+  - name: Low-rise
+    duration: 43200 # 12 hours
+    scheduler: [ *simple, *planning ]
+    planningHorizon: 5
+    cost_function: [ *random, *nearest_neighbour, *better_nearest_neighbour, *weighted ]
+    seed: 54TH7hboAG1iOsDIDhJp
+    elevators: 2
+    capacity: *small
+    floors: [ 60, 520, 360, 360, 360, 240, 240, 240, 90, 90, 90 ]
+
+  - name: High-rise
+    duration: 43200 # 12 hours
+    scheduler: [ *simple, *planning ]
+    planningHorizon: 2
+    cost_function: [ *random, *nearest_neighbour, *better_nearest_neighbour, *weighted ]
+    seed: w9JwgykwejtoL2icSgHo
+    elevators: 8
+    capacity: *medium
+    floors: [ 60, 520, 520, 520, 360, 360, 360, 360, 360, 360, 360, 360, 360, 360, 360, 360, 360, 360, 360, 360, 360, 360, 360, 360, 360, 360, 360, 360, 240, 240, 240, 240, 240, 240, 90, 90, 90, 90, 90 ]
+
+  - name: Skyscraper
+    duration: 43200 # 12 hours
+    scheduler: [ *simple , *planning ]
+    planningHorizon: 2
+    cost_function: [ *random, *nearest_neighbour, *better_nearest_neighbour, *weighted ]
+    seed: NimatYvEnU9QeE3GkF4J
+    elevators: 16
+    capacity: *large
+    floors: [ 150, 300, 450, 600, 150, 300, 450, 600, 150, 300, 450, 450, 150, 300, 450, 600, 150, 300, 450, 600, 150, 300, 450, 450, 150, 300, 450, 600, 150, 300, 450, 600, 150, 300, 450, 450, 300, 450, 450, 450, 150, 300, 450, 600, 150, 300, 450, 600, 150, 300, 450, 450, 150, 300, 450, 600, 150, 300, 450, 600, 150, 300, 450, 450, 150, 300, 450, 600, 150, 300, 450, 600, 150, 300, 450, 450, 300, 450, 450, 450, 150, 300, 450, 600, 150, 300, 450, 600, 150, 300, 450, 450, 150, 300, 450, 600, 150, 300, 450, 600, 150, 300, 450, 450, 150, 300, 450, 600, 150, 300, 450, 600, 150, 300, 450, 450, 300, 450, 450, 450, 150, 300, 450, 600, 150, 300, 450, 600, 150, 300, 450, 450, 150, 300, 450, 600, 150, 300, 450, 600, 150, 300, 450, 450, 150, 300, 450, 600, 150, 300, 450, 600, 150, 300, 450, 450, 300, 450, 450, 450, 450, 450, 450 ]

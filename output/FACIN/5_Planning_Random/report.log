@@ -1,0 +1,17 @@
+Name............: FACIN
+Duration........: 43200
+Scheduler.......: Planning
+Cost Function...: Random
+Seed............: 54TH7hboAG1iOsDIDhJp
+Elevators.......: 4
+Capacity........: 10
+Floors..........: 8
+Horizon.........: 5
+
+Clients arrived.: 1701
+Clients served..: 1701
+Duration........: 43200
+
+                                         Average         Deviant           Total
+Waiting Time                              1.6790          1.2526       2856.0000
+Journey Time                              3.3416          2.5165       5684.0000
